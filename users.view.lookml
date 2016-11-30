@@ -246,6 +246,7 @@
     map_layer: us_states
     sql: CASE WHEN ${TABLE}.state = ' ' THEN NULL ELSE ${TABLE}.state END
 
+
 #   - dimension: stripe_cc_exp_month
 #     type: number
 #     sql: ${TABLE}.stripe_cc_exp_month
