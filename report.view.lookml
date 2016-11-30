@@ -2,25 +2,25 @@
   sql_table_name: google_analytics_age.report
   fields:
 
-  - dimension: _rjm_record_hash
+  - dimension: rjm_record_hash
     type: string
     sql: ${TABLE}._rjm_record_hash
 
-  - dimension_group: _sdc_batched
+  - dimension_group: sdc_batched
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_batched_at
 
-  - dimension_group: _sdc_received
+  - dimension_group: sdc_received
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_received_at
 
-  - dimension: _sdc_sequence
+  - dimension: sdc_sequence
     type: number
     sql: ${TABLE}._sdc_sequence
 
-  - dimension: _sdc_table_version
+  - dimension: sdc_table_version
     type: number
     sql: ${TABLE}._sdc_table_version
 
@@ -28,16 +28,16 @@
     type: number
     sql: ${TABLE}.bounces
 
-  - dimension_group: enddate
+  - dimension_group: end
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}."end-date"
 
-  - dimension: newusers
+  - dimension: new_users
     type: number
     sql: ${TABLE}.newusers
 
-  - dimension: pageviews
+  - dimension: page_views
     type: number
     sql: ${TABLE}.pageviews
 
@@ -62,16 +62,16 @@
     value_format_name: decimal_1
     sql: 1.0 * ${total_session_duration_in_minutes} / NULLIF(${total_sessions},0)
 
-  - dimension_group: startdate
+  - dimension_group: start
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}."start-date"
 
-  - dimension: uniquepageviews
+  - dimension: unique_page_views
     type: number
     sql: ${TABLE}.uniquepageviews
 
-  - dimension: useragebracket
+  - dimension: user_age_bracket
     type: string
     sql: ${TABLE}.useragebracket
 

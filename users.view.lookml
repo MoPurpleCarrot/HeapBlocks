@@ -33,7 +33,7 @@
     type: string
     sql: ${TABLE}.address
 
-  - dimension: address2
+  - dimension: address_2
     type: string
     sql: ${TABLE}.address2
 
@@ -125,8 +125,6 @@
   - dimension: is_purple_carrot_employee
     type: yesno
     sql: ${email} LIKE '%purplecarrot%'
-    
-  
 
   - dimension: encrypted_password
     type: string
@@ -246,31 +244,31 @@
   - dimension: state
     type: string
     map_layer: us_states
-    sql: ${TABLE}.state
+    sql: CASE WHEN ${TABLE}.state = ' ' THEN NULL ELSE ${TABLE}.state END
 
-  - dimension: stripe_cc_exp_month
-    type: number
-    sql: ${TABLE}.stripe_cc_exp_month
-
-  - dimension: stripe_cc_exp_year
-    type: number
-    sql: ${TABLE}.stripe_cc_exp_year
-
-  - dimension: stripe_cc_last_four
-    type: number
-    sql: ${TABLE}.stripe_cc_last_four
-
-  - dimension: stripe_cc_type
-    type: string
-    sql: ${TABLE}.stripe_cc_type
-
-  - dimension: stripe_customer_id
-    type: string
-    sql: ${TABLE}.stripe_customer_id
-
-  - dimension: stripe_token
-    type: string
-    sql: ${TABLE}.stripe_token
+#   - dimension: stripe_cc_exp_month
+#     type: number
+#     sql: ${TABLE}.stripe_cc_exp_month
+# 
+#   - dimension: stripe_cc_exp_year
+#     type: number
+#     sql: ${TABLE}.stripe_cc_exp_year
+# 
+#   - dimension: stripe_cc_last_four
+#     type: number
+#     sql: ${TABLE}.stripe_cc_last_four
+# 
+#   - dimension: stripe_cc_type
+#     type: string
+#     sql: ${TABLE}.stripe_cc_type
+# 
+#   - dimension: stripe_customer_id
+#     type: string
+#     sql: ${TABLE}.stripe_customer_id
+# 
+#   - dimension: stripe_token
+#     type: string
+#     sql: ${TABLE}.stripe_token
 
   - dimension_group: subscribed
     type: time
@@ -312,5 +310,5 @@
 
   - measure: count
     type: count
-    drill_fields: [id, business_name, first_name, last_name]
+    drill_fields: [id, business_name, uid, first_name, last_name, phone, state, weeks_as_customer, total_active_credit]
 
