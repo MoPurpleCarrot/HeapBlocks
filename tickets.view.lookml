@@ -87,26 +87,54 @@
     type: number
     sql: ${TABLE}.requester_id
 
-  - dimension: satisfaction_rating__comment
+  - dimension: satisfaction_rating_comment
     type: string
     sql: ${TABLE}.satisfaction_rating__comment
 
-  - dimension: satisfaction_rating__id
+  - dimension: satisfaction_rating_id
     type: number
     sql: ${TABLE}.satisfaction_rating__id
 
-  - dimension: satisfaction_rating__reason
+  - dimension: satisfaction_rating_reason
     type: string
     sql: ${TABLE}.satisfaction_rating__reason
 
-  - dimension: satisfaction_rating__reason_id
+  - dimension: satisfaction_rating_reason_id
     type: number
     sql: ${TABLE}.satisfaction_rating__reason_id
 
-  - dimension: satisfaction_rating__score
+  - dimension: satisfaction_rating_score
     type: string
     sql: ${TABLE}.satisfaction_rating__score
 
+  - dimension: is_bad_rating
+    type: yesno
+    hidden: true
+    sql: ${satisfaction_rating_score} = 'bad'
+    
+  - measure: count_bad_ratings
+    type: count
+    filters:
+      is_bad_rating: yes
+    drill_fields: [satisfaction_rating_reason, satisfaction_rating_comment,users.id, users.count]
+      
+  - dimension: is_good_rating
+    type: yesno
+    hidden: true
+    sql: ${satisfaction_rating_score} = 'good'
+    
+  - measure: count_good_ratings
+    type: count
+    filters:
+      is_good_rating: yes
+      
+  - measure: ratio_good_to_bad_ratings
+    type: number
+    value_format_name: percent_2
+    sql: 1.0 * ${count_good_ratings} / NULLIF((${count_bad_ratings} + ${count_good_ratings}),0)
+  
+  
+  
   - dimension: status
     type: string
     sql: ${TABLE}.status

@@ -84,6 +84,13 @@
     type: number
     sql: ${TABLE}.price
 
+  - measure: total_revenue
+    # label: "My Revenue"
+    # view_label: "Chefs"
+    type: sum
+    value_format_name: usd
+    sql: ${price}
+    
   - dimension: shipping_carrier
     type: string
     sql: ${TABLE}.shipping_carrier

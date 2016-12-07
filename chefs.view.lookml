@@ -71,7 +71,4 @@
     type: count
     drill_fields: [id, name, recipes.count]
     
-  - measure: total_orders
-    type: number
-    sql: ${orders.count}
-    drill_fields: [recipes.title, orders.count]
+

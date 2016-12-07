@@ -4,26 +4,33 @@
 - include: "*.dashboard.lookml"  # include all dashboards in this project
 
 
-
-
-- explore: report
-
 - explore: users
+  label: "(2) Customer Service Portal"
   joins:
     - join: tickets
       relationship: one_to_many
       sql_on: ${users.email} = ${tickets.email}
+      
+    - join: subscriptions
+      relationship: one_to_one
+      sql_on: ${subscriptions.user_id} = ${users.id}
+      
+    - join: orders
+      relationship: one_to_many
+      sql_on: ${orders.subscription_id} = ${subscriptions.id}
+    
 
 - explore: orders
   label: "(1) Users, Orders & Recipes"
   joins:
-    - join: users
-      relationship: many_to_one
-      sql_on: ${orders.user_id} = ${users.id}
-      
+
     - join: subscriptions
       relationship: many_to_one
       sql_on: ${orders.subscription_id} = ${subscriptions.id}
+     
+    - join: users
+      relationship: one_to_one
+      sql_on: ${subscriptions.user_id} = ${users.id}
       
     - join: menus
       relationship: many_to_one
