@@ -39,4 +39,6 @@
       relationship: many_to_one
       sql_on: ${menu_items.recipe_id} = ${recipes.id}
       
-      
+    - join: chefs
+      relationship: many_to_one
+      sql_on: ${recipes.chef_id} = ${chefs.id}
