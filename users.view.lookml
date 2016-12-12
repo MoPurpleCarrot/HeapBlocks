@@ -5,41 +5,57 @@
   - dimension: id
     primary_key: true
     type: number
+    value_format_name: id
     sql: ${TABLE}.id
 
   - dimension_group: sdc_batched
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_batched_at
+    hidden: true
 
   - dimension_group: sdc_received
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_received_at
+    hidden: true
 
   - dimension: sdc_sequence
     type: number
     sql: ${TABLE}._sdc_sequence
+    hidden: true
 
   - dimension: sdc_table_version
     type: number
     sql: ${TABLE}._sdc_table_version
+    hidden: true
 
   - dimension: account_number
     type: number
+    value_format_name: id
     sql: ${TABLE}.account_number
 
   - dimension: address
     type: string
+    group_label: "Location"
     sql: ${TABLE}.address
 
   - dimension: address_2
     type: string
+    group_label: "Location"
     sql: ${TABLE}.address2
+
+  - dimension: name
+    type: string
+    sql: ${first_name} || ' ' || ${last_name}
 
   - dimension: business_name
     type: string
     sql: ${TABLE}.business_name
+    
+  - dimension: is_business_user
+    type: yesno
+    sql: ${business_name} IS NOT NULL
 
   - dimension_group: cancelled
     type: time
@@ -52,10 +68,13 @@
 
   - dimension: city
     type: string
+    group_label: "Location"
     sql: ${TABLE}.city
 
   - dimension: country
     type: string
+    group_label: "Location"
+    map_layer: countries
     sql: ${TABLE}.country
 
   - dimension_group: created
@@ -66,6 +85,7 @@
   - dimension: credit
     type: number
     sql: ${TABLE}.credit
+    value_format_name: usd
     
   - measure: total_credit
     type: sum
@@ -104,6 +124,7 @@
 
   - dimension: current_sign_in_ip
     type: string
+    group_label: "Location"
     sql: ${TABLE}.current_sign_in_ip
 
   - dimension: delivery_day
@@ -136,6 +157,7 @@
 
   - dimension: generated_password
     type: yesno
+    hidden: true
     sql: ${TABLE}.generated_password
 
   - dimension: giveaway_points
@@ -144,6 +166,7 @@
 
   - dimension: giveaway_redemption_token
     type: string
+    hidden: true
     sql: ${TABLE}.giveaway_redemption_token
 
   - dimension: is_blocked_from_ordering
@@ -174,6 +197,7 @@
 
   - dimension: partner_token
     type: string
+    hidden: true
     sql: ${TABLE}.partner_token
 
   - dimension_group: paused
@@ -182,8 +206,9 @@
     sql: ${TABLE}.paused_at
 
   - dimension: phone
-    type: string
+    type: number
     sql: ${TABLE}.phone
+    value_format: '(###) ###-####'
 
   - dimension: plan
     type: number
@@ -193,12 +218,12 @@
     type: string
     sql: ${TABLE}.provider
 
-  - dimension_group: reactivation
+  - dimension_group: reactivated
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.reactivation_on
 
-  - dimension: referrer_converted
+  - dimension: is_referrer_converted
     type: yesno
     sql: ${TABLE}.referrer_converted
 
@@ -208,14 +233,17 @@
 
   - dimension: referrer_token
     type: string
+    hidden: true
     sql: ${TABLE}.referrer_token
 
   - dimension: region
     type: string
+    group_label: "Location"
     sql: ${TABLE}.region
 
   - dimension_group: remember_created
     type: time
+    hidden: true
     timeframes: [time, date, week, month]
     sql: ${TABLE}.remember_created_at
 
@@ -226,6 +254,7 @@
 
   - dimension: reset_password_token
     type: string
+    hidden: true
     sql: ${TABLE}.reset_password_token
 
   - dimension: role
@@ -243,6 +272,7 @@
 
   - dimension: state
     type: string
+    group_label: "Location"
     map_layer: us_states
     sql: CASE WHEN ${TABLE}.state = ' ' THEN NULL ELSE ${TABLE}.state END
 
@@ -275,41 +305,51 @@
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.subscribed_at
+    hidden: true
 
-  - dimension: subscribed_to_mailchimp
+  - dimension: is_subscribed_to_mailchimp
     type: yesno
     sql: ${TABLE}.subscribed_to_mailchimp
 
   - dimension: subscription_status
     type: number
     sql: ${TABLE}.subscription_status
+    hidden: true
 
   - dimension: tnt
     type: number
+    hidden: true
     sql: ${TABLE}.tnt
 
   - dimension: uid
     type: string
+    label: "UID"
     sql: ${TABLE}.uid
 
   - dimension_group: updated
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at
+    hidden: true
 
   - dimension: utm_campaign
+    label: "UTM Campaign"
+    group_label: "Marketing"
     type: string
     sql: ${TABLE}.utm_campaign
 
   - dimension: utm_source
+    label: "UTM Source"
+    group_label: "Marketing"
     type: string
     sql: ${TABLE}.utm_source
 
   - dimension: zip
     type: zipcode
+    group_label: "Location"
     sql: ${TABLE}.zip
 
   - measure: count
     type: count
-    drill_fields: [id, business_name, uid, first_name, last_name, phone, state, weeks_as_customer, total_active_credit]
+    drill_fields: [id, name, phone, state, weeks_as_customer, orders.total_revenue, tickets.count]
 

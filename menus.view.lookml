@@ -7,33 +7,39 @@
     type: number
     sql: ${TABLE}.id
 
-  - dimension_group: _sdc_batched
+  - dimension_group: sdc_batched
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_batched_at
+    hidden: true
 
-  - dimension_group: _sdc_received
+  - dimension_group: sdc_received
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_received_at
+    hidden: true
 
-  - dimension: _sdc_sequence
+  - dimension: sdc_sequence
     type: number
     sql: ${TABLE}._sdc_sequence
+    hidden: true
 
-  - dimension: _sdc_table_version
+  - dimension: sdc_table_version
     type: number
     sql: ${TABLE}._sdc_table_version
+    hidden: true
 
   - dimension_group: authorization
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.authorization_at
+    hidden: true
 
   - dimension_group: capture
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.capture_at
+    hidden: true
 
   - dimension_group: created
     type: time
@@ -50,7 +56,7 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.order_cancellation_cutoff_at
 
-  - dimension: published
+  - dimension: is_published
     type: yesno
     sql: ${TABLE}.published
 
@@ -76,6 +82,7 @@
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at
+    hidden: true
 
   - measure: count
     type: count

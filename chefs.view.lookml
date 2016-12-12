@@ -7,23 +7,27 @@
     type: number
     sql: ${TABLE}.id
 
-  - dimension_group: _sdc_batched
+  - dimension_group: sdc_batched
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_batched_at
+    hidden: true
 
-  - dimension_group: _sdc_received
+  - dimension_group: sdc_received
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_received_at
+    hidden: true
 
-  - dimension: _sdc_sequence
+  - dimension: sdc_sequence
     type: number
     sql: ${TABLE}._sdc_sequence
+    hidden: true
 
-  - dimension: _sdc_table_version
+  - dimension: sdc_table_version
     type: number
     sql: ${TABLE}._sdc_table_version
+    hidden: true
 
   - dimension: biography
     type: string
@@ -45,6 +49,7 @@
   - dimension: image
     type: string
     sql: ${TABLE}.image
+    hidden: true
 
   - dimension: name
     type: string
@@ -60,12 +65,14 @@
 
   - dimension: state
     type: string
+    map_layer: us_states
     sql: ${TABLE}.state
 
   - dimension_group: updated
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at
+    hidden: true
 
   - measure: count
     type: count

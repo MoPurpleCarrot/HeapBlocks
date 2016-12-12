@@ -7,23 +7,27 @@
     type: number
     sql: ${TABLE}.id
 
-  - dimension_group: _sdc_batched
+  - dimension_group: sdc_batched
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_batched_at
+    hidden: true
 
-  - dimension_group: _sdc_received
+  - dimension_group: sdc_received
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_received_at
+    hidden: true
 
-  - dimension: _sdc_sequence
+  - dimension: sdc_sequence
     type: number
     sql: ${TABLE}._sdc_sequence
+    hidden: true
 
-  - dimension: _sdc_table_version
+  - dimension: sdc_table_version
     type: number
     sql: ${TABLE}._sdc_table_version
+    hidden: true
 
   - dimension: admin_id
     type: number
@@ -31,6 +35,7 @@
 
   - dimension: amount_charged
     type: number
+    value_format_name: usd
     sql: ${TABLE}.amount_charged
 
   - dimension: cancelled_reason
@@ -47,25 +52,26 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.created_at
 
   - dimension: credit_applied
     type: number
+    value_format_name: usd
     sql: ${TABLE}.credit_applied
 
   - dimension_group: delivery
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.delivery_on
 
-  - dimension: donated
+  - dimension: is_donated
     type: yesno
     sql: ${TABLE}.donated
 
   - dimension: menu_id
     type: number
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.menu_id
 
   - dimension: order_number
@@ -74,6 +80,7 @@
 
   - dimension: partner_label
     type: string
+    hidden: true
     sql: ${TABLE}.partner_label
 
   - dimension: plan
@@ -82,11 +89,10 @@
 
   - dimension: price
     type: number
+    value_format_name: usd
     sql: ${TABLE}.price
 
   - measure: total_revenue
-    # label: "My Revenue"
-    # view_label: "Chefs"
     type: sum
     value_format_name: usd
     sql: ${price}
@@ -97,6 +103,7 @@
 
   - dimension: shipping_label
     type: string
+    hidden: true
     sql: ${TABLE}.shipping_label
 
   - dimension: status
@@ -106,6 +113,7 @@
   - dimension: status_old
     type: string
     sql: ${TABLE}.status_old
+    hidden: true
 
   - dimension: stripe_charge_id
     type: string
@@ -113,10 +121,10 @@
 
   - dimension: subscription_id
     type: number
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.subscription_id
 
-  - dimension: through_partner
+  - dimension: is_through_partner
     type: yesno
     sql: ${TABLE}.through_partner
 
@@ -128,10 +136,15 @@
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at
+    hidden: true
 
+  - dimension: days_to_process
+    type: number
+    sql: DATEDIFF('day',${created_raw},${delivery_raw})
+    
   - dimension: user_id
     type: number
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.user_id
 
   - measure: count
@@ -143,10 +156,12 @@
   sets:
     detail:
     - id
-    - menus.id
-    - subscriptions.id
-    - users.business_name
-    - users.first_name
-    - users.id
-    - users.last_name
+    - created_date
+    - delivery_date
+    - days_to_process
+    - tracking_number
+    - recipes.title
+    - chefs.name
+    - users.name
+
 

@@ -7,23 +7,27 @@
     type: number
     sql: ${TABLE}.id
 
-  - dimension_group: _sdc_batched
+  - dimension_group: sdc_batched
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_batched_at
+    hidden: true
 
-  - dimension_group: _sdc_received
+  - dimension_group: sdc_received
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}._sdc_received_at
+    hidden: true
 
-  - dimension: _sdc_sequence
+  - dimension: sdc_sequence
     type: number
     sql: ${TABLE}._sdc_sequence
+    hidden: true
 
-  - dimension: _sdc_table_version
+  - dimension: sdc_table_version
     type: number
     sql: ${TABLE}._sdc_table_version
+    hidden: true
 
   - dimension: billed_or_bill_error_orders_count
     type: number
@@ -42,31 +46,37 @@
     type: number
     sql: ${TABLE}.plan
 
-  - dimension: status
+  - dimension: status_code
     type: number
     sql: ${TABLE}.status
 
-  - dimension: stripe_cc_exp_month
+  - dimension: cc_exp_month
+    group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_cc_exp_month
 
-  - dimension: stripe_cc_exp_year
+  - dimension: cc_exp_year
+    group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_cc_exp_year
 
-  - dimension: stripe_cc_last_four
+  - dimension: cc_last_four
+    group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_cc_last_four
 
-  - dimension: stripe_cc_type
+  - dimension: cc_type
+    group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_cc_type
 
   - dimension: stripe_customer_id
+    group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_customer_id
 
   - dimension: stripe_token
+    group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_token
 
@@ -74,10 +84,11 @@
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at
+    hidden: true
 
   - dimension: user_id
     type: number
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.user_id
 
   - measure: count
