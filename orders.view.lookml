@@ -95,6 +95,7 @@
   - measure: total_revenue
     type: sum
     value_format_name: usd
+    drill_fields: detail*
     sql: ${price}
     
   - dimension: shipping_carrier
