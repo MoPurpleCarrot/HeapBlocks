@@ -64,7 +64,7 @@
     primary_key: true
     sql: ${TABLE}.id
     links:
-    - label: ZenDesk
+    - label: Lookup in ZenDesk
       url: https://thepurplecarrotxo.zendesk.com/agent/tickets/{{value}}
       icon_url: http://looker.com/favicon.ico
 
