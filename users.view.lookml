@@ -67,11 +67,11 @@
     sql: DATEDIFF(WEEKS, ${created_raw}, CASE WHEN ${cancelled_raw} IS NULL THEN current_date ELSE ${cancelled_raw} END)
     html: |
         {% if value < 50 %}
-        <div style="color: white; background-color: darkred; font-size: 80%; text-align:center">{{ rendered_value }}</div>
+        <div style="color: white; background-color: darkred; font-size: 80%; text-align:center; margin-bottom: 10px">{{ rendered_value }}</div>
         {% elsif value < 70 %}
-        <div style="color: black; background-color: goldenrod; font-size: 80%; text-align:center">{{ rendered_value }}</div>
+        <div style="color: black; background-color: goldenrod; font-size: 80%; text-align:center; margin-bottom: 10px">{{ rendered_value }}</div>
         {% else %}
-        <div style="color: white; background-color: darkgreen; font-size: 80%; text-align:center">{{ rendered_value }}</div>
+        <div style="color: white; background-color: darkgreen; font-size: 80%; text-align:center; margin-bottom: 10px">{{ rendered_value }}</div>
         {% endif %}
 
   - dimension: city
@@ -96,11 +96,11 @@
     value_format_name: usd
     html: |
         {% if value < 50 %}
-        <div style="color: white; background-color: darkred; font-size: 80%; text-align:center">{{ rendered_value }}</div>
+        <div style="color: white; background-color: darkred; font-size: 80%; text-align:center; margin-bottom: 10px">{{ rendered_value }}</div>
         {% elsif value < 70 %}
-        <div style="color: black; background-color: goldenrod; font-size: 80%; text-align:center">{{ rendered_value }}</div>
+        <div style="color: black; background-color: goldenrod; font-size: 80%; text-align:center; margin-bottom: 10px">{{ rendered_value }}</div>
         {% else %}
-        <div style="color: white; background-color: darkgreen; font-size: 80%; text-align:center">{{ rendered_value }}</div>
+        <div style="color: white; background-color: darkgreen; font-size: 80%; text-align:center; margin-bottom: 10px">{{ rendered_value }}</div>
         {% endif %}
     
   - measure: total_credit
