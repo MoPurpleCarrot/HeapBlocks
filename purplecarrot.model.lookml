@@ -49,3 +49,11 @@
     - join: chefs
       relationship: many_to_one
       sql_on: ${recipes.chef_id} = ${chefs.id}
+      
+    - join: stripe_charges
+      relationship: one_to_one
+      sql_on: ${orders.stripe_charge_id} = ${stripe_charges.id}
+      
+  
+- explore: stripe_charges
+  label: "(3) Stripe"
