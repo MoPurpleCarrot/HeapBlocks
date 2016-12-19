@@ -1,4 +1,4 @@
-- view: report
+- view: google_analytics_age
   sql_table_name: google_analytics_age.report
   fields:
 
