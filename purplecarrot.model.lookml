@@ -19,6 +19,9 @@
       relationship: one_to_many
       sql_on: ${orders.subscription_id} = ${subscriptions.id}
     
+    - join: google_analytics_user
+      relationship: one_to_many
+      sql_on: ${users.id} = ${google_analytics_user.dimension1}
 
 - explore: orders
   label: "(1) Users, Orders & Recipes"
@@ -59,3 +62,4 @@
   label: "(3) Stripe"
 
 - explore: google_analytics_age
+  label: "(4) Google Analytics Age"
