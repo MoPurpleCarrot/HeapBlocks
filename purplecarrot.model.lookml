@@ -19,9 +19,9 @@
       relationship: one_to_many
       sql_on: ${orders.subscription_id} = ${subscriptions.id}
     
-    - join: google_analytics_user
-      relationship: one_to_many
-      sql_on: ${users.id} = ${google_analytics_user.dimension1}
+    # - join: google_analytics_user
+    #   relationship: one_to_many
+    #   sql_on: ${users.id} = ${google_analytics_user.dimension1}
 
 - explore: orders
   label: "(1) Users, Orders & Recipes"
@@ -53,13 +53,13 @@
       relationship: many_to_one
       sql_on: ${recipes.chef_id} = ${chefs.id}
       
-    - join: stripe_charges
-      relationship: one_to_one
-      sql_on: ${orders.stripe_charge_id} = ${stripe_charges.id}
+    # - join: stripe_charges
+    #   relationship: one_to_one
+    #   sql_on: ${orders.stripe_charge_id} = ${stripe_charges.id}
       
   
-- explore: stripe_charges
-  label: "(3) Stripe"
+# - explore: stripe_charges
+#   label: "(3) Stripe"
 
-- explore: google_analytics_age
-  label: "(4) Google Analytics Age"
+# - explore: google_analytics_age
+#   label: "(4) Google Analytics Age"
