@@ -5,6 +5,7 @@
 
 
 - explore: users
+  persist_for: 1 hour
   label: "(2) Customer Service Portal"
   joins:
     - join: tickets
@@ -24,6 +25,7 @@
     #   sql_on: ${users.id} = ${google_analytics_user.dimension1}
 
 - explore: orders
+  persist_for: 1 hour
   label: "(1) Users, Orders & Recipes"
   joins:
 
