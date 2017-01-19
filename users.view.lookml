@@ -370,3 +370,6 @@
     type: count
     drill_fields: [id, name, phone, state, weeks_as_customer, orders.total_revenue, tickets.count]
 
+  - measure: running_total
+    type: running_total
+    sql: ${count}

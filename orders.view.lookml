@@ -98,6 +98,11 @@
     drill_fields: detail*
     sql: ${price}
     
+  - measure: average_revenue_per_user
+    type: number
+    value_format_name: usd
+    sql: ${total_revenue}/NULLIF(${users.running_total},0)
+    
   - dimension: shipping_carrier
     type: string
     sql: ${TABLE}.shipping_carrier
