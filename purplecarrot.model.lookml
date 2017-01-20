@@ -71,3 +71,6 @@
     - join: google_analytics_dau
       relationship: one_to_one
       sql_on: ${google_analytics_wau.date_date} = ${google_analytics_dau.date_date}
+      
+- explore: google_analytics_conversion
+  label: "(5) Google Analytics Conversion"
