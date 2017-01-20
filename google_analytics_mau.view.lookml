@@ -46,7 +46,3 @@
   - measure: count
     type: count
     drill_fields: []
-
-  - measure: mau_count
-    type: number
-    sql: ${30dayusers} + 0*${count}

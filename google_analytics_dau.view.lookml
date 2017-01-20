@@ -51,7 +51,3 @@
   - measure: count
     type: count
     drill_fields: []
-
-  - measure: dau_count
-    type: number
-    sql: ${1dayusers}
