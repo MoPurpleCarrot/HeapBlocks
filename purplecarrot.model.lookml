@@ -23,12 +23,16 @@
     - join: google_analytics_user
       relationship: one_to_many
       sql_on: ${users.id} = ${google_analytics_user.dimension1}
+      
+    - join: user_facts
+      relationship: one_to_one
+      sql_on: ${users.id} = ${user_facts.id}
 
-- explore: orders
+- explore: subscriptions
   persist_for: 1 hour
   label: "(1) Users, Orders & Recipes"
   joins:
-    - join: subscriptions
+    - join: orders
       relationship: many_to_one
       sql_on: ${orders.subscription_id} = ${subscriptions.id}
      
@@ -74,3 +78,16 @@
       
 - explore: google_analytics_conversion
   label: "(5) Google Analytics Conversion"
+  
+- explore: orders
+  label: "(6) Users & Orders"
+  joins:
+    - join: users
+      relationship: one_to_many
+      sql_on: ${users.id} = ${orders.user_id}
+      
+    - join: user_facts
+      relationship: one_to_one
+      sql_on: ${users.id} = ${user_facts.id}
+      
+- explore: cancelled_rate

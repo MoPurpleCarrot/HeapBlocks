@@ -62,6 +62,15 @@
     timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.cancelled_at
     
+  - dimension: is_cancelled
+    type: yesno
+    sql: ${cancelled_raw} IS NOT NULL
+    
+  - measure: cancelled_count
+    type: count
+    filters:
+      is_cancelled: yes
+    
   - dimension: weeks_as_customer
     type: number
     sql: DATEDIFF(WEEKS, ${created_raw}, CASE WHEN ${cancelled_raw} IS NULL THEN current_date ELSE ${cancelled_raw} END)

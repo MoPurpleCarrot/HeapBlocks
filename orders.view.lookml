@@ -98,6 +98,14 @@
     drill_fields: detail*
     sql: ${price}
     
+  - measure: running_total_revenue
+    type: running_total
+    sql: ${total_revenue}
+    
+  - measure: average_revenue
+    type: number
+    sql: ${running_total_revenue}/NULLIF(${users.count},0)
+    
   - measure: average_revenue_per_user
     type: number
     value_format_name: usd
@@ -156,7 +164,10 @@
   - measure: count
     type: count
     drill_fields: detail*
-
+    
+#   - measure: first_count
+#     type: count
+#     sql: ${}
 
   # ----- Sets of fields for drilling ------
   sets:
