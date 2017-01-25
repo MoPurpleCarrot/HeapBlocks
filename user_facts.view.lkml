@@ -1,8 +1,6 @@
-
-- view: user_facts
-  derived_table:
-    sql: |
-      SELECT users.id, 
+view: user_facts {
+  derived_table: {
+    sql: SELECT users.id,
       COUNT(orders.id) as num_orders,
       SUM(orders.price) as total_revenue,
       MIN(orders.created_at) as first_order,
@@ -13,31 +11,38 @@
       LEFT JOIN heroku_postgres.orders as orders
       ON subscriptions.id = orders.subscription_id
       GROUP BY 1
+       ;;
+  }
 
-  fields:
-  - measure: count
+  measure: count {
     type: count
-    drill_fields: detail*
+  }
 
-  - dimension: id
-    primary_key: true
+  dimension: id {
+    primary_key: yes
     type: number
-    sql: ${TABLE}.id
+    sql: ${TABLE}.id ;;
+  }
 
-  - dimension: num_orders
+  dimension: num_orders {
     type: number
-    sql: ${TABLE}.num_orders
+    sql: ${TABLE}.num_orders ;;
+  }
 
-  - dimension: total_revenue
+  dimension: total_revenue {
     type: number
-    sql: ${TABLE}.total_revenue
+    sql: ${TABLE}.total_revenue ;;
+  }
 
-  - dimension_group: first_order
+  dimension_group: first_order {
     type: time
     timeframes: [date, week, month, year]
-    sql: ${TABLE}.first_order
+    sql: ${TABLE}.first_order ;;
+  }
 
-  - dimension_group: last_order
+  dimension_group: last_order {
     type: time
     timeframes: [date, week, month, year]
-    sql: ${TABLE}.last_order
+    sql: ${TABLE}.last_order ;;
+  }
+}
