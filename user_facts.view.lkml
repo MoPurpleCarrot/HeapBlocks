@@ -12,6 +12,7 @@ view: user_facts {
       ON subscriptions.id = orders.subscription_id
       GROUP BY 1
        ;;
+#       sql_trigger_value: select current_date ;;
   }
 
   measure: count {

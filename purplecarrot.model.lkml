@@ -6,39 +6,10 @@ include: "*.view"
 # include all dashboards in this project
 include: "*.dashboard"
 
-explore: users {
-  persist_for: "1 hour"
-  label: "(2) Customer Service Portal"
-
-  join: tickets {
-    relationship: one_to_many
-    sql_on: ${users.email} = ${tickets.email} ;;
-  }
-
-  join: subscriptions {
-    relationship: one_to_one
-    sql_on: ${subscriptions.user_id} = ${users.id} ;;
-  }
-
-  join: orders {
-    relationship: one_to_many
-    sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
-  }
-
-  join: google_analytics_user {
-    relationship: one_to_many
-    sql_on: ${users.id} = ${google_analytics_user.dimension1} ;;
-  }
-
-  join: user_facts {
-    relationship: one_to_one
-    sql_on: ${users.id} = ${user_facts.id} ;;
-  }
-}
-
 explore: subscriptions {
   persist_for: "1 hour"
   label: "(1) Users, Orders & Recipes"
+  fields: [ALL_FIELDS*, -orders.days_since_first_order, -orders.month_num]
 
   join: orders {
     relationship: many_to_one
@@ -75,6 +46,36 @@ explore: subscriptions {
   join: stripe_charges {
     relationship: one_to_one
     sql_on: ${orders.stripe_charge_id} = ${stripe_charges.id} ;;
+  }
+}
+
+explore: users {
+  persist_for: "1 hour"
+  label: "(2) Customer Service Portal"
+
+  join: tickets {
+    relationship: one_to_many
+    sql_on: ${users.email} = ${tickets.email} ;;
+  }
+
+  join: subscriptions {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+
+  join: orders {
+    relationship: one_to_many
+    sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
+  }
+
+  join: google_analytics_user {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${google_analytics_user.dimension1} ;;
+  }
+
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id} ;;
   }
 }
 

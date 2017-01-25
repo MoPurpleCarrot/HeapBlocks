@@ -65,6 +65,11 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: month_num {
+    type: number
+    sql: DATEDIFF('month', ${user_facts.first_order_date}, ${created_date}) ;;
+  }
+
   dimension: credit_applied {
     type: number
     value_format_name: usd
@@ -125,6 +130,31 @@ view: orders {
   measure: average_revenue {
     type: number
     sql: ${running_total_revenue}/NULLIF(${users.count},0) ;;
+  }
+
+  dimension: days_since_first_order {
+    type: number
+    sql:  DATEDIFF('day',${user_facts.first_order_date},${created_date})  ;;
+  }
+
+  dimension: is_30day_since_first_order {
+    type: yesno
+    sql: ${days_since_first_order} <= 30 ;;
+  }
+
+  measure: total_revenue_30day {
+    type:  sum
+    sql: ${price} ;;
+    filters: {
+      field: is_30day_since_first_order
+      value: "Yes"
+    }
+  }
+
+  measure: average_revenue_30day {
+    type: number
+    sql: ${total_revenue_30day}/NULLIF(${users.user_count_30day},0);;
+#     CASE WHEN ${days_since_first_order} <= 30 THEN ${average_revenue} END ;;
   }
 
   measure: average_revenue_per_user {
