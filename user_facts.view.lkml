@@ -4,7 +4,9 @@ view: user_facts {
       COUNT(orders.id) as num_orders,
       SUM(orders.price) as total_revenue,
       MIN(orders.created_at) as first_order,
-      MAX(orders.created_at) as last_order
+      MIN(orders.id) as first_order_id,
+      MAX(orders.created_at) as last_order,
+      MAX(orders.id) as last_order_id
       FROM heroku_postgres.users as users
       LEFT JOIN heroku_postgres.subscriptions as subscriptions
       ON users.id = subscriptions.user_id
@@ -41,9 +43,25 @@ view: user_facts {
     sql: ${TABLE}.first_order ;;
   }
 
+  dimension: first_order_id {
+    type: number
+    sql: ${TABLE}.first_order_id ;;
+  }
+
   dimension_group: last_order {
     type: time
     timeframes: [date, week, month, year]
     sql: ${TABLE}.last_order ;;
   }
+
+  dimension: last_order_id {
+    type: number
+    sql: ${TABLE}.last_order_id ;;
+  }
+
+  dimension: first_order_medium {
+    type: string
+    sql: CASE WHEN ${first_order_id} = ${google_analytics_traffic.transactionid} THEN ${google_analytics_traffic.medium} END ;;
+  }
+
 }

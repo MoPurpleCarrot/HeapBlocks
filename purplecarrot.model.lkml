@@ -77,6 +77,16 @@ explore: users {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
+
+  join: google_analytics_traffic {
+    relationship: one_to_one
+    sql_on: ${orders.id} = ${google_analytics_traffic.transactionid} ;;
+  }
+
+  join: user_facts_traffic {
+    relationship: one_to_one
+    sql_on: ${user_facts.id} = ${user_facts_traffic.id} ;;
+  }
 }
 
 explore: google_analytics_age {
@@ -99,20 +109,6 @@ explore: google_analytics_wau {
 
 explore: google_analytics_conversion {
   label: "(5) Google Analytics Conversion"
-}
-
-explore: orders {
-  label: "(6) Users & Orders"
-
-  join: users {
-    relationship: one_to_many
-    sql_on: ${users.id} = ${orders.user_id} ;;
-  }
-
-  join: user_facts {
-    relationship: one_to_one
-    sql_on: ${users.id} = ${user_facts.id} ;;
-  }
 }
 
 explore: cancelled_rate {}
