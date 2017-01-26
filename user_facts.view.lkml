@@ -59,9 +59,4 @@ view: user_facts {
     sql: ${TABLE}.last_order_id ;;
   }
 
-  dimension: first_order_medium {
-    type: string
-    sql: CASE WHEN ${first_order_id} = ${google_analytics_traffic.transactionid} THEN ${google_analytics_traffic.medium} END ;;
-  }
-
 }

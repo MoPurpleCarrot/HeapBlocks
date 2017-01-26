@@ -87,6 +87,11 @@ explore: users {
     relationship: one_to_one
     sql_on: ${user_facts.id} = ${user_facts_traffic.id} ;;
   }
+
+  join: user_facts_order {
+    relationship: one_to_one
+    sql_on: ${user_facts.id} = ${user_facts_order.id} ;;
+  }
 }
 
 explore: google_analytics_age {
