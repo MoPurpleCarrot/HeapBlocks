@@ -205,69 +205,69 @@ view: orders {
     sql: ${total_revenue}/NULLIF(${users.running_total},0) ;;
   }
 
-  dimension: days_since_first_order {
+  dimension: days_since_created {
     type: number
-    sql:  DATEDIFF('day',${user_facts.first_order_date},${created_date})  ;;
+    sql:  DATEDIFF('day',${users.created_date},${created_date})  ;;
   }
 
   # 30 day
-  dimension: is_30day_since_first_order {
+  dimension: is_30day_since_created {
     type: yesno
-    sql: ${days_since_first_order} <= 30 ;;
+    sql: ${days_since_created} <= 30 ;;
   }
 
   measure: total_revenue_30day {
     type:  sum
     sql: ${price} ;;
     filters: {
-      field: is_30day_since_first_order
+      field: is_30day_since_created
       value: "Yes"
     }
   }
 
   measure: average_revenue_30day {
     type: number
-    sql: ${total_revenue_30day}/NULLIF(${users.user_count_30day},0);;
+    sql: ${total_revenue_30day}/NULLIF(${users.count},0);;
   }
 
   # 60 day
-  dimension: is_60day_since_first_order {
+  dimension: is_60day_since_created {
     type: yesno
-    sql: ${days_since_first_order} <= 60 ;;
+    sql: ${days_since_created} <= 60 ;;
   }
 
   measure: total_revenue_60day {
     type:  sum
     sql: ${price} ;;
     filters: {
-      field: is_60day_since_first_order
+      field: is_60day_since_created
       value: "Yes"
     }
   }
 
   measure: average_revenue_60day {
     type: number
-    sql: ${total_revenue_60day}/NULLIF(${users.user_count_60day},0);;
+    sql: ${total_revenue_60day}/NULLIF(${users.count},0);;
   }
 
   # 90 day
-  dimension: is_90day_since_first_order {
+  dimension: is_90day_since_created {
     type: yesno
-    sql: ${days_since_first_order} <= 90 ;;
+    sql: ${days_since_created} <= 90 ;;
   }
 
   measure: total_revenue_90day {
     type:  sum
     sql: ${price} ;;
     filters: {
-      field: is_90day_since_first_order
+      field: is_90day_since_created
       value: "Yes"
     }
   }
 
   measure: average_revenue_90day {
     type: number
-    sql: ${total_revenue_90day}/NULLIF(${users.user_count_90day},0);;
+    sql: ${total_revenue_90day}/NULLIF(${users.count},0);;
   }
 
   # ----- Sets of fields for drilling ------

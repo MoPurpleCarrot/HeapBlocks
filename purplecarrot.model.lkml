@@ -9,7 +9,7 @@ include: "*.dashboard"
 explore: subscriptions {
   persist_for: "1 hour"
   label: "(1) Users, Orders & Recipes"
-  fields: [ALL_FIELDS*, -orders.days_since_first_order, -orders.month_num]
+  fields: [ALL_FIELDS*, -orders.days_since_created, -orders.month_num]
 
   join: orders {
     relationship: many_to_one
