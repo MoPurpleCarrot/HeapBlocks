@@ -481,4 +481,20 @@ view: users {
       value: "Yes"
     }
   }
+
+  measure: user_count_60day {
+    type:  count
+    filters: {
+      field: orders.is_60day_since_first_order
+      value: "Yes"
+    }
+  }
+
+  measure: user_count_90day {
+    type:  count
+    filters: {
+      field: orders.is_90day_since_first_order
+      value: "Yes"
+    }
+  }
 }
