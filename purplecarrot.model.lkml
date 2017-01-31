@@ -1,4 +1,5 @@
 connection: "redshift"
+week_start_day: wednesday
 
 # include all views in this project
 include: "*.view"
@@ -91,6 +92,11 @@ explore: users {
   join: user_facts_order {
     relationship: one_to_one
     sql_on: ${user_facts.id} = ${user_facts_order.id} ;;
+  }
+
+  join: subscription_events {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${subscription_events.user_id} ;;
   }
 }
 

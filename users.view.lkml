@@ -414,7 +414,6 @@ view: users {
   dimension: subscription_status {
     type: number
     sql: ${TABLE}.subscription_status ;;
-    hidden: yes
   }
 
   dimension: tnt {
