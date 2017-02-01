@@ -65,7 +65,7 @@ explore: users {
   }
 
   join: orders {
-    relationship: one_to_many
+    relationship: many_to_one
     sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
   }
 
@@ -97,6 +97,16 @@ explore: users {
   join: subscription_events {
     relationship: one_to_many
     sql_on: ${users.id} = ${subscription_events.user_id} ;;
+  }
+
+  join: scheduled_menu_skips {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${scheduled_menu_skips.subscription_id} ;;
+  }
+
+  join: menus {
+    relationship: many_to_one
+    sql_on: ${scheduled_menu_skips.menu_id} = ${menus.id} ;;
   }
 }
 
