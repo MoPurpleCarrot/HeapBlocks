@@ -32,6 +32,20 @@ view: user_facts {
     sql: ${TABLE}.num_orders ;;
   }
 
+  dimension: orders_group {
+    type: string
+    sql:  CASE WHEN ${num_orders} >= 20 THEN 'g) >20'
+    WHEN ${num_orders} > 15 THEN 'f) 16 to 20'
+    WHEN ${num_orders} > 10 THEN 'e) 11 to 15'
+    WHEN ${num_orders} > 5 THEN 'd) 6 to 10'
+    WHEN ${num_orders} > 3 THEN 'c) 4 to 5'
+    WHEN ${num_orders} > 1 THEN 'b) 2 to 3'
+    WHEN ${num_orders} = 1 THEN 'a) 1'
+    ELSE NULL
+    END
+    ;;
+  }
+
   dimension: total_revenue {
     type: number
     sql: ${TABLE}.total_revenue ;;
