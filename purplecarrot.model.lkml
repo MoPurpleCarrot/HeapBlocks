@@ -65,7 +65,7 @@ explore: users {
   }
 
   join: orders {
-    relationship: many_to_one
+    relationship: one_to_many
     sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
   }
 
