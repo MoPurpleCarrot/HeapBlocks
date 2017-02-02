@@ -190,6 +190,7 @@ view: orders {
 
   measure: average_revenue {
     type: number
+    value_format_name: usd
     sql: ${total_revenue}/NULLIF(${users.count},0) ;;
   }
 
@@ -218,6 +219,7 @@ view: orders {
 
   measure: total_revenue_30day {
     type:  sum
+    value_format_name: usd
     sql: ${price} ;;
     filters: {
       field: is_30day_since_created
@@ -227,6 +229,7 @@ view: orders {
 
   measure: average_revenue_30day {
     type: number
+    value_format_name: usd
     sql: ${total_revenue_30day}/NULLIF(${users.count},0);;
   }
 
@@ -238,6 +241,7 @@ view: orders {
 
   measure: total_revenue_60day {
     type:  sum
+    value_format_name: usd
     sql: ${price} ;;
     filters: {
       field: is_60day_since_created
@@ -247,6 +251,7 @@ view: orders {
 
   measure: average_revenue_60day {
     type: number
+    value_format_name: usd
     sql: ${total_revenue_60day}/NULLIF(${users.count},0);;
   }
 
@@ -258,6 +263,7 @@ view: orders {
 
   measure: total_revenue_90day {
     type:  sum
+    value_format_name: usd
     sql: ${price} ;;
     filters: {
       field: is_90day_since_created
@@ -267,6 +273,7 @@ view: orders {
 
   measure: average_revenue_90day {
     type: number
+    value_format_name: usd
     sql: ${total_revenue_90day}/NULLIF(${users.count},0);;
   }
 
