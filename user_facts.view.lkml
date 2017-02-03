@@ -69,4 +69,9 @@ view: user_facts {
     sql: ${TABLE}.last_order_id ;;
   }
 
+  dimension: is_customer_after_6_months {
+    type: yesno
+    sql: DATEDIFF(month, ${first_order_date}, ${last_order_date}) > 6 ;;
+  }
+
 }
