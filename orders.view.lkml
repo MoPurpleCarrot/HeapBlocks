@@ -89,7 +89,6 @@ view: orders {
 
   dimension: menu_id {
     type: number
-    hidden: yes
     sql: ${TABLE}.menu_id ;;
   }
 
@@ -100,7 +99,6 @@ view: orders {
 
   dimension: partner_label {
     type: string
-    hidden: yes
     sql: ${TABLE}.partner_label ;;
   }
 
@@ -122,7 +120,6 @@ view: orders {
 
   dimension: shipping_label {
     type: string
-    hidden: yes
     sql: ${TABLE}.shipping_label ;;
   }
 
@@ -134,7 +131,6 @@ view: orders {
   dimension: status_old {
     type: string
     sql: ${TABLE}.status_old ;;
-    hidden: yes
   }
 
   dimension: stripe_charge_id {
@@ -144,7 +140,6 @@ view: orders {
 
   dimension: subscription_id {
     type: number
-    hidden: yes
     sql: ${TABLE}.subscription_id ;;
   }
 
@@ -162,7 +157,6 @@ view: orders {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
-    hidden: yes
   }
 
   dimension: days_to_process {
@@ -172,7 +166,6 @@ view: orders {
 
   dimension: user_id {
     type: number
-    hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 
@@ -198,12 +191,6 @@ view: orders {
     type: number
     value_format_name: decimal_2
     sql: 1.0 * ${count}/NULLIF(${users.count},0) ;;
-  }
-
-  measure: average_revenue_per_user {
-    type: number
-    value_format_name: usd
-    sql: ${total_revenue}/NULLIF(${users.running_total},0) ;;
   }
 
   dimension: days_since_created {

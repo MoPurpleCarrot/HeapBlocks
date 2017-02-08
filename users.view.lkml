@@ -467,9 +467,4 @@ view: users {
       tickets.count
     ]
   }
-
-  measure: running_total {
-    type: running_total
-    sql: ${count} ;;
-  }
 }

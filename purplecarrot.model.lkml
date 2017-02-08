@@ -9,7 +9,7 @@ include: "*.dashboard"
 
 explore: subscriptions {
   persist_for: "1 hour"
-  label: "(1) Users, Orders & Recipes"
+  label: "Users, Orders & Recipes"
   fields: [ALL_FIELDS*, -orders.days_since_created, -orders.month_num]
 
   join: orders {
@@ -52,7 +52,7 @@ explore: subscriptions {
 
 explore: users {
   persist_for: "1 hour"
-  label: "(2) Customer Service Portal"
+  label: "Customer Service Portal"
 
   join: tickets {
     relationship: one_to_many
@@ -67,6 +67,11 @@ explore: users {
   join: orders {
     relationship: one_to_many
     sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
+  }
+
+  join: menus {
+    relationship: many_to_one
+    sql_on: ${orders.menu_id} = ${menus.id} ;;
   }
 
   join: google_analytics_user {
@@ -103,8 +108,10 @@ explore: users {
     relationship: one_to_many
     sql_on: ${users.id} = ${subscription_events.user_id} ;;
   }
+}
 
-  join: scheduled_menu_skips {
+explore: scheduled_menu_skips {
+  join: subscriptions {
     relationship: one_to_many
     sql_on: ${subscriptions.id} = ${scheduled_menu_skips.subscription_id} ;;
   }
@@ -116,11 +123,11 @@ explore: users {
 }
 
 explore: google_analytics_age {
-  label: "(3) Google Analytics Age"
+  label: "Google Analytics Age"
 }
 
 explore: google_analytics_wau {
-  label: "(4) Google Analytics Active Users"
+  label: "Google Analytics Active Users"
 
   join: google_analytics_mau {
     relationship: one_to_one
@@ -134,9 +141,7 @@ explore: google_analytics_wau {
 }
 
 explore: google_analytics_conversion {
-  label: "(5) Google Analytics Conversion"
+  label: "Google Analytics Conversion"
 }
 
 explore: cancelled_rate {}
-
-explore: credit_transactions {}
