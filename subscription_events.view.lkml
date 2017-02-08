@@ -77,11 +77,11 @@ view: subscription_events {
 
   dimension: event {
     type: string
-    sql:  CASE WHEN ${event_type} = 0 THEN 'Inactive'
-    WHEN ${event_type} = 1 THEN 'Active'
-    WHEN ${event_type} = 2 THEN 'Cancelled'
-    WHEN ${event_type} = 3 THEN 'Paused'
-    WHEN ${event_type} = 4 THEN 'Skipped'
+    sql:  CASE WHEN ${event_type} = 0 THEN 'Subscribed'
+    WHEN ${event_type} = 1 THEN 'Skipped'
+    WHEN ${event_type} = 2 THEN 'Paused'
+    WHEN ${event_type} = 3 THEN 'Cancelled'
+    WHEN ${event_type} = 4 THEN 'Credits Updated'
     WHEN ${event_type} = 5 THEN 'Suspended'
     ELSE NULL
     END

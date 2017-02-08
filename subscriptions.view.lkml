@@ -59,6 +59,19 @@ view: subscriptions {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: status {
+    type: string
+    sql:  CASE WHEN ${status_code} = 0 THEN 'Inactive'
+    WHEN ${status_code} = 1 THEN 'Active'
+    WHEN ${status_code} = 2 THEN 'Cancelled'
+    WHEN ${status_code} = 3 THEN 'Paused'
+    WHEN ${status_code} = 4 THEN 'Skipped'
+    WHEN ${status_code} = 5 THEN 'Suspended'
+    ELSE NULL
+    END
+    ;;
+  }
+
   dimension: cc_exp_month {
     group_label: "Stripe Info"
     type: string
