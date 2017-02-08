@@ -59,6 +59,12 @@ view: subscription_events {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: last_event {
+    type: number
+    sql: max(extract(epoch from ${created_raw}) * 1000::bigint + ${event_type}) - max(extract(epoch from ${created_raw}) * 1000::bigint)
+    ;;
+  }
+
   dimension: description {
     type: string
     sql: ${TABLE}.description ;;
@@ -67,6 +73,19 @@ view: subscription_events {
   dimension: event_type {
     type: number
     sql: ${TABLE}.event_type ;;
+  }
+
+  dimension: event {
+    type: string
+    sql:  CASE WHEN ${event_type} = 0 THEN 'Inactive'
+    WHEN ${event_type} = 1 THEN 'Active'
+    WHEN ${event_type} = 2 THEN 'Cancelled'
+    WHEN ${event_type} = 3 THEN 'Paused'
+    WHEN ${event_type} = 4 THEN 'Skipped'
+    WHEN ${event_type} = 5 THEN 'Suspended'
+    ELSE NULL
+    END
+    ;;
   }
 
   dimension: plan {
