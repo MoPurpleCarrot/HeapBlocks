@@ -1,5 +1,5 @@
-view: skip_and_active_users {
-  sql_table_name: skip_and_active_users.tracker ;;
+view: paused_and_cancelled_users {
+  sql_table_name: skip_and_active_users.tracker2 ;;
 
   dimension: id {
     primary_key: yes
@@ -45,15 +45,21 @@ view: skip_and_active_users {
     sql: ${TABLE}._sdc_table_version ;;
   }
 
-  dimension: active {
+  dimension: cancelled {
     type: number
-    sql: ${TABLE}.active ;;
+    sql: ${TABLE}.cancelled ;;
     hidden: yes
   }
 
-  measure: active_status {
+  measure: cancelled_status {
     type: sum
-    sql: ${active} ;;
+    sql: ${cancelled} ;;
+  }
+
+  measure: first_cancelled {
+    type: number
+    sql: min(extract(epoch from ${date_raw}) * 1000::bigint + ${cancelled}) - min(extract(epoch from ${date_raw}) * 1000::bigint)
+      ;;
   }
 
   dimension_group: date {
@@ -70,33 +76,25 @@ view: skip_and_active_users {
     sql: ${TABLE}.date ;;
   }
 
-  dimension_group: menu_end {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.menu_end_date ;;
-  }
-
-  dimension: skip {
+  dimension: paused {
     type: number
-    sql: ${TABLE}.skip ;;
+    sql: ${TABLE}.paused ;;
     hidden: yes
   }
 
-  measure: skip_status {
+  measure: paused_status {
     type: sum
-    sql: ${skip} ;;
+    sql: ${paused} ;;
+  }
+
+  measure: first_paused {
+    type: number
+    sql: min(extract(epoch from ${date_raw}) * 1000::bigint + ${paused}) - min(extract(epoch from ${date_raw}) * 1000::bigint)
+      ;;
   }
 
   measure: count {
     type: count
-    drill_fields: []
+    drill_fields: [id]
   }
 }
