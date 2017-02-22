@@ -122,9 +122,7 @@ explore: scheduled_menu_skips {
   }
 }
 
-explore: google_analytics_age {
-  label: "Google Analytics Age"
-}
+explore: google_analytics_age {}
 
 explore: google_analytics_wau {
   label: "Google Analytics Active Users"
@@ -140,8 +138,15 @@ explore: google_analytics_wau {
   }
 }
 
-explore: google_analytics_conversion {
-  label: "Google Analytics Conversion"
-}
+explore: google_analytics_conversion {}
 
-explore: cancelled_rate {}
+explore: skip_and_active_users {}
+
+explore: email_delivered {
+  label: "Customer.io Email"
+
+  join: email_opened {
+    relationship: many_to_many
+    sql_on: ${email_delivered.email_id} = ${email_opened.email_id} ;;
+  }
+}
