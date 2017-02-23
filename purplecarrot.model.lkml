@@ -59,6 +59,11 @@ explore: users {
     sql_on: ${users.email} = ${tickets.email} ;;
   }
 
+  join: delighted {
+    relationship: one_to_many
+    sql_on: ${users.email} = ${delighted.event_data__person__email} ;;
+  }
+
   join: subscriptions {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
@@ -153,6 +158,4 @@ explore: email_delivered {
   }
 }
 
-explore: google_analytics {}
-
-explore: delighted {}
+explore: google_analytics_data {}

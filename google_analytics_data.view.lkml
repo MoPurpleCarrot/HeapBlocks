@@ -1,5 +1,5 @@
-view: google_analytics {
-  sql_table_name: google_analytics.report ;;
+view: google_analytics_data {
+  sql_table_name: google_analytics_data.report ;;
 
   dimension: _rjm_record_hash {
     type: string

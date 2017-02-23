@@ -4,6 +4,7 @@ view: delighted {
   dimension: __sdc_primary_key {
     type: string
     sql: ${TABLE}.__sdc_primary_key ;;
+    primary_key: yes
   }
 
   dimension_group: _sdc_batched {
