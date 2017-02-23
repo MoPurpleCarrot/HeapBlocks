@@ -154,3 +154,5 @@ explore: email_delivered {
 }
 
 explore: google_analytics {}
+
+explore: delighted {}
