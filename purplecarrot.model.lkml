@@ -152,3 +152,5 @@ explore: email_delivered {
     sql_on: ${email_delivered.email_id} = ${email_opened.email_id} ;;
   }
 }
+
+explore: google_analytics {}
