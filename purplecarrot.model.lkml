@@ -39,6 +39,18 @@ explore: subscriptions {
     sql_on: ${menu_items.recipe_id} = ${recipes.id} ;;
   }
 
+  join: recipe_tags_recipes {
+    relationship: one_to_many
+    #this is a mapping/join table
+    fields: []
+    sql_on: ${recipes.id} = ${recipe_tags_recipes.recipe_id} ;;
+  }
+
+  join: recipe_tags {
+    relationship: many_to_one
+    sql_on: ${recipe_tags_recipes.recipe_tag_id} = ${recipe_tags.id} ;;
+  }
+
   join: chefs {
     relationship: many_to_one
     sql_on: ${recipes.chef_id} = ${chefs.id} ;;
