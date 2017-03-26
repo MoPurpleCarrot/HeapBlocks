@@ -169,6 +169,11 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: account_number {
+    type: number
+    sql: ${TABLE}.account_number ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
