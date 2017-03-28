@@ -4,7 +4,6 @@ view: user_facts {
       COUNT(orders.id) as num_orders,
       SUM(orders.price) as total_revenue,
       MIN(orders.created_at) as first_order,
-      MIN(orders.delivery) as first_delivery,
       MIN(orders.id) as first_order_id,
       MAX(orders.created_at) as last_order,
       MAX(orders.id) as last_order_id
@@ -54,11 +53,7 @@ view: user_facts {
     sql: ${TABLE}.first_order ;;
   }
 
-  dimension_group: first_delivery {
-    type: time
-    timeframes: [date, week, month, quarter, year]
-    sql: ${TABLE}.first_delivery ;;
-  }
+
 
   dimension: first_order_id {
     type: number
