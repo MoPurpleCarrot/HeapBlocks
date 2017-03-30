@@ -340,12 +340,6 @@ view: users {
     sql: ${TABLE}.remember_created_at ;;
   }
 
-  dimension_group: registered_at {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.registered_at ;;
-  }
-
   dimension_group: reset_password_sent {
     type: time
     timeframes: [time, date, week, month]
