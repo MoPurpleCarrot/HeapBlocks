@@ -33,6 +33,12 @@ view: subscriptions {
     hidden: yes
   }
 
+  dimension_group: registered_at {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.registered_at ;;
+  }
+
   dimension: billed_or_bill_error_orders_count {
     type: number
     sql: ${TABLE}.billed_or_bill_error_orders_count ;;
