@@ -186,6 +186,39 @@ view: orders {
     sql: ${price} ;;
   }
 
+  measure: TB12_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "2"
+      field: status
+      value: "3"
+    }
+  }
+
+  measure: PC_2_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "0"
+      field: status
+      value: "3"
+    }
+  }
+
+  measure: PC_4_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "1"
+      field: status
+      value: "3"
+    }
+  }
+
   measure: average_revenue {
     type: number
     value_format_name: usd
