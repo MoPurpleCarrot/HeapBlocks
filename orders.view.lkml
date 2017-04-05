@@ -191,7 +191,8 @@ view: orders {
     drill_fields: [detail*]
     filters: {
       field: plan
-      value: "2"
+      value: "2"}
+    filters: {
       field: status
       value: "3"
     }
@@ -202,7 +203,8 @@ view: orders {
     drill_fields: [detail*]
     filters: {
       field: plan
-      value: "0"
+      value: "0"}
+    filters: {
       field: status
       value: "3"
     }
@@ -213,7 +215,8 @@ view: orders {
     drill_fields: [detail*]
     filters: {
       field: plan
-      value: "1"
+      value: "1"}
+    filters: {
       field: status
       value: "3"
     }
