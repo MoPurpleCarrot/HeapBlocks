@@ -137,10 +137,10 @@ explore: users {
     sql_on: ${user_facts.id} = ${user_facts_credit.id} ;;
   }
 
-  join: gift_purchases_recipient {
-    from: gift_purchases
+  join:  user_gift_redemptions {
+    from: gift_redemptions
     relationship: many_to_one
-    sql_on: ${gift_purchases_recipient.recipient_email} = ${users.email} ;;
+    sql_on: ${user_gift_redemptions.user_id} = ${users.id} ;;
   }
 
   join: subscription_events {
