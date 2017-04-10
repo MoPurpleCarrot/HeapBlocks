@@ -56,12 +56,6 @@ explore: subscriptions {
     sql_on: ${recipes.chef_id} = ${chefs.id} ;;
   }
 
-  join: gift_purchases_recipient {
-    from: gift_purchases
-    relationship: many_to_one
-    sql_on: ${gift_purchases_recipient.recipient_email} = ${users.email} ;;
-  }
-
   join: stripe_charges {
     relationship: one_to_one
     sql_on: ${orders.stripe_charge_id} = ${stripe_charges.id} ;;
@@ -138,6 +132,12 @@ explore: users {
     sql_on: ${user_facts.id} = ${user_facts_credit.id} ;;
   }
 
+  join: gift_purchases_recipient {
+    from: gift_purchases
+    relationship: many_to_one
+    sql_on: ${gift_purchases_recipient.recipient_email} = ${users.email} ;;
+  }
+
   join: subscription_events {
     relationship: one_to_many
     sql_on: ${users.id} = ${subscription_events.user_id} ;;
@@ -171,6 +171,8 @@ explore: google_analytics_wau {
     sql_on: ${google_analytics_wau.date_date} = ${google_analytics_dau.date_date} ;;
   }
 }
+
+explore: gift_purchases {}
 
 explore: google_analytics_conversion {}
 
