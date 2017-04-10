@@ -96,6 +96,12 @@ explore: users {
     sql_on: ${gift_redemptions.user_id} = ${users.id} ;;
   }
 
+  join: gift_purchases {
+    relationship: one_to_one
+    sql_on: ${gift_redemptions.gift_purchase_id} = ${gift_purchases.id} ;;
+  }
+
+
   join: menus {
     relationship: many_to_one
     sql_on: ${orders.menu_id} = ${menus.id} ;;
@@ -135,18 +141,6 @@ explore: users {
   join: user_facts_credit {
     relationship: one_to_one
     sql_on: ${user_facts.id} = ${user_facts_credit.id} ;;
-  }
-
-  join:  user_gift_redemptions {
-    from: gift_redemptions
-    relationship: many_to_one
-    sql_on: ${user_gift_redemptions.user_id} = ${users.id} ;;
-  }
-
-  join: user_gift_purchases {
-    from: gift_purchases
-    relationship: one_to_one
-    sql_on: ${user_gift_redemptions.gift_purchase_id} = ${user_gift_purchases.id} ;;
   }
 
   join: subscription_events {
