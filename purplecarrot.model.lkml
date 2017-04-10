@@ -98,7 +98,7 @@ explore: users {
 
   join: gift_purchases {
     relationship: one_to_one
-    sql_on: ${gift_redemptions.gift_purchase_id} = ${gift_purchases.id} ;;
+    sql_on: ${gift_purchases.id} = ${gift_redemptions.gift_purchase_id} ;;
   }
 
 
