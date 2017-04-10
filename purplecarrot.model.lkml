@@ -91,6 +91,11 @@ explore: users {
     sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
   }
 
+  join: gift_redemptions {
+    relationship: one_to_many
+    sql_on: ${gift_redemptions.user_id} = ${users.id} ;;
+  }
+
   join: menus {
     relationship: many_to_one
     sql_on: ${orders.menu_id} = ${menus.id} ;;
@@ -180,6 +185,7 @@ explore: gift_purchases {
     type: left_outer
     sql_on: ${gift_purchases.id} = ${gift_redemptions.id} ;;
   }
+
 }
 
 explore: google_analytics_conversion {}
