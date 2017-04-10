@@ -172,7 +172,15 @@ explore: google_analytics_wau {
   }
 }
 
-explore: gift_purchases {}
+explore: gift_purchases {
+  label: "Gift Purchases and Redemptions"
+
+  join: gift_redemptions {
+    relationship: one_to_one
+    type: left_outer
+    sql_on: ${gift_purchases.id} = ${gift_redemptions.id} ;;
+  }
+}
 
 explore: google_analytics_conversion {}
 
