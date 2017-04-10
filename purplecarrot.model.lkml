@@ -143,6 +143,12 @@ explore: users {
     sql_on: ${user_gift_redemptions.user_id} = ${users.id} ;;
   }
 
+  join: user_gift_purchases {
+    from: gift_purchases
+    relationship: one_to_one
+    sql_on: ${user_gift_redemptions.gift_purchase_id} = ${user_gift_purchases.id} ;;
+  }
+
   join: subscription_events {
     relationship: one_to_many
     sql_on: ${users.id} = ${subscription_events.user_id} ;;
