@@ -56,6 +56,12 @@ explore: subscriptions {
     sql_on: ${recipes.chef_id} = ${chefs.id} ;;
   }
 
+  join: gift_purchases_recipient {
+    from: gift_purchases
+    relationship: many_to_one
+    sql_on: ${gift_purchases_recipient.recipient_email} = ${users.email} ;;
+  }
+
   join: stripe_charges {
     relationship: one_to_one
     sql_on: ${orders.stripe_charge_id} = ${stripe_charges.id} ;;
