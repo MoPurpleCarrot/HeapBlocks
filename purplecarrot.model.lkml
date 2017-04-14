@@ -210,3 +210,5 @@ explore: email_delivered {
 }
 
 explore: google_analytics_data {}
+
+explore: google_adwords {}
