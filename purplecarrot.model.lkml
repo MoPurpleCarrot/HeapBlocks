@@ -123,6 +123,12 @@ explore: users {
     sql_on: ${last_order.id} = ${user_facts.last_order_id} ;;
   }
 
+  join: first_order {
+    from: orders
+    relationship: many_to_one
+    sql_on: ${first_order.id} = ${user_facts.first_order_id} ;;
+  }
+
   join: google_analytics_traffic {
     relationship: one_to_one
     sql_on: ${orders.id} = ${google_analytics_traffic.transactionid} ;;
