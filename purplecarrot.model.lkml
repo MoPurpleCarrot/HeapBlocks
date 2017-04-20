@@ -198,19 +198,16 @@ explore: ingredients {
 
   join: recipes {
     relationship: one_to_many
-    type: inner
     sql_on: ${ingredients.recipe_id} = ${recipes.id} ;;
   }
 
   join: menu_items {
     relationship: one_to_one
-    type: inner
     sql_on: ${recipes.id} = ${menu_items.recipe_id}  ;;
   }
 
   join: menus {
     relationship: one_to_one
-    type: inner
     sql_on: ${menu_items.menu_id} = ${menus.id} ;;
   }
   }
