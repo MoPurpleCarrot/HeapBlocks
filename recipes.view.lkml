@@ -65,11 +65,6 @@ view: recipes {
     sql: ${carbs} ;;
   }
 
-  measure: total_carbs_per_user {
-    type: number
-    value_format_name: decimal_2
-    sql: 1.0 * ${total_carbs} / NULLIF(${users.count},0) ;;
-  }
 
   dimension: chef_id {
     type: number
