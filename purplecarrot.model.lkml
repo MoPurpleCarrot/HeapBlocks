@@ -88,7 +88,7 @@ explore: users {
 
   join: orders {
     relationship: one_to_many
-    sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
+    sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
   join: gift_redemptions {
@@ -100,7 +100,6 @@ explore: users {
     relationship: one_to_one
     sql_on: ${gift_purchases.id} = ${gift_redemptions.gift_purchase_id} ;;
   }
-
 
   join: menus {
     relationship: many_to_one
@@ -197,7 +196,7 @@ explore: gift_purchases {
 explore: ingredients {
 
   join: recipes {
-    relationship: one_to_many
+    relationship: many_to_one
     sql_on: ${ingredients.recipe_id} = ${recipes.id} ;;
   }
 
@@ -232,3 +231,5 @@ explore: google_analytics_data {}
 explore: google_adwords {}
 
 explore: facebook_ads_insights {}
+
+explore: credit_transactions{}
