@@ -164,6 +164,11 @@ explore: scheduled_menu_skips {
     relationship: many_to_one
     sql_on: ${scheduled_menu_skips.menu_id} = ${menus.id} ;;
   }
+
+  join: users {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
 }
 
 explore: google_analytics_age {}
