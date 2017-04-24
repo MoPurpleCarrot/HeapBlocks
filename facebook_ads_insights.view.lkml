@@ -298,9 +298,20 @@ view: facebook_ads_insights {
     sql: ${TABLE}.total_action_value ;;
   }
 
+  measure: total_action_value_sum {
+    type: sum
+    value_format_name: usd
+    sql: ${total_action_value} ;;
+  }
+
   dimension: total_actions {
     type: number
     sql: ${TABLE}.total_actions ;;
+  }
+
+  measure: total_actions_sum {
+    type: sum
+    sql: ${total_actions} ;;
   }
 
   dimension: total_unique_actions {
