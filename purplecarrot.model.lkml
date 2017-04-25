@@ -22,6 +22,11 @@ explore: subscriptions {
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
 
+  join: shipping_addresses {
+    relationship: one_to_one
+    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
+  }
+
   join: menus {
     relationship: many_to_one
     sql_on: ${orders.menu_id} = ${menus.id} ;;
@@ -84,6 +89,11 @@ explore: users {
   join: subscriptions {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+
+  join: shipping_addresses {
+    relationship: one_to_one
+    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
   }
 
   join: orders {
@@ -169,6 +179,12 @@ explore: scheduled_menu_skips {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
+
+  join: shipping_addresses {
+    relationship: one_to_one
+    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
+  }
+
 }
 
 explore: google_analytics_age {}
