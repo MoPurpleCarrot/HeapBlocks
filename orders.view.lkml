@@ -67,7 +67,7 @@ view: orders {
 
   dimension: month_num {
     type: number
-    sql: DATEDIFF('month', ${user_facts.first_order_date}, ${created_date}) ;;
+    sql: DATEDIFF('month', ${user_facts.first_order_date}, ${delivery_date}) ;;
   }
 
   dimension: credit_applied {

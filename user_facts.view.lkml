@@ -3,9 +3,9 @@ view: user_facts {
     sql: SELECT users.id,
       COUNT(orders.id) as num_orders,
       SUM(orders.price) as total_revenue,
-      MIN(orders.created_at) as first_order,
+      MIN(orders.delivery_on) as first_order,
       MIN(orders.id) as first_order_id,
-      MAX(orders.created_at) as last_order,
+      MAX(orders.delivery_on) as last_order,
       MAX(orders.id) as last_order_id
       FROM heroku_postgres.users as users
       LEFT JOIN heroku_postgres.subscriptions as subscriptions
