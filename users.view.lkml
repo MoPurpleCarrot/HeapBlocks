@@ -403,7 +403,6 @@ view: users {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.subscribed_at ;;
-    hidden: yes
   }
 
   dimension: is_subscribed_to_mailchimp {

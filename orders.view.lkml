@@ -198,6 +198,14 @@ view: orders {
     }
   }
 
+  measure: admin_cancel_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "6"
+    }
+  }
   measure: PC_2_billed_count {
     type: count
     drill_fields: [detail*]
