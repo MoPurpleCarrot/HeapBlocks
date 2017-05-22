@@ -265,6 +265,17 @@ view: delighted {
     sql: ${TABLE}.trigger__url ;;
   }
 
+  measure: average_NPS_score  {
+    type: average
+    sql: ${event_data__score} ;;
+  }
+
+  measure: total_NPS_score  {
+    type: sum
+    sql: ${event_data__score} ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [event_data__person__name, event_data__person_properties__question_product_name, trigger__name]
