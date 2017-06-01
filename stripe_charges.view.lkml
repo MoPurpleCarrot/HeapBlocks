@@ -451,6 +451,12 @@ view: stripe_charges {
     sql: ${TABLE}.status ;;
   }
 
+  measure: total_refunded {
+    type: sum
+    value_format_name: usd
+    sql: ${amount_refunded} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, card__name, source__name]
