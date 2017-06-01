@@ -21,4 +21,10 @@ view: main_production_heap {
     type: string
     sql: ${TABLE}.utm_campaign ;;
   }
+
+  dimension: session_time {
+    type: date_time
+    sql: ${TABLE}.time ;;
+  }
+
   }
