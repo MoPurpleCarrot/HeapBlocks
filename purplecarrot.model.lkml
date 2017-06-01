@@ -249,6 +249,8 @@ explore: google_analytics_data {}
 
 explore: google_adwords {}
 
+explore: main_production_heap {}
+
 explore: facebook_ads_insights {}
 
 explore: credit_transactions{}
