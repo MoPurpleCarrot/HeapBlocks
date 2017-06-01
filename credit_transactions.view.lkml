@@ -108,6 +108,12 @@ view: credit_transactions {
     sql: ${TABLE}.updated_at ;;
   }
 
+  measure: total_credit_amount {
+    type: sum
+    sql: ${amount} ;;
+    value_format_name: usd
+  }
+
   measure: count {
     type: count
     drill_fields: [id]

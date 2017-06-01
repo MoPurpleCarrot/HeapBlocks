@@ -234,8 +234,6 @@ explore: ingredients {
 
 explore: google_analytics_conversion {}
 
-explore: skip_and_active_users {}
-
 explore: paused_and_cancelled_users {}
 
 explore: email_delivered {
