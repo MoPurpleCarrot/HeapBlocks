@@ -265,6 +265,12 @@ view: delighted {
     sql: ${TABLE}.trigger__url ;;
   }
 
+  dimension: tribe_member {
+    type: string
+    sql: ${TABLE}.event_data__person_properties__tribe_nps ;;
+  }
+
+
   measure: average_NPS_score  {
     type: average
     sql: ${event_data__score} ;;
