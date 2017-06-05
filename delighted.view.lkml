@@ -267,7 +267,7 @@ view: delighted {
 
   dimension: tribe_member {
     type: string
-    sql: ${TABLE}.event_data__person_properties__tribe_nps ;;
+    sql: ${TABLE}."event_data__person_properties__tribe nps";;
   }
 
 
