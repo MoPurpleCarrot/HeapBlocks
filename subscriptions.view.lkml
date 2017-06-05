@@ -60,6 +60,17 @@ view: subscriptions {
     sql: ${TABLE}.plan ;;
   }
 
+  dimension: plan_bucket {
+    sql:
+      if
+        (${plan}="0","Core",
+          if
+            (${plan}="1","Core",
+              if
+                (${plan}="2","TB12", "Other")));;
+  }
+
+
   dimension: status_code {
     type: number
     sql: ${TABLE}.status ;;

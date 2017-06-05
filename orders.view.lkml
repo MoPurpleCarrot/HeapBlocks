@@ -253,6 +253,16 @@ view: orders {
     sql: ${days_since_created} <= 30 ;;
   }
 
+  dimension: plan_bucket {
+    sql:
+      if
+      (${plan}="0","Core",
+        if
+        (${plan}="1","Core",
+          if
+          (${plan}="2","TB12", "Other")));;
+  }
+
   measure: total_revenue_30day {
     type:  sum
     value_format_name: usd
