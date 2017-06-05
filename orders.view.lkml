@@ -256,11 +256,11 @@ view: orders {
   dimension: plan_bucket {
     sql:
       if
-      (${plan}="0","Core",
+      (${plan}=0,"Core",
         if
-        (${plan}="1","Core",
+        (${plan}=1,"Core",
           if
-          (${plan}="2","TB12", "Other")));;
+          (${plan}=2,"TB12", "Other")));;
   }
 
   measure: total_revenue_30day {
