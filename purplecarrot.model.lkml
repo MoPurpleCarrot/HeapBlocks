@@ -86,6 +86,11 @@ explore: users {
     sql_on: ${users.email} = ${delighted.event_data__person__email} ;;
   }
 
+  join: subscription_cancellations {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
+  }
+
   join: subscriptions {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
