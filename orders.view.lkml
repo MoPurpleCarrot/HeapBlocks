@@ -254,14 +254,19 @@ view: orders {
   }
 
   dimension: plan_bucket {
-    sql:
-      if
-      (${plan}=0,'Core',
-        if
-        (${plan}=1,'Core',
-          if
-          (${plan}=2,'TB12', 'Other')));;
-  }
+    case:{
+      when:{
+        sql: ${plan} = 0 ;;
+        label: "Core"
+      }
+      when:{
+        sql: ${plan} = 1 ;;
+        label: "Core"
+      }
+      when:{
+        sql: ${plan} = 2 ;;
+        label: "TB12"
+      }}}
 
   measure: total_revenue_30day {
     type:  sum
