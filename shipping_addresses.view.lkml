@@ -144,6 +144,11 @@ view: shipping_addresses {
     sql: ${TABLE}.zip ;;
   }
 
+  dimension: zip_geo {
+    type: zipcode
+    sql: ${TABLE}.zip ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
