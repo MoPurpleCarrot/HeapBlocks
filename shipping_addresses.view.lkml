@@ -119,6 +119,13 @@ view: shipping_addresses {
     sql: ${TABLE}.state ;;
   }
 
+  dimension: state_geo {
+    type: string
+    group_label: "Location"
+    map_layer_name: us_states
+    sql: CASE WHEN ${TABLE}.state = ' ' THEN NULL ELSE ${TABLE}.state END ;;
+  }
+
   dimension: subscription_id {
     type: number
     # hidden: yes
