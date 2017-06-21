@@ -1,4 +1,4 @@
-view: users_heap {
+view: heap_users {
   sql_table_name: main_production.users ;;
 
   dimension: user_id {
