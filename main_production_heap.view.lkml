@@ -1,4 +1,4 @@
-view: main_production_heap {
+view: heap_sessions {
   sql_table_name: main_production.session ;;
 
   dimension: id {
