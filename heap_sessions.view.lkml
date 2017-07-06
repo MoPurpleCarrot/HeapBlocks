@@ -12,6 +12,11 @@ view: heap_sessions {
     sql: ${TABLE}.referrer ;;
   }
 
+  dimension: user_id {
+    type: string
+    sql: ${TABLE}.user_id ;;
+  }
+
   dimension: utm_source {
     type: string
     sql: ${TABLE}.utm_source ;;

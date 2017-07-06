@@ -96,6 +96,11 @@ explore: users {
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
 
+  join: welcome_surveys {
+    relationship: one_to_one
+    sql_on: ${welcome_surveys.user_id} = ${users.id} ;;
+  }
+
   join: shipping_addresses {
     relationship: one_to_one
     sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
@@ -119,6 +124,11 @@ explore: users {
   join: menus {
     relationship: many_to_one
     sql_on: ${orders.menu_id} = ${menus.id} ;;
+  }
+
+  join: skip_menu_surveys {
+    relationship:one_to_many
+    sql_on: ${skip_menu_surveys.user_id} = ${users.id} ;;
   }
 
   join: google_analytics_user {
@@ -248,7 +258,14 @@ explore: email_delivered {
     relationship: many_to_many
     sql_on: ${email_delivered.email_id} = ${email_opened.email_id} ;;
   }
+
+  join: users {
+    relationship: many_to_one
+    sql_on: ${email_delivered.user_id} = ${users.id} ;;
+  }
+
 }
+
 
 explore: google_analytics_data {}
 
