@@ -186,6 +186,15 @@ view: orders {
     sql: ${price} ;;
   }
 
+  measure: total_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "3"
+    }
+  }
+
   measure: TB12_billed_count {
     type: count
     drill_fields: [detail*]
