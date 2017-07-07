@@ -147,6 +147,36 @@ view: welcome_surveys {
     sql: ${TABLE}.protecting_env_and_climate ;;
   }
 
+  dimension: top_env_mission {
+    case:{
+      when:{
+        sql: ${protecting_env_and_climate} = 5 ;;
+        label: "Top"
+      }
+      else: "Not Top"
+      }
+      }
+
+  dimension: top_health_mission {
+    case:{
+      when:{
+        sql: ${improving_health_and_wellbeing} = 5 ;;
+        label: "Top"
+      }
+      else: "Not Top"
+    }
+  }
+
+  dimension: top_animal_mission {
+    case:{
+      when:{
+        sql: ${protecting_animals} = 5 ;;
+        label: "Top"
+      }
+      else: "Not Top"
+    }
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
