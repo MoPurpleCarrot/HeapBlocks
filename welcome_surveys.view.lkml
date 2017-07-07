@@ -173,37 +173,31 @@ view: welcome_surveys {
 
   measure: total_env_score {
     type: sum
-    value_format_name: decimal_0
     sql: ${protecting_env_and_climate} ;;
   }
 
   measure: avg_env_score {
     type: average
-    value_format_name: decimal_2
     sql: ${protecting_env_and_climate} ;;
   }
 
   measure: total_animal_score {
     type: sum
-    value_format_name: decimal_0
     sql: ${protecting_animals} ;;
   }
 
   measure: avg_animal_score {
     type: average
-    value_format_name: decimal_2
     sql: ${protecting_animals} ;;
   }
 
   measure: total_health_score {
     type: sum
-    value_format_name: decimal_0
     sql: ${improving_health_and_wellbeing} ;;
   }
 
   measure: avg_health_score {
     type: average
-    value_format_name: decimal_2
     sql: ${improving_health_and_wellbeing} ;;
   }
 
