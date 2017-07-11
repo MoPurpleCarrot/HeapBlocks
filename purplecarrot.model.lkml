@@ -17,6 +17,11 @@ explore: subscriptions {
     sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
   }
 
+  join: refunds {
+    relationship: one_to_one
+    sql_on: ${refunds.order_id} = ${orders.id} ;;
+  }
+
   join: users {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
