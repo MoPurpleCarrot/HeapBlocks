@@ -275,6 +275,27 @@ explore: heap_sessions {}
 
 explore: facebook_ads_insights {}
 
-explore: credit_transactions{}
+explore: credit_transactions{
+
+  join: credit_transaction_groups {
+    relationship: many_to_one
+    sql_on: ${credit_transactions.credit_transaction_group_id} = ${credit_transaction_groups.id};;
+    }
+
+  join: users {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${credit_transaction_groups.user_id} ;;
+  }
+
+  join: subscriptions {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+
+  join: shipping_addresses {
+    relationship: one_to_one
+    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
+  }
+}
 
 explore: refunds {}
