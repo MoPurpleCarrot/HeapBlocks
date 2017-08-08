@@ -7,8 +7,34 @@ include: "*.view"
 # include all dashboards in this project
 include: "*.dashboard"
 
+datagroup: hourly_sync  {
+  sql_trigger: SELECT date_part(hour, current_timestamp) ;;
+  }
+
+explore: heap_users{
+  label: "Heap Attribution"
+
+  join: heap_first_session {
+    relationship: one_to_one
+    sql_on: ${heap_first_session.user_id} = ${heap_users.user_id} ;;
+    type: left_outer
+  }
+
+  join: heap_account_created {
+    relationship: one_to_one
+    sql_on: ${heap_account_created.user_id} = ${heap_users.user_id} ;;
+    type: left_outer
+  }
+
+  join: heap_registration_complete {
+    relationship: one_to_one
+    sql_on: ${heap_registration_complete.user_id} = ${heap_users.user_id} ;;
+    type: left_outer
+  }
+
+}
+
 explore: subscriptions {
-  persist_for: "1 hour"
   label: "Users, Orders & Recipes"
   fields: [ALL_FIELDS*, -orders.days_since_created, -orders.month_num]
 
