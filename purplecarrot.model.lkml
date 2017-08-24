@@ -92,6 +92,10 @@ explore: subscriptions {
     sql_on: ${orders.stripe_charge_id} = ${stripe_charges.id} ;;
   }
 }
+#  join: stripe_customers__cards_data {
+#    relationship: many_to_one
+#    sql_on: ${strip_charges__cards} = ${stripe_charges.id} ;;
+#  }
 
 explore: users {
   persist_for: "1 hour"

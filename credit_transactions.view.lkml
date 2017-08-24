@@ -84,6 +84,27 @@ view: credit_transactions {
     sql: ${TABLE}.description ;;
   }
 
+  dimension: description_bucket {
+    case:{
+      when:{
+        sql: ${description} = "Delivery issue" ;;
+        label: "Delivery"
+      }
+      when:{
+        sql: ${description} = "Damaged Ingredient(s)" ;;
+        label: "Ingredient Damage"
+      }
+      when:{
+        sql: ${description} = "Coupon not applied" ;;
+        label: "Coupon"
+      }
+      when:{
+        sql: ${description} = "Damaged (Interior)" ;;
+        label: "Interior Damage"
+      }
+      else: "Other"
+      }}
+
   dimension: source_id {
     type: number
     sql: ${TABLE}.source_id ;;
