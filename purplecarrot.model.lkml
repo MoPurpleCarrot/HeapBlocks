@@ -317,6 +317,12 @@ explore: credit_transactions{
     sql_on: ${users.id} = ${credit_transaction_groups.user_id} ;;
   }
 
+  join: cx_rep {
+    from: users
+    relationship: one_to_many
+    sql_on: ${users.id} = ${credit_transactions.admin_id} ;;
+  }
+
   join: subscriptions {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
