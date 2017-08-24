@@ -102,6 +102,22 @@ view: credit_transactions {
         sql: ${description} = "Damaged (Interior)" ;;
         label: "Interior Damage"
       }
+      when:{
+        sql: ${description} = "Damaged (Exterior)" ;;
+        label: "Exterior Damage"
+      }
+      when:{
+        sql: ${description} = "Unwanted Box" ;;
+        label: "Unwanted Box"
+      }
+      when:{
+        sql: ${description} = "Missing item(s)" ;;
+        label: "Missing Item"
+      }
+      when:{
+        sql: ${description} = "Gift" ;;
+        label: "Gift"
+      }
       else: "Other"
       }}
 
