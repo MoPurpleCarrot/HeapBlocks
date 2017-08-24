@@ -319,8 +319,8 @@ explore: credit_transactions{
 
   join: cx_rep {
     from: users
-    relationship: one_to_many
-    sql_on: ${users.id} = ${credit_transactions.admin_id} ;;
+    relationship: many_to_one
+    sql_on: ${credit_transactions.admin_id}=${users.id} ;;
   }
 
   join: subscriptions {
