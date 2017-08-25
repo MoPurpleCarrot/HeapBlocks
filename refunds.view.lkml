@@ -60,6 +60,12 @@ view: refunds {
     sql: ${TABLE}.amount ;;
   }
 
+  measure: total_refund_amount {
+    type: sum
+    value_format_name: usd
+    sql: ${amount} ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
