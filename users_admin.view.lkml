@@ -40,33 +40,6 @@ view: users {
     sql: ${TABLE}.account_number ;;
   }
 
-  dimension: address {
-    type: string
-    group_label: "Location"
-    sql: ${TABLE}.address ;;
-  }
-
-  dimension: address_2 {
-    type: string
-    group_label: "Location"
-    sql: ${TABLE}.address2 ;;
-  }
-
-  dimension: name {
-    type: string
-    sql: ${first_name} || ' ' || ${last_name} ;;
-  }
-
-  dimension: business_name {
-    type: string
-    sql: ${TABLE}.business_name ;;
-  }
-
-  dimension: is_business_user {
-    type: yesno
-    sql: ${business_name} IS NOT NULL ;;
-  }
-
   dimension_group: cancelled {
     type: time
     timeframes: [time, date, week, month, raw]
@@ -100,19 +73,6 @@ view: users {
       ;;
   }
 
-  dimension: city {
-    type: string
-    group_label: "Location"
-    sql: ${TABLE}.city ;;
-  }
-
-  dimension: country {
-    type: string
-    group_label: "Location"
-    map_layer_name: countries
-    sql: ${TABLE}.country ;;
-  }
-
   dimension_group: created {
     type: time
     timeframes: [time, date, week, month, raw]
@@ -137,14 +97,12 @@ view: users {
     type: sum
     value_format_name: usd
     sql: ${credit} ;;
-    drill_fields: [id, city, state, account_number]
-  }
+    }
 
   measure: total_purple_carrot_credit {
     type: sum
     value_format_name: usd
     sql: ${credit} ;;
-    drill_fields: [id, city, state, account_number]
 
     filters: {
       field: is_purple_carrot_employee
@@ -161,7 +119,6 @@ view: users {
     type: sum
     value_format_name: usd
     sql: ${credit} ;;
-    drill_fields: [id, city, state, account_number]
 
     filters: {
       field: is_active_customer
@@ -186,16 +143,6 @@ view: users {
     sql: ${TABLE}.current_sign_in_ip ;;
   }
 
-  dimension: delivery_day {
-    type: number
-    sql: ${TABLE}.delivery_day ;;
-  }
-
-  dimension: delivery_instructions {
-    type: string
-    sql: ${TABLE}.delivery_instructions ;;
-  }
-
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
@@ -214,11 +161,6 @@ view: users {
   dimension: encrypted_password {
     type: string
     sql: ${TABLE}.encrypted_password ;;
-  }
-
-  dimension: first_name {
-    type: string
-    sql: ${TABLE}.first_name ;;
   }
 
   dimension: generated_password {
@@ -254,11 +196,6 @@ view: users {
     sql: ${TABLE}.last_mailchimp_update_at ;;
   }
 
-  dimension: last_name {
-    type: string
-    sql: ${TABLE}.last_name ;;
-  }
-
   dimension_group: last_sign_in {
     type: time
     timeframes: [
@@ -287,17 +224,6 @@ view: users {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.paused_at ;;
-  }
-
-  dimension: phone {
-    type: number
-    sql: ${TABLE}.phone ;;
-    value_format: "(###) ###-####"
-  }
-
-  dimension: plan {
-    type: number
-    sql: ${TABLE}.plan ;;
   }
 
   dimension: provider {
@@ -448,22 +374,7 @@ view: users {
     sql: ${TABLE}.utm_source ;;
   }
 
-  dimension: zip {
-    type: zipcode
-    group_label: "Location"
-    sql: ${TABLE}.zip ;;
-  }
-
   measure: count {
     type: count
-    drill_fields: [
-      id,
-      name,
-      phone,
-      state,
-      weeks_as_customer,
-      orders.total_revenue,
-      tickets.count
-    ]
   }
 }
