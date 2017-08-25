@@ -320,7 +320,7 @@ explore: credit_transactions{
   join: cx_rep {
     from: users
     relationship: many_to_one
-    sql_on: ${credit_transactions.admin_id}=${users.id} ;;
+    sql_on: ${credit_transactions.admin_id}=${cx_rep.id} ;;
   }
 
   join: subscriptions {
