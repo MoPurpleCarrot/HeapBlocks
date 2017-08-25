@@ -346,4 +346,23 @@ explore: credit_transactions{
   }
 }
 
-explore: refunds {}
+explore: refunds {
+
+  join: cx_rep_user {
+      from: users
+    relationship: many_to_one
+    sql_on: ${refunds.admin_id}=${cx_rep_user.id} ;;
+  }
+
+  join: cx_rep_subscription {
+    from: subscriptions
+    relationship: one_to_one
+    sql_on: ${cx_rep_subscription.user_id}=${cx_rep_user.id} ;;
+  }
+
+  join: cx_rep_shipping_addresses {
+    from: shipping_addresses
+    relationship: one_to_one
+    sql_on: ${cx_rep_subscription.id}=${cx_rep_shipping_addresses.subscription_id} ;;
+  }
+  }
