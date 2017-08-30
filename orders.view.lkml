@@ -186,6 +186,13 @@ view: orders {
     sql: ${price} ;;
   }
 
+  measure: total_amount_charged {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${amount_charged} ;;
+  }
+
   measure: total_billed_count {
     type: count
     drill_fields: [detail*]
