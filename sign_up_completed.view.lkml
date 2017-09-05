@@ -1,5 +1,5 @@
 view: sign_up_completed {
-  sql_table_name: main_production.sign_up_completed ;;
+  sql_table_name: main_production.sign_up_account_creation_submit_account_creation_form ;;
 
   dimension: active {
     type: string
