@@ -157,7 +157,7 @@ explore: users {
   }
 
   join: skip_menu_surveys {
-    relationship:one_to_many
+    relationship:many_to_one
     sql_on: ${skip_menu_surveys.user_id} = ${users.id} ;;
   }
 
