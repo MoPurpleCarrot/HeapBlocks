@@ -156,11 +156,6 @@ explore: users {
     sql_on: ${orders.menu_id} = ${menus.id} ;;
   }
 
-  join: skip_menu_surveys {
-    relationship:many_to_one
-    sql_on: ${skip_menu_surveys.user_id} = ${users.id} ;;
-  }
-
   join: google_analytics_user {
     relationship: one_to_many
     sql_on: ${users.id} = ${google_analytics_user.dimension1} ;;
@@ -304,6 +299,8 @@ explore: google_adwords {}
 explore: heap_sessions {}
 
 explore: facebook_ads_insights {}
+
+explore: skip_menu_surveys {}
 
 explore: credit_transactions{
 
