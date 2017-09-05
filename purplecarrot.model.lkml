@@ -32,6 +32,16 @@ explore: heap_users{
     type: left_outer
   }
 
+  join: users {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${heap_users.identity} ;;
+  }
+
+  join: subscriptions {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+
 }
 
 explore: subscriptions {
