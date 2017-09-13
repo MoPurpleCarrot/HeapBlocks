@@ -6,6 +6,11 @@ view: heap_registration_complete {
       order by user_id, rank asc) as account_created
       WHERE rank = 1
  ;;
+
+  datagroup_trigger: hourly_sync
+  distribution: "registration_complete_time"
+  sortkeys: ["registration_complete_time"]
+
   }
 
   measure: count {

@@ -6,9 +6,11 @@ view: heap_first_session {
       order by user_id, rank asc) as first_session
       WHERE rank = 1
        ;;
+
     datagroup_trigger: hourly_sync
-    distribution: "user_id"
-    sortkeys: ["user_id", "session_id"]
+    distribution: "first_session_time"
+    sortkeys: ["first_session_time"]
+
   }
 
 

@@ -6,6 +6,9 @@ view: heap_account_created {
       order by user_id, rank asc) as account_created
       WHERE rank = 1
  ;;
+    datagroup_trigger: hourly_sync
+    distribution: "account_created_time"
+    sortkeys: ["account_created_time"]
   }
 
   measure: count {
