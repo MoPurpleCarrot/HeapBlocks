@@ -1,6 +1,6 @@
 view: zendesk_custom_fields {
   derived_table: {
-    sql: select ticket_id._sdc_source_key_id, ship_date, shipping_provider, shipping_zone, product_line, packing_issue_type_1, packing_issue_detail_1, packing_issue_type_2, packing_issue_detail_2, packing_issue_type_3, packing_issue_detail_3, ingredient_issue_type_1, ingredient_issue_detail_1, ingredient_issue_type_2, ingredient_issue_detail_2, ingredient_issue_type_3, ingredient_issue_detail_3, shipping_issue_type_1, shipping_issue_detail_1, shipping_issue_type_2, shipping_issue_detail_2 from
+    sql: select ticket_id._sdc_source_key_id, ship_date, shipping_provider, shipping_zone, product_line, packing_issue_type_1, packing_issue_detail_1, packing_issue_type_2, packing_issue_detail_2, packing_issue_type_3, packing_issue_detail_3, ingredient_issue_type_1, ingredient_issue_detail_1, ingredient_issue_type_2, ingredient_issue_detail_2, ingredient_issue_type_3, ingredient_issue_detail_3, shipping_issue_type_1, shipping_issue_detail_1, shipping_issue_type_2, shipping_issue_detail_2, kitting_partner from
 
       (select distinct _sdc_source_key_id FROM zendesk.tickets__custom_fields) ticket_id
 
