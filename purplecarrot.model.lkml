@@ -121,6 +121,11 @@ explore: users {
     sql_on: ${tickets.id} = ${zendesk_ticket_metrics.ticket_id} ;;
   }
 
+  join: zendesk_custom_fields {
+    relationship: one_to_one
+    sql_on: ${tickets.id} = ${zendesk_custom_fields._sdc_source_key_id} ;;
+  }
+
   join: delighted {
     relationship: one_to_many
     sql_on: ${users.email} = ${delighted.event_data__person__email} ;;
