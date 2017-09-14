@@ -38,7 +38,7 @@ explore: heap_users{
 
   join: users {
     relationship: one_to_one
-    sql_on: ${users.id} = ${heap_users.identity} ;;
+    sql_on: ${users.email} = ${heap_users._email} ;;
   }
 
   join: subscriptions {
