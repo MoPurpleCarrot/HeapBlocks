@@ -11,6 +11,10 @@ datagroup: hourly_sync  {
   sql_trigger: SELECT date_part(hour, current_timestamp) ;;
   }
 
+datagroup: daily_sync  {
+  sql_trigger: SELECT date_part(day, current_timestamp) ;;
+}
+
 explore: heap_users{
   label: "Heap Attribution"
 
