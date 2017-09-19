@@ -184,7 +184,7 @@ view: zendesk_custom_fields {
 
     dimension: packing_issue_type_2 {
       type: string
-      sql: trim('2' from ${TABLE}.packing_issue_type_2)  ;;
+      sql: ${TABLE}.packing_issue_type_2 ;;
     }
 
     dimension: packing_issue_detail_2 {
