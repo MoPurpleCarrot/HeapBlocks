@@ -136,9 +136,9 @@ view: zendesk_custom_fields {
             on ticket_id._sdc_source_key_id = kitting_partner._sdc_source_key_id
              ;;
 
-      datagroup_trigger: batch_date_update
-      distribution: "_sdc_batched_at"
-      sortkeys: ["_sdc_batched_at"]
+      # datagroup_trigger: batch_date_update
+      # distribution: "_sdc_batched_at"
+      # sortkeys: ["_sdc_batched_at"]
 
     }
 
