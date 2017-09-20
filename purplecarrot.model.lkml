@@ -387,3 +387,5 @@ explore: refunds {
     sql_on: ${cx_rep_subscription.id}=${cx_rep_shipping_addresses.subscription_id} ;;
   }
   }
+
+explore: coupons {}
