@@ -389,3 +389,22 @@ explore: refunds {
   }
 
 explore: coupons {}
+
+explore: stripe_customers {
+
+  join: stripe_customers__cards__data {
+    relationship: many_to_one
+    sql_on: ${stripe_customers__cards__data.id} = ${stripe_customers.default_card} ;;
+  }
+
+  join: users {
+    relationship: one_to_one
+    sql_on: ${users.email}=${stripe_customers.email} ;;
+  }
+
+  join: subscriptions {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+
+}
