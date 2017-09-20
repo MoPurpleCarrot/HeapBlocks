@@ -160,6 +160,11 @@ explore: users {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = coupons.id ;;
+
+  }
   join: gift_redemptions {
     relationship: one_to_many
     sql_on: ${gift_redemptions.user_id} = ${users.id} ;;
