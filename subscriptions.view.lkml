@@ -73,7 +73,7 @@ view: subscriptions {
       when:{
         sql: ${plan} = 2 ;;
         label: "TB12"
-    }}}
+      }}}
 
   dimension: status_code {
     type: number
@@ -83,15 +83,21 @@ view: subscriptions {
   dimension: status {
     type: string
     sql:  CASE WHEN ${status_code} = 0 THEN 'Inactive'
-    WHEN ${status_code} = 1 THEN 'Active'
-    WHEN ${status_code} = 2 THEN 'Cancelled'
-    WHEN ${status_code} = 3 THEN 'Paused'
-    WHEN ${status_code} = 4 THEN 'Skipped'
-    WHEN ${status_code} = 5 THEN 'Suspended'
-    ELSE NULL
-    END
-    ;;
+          WHEN ${status_code} = 1 THEN 'Active'
+          WHEN ${status_code} = 2 THEN 'Cancelled'
+          WHEN ${status_code} = 3 THEN 'Paused'
+          WHEN ${status_code} = 4 THEN 'Skipped'
+          WHEN ${status_code} = 5 THEN 'Suspended'
+          ELSE NULL
+          END
+          ;;
   }
+
+  dimension: account_designation {
+    type: string
+    sql: ${TABLE}.account_designation ;;
+  }
+
 
   dimension: cc_exp_month {
     group_label: "Stripe Info"
