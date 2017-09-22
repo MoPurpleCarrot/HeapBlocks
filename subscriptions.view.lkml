@@ -93,17 +93,17 @@ view: subscriptions {
           ;;
   }
 
-  dimension: account_designation_code {
+  dimension: account_designation {
     type: string
     sql: ${TABLE}.account_designation ;;
   }
 
-  dimension: account_designation {
+  dimension: account_designation_bucket {
     type: string
-    sql: CASE WHEN ${account_designation_code}_code} = 0 THEN 'Standard'
-          WHEN ${account_designation_code} = 1 THEN 'Employee'
-          WHEN ${account_designation_code} = 2 THEN 'Comp'
-          WHEN ${account_designation_code} = 3 THEN 'VIP'
+    sql: CASE WHEN ${account_designation}_code} = 0 THEN 'Standard'
+          WHEN ${account_designation} = 1 THEN 'Employee'
+          WHEN ${account_designation} = 2 THEN 'Comp'
+          WHEN ${account_designation} = 3 THEN 'VIP'
           ELSE NULL
           END
           ;;
