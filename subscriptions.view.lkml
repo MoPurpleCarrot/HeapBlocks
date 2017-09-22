@@ -94,7 +94,7 @@ view: subscriptions {
   }
 
   dimension: account_designation {
-    type: string
+    type: number
     sql: ${TABLE}.account_designation ;;
   }
 
