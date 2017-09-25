@@ -408,3 +408,5 @@ explore: stripe_customers {
   }
 
 }
+
+explore: stripe_charges {}
