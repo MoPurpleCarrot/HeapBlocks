@@ -39,7 +39,7 @@ view: heap_users {
 
   dimension: identity {
     type: string
-    sql: ${TABLE}.identity ;;
+    sql: ${TABLE}."identity" ;;
   }
 
   dimension_group: joindate {

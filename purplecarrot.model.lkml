@@ -11,9 +11,9 @@ datagroup: hourly_sync  {
   sql_trigger: SELECT DATE_PART('hour', getdate()) ;;
   }
 
-# datagroup:batch_date_update {
-#   sql_trigger: SELECT max(_sdc_batch_date) FROM zendesk.tickets__custom_fields ;;
-# }
+datagroup:batch_date_update {
+ sql_trigger: SELECT max(_sdc_batch_date) FROM zendesk.tickets__custom_fields ;;
+ }
 
 explore: heap_users{
   label: "Heap Attribution"
