@@ -8,7 +8,7 @@ include: "*.view"
 include: "*.dashboard"
 
 datagroup: hourly_sync  {
-  sql_trigger: SELECT date_part(hour, current_timestamp) ;;
+  sql_trigger: SELECT DATE_PART('hour', getdate()) ;;
   }
 
 # datagroup:batch_date_update {
