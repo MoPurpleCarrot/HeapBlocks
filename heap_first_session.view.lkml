@@ -23,7 +23,6 @@ view: heap_first_session {
     type: number
     sql: ${TABLE}.user_id ;;
     primary_key: yes
-    hidden: yes
   }
 
   dimension: session_id {
