@@ -87,7 +87,7 @@ view: credit_transactions {
   dimension: description_bucket {
     case:{
       when:{
-        sql: ${description} = "Delivery issue" ;;
+        sql: ${description} = 'Delivery issue' ;;
         label: "Delivery"
       }
       when:{
