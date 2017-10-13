@@ -15,6 +15,8 @@ datagroup:batch_date_update {
  sql_trigger: SELECT max(_sdc_batch_date) FROM zendesk.tickets__custom_fields ;;
  }
 
+explore:heap_registration_complete {}
+
 explore: heap_users{
   label: "Heap Attribution"
 
