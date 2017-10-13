@@ -55,6 +55,44 @@ view: refunds {
     sql: ${TABLE}.admin_reason ;;
   }
 
+  dimension: refund_reason_bucket {
+    case:{
+      when:{
+        sql: ${admin_reason} = 'Delivery issue' ;;
+        label: "Delivery"
+      }
+      when:{
+        sql: ${admin_reason} = 'Unwanted box' ;;
+        label: "Unwanted Box"
+      }
+      when:{
+        sql: ${admin_reason} = 'Damaged Ingredient(s)' ;;
+        label: "Ingredient Damage"
+      }
+      when:{
+        sql: ${admin_reason} = 'Coupon not applied' ;;
+        label: "Coupon"
+      }
+      when:{
+        sql: ${admin_reason} = 'Missing item(s)' ;;
+        label: "Missing Item"
+      }
+      when:{
+        sql: ${admin_reason} = 'Damaged (Interior)' ;;
+        label: "Interior Damage"
+      }
+      when:{
+        sql: ${admin_reason} = 'Damaged (Exterior)' ;;
+        label: "Exterior Damage"
+      }
+      when:{
+        sql: ${admin_reason} = 'Gift' ;;
+        label: "Gift"
+      }
+      else: "Other"
+    }}
+
+
   dimension: amount {
     type: number
     sql: ${TABLE}.amount ;;

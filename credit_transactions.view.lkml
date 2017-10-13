@@ -84,38 +84,38 @@ view: credit_transactions {
     sql: ${TABLE}.description ;;
   }
 
-  dimension: description_bucket {
+  dimension: credit_reason_bucket {
     case:{
       when:{
         sql: ${description} = 'Delivery issue' ;;
         label: "Delivery"
       }
       when:{
-        sql: ${description} = "Damaged Ingredient(s)" ;;
+        sql: ${description} = 'Damaged Ingredient(s)' ;;
         label: "Ingredient Damage"
       }
       when:{
-        sql: ${description} = "Coupon not applied" ;;
+        sql: ${description} = 'Coupon not applied' ;;
         label: "Coupon"
       }
       when:{
-        sql: ${description} = "Damaged (Interior)" ;;
+        sql: ${description} = 'Damaged (Interior)' ;;
         label: "Interior Damage"
       }
       when:{
-        sql: ${description} = "Damaged (Exterior)" ;;
+        sql: ${description} = 'Damaged (Exterior)' ;;
         label: "Exterior Damage"
       }
       when:{
-        sql: ${description} = "Unwanted Box" ;;
+        sql: ${description} = 'Unwanted box' ;;
         label: "Unwanted Box"
       }
       when:{
-        sql: ${description} = "Missing item(s)" ;;
+        sql: ${description} = 'Missing item(s)' ;;
         label: "Missing Item"
       }
       when:{
-        sql: ${description} = "Gift" ;;
+        sql: ${description} = 'Gift' ;;
         label: "Gift"
       }
       else: "Other"
