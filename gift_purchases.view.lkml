@@ -56,15 +56,89 @@ view: gift_purchases {
     sql: ${TABLE}.source ;;
   }
 
+  dimension: sending_method {
+    type: string
+    sql: ${TABLE}.sending_method ;;
+  }
+
+  # Sending Method Codes
+    # email = 0 (seems like gift-based)
+    # gift card = 1
+    # no method = 2 (rarely used)
+    # giveaway = 3 (SFM program)
+
+  dimension: gift_program_bucket {
+    case:{
+      when:{
+        sql: ${sending_method} = 0 ;;
+        label: "Gift"
+      }
+
+      when:{
+        sql: ${sending_method} = 1 ;;
+        label: "Gift"
+      }
+
+      when:{
+        sql: ${sending_method} = 3 ;;
+        label: "Send Free Meal"
+      }
+      else: "Other"
+    }}
+
   dimension: status {
     type: number
     sql: ${TABLE}.status ;;
   }
 
-  dimension: status_string {
-    type: string
-    sql: ${TABLE}.status_string ;;
-  }
+  # Status Codes
+    # 1 = purchased
+    # 2 = credit_card_error
+    # 3 = redeemed
+    # 4 = partially_applied
+    # 5 = fully_applied
+    # 6 = refunded
+    # 7 = Partially_refunded
+
+  dimension: gift_status_bucket {
+    case:{
+      when:{
+        sql: ${status} = 1 ;;
+        label: "Purchased"
+      }
+
+      when:{
+        sql: ${status} = 2 ;;
+        label: "Credit Card Error"
+      }
+
+      when:{
+        sql: ${status} = 3 ;;
+        label: "Redeemed"
+      }
+
+      when:{
+        sql: ${status} = 4 ;;
+        label: "Partially Applied"
+      }
+
+      when:{
+        sql: ${status} = 5 ;;
+        label: "Fully Applied"
+      }
+
+      when:{
+        sql: ${status} = 6 ;;
+        label: "Refunded"
+      }
+
+      when:{
+        sql: ${status} = 7 ;;
+        label: "Partially Refunded"
+      }
+
+      else: "Other"
+  }}
 
   dimension: stripe_charge_id {
     type: string
@@ -133,6 +207,15 @@ view: gift_purchases {
     drill_fields: [id, purchaser_name, purchaser_email, recipient_name, recipient_email]
   }
 
+  measure: send_free_meal_count {
+    type:  count
+    filters: {
+      field: gift_program_bucket
+      value: "Send Free Meal"
+    }
+    drill_fields: [id, purchaser_name, purchaser_email, recipient_name, recipient_email]
+  }
+
   measure: partially_applied_gift_value {
     type:  sum
     sql: ${value} ;;
@@ -143,6 +226,7 @@ view: gift_purchases {
     }
     drill_fields: [id, purchaser_name, purchaser_email, recipient_name, recipient_email]
   }
+
 
   measure: fully_applied_gift_value {
     type:  sum

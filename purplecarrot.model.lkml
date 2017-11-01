@@ -155,7 +155,7 @@ explore: users {
   }
 
   join: shipping_addresses {
-    relationship: one_to_one
+    relationship: one_to_many
     sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
   }
 
