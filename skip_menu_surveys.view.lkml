@@ -69,6 +69,21 @@ view: skip_menu_surveys {
     sql: ${TABLE}.plan ;;
   }
 
+  dimension: plan_after_skip {
+    type: string
+    sql: ${TABLE}.plan_after_skip ;;
+  }
+
+  dimension: unskipped_through_rebuttal {
+    type: string
+    sql: ${TABLE}.unskipped_through_rebuttal ;;
+  }
+
+  dimension: shipping_address_id {
+    type: string
+    sql: ${TABLE}.shipping_address_id ;;
+  }
+
   dimension: reason {
     type: string
     sql: ${TABLE}.reason ;;
