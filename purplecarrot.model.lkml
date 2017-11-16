@@ -100,6 +100,11 @@ explore: subscriptions {
     sql_on: ${recipe_tags_recipes.recipe_tag_id} = ${recipe_tags.id} ;;
   }
 
+  join: scheduled_menus {
+    relationship: many_to_one
+    sql_on: ${scheduled_menus.subscription_id} =  ${subscriptions.id} ;;
+  }
+
   join: chefs {
     relationship: many_to_one
     sql_on: ${recipes.chef_id} = ${chefs.id} ;;
@@ -147,6 +152,11 @@ explore: users {
   join: subscriptions {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+
+  join: scheduled_menus {
+    relationship: many_to_one
+    sql_on: ${scheduled_menus.subscription_id} =  ${subscriptions.id} ;;
   }
 
   join: welcome_surveys {
@@ -224,33 +234,6 @@ explore: users {
   join: user_facts_credit {
     relationship: one_to_one
     sql_on: ${user_facts.id} = ${user_facts_credit.id} ;;
-  }
-
-  join: subscription_events {
-    relationship: one_to_many
-    sql_on: ${users.id} = ${subscription_events.user_id} ;;
-  }
-}
-
-explore: scheduled_menu_skips {
-  join: subscriptions {
-    relationship: one_to_many
-    sql_on: ${subscriptions.id} = ${scheduled_menu_skips.subscription_id} ;;
-  }
-
-  join: menus {
-    relationship: many_to_one
-    sql_on: ${scheduled_menu_skips.menu_id} = ${menus.id} ;;
-  }
-
-  join: users {
-    relationship: one_to_one
-    sql_on: ${subscriptions.user_id} = ${users.id} ;;
-  }
-
-  join: shipping_addresses {
-    relationship: one_to_one
-    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
   }
 
 }

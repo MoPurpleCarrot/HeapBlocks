@@ -1,5 +1,5 @@
-view: subscription_events {
-  sql_table_name: heroku_postgres.subscription_events ;;
+view: scheduled_menus {
+  sql_table_name: heroku_postgres.scheduled_menus ;;
 
   dimension: id {
     primary_key: yes
@@ -59,38 +59,39 @@ view: subscription_events {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: last_event {
+  dimension: donated {
+    type: yesno
+    sql: ${TABLE}.donated ;;
+  }
+
+  dimension: menu_id {
     type: number
-    sql: max(extract(epoch from ${created_raw}) * 1000::bigint + ${event_type}) - max(extract(epoch from ${created_raw}) * 1000::bigint)
-    ;;
-  }
-
-  dimension: description {
-    type: string
-    sql: ${TABLE}.description ;;
-  }
-
-  dimension: event_type {
-    type: number
-    sql: ${TABLE}.event_type ;;
-  }
-
-  dimension: event {
-    type: string
-    sql:  CASE WHEN ${event_type} = 0 THEN 'Subscribed'
-    WHEN ${event_type} = 1 THEN 'Skipped'
-    WHEN ${event_type} = 2 THEN 'Paused'
-    WHEN ${event_type} = 3 THEN 'Cancelled'
-    WHEN ${event_type} = 4 THEN 'Credits Updated'
-    WHEN ${event_type} = 5 THEN 'Suspended'
-    ELSE NULL
-    END
-    ;;
+    sql: ${TABLE}.menu_id ;;
   }
 
   dimension: plan {
     type: number
     sql: ${TABLE}.plan ;;
+  }
+
+  dimension: recipient_email {
+    type: string
+    sql: ${TABLE}.recipient_email ;;
+  }
+
+  dimension: shipping_address_id {
+    type: number
+    sql: ${TABLE}.shipping_address_id ;;
+  }
+
+  dimension: status {
+    type: number
+    sql: ${TABLE}.status ;;
+  }
+
+  dimension: subscription_id {
+    type: number
+    sql: ${TABLE}.subscription_id ;;
   }
 
   dimension_group: updated {
@@ -107,13 +108,8 @@ view: subscription_events {
     sql: ${TABLE}.updated_at ;;
   }
 
-  dimension: user_id {
-    type: number
-    sql: ${TABLE}.user_id ;;
-  }
-
   measure: count {
     type: count
-    drill_fields: [id, users.business_name, users.first_name, users.id, users.last_name]
+    drill_fields: [id]
   }
 }
