@@ -373,6 +373,28 @@ explore: refunds {
     relationship: one_to_one
     sql_on: ${cx_rep_subscription.id}=${cx_rep_shipping_addresses.subscription_id} ;;
   }
+
+  join: orders {
+    relationship: one_to_one
+    sql_on: ${refunds.order_id}=${orders.id} ;;
+  }
+
+  join: subscriptions {
+    relationship: many_to_one
+    sql_on: ${orders.subscription_id}=${subscriptions.id} ;;
+  }
+
+  join: users {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id}=${users.id} ;;
+  }
+
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id} ;;
+  }
+
+
   }
 
 explore: coupons {}
