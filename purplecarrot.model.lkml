@@ -374,6 +374,30 @@ explore: refunds {
     sql_on: ${cx_rep_subscription.id}=${cx_rep_shipping_addresses.subscription_id} ;;
   }
 
+  join: legacy_orders {
+    from: orders
+    relationship: one_to_one
+    sql_on: ${refunds.refundable_id}=${legacy_orders.id} ;;
+  }
+
+  join: legacy_subscriptions {
+    from: subscriptions
+    relationship: many_to_one
+    sql_on: ${legacy_orders.subscription_id}=${legacy_subscriptions.id} ;;
+  }
+
+  join: legacy_users {
+    from: users
+    relationship: one_to_one
+    sql_on: ${legacy_subscriptions.user_id}=${legacy_users.id} ;;
+  }
+
+  join: legacy_user_facts {
+    from: user_facts
+    relationship: one_to_one
+    sql_on: ${legacy_users.id} = ${legacy_user_facts.id} ;;
+  }
+
   join: orders {
     relationship: one_to_one
     sql_on: ${refunds.order_id}=${orders.id} ;;
@@ -393,8 +417,6 @@ explore: refunds {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
-
-
   }
 
 explore: coupons {}
