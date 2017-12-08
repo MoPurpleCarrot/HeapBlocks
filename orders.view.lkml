@@ -61,7 +61,7 @@ view: orders {
 
   dimension_group: created {
     type: time
-    timeframes: [time, date, week, month, raw]
+    timeframes: [time, date, week, month, quarter, raw]
     sql: ${TABLE}.created_at ;;
   }
 
@@ -78,7 +78,7 @@ view: orders {
 
   dimension_group: delivery {
     type: time
-    timeframes: [time, date, week, month, raw]
+    timeframes: [time, date, week, month, quarter, raw]
     sql: ${TABLE}.delivery_on ;;
   }
 
