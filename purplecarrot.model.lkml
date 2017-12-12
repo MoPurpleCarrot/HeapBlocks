@@ -54,7 +54,7 @@ explore: heap_users{
 
 explore: subscriptions {
   label: "Users, Orders & Recipes"
-  fields: [ALL_FIELDS*, -orders.days_since_created, -orders.month_num]
+  fields: [ALL_FIELDS*, -orders.days_since_created, -orders.month_num, -orders.week_num]
 
   join: orders {
     relationship: many_to_one

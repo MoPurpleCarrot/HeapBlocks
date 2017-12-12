@@ -70,6 +70,11 @@ view: orders {
     sql: DATEDIFF('month', ${user_facts.first_order_date}, ${delivery_date}) ;;
   }
 
+  dimension: week_num {
+    type: number
+    sql: DATEDIFF('week', ${user_facts.first_order_date}, ${delivery_date}) ;;
+  }
+
   dimension: credit_applied {
     type: number
     value_format_name: usd
