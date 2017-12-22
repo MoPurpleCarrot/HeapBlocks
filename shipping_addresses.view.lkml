@@ -156,6 +156,11 @@ view: shipping_addresses {
     sql: ${TABLE}.zip ;;
   }
 
+  dimension: primary {
+    type: string
+    sql: ${TABLE}.primary ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
