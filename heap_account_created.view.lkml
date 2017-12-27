@@ -2,7 +2,7 @@ view: heap_account_created {
   derived_table: {
     sql: Select * FROM
       (SELECT user_id, session_id, utm_source, utm_campaign, time as account_created_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY account_created_time asc) as rank
-      FROM main_production.sign_up_account_creation_submit_account_creation_form
+      FROM main_production.lead_source_tracking_2_combo_account_creation
       order by user_id, rank asc) as account_created
       WHERE rank = 1
  ;;
