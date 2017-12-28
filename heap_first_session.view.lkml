@@ -1,7 +1,7 @@
 view: heap_first_session {
   derived_table: {
     sql: SELECT * FROM
-      (SELECT user_id, session_id, utm_source, utm_campaign, time as first_session_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY first_session_time asc) as rank
+      (SELECT user_id, referrer, session_id, utm_source, utm_campaign, time as first_session_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY first_session_time asc) as rank
       FROM main_production.sessions
       order by user_id, rank asc) as first_session
       WHERE rank = 1
