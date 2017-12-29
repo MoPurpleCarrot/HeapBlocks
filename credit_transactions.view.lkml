@@ -134,6 +134,7 @@ view: credit_transactions {
     else: "Other"
   }
 }
+
   dimension: credit_reason_bucket_legacy_2017 {
     case:{
       when:{
