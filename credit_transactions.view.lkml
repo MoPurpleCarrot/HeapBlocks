@@ -221,7 +221,7 @@ view: credit_transactions {
     }
     when:{
       sql: ${cx_reason} = 'Damaged (exterior)' ;;
-      label: "Packaging Quality"
+      label: "Packaging Quality2"
     }
     when:{
       sql: ${cx_reason} = 'Damaged (interior - liner/gel packs)' ;;
