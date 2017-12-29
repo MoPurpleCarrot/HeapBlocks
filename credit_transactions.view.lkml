@@ -104,7 +104,7 @@ view: credit_transactions {
       label: "Cancel or Skip After Deadline"
     }
     when:{
-      sql: ${cx_reason} = 'Expired Coupon' OR ${cx_reason} = 'Employee Coupon' OR ${cx_reason} = 'Gift Code/Voucher Invalid' OR ${cx_reason} = 'Gift Refunded (Retroactive)' OR ${cx_reason} = 'Referral Program Issue' OR ${cx_reason} = 'First Time Subscriber Code Error' ;;
+      sql: ${cx_reason} = 'Expired Coupon' OR ${cx_reason} = 'Employee Coupon' OR ${cx_reason} = 'Gift code/voucher Invalid' OR ${cx_reason} = 'Gift Refunded (Retroactive)' OR ${cx_reason} = 'Referral Program Issue' OR ${cx_reason} = 'First Time Subscriber Code Error' ;;
       label: "Coupon Not Applied"
     }
     when:{
@@ -120,15 +120,15 @@ view: credit_transactions {
       label: "Missing Item"
     }
     when:{
-      sql: ${cx_reason} = 'Arrived Warm' OR ${cx_reason} = 'Arrived after dinner' OR ${cx_reason} = 'Arrived Late 1' OR ${cx_reason} = 'Arrived Late 2+' OR ${cx_reason} = 'Didn''t arrive' ;;
+      sql: ${cx_reason} = 'Arrived Warm' OR ${cx_reason} = 'Arrived after Dinner' OR ${cx_reason} = 'Arrived Late 1' OR ${cx_reason} = 'Arrived Late 2+' OR ${cx_reason} = 'Didn''t arrive' ;;
       label: "Delivery"
     }
     when:{
-      sql: ${cx_reason} = 'Damaged produce' OR ${cx_reason} = 'Damaged non-produce ingredient' OR ${cx_reason} = 'Incorrect measurement' ;;
+      sql: ${cx_reason} = 'Damaged Produce' OR ${cx_reason} = 'Damaged non-produce Ingredient' OR ${cx_reason} = 'Incorrect Measurement' ;;
       label: "Ingredient Quality"
     }
     when:{
-      sql: ${cx_reason} = 'Broken or leaked packaging' OR ${cx_reason} = 'Damaged (exterior)' OR ${cx_reason} = 'Damaged (interior - liner/gel packs)' OR  ${cx_reason} = 'Damaged (exterior)' ;;
+      sql: ${cx_reason} = 'Broken or Leaked Packaging' OR ${cx_reason} = 'Damaged (exterior)' OR ${cx_reason} = 'Damaged (interior - liner/gel packs)' OR  ${cx_reason} = 'Damaged (exterior)' ;;
       label: "Packaging Quality"
     }
     else: "Other"
