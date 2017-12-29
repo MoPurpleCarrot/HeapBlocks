@@ -227,9 +227,9 @@ view: credit_transactions {
         sql: ${cx_reason} = "Damaged (interior - liner/gel packs)" ;;
         label: "Packaging Quality"
       }
-
       else: "Other"
-    }}
+      }
+    }
 
   dimension: credit_reason_bucket_legacy_2017 {
     case:{
