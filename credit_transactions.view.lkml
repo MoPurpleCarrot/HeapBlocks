@@ -105,15 +105,15 @@ view: credit_transactions {
       }
       when:{
         sql: ${cx_reason} = "Timeframe Confusion" ;;
-        label: "Cancel After Deadline"
+        label: "Cancel or Skip After Deadline"
       }
       when:{
         sql: ${cx_reason} = "User Error" ;;
-        label: "Cancel After Deadline"
+        label: "Cancel or Skip After Deadline"
       }
       when:{
         sql: ${cx_reason} = "Exceptional Circumstance (Weather/Life Event)" ;;
-        label: "Cancel After Deadline"
+        label: "Cancel or Skip After Deadline"
       }
       when:{
         sql: ${cx_reason} = "Expired Coupon" ;;
