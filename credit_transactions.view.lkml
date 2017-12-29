@@ -100,7 +100,7 @@ view: credit_transactions {
       label: "Allergen/Dietary Issues"
     }
     when:{
-      sql: ${cx_reason} = 'Timeframe Confusion' OR ${cx_reason} = 'User Error' OR 'Exceptional Circumstance (Weather/Life Event)' ;;
+      sql: ${cx_reason} = 'Timeframe Confusion' OR ${cx_reason} = 'User Error' OR ${cx_reason} = 'Exceptional Circumstance (Weather/Life Event)' ;;
       label: "Cancel or Skip After Deadline"
     }
     when:{
