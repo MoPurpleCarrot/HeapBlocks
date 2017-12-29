@@ -295,6 +295,7 @@ view: credit_transactions {
   measure: total_credit_amount {
     type: sum
     sql: ${amount} ;;
+    drill_fields: [id, source_id, created_date, amount, credit_reason_bucket, cx_reason]
     value_format_name: usd
   }
 
