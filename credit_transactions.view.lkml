@@ -221,17 +221,15 @@ view: credit_transactions {
     }
     when:{
       sql: ${cx_reason} = 'Damaged (exterior)' ;;
-      label: "Packaging Quality2"
+      label: "Packaging Quality"
     }
     when:{
-      sql: ${cx_reason} = 'Damaged (interior - liner/gel packs)' ;;
+      sql: ${cx_reason} = 'Damaged (interior - liner/gel packs)' OR  ${cx_reason} = 'Damaged (exterior)' ;;
       label: "Packaging Quality"
     }
     else: "Other"
   }
 }
-
-
   dimension: credit_reason_bucket_legacy_2017 {
     case:{
       when:{
