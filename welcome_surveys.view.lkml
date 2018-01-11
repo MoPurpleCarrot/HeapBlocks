@@ -137,6 +137,21 @@ view: welcome_surveys {
     sql: ${TABLE}.number_of_people_in_household ;;
   }
 
+  dimension: using_pc {
+    type: string
+    sql: ${TABLE}.using_pc ;;
+  }
+
+  dimension: primary_reason {
+    type: string
+    sql: ${TABLE}.primary_reason ;;
+  }
+
+  dimension: primary_reason_other {
+    type: string
+    sql: ${TABLE}.primary_reason_other ;;
+  }
+
   dimension: protecting_animals {
     type: number
     sql: ${TABLE}.protecting_animals ;;
