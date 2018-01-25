@@ -1,7 +1,7 @@
 view: heap_first_session {
   derived_table: {
     sql: SELECT * FROM
-      (SELECT user_id, referrer, session_id, utm_source, utm_campaign, time as first_session_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY first_session_time asc) as rank
+      (SELECT user_id, referrer, landing_page, device_type, session_id, utm_source, utm_campaign, time as first_session_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY first_session_time asc) as rank
       FROM main_production.sessions
       order by user_id, rank asc) as first_session
       WHERE rank = 1
@@ -12,7 +12,6 @@ view: heap_first_session {
     sortkeys: ["first_session_time"]
 
   }
-
 
   measure: count {
     type: count
@@ -38,6 +37,21 @@ view: heap_first_session {
   dimension: utm_campaign {
     type: string
     sql: ${TABLE}.utm_campaign ;;
+  }
+
+  dimension: referrer {
+    type: string
+    sql: ${TABLE}.referrer ;;
+  }
+
+  dimension: landing_page {
+    type: string
+    sql: ${TABLE}.landing_page ;;
+  }
+
+  dimension: device_type {
+    type: string
+    sql: ${TABLE}.device_type ;;
   }
 
   dimension_group: first_session {

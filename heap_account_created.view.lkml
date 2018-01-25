@@ -1,7 +1,7 @@
 view: heap_account_created {
   derived_table: {
     sql: Select * FROM
-      (SELECT user_id, session_id, utm_source, utm_campaign, time as account_created_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY account_created_time asc) as rank
+      (SELECT user_id, referrer, landing_page, device_type, session_id, utm_source, utm_campaign, time as account_created_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY account_created_time asc) as rank
       FROM main_production.lead_source_tracking_2_combo_account_creation
       order by user_id, rank asc) as account_created
       WHERE rank = 1
@@ -35,6 +35,21 @@ view: heap_account_created {
   dimension: utm_campaign {
     type: string
     sql: ${TABLE}.utm_campaign ;;
+  }
+
+  dimension: landing_page {
+    type: string
+    sql: ${TABLE}.landing_page ;;
+  }
+
+  dimension: device_type {
+    type: string
+    sql: ${TABLE}.device_type ;;
+  }
+
+  dimension: referrer {
+    type: string
+    sql: ${TABLE}.referrer ;;
   }
 
   dimension_group: account_created {
