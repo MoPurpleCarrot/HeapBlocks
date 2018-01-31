@@ -1,5 +1,5 @@
 view: heap_sessions {
-  sql_table_name: main_production.session ;;
+  sql_table_name: main_production.sessions ;;
 
   dimension: id {
     primary_key: yes
