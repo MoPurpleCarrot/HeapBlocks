@@ -45,6 +45,11 @@ explore: heap_users{
     sql_on: ${users.email} = ${heap_users._email} ;;
   }
 
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id} ;;
+  }
+
   join: subscriptions {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
@@ -388,6 +393,12 @@ explore: refunds {
   join: users {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id}=${users.id} ;;
+  }
+
+  join: first_order {
+    from: orders
+    relationship: many_to_one
+    sql_on: ${first_order.id} = ${user_facts.first_order_id} ;;
   }
 
   join: user_facts {
