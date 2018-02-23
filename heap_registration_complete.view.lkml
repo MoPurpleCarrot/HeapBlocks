@@ -66,7 +66,8 @@ view: heap_registration_complete {
       session_id,
       utm_source,
       utm_campaign,
-      registration_complete_date
+      registration_complete_date,
+      referrer
     ]
   }
 }
