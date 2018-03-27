@@ -143,6 +143,21 @@ view: recipes {
     sql: ${TABLE}.prep_time ;;
   }
 
+  dimension: prep_and_cook_time {
+    type: string
+    sql: ${TABLE}.prep_and_cook_time ;;
+  }
+
+  dimension: allergens {
+    type: string
+    sql: ${TABLE}.allergens ;;
+  }
+
+  dimension: subtitle {
+    type: string
+    sql: ${TABLE}.subtitle ;;
+  }
+
   dimension: protein {
     type: number
     sql: ${TABLE}.protein ;;

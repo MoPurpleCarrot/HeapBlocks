@@ -298,6 +298,8 @@ explore: google_analytics_conversion {}
 
 explore: paused_and_cancelled_users {}
 
+explore: recipes {}
+
 explore: email_delivered {
   label: "Customer.io Email"
 
