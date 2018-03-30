@@ -271,7 +271,7 @@ explore: gift_purchases {
   join: gift_redemptions {
     relationship: one_to_one
     type: left_outer
-    sql_on: ${gift_purchases.id} = ${gift_redemptions.id} ;;
+    sql_on: ${gift_purchases.id} = ${gift_redemptions.gift_purchase_id};;
   }
 
 }

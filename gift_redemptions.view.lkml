@@ -58,6 +58,16 @@ view: gift_redemptions {
     drill_fields: [detail*]
   }
 
+# AM in process 3.30.18
+# measure: count_redeemed {
+#    type: count
+#    filters: {
+#      field: user_id
+#      value: "3"
+#    }
+#    drill_fields: [detail*]
+#  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
