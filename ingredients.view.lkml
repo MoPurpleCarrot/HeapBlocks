@@ -64,6 +64,11 @@ view: ingredients {
     sql: ${TABLE}.name ;;
   }
 
+  dimension: quantity {
+    type: string
+    sql: ${TABLE}.quantity ;;
+  }
+
   dimension: priority {
     type: number
     sql: ${TABLE}.priority ;;
@@ -77,7 +82,7 @@ view: ingredients {
 
   dimension: recipe_plan_id {
     type: number
-    sql: ${TABLE}.recipe_id ;;
+    sql: ${TABLE}.recipe_plan_id ;;
   }
 
   dimension_group: updated {
