@@ -75,6 +75,11 @@ view: ingredients {
     sql: ${TABLE}.recipe_id ;;
   }
 
+  dimension: recipe_plan_id {
+    type: number
+    sql: ${TABLE}.recipe_id ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
