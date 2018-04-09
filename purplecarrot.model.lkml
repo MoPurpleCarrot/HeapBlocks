@@ -283,6 +283,18 @@ explore: ingredients {
     sql_on: ${ingredients.recipe_id} = ${recipes.id} ;;
   }
 
+  join: recipe_plans {
+    relationship: many_to_one
+    sql_on: ${ingredients.recipe_plan_id} = ${recipe_plans.id} ;;
+  }
+
+  join: recipes_thru_plan {
+    from: recipes
+    relationship: many_to_one
+    sql_on: ${recipe_plans.recipe_id} = ${recipes.id} ;;
+  }
+
+
   join: menu_items {
     relationship: one_to_one
     sql_on: ${recipes.id} = ${menu_items.recipe_id}  ;;
