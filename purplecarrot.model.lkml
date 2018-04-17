@@ -289,6 +289,19 @@ explore: gift_purchases {
     sql_on: ${gift_purchases.id} = ${gift_redemptions.gift_purchase_id};;
   }
 
+  join: recipient_users {
+    from: users
+    relationship: one_to_one
+    type: left_outer
+    sql_on: ${gift_redemptions.user_id} = ${recipient_users.id} ;;
+  }
+
+  join: recipient_subscriptions {
+    from: subscriptions
+    relationship: one_to_one
+    type: left_outer
+    sql_on: ${recipient_users.id}=${recipient_subscriptions.user_id};;
+  }
 }
 
 explore: ingredients {
