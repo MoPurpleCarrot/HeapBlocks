@@ -50,6 +50,21 @@ explore: heap_users{
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
 
+  join: email_delivered {
+    relationship: many_to_one
+    sql_on: ${email_delivered.user_id} = ${users.id} ;;
+  }
+
+  join: email_opened {
+    relationship: many_to_one
+    sql_on: ${email_opened.user_id} = ${users.id} ;;
+  }
+
+  join: email_link_clicked {
+    relationship: many_to_one
+    sql_on: ${email_link_clicked.user_id} = ${users.id} ;;
+  }
+
   join: first_order {
     from: orders
     relationship: many_to_one
@@ -293,7 +308,6 @@ explore: ingredients {
     relationship: many_to_one
     sql_on: ${recipe_plans.recipe_id} = ${recipes.id} ;;
   }
-
 
   join: menu_items {
     relationship: one_to_one
