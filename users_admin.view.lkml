@@ -377,4 +377,9 @@ view: users {
   measure: count {
     type: count
   }
+
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${id} ;;
+  }
 }
