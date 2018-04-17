@@ -167,4 +167,10 @@ view: email_link_clicked {
     type: count
     drill_fields: [id, context_library_name, context_integration_name, campaign_name]
   }
+
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${email_id} ;;
+  }
+
 }
