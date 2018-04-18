@@ -184,6 +184,20 @@ view: gift_purchases {
     sql: ${TABLE}.value_refunded ;;
   }
 
+  dimension_group: sent_to_recipient {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.giveaway_sent_at ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, purchaser_name, recipient_name, gift_redemptions.count]

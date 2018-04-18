@@ -7,7 +7,6 @@ view: gift_redemptions {
     sql: ${TABLE}.id ;;
   }
 
-
   dimension_group: created {
     type: time
     timeframes: [
