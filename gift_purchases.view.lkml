@@ -140,6 +140,11 @@ view: gift_purchases {
       else: "Other"
   }}
 
+    dimension: is_date_of_SAB_error {
+      type: yesno
+      sql: ${created_date} = date(2017,12,13) ;;
+    }
+
   dimension: stripe_charge_id {
     type: string
     sql: ${TABLE}.stripe_charge_id ;;
