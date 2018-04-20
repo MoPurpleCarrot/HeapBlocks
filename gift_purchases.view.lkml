@@ -142,7 +142,7 @@ view: gift_purchases {
 
     dimension: is_date_of_SAB_error {
       type: yesno
-      sql: ${created_date} = 2017-12-13 ;;
+      sql: ${created_date} >= date(2017,12,13) AND ${created_date} < date(2017,12,14) ;;
     }
 
   dimension: stripe_charge_id {
