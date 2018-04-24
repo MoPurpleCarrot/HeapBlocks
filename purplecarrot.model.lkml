@@ -61,9 +61,10 @@ explore: heap_users{
     sql_on: ${email_opened.email_id} = ${email_delivered.email_id} ;;
   }
 
+#could have multiple clicks to one open, but treating as one to one for data model simplicity
   join: email_link_clicked {
     relationship: many_to_one
-    sql_on: ${email_link_clicked.user_id} = ${users.id} ;;
+    sql_on: ${email_link_clicked.user_id} = ${email_opened.email_id} ;;
   }
 
   join: first_order {
