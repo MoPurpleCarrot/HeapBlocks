@@ -152,4 +152,5 @@ view: email_delivered {
     type: count_distinct
     sql: ${email_id} ;;
   }
+
 }
