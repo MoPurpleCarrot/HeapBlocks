@@ -1,6 +1,8 @@
 view: user_facts {
   derived_table: {
-    sql: SELECT users.id,
+    sql: SELECT users.id, users
+      orders.created as created
+      subscriptions.registered_at as registered_at
       COUNT(orders.id) as num_orders,
       SUM(orders.price) as total_revenue,
       MIN(orders.delivery_on) as first_order,
@@ -53,7 +55,15 @@ view: user_facts {
     sql: ${TABLE}.first_order ;;
   }
 
+  dimension: days_step_2_to_3 {
+    type: number
+    sql: DATEDIFF(day, ${TABLE}.created, ${TABLE}.registered_at);;
+  }
 
+  dimension: under_16_days_step_2_to_3 {
+    type:  yesno
+    sql: ${days_step_2_to_3} < 16 ;;
+  }
 
   dimension: first_order_id {
     type: number
