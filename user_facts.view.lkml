@@ -1,6 +1,6 @@
 view: user_facts {
   derived_table: {
-    sql: SELECT users.id, users,
+    sql: SELECT users.id,
       orders.created as created,
       subscriptions.registered_at as registered_at,
       COUNT(orders.id) as num_orders,
