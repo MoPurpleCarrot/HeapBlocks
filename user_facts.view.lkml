@@ -1,6 +1,7 @@
 view: user_facts {
   derived_table: {
     sql: SELECT users.id,
+      subscriptions.user_id,
       orders.created as created,
       subscriptions.registered_at as registered_at,
       COUNT(orders.id) as num_orders,
@@ -9,6 +10,7 @@ view: user_facts {
       MIN(orders.id) as first_order_id,
       MAX(orders.delivery_on) as last_order,
       MAX(orders.id) as last_order_id
+
       FROM heroku_postgres.users as users
       LEFT JOIN heroku_postgres.subscriptions as subscriptions
       ON users.id = subscriptions.user_id
