@@ -450,8 +450,6 @@ explore: refunds {
   }
   }
 
-explore: coupons {}
-
 explore: stripe_customers {
 
   join: stripe_customers__cards__data {
@@ -471,5 +469,13 @@ explore: stripe_customers {
 
 }
 
+explore: prep_needs {
+
+  join: recipe_plans {
+    relationship: many_to_one
+    sql_on: ${prep_needs.recipe_plan_id} = ${recipe_plans.id} ;;
+  }
+}
+
+explore: coupons {}
 explore: stripe_charges {}
-explore: prep_needs {}
