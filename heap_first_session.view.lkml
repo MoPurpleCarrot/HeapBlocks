@@ -1,8 +1,8 @@
 view: heap_first_session {
   derived_table: {
     sql: SELECT * FROM
-      (SELECT user_id, referrer, landing_page, device_type, session_id, utm_source, utm_campaign, time as first_session_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY first_session_time asc) as rank
-      FROM main_production.sessions
+      (SELECT user_id, referrer, landing_page, device_type, session_id, clean_utm_campaign_adwords_buckets, clean_utm_source, utm_source, utm_campaign, time as first_session_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY first_session_time asc) as rank
+      FROM main_production.clean_utm_campaign_adwords_buckets
       order by user_id, rank asc) as first_session
       WHERE rank = 1
        ;;
@@ -52,6 +52,16 @@ view: heap_first_session {
   dimension: device_type {
     type: string
     sql: ${TABLE}.device_type ;;
+  }
+
+  dimension: clean_utm_source {
+    type: string
+    sql: ${TABLE}.clean_utm_source ;;
+  }
+
+  dimension: clean_utm_campaign_adwords_buckets {
+    type: string
+    sql: ${TABLE}.clean_utm_campaign_adwords_buckets ;;
   }
 
   dimension_group: first_session {
