@@ -4,7 +4,7 @@ view: zendesk_custom_fields {
         packing_issue_type_1, packing_issue_detail_1, packing_issue_type_2, packing_issue_detail_2, packing_issue_type_3, packing_issue_detail_3,
         ingredient_issue_type_1, ingredient_issue_detail_1, ingredient_issue_type_2, ingredient_issue_detail_2, ingredient_issue_type_3, ingredient_issue_detail_3,
         shipping_issue_type_1, shipping_issue_detail_1, shipping_issue_type_2, shipping_issue_detail_2,
-        ontrac_tracking_number, ontrac_claim_reason, lasership_tracking_number, lasership_claim_reason,
+        ontrac_tracking_number, ontrac_claim_reason, lasership_tracking_number, lasership_claim_reason, fedex_tracking_number, fedex_claim_reason, fedex_claim_damage_detail,
         kitting_partner from
 
         (select distinct _sdc_source_key_id FROM zendesk.tickets__custom_fields) ticket_id
@@ -159,6 +159,24 @@ view: zendesk_custom_fields {
         on ticket_id._sdc_source_key_id = lasership_claim_reason._sdc_source_key_id
 
         left join
+        (SELECT _sdc_source_key_id, value as fedex_tracking_number
+        FROM zendesk.tickets__custom_fields
+        WHERE id = 360000107166) fedex_tracking_number
+        on ticket_id._sdc_source_key_id = fedex_tracking_number._sdc_source_key_id
+
+        left join
+        (SELECT _sdc_source_key_id, value as fedex_claim_reason
+        FROM zendesk.tickets__custom_fields
+        WHERE id = 360000107363) fedex_claim_reason
+        on ticket_id._sdc_source_key_id = fedex_claim_reason._sdc_source_key_id
+
+        left join
+        (SELECT _sdc_source_key_id, value as fedex_claim_damage_detail
+        FROM zendesk.tickets__custom_fields
+        WHERE id = 360000107383) fedex_claim_damage_detail
+        on ticket_id._sdc_source_key_id = fedex_claim_damage_detail._sdc_source_key_id
+
+        left join
         (SELECT _sdc_source_key_id, value as kitting_partner
         FROM zendesk.tickets__custom_fields
         WHERE id = 24160883) kitting_partner
@@ -297,6 +315,21 @@ view: zendesk_custom_fields {
   dimension: lasership_claim_reason {
     type: string
     sql: ${TABLE}.lasership_claim_reason ;;
+  }
+
+  dimension: fedex_tracking_number {
+    type: string
+    sql: ${TABLE}.fedex_tracking_number ;;
+  }
+
+  dimension: fedex_claim_reason {
+    type: string
+    sql: ${TABLE}.fedex_claim_reason ;;
+  }
+
+  dimension: fedex_claim_damage_detail {
+    type: string
+    sql: ${TABLE}.fedex_claim_damage_detail ;;
   }
 
     set: detail {
