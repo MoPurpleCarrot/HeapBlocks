@@ -211,7 +211,6 @@ view: tickets {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
-    hidden: yes
   }
 
   dimension: url {
