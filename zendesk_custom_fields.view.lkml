@@ -1,6 +1,11 @@
 view: zendesk_custom_fields {
   derived_table: {
-    sql: select ticket_id._sdc_source_key_id, ship_date, shipping_provider, shipping_zone, product_line, packing_issue_type_1, packing_issue_detail_1, packing_issue_type_2, packing_issue_detail_2, packing_issue_type_3, packing_issue_detail_3, ingredient_issue_type_1, ingredient_issue_detail_1, ingredient_issue_type_2, ingredient_issue_detail_2, ingredient_issue_type_3, ingredient_issue_detail_3, shipping_issue_type_1, shipping_issue_detail_1, shipping_issue_type_2, shipping_issue_detail_2, kitting_partner from
+    sql: select ticket_id._sdc_source_key_id, ship_date, shipping_provider, shipping_zone, product_line,
+        packing_issue_type_1, packing_issue_detail_1, packing_issue_type_2, packing_issue_detail_2, packing_issue_type_3, packing_issue_detail_3,
+        ingredient_issue_type_1, ingredient_issue_detail_1, ingredient_issue_type_2, ingredient_issue_detail_2, ingredient_issue_type_3, ingredient_issue_detail_3,
+        shipping_issue_type_1, shipping_issue_detail_1, shipping_issue_type_2, shipping_issue_detail_2,
+        ontrac_tracking_number, ontrac_claim_reason
+        kitting_partner from
 
         (select distinct _sdc_source_key_id FROM zendesk.tickets__custom_fields) ticket_id
 
@@ -130,6 +135,18 @@ view: zendesk_custom_fields {
         on ticket_id._sdc_source_key_id = shipping_issue_detail_2._sdc_source_key_id
 
         left join
+        (SELECT _sdc_source_key_id, value as ontrac_tracking_number
+        FROM zendesk.tickets__custom_fields
+        WHERE id = 360000106443) ontrac_tracking_number
+        on ticket_id._sdc_source_key_id = ontrac_tracking_number._sdc_source_key_id
+
+        left join
+        (SELECT _sdc_source_key_id, value as ontrac_claim_reason
+        FROM zendesk.tickets__custom_fields
+        WHERE id = 360000105846) ontrac_claim_reason
+        on ticket_id._sdc_source_key_id = ontrac_claim_reason._sdc_source_key_id
+
+        left join
         (SELECT _sdc_source_key_id, value as kitting_partner
         FROM zendesk.tickets__custom_fields
         WHERE id = 24160883) kitting_partner
@@ -249,6 +266,17 @@ view: zendesk_custom_fields {
       type: string
       sql: ${TABLE}.shipping_issue_detail_2 ;;
     }
+
+  dimension: ontrac_tracking_number {
+    type: string
+    sql: ${TABLE}.ontrac_tracking_number ;;
+  }
+
+  dimension: ontrac_claim_reason {
+    type: string
+    sql: ${TABLE}.ontrac_claim_reason ;;
+  }
+
 
     set: detail {
       fields: [
