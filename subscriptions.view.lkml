@@ -150,7 +150,6 @@ view: subscriptions {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
-    hidden: yes
   }
 
   dimension: user_id {
