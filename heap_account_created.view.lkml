@@ -68,6 +68,15 @@ view: heap_account_created {
     timeframes: [date, week, month, year]
   }
 
+  measure: count_second_touch {
+    type: count_distinct
+    filters: {
+      field: account_created_year
+      value: "-NULL"
+    }
+    sql: ${user_id} ;;
+  }
+
   set: detail {
     fields: [
       user_id,
