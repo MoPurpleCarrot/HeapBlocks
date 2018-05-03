@@ -2,7 +2,7 @@ view: heap_first_session {
   derived_table: {
     sql: SELECT * FROM
       (SELECT user_id, referrer, landing_page, device_type, session_id, clean_utm_campaign_adwords_buckets, clean_utm_source, utm_source, utm_campaign, time as first_session_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY first_session_time asc) as rank
-      FROM main_production.clean_utm_campaign_adwords_buckets
+      FROM main_production.lead_source_tracking_1_start_session
       order by user_id, rank asc) as first_session
       WHERE rank = 1
        ;;
