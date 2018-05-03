@@ -125,4 +125,14 @@ view: heap_users {
     drill_fields: [user_id]
   }
 
+  measure: count_second_touch {
+    type: count_distinct
+    filters: {
+      field: heap_account_created.account_created_year
+      value: "-NULL"
+    }
+    sql: ${identity} ;;
+  }
+
+
 }
