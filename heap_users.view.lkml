@@ -134,5 +134,13 @@ view: heap_users {
     sql: ${identity} ;;
   }
 
+  measure: count_third_touch {
+    type: count_distinct
+    filters: {
+      field: heap_registration_complete.registration_complete_year
+      value: "-NULL"
+    }
+    sql: ${identity} ;;
+  }
 
 }
