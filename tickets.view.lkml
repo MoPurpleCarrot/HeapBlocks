@@ -362,6 +362,11 @@ view: tickets {
     type: count
   }
 
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${id} ;;
+  }
+
   dimension: cx_associate_name {
     case:{
       when:{
