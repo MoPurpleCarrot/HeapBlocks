@@ -361,6 +361,44 @@ view: tickets {
   measure: count {
     type: count
   }
+
+  dimension: cx_associate_name {
+    case:{
+      when:{
+        sql: ${assignee_id} = 4837743386 ;;
+        label: "Jessie Tarbox"
+      }
+      when:{
+        sql: ${assignee_id} = 6907247066 ;;
+        label: "Stephanie Grimaldi"
+      }
+      when:{
+        sql: ${assignee_id} = 7061298586 ;;
+        label: "Genesis Pepper"
+      }
+      when:{
+        sql: ${assignee_id} = 7620123786 ;;
+        label: "Taylor Newcomb"
+      }
+      when:{
+        sql: ${assignee_id} = 360157798423 ;;
+        label: "Sophia Tarquinio"
+      }
+      when:{
+        sql: ${assignee_id} = 360230959363 ;;
+        label: "Rachel Root"
+      }
+      when:{
+        sql: ${assignee_id} = 360566443626 ;;
+        label: "Amelia Yono"
+      }
+      when:{
+        sql: ${assignee_id} = 360567551103 ;;
+        label: "Sarah Spencer"
+      }
+      else: "Other"
+    }
+  }
 }
 
 #     drill_fields: detail*
