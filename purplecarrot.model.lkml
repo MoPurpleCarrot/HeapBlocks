@@ -78,6 +78,12 @@ explore: heap_users{
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
 
+  join: shipping_addresses {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
+  }
+
+
 }
 
 explore: subscriptions {
