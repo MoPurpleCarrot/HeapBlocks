@@ -2,7 +2,7 @@ view: heap_registration_complete {
   derived_table: {
     sql: Select * FROM
       (SELECT user_id, session_id, landing_page, device_type, referrer, clean_utm_campaign_adwords_buckets, clean_utm_source, utm_source, utm_campaign, time as registration_complete_time, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY registration_complete_time asc) as rank
-      FROM main_production.lead_source_tracking_3_combo_registration
+      FROM main_production._before_style_guide_events_3_combo_registration
       order by user_id, rank asc) as account_created
       WHERE rank = 1
  ;;
