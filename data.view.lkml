@@ -174,6 +174,10 @@ view: live_chat_sessions {
     drill_fields: [session__customer__name, session__channel_name, session__channel__name, session__agent_responder__name]
   }
 
+  measure: unique_count {
+    type: count_distinct
+  }
+
   #BUILD UNIQUE COUNTS
 
 }
