@@ -176,8 +176,7 @@ view: live_chat_sessions {
 
   measure: unique_count {
     type: count_distinct
+    sql: ${__sdc_primary_key} ;;
   }
-
-  #BUILD UNIQUE COUNTS
 
 }
