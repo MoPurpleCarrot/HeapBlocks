@@ -179,7 +179,7 @@ view: live_chat_sessions {
     sql: ${__sdc_primary_key} ;;
   }
 
-  #build other measures for avg times
+  #build other measures for avg times e.g. change average duration to unique sessions (avg distinct) and build avg time to response
 
   measure: average_duration {
     type: average
