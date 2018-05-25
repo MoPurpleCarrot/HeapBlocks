@@ -153,6 +153,11 @@ view: live_chat_sessions {
     type: number
     sql: substring(${TABLE}.session__start_time,9,2) ;;
   }
+
+  dimension: session__start {
+    type: date
+    sql: date(${session__start_year_number},${session__start_month_number},${session__start_day_number}) ;;
+  }
   # TURN INTO A TIME
 
 
