@@ -139,9 +139,9 @@ view: live_chat_sessions {
     sql: ${TABLE}.session__start_time ;;
   }
 
-  dimension: session__start_year {
-    type: number
-    sql: to_number(substring(${TABLE}.session__start_time,1,4)) ;;
+  dimension: session__start_year_string {
+    type: string
+    sql: substring(${TABLE}.session__start_time,1,4) ;;
   }
   # TURN INTO A TIME
 
