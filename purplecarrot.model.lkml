@@ -485,3 +485,4 @@ explore: prep_needs {
 
 explore: coupons {}
 explore: stripe_charges {}
+explore: live_chat_sessions {}
