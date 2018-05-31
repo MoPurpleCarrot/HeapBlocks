@@ -154,6 +154,14 @@ view: live_chat_sessions {
     sql: substring(${TABLE}.session__start_time,9,2) ;;
   }
 
+
+  dimension: session__start_date_num {
+    type: number
+    sql: substring(${TABLE}.session__start_time,1,10)  ;;
+  }
+
+
+
   # TURN INTO A TIME
   # https://discourse.looker.com/t/techniques-for-handling-dates-stored-as-integers/895
   # https://discourse.looker.com/t/grouping-by-date-types-instead-of-strings/2814
