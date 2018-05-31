@@ -156,8 +156,8 @@ view: live_chat_sessions {
 
 
   dimension: session__start_date_num {
-    type: number
-    sql: substring(${TABLE}.session__start_time,1,5)  ;;
+    type: date
+    sql: substring(${TABLE}.session__start_time,1,10)  ;;
   }
 
 
