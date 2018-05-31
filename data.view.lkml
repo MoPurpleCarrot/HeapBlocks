@@ -155,12 +155,10 @@ view: live_chat_sessions {
   }
 
 
-  dimension: session__start_date_num {
+  dimension: session__start_date {
     type: date
     sql: substring(${TABLE}.session__start_time,1,10)  ;;
   }
-
-
 
   # TURN INTO A TIME
   # https://discourse.looker.com/t/techniques-for-handling-dates-stored-as-integers/895
