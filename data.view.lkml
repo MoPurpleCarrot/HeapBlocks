@@ -137,6 +137,7 @@ view: live_chat_sessions {
   dimension: session__start_time_string {
     type: string
     sql: ${TABLE}.session__start_time ;;
+    hidden: yes
   }
 
   dimension: session__start_year_number {
@@ -158,6 +159,14 @@ view: live_chat_sessions {
   dimension: session__start_date {
     type: date
     sql: substring(${TABLE}.session__start_time,1,10)  ;;
+  }
+
+
+  dimension_group: session_start_time {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.session__start_time ;;
+
   }
 
   # TURN INTO A TIME
