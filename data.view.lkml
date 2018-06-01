@@ -198,6 +198,11 @@ view: live_chat_sessions {
     sql:${session__duration} ;;
   }
 
+  measure: average_time_to_first_response {
+    type: average_distinct
+    sql_distinct_key: ${__sdc_primary_key} ;;
+    sql:${session__time_to_first_response} ;;
+  }
 
 
 
