@@ -161,6 +161,17 @@ view: live_chat_sessions {
     sql: substring(${TABLE}.session__start_time,1,10)  ;;
   }
 
+  dimension: session__start_week {
+    type: date_week
+    sql: substring(${TABLE}.session__start_time,1,10)  ;;
+  }
+
+  dimension: session__start_month {
+    type: date_month
+    sql: substring(${TABLE}.session__start_time,1,10)  ;;
+  }
+
+
 
   dimension_group: session_start_time {
     type: time
