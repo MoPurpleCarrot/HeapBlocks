@@ -165,7 +165,7 @@ view: live_chat_sessions {
   dimension_group: session_start_time {
     type: time
     timeframes: [date, week, month, time]
-    sql: ${TABLE}.session__start_date ;;
+    sql: ${session__start_date} ;;
     datatype:  date
 
   }
