@@ -175,6 +175,8 @@ view: live_chat_sessions {
   # https://discourse.looker.com/t/grouping-by-date-types-instead-of-strings/2814
 
 
+
+
   dimension: session__time_to_first_response {
     type: number
     sql: ${TABLE}.session__time_to_first_response ;;
