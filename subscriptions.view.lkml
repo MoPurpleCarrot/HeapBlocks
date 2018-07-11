@@ -80,6 +80,11 @@ view: subscriptions {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: preselected_meal_portfolio_plan_2018 {
+    type: string
+    sql: ${TABLE}.preselected_new_plan ;;
+  }
+
   dimension: status {
     type: string
     sql:  CASE WHEN ${status_code} = 0 THEN 'Inactive'

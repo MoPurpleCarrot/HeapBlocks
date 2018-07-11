@@ -217,5 +217,4 @@ view: live_chat_sessions {
   }
 
 
-
 }
