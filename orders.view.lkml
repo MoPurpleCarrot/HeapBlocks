@@ -181,9 +181,9 @@ view: orders {
     sql: ${TABLE}.ship_template_shipping_provider ;;
   }
 
-  dimension: ship_template_fulfilllment_center {
+  dimension: ship_template_fulfillment_center {
     type: string
-    sql: ${TABLE}.ship_template_fulfilllment_center ;;
+    sql: ${TABLE}.ship_template_fulfillment_center ;;
   }
 
   dimension: ship_template_shipping_cost {
