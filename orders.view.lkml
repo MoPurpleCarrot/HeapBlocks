@@ -133,6 +133,44 @@ view: orders {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: billing_status_code {
+    type: number
+    sql: ${TABLE}.billing_status ;;
+  }
+
+  dimension: billing_status {
+    type: string
+    sql:  CASE WHEN ${billing_status_code} = 0 THEN 'No Billing'
+          WHEN ${billing_status_code} = 1 THEN 'Authorized'
+          WHEN ${billing_status_code} = 2 THEN 'Auth Error'
+          WHEN ${billing_status_code} = 3 THEN 'No Charge'
+          WHEN ${billing_status_code} = 4 THEN 'Billed'
+          WHEN ${billing_status_code} = 5 THEN 'Unknown'
+          WHEN ${billing_status_code} = 6 THEN 'Refunded'
+          ELSE NULL
+          END
+          ;;
+  }
+
+  dimension: fulfillment_status_code {
+    type: number
+    sql: ${TABLE}.fulfillment_status ;;
+  }
+
+  dimension: fulfillment_status {
+    type: string
+    sql:  CASE WHEN ${fulfillment_status_code} = 0 THEN 'Planned'
+          WHEN ${fulfillment_status_code} = 1 THEN 'Confirmed'
+          WHEN ${fulfillment_status_code} = 2 THEN 'Unknown'
+          WHEN ${fulfillment_status_code} = 3 THEN 'Skipped'
+          WHEN ${fulfillment_status_code} = 4 THEN 'Cancelled'
+          WHEN ${fulfillment_status_code} = 5 THEN 'Suspended'
+          WHEN ${fulfillment_status_code} = 6 THEN 'Admin Cancelled'
+          ELSE NULL
+          END
+          ;;
+  }
+
   dimension: status_old {
     type: string
     sql: ${TABLE}.status_old ;;

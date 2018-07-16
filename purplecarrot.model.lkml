@@ -5,7 +5,7 @@ week_start_day: wednesday
 include: "*.view"
 
 # include all dashboards in this project
-include: "*.dashboard"
+# include: "*.dashboard"
 
 datagroup: hourly_sync  {
   sql_trigger: SELECT DATE_PART('hour', getdate()) ;;
