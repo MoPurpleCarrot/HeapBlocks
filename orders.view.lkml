@@ -176,6 +176,41 @@ view: orders {
     sql: ${TABLE}.status_old ;;
   }
 
+  dimension: ship_template_shipping_provider {
+    type: string
+    sql: ${TABLE}.ship_template_shipping_provider ;;
+  }
+
+  dimension: ship_template_fulfilllment_center {
+    type: string
+    sql: ${TABLE}.ship_template_fulfilllment_center ;;
+  }
+
+  dimension: ship_template_shipping_cost {
+    type: number
+    sql: ${TABLE}.ship_template_shipping_cost ;;
+  }
+
+  dimension: ship_template_TNT {
+    type: number
+    sql: ${TABLE}.ship_template_TNT ;;
+  }
+
+  dimension: ship_template_ship {
+    type: date
+    sql: ${TABLE}.ship_template_ship_date ;;
+  }
+
+  dimension: ship_template_delivery {
+    type: date
+    sql: ${TABLE}.ship_template_ship_date ;;
+  }
+
+  dimension: projected_delivery{
+    type: date
+    sql: ${TABLE}.projected_delivery_on ;;
+  }
+
   dimension: stripe_charge_id {
     type: string
     sql: ${TABLE}.stripe_charge_id ;;
