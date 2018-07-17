@@ -161,7 +161,7 @@ view: orders {
     type: string
     sql:  CASE WHEN ${fulfillment_status_code} = 0 THEN 'Planned'
           WHEN ${fulfillment_status_code} = 1 THEN 'Confirmed'
-          WHEN ${fulfillment_status_code} = 2 THEN 'Unknown'
+          WHEN ${fulfillment_status_code} = 2 THEN 'Delayed Start'
           WHEN ${fulfillment_status_code} = 3 THEN 'Skipped'
           WHEN ${fulfillment_status_code} = 4 THEN 'Cancelled'
           WHEN ${fulfillment_status_code} = 5 THEN 'Suspended'
