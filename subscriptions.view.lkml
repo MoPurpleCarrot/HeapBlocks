@@ -71,7 +71,6 @@ view: subscriptions {
     ELSE NULL
     END
     ;;
-
   }
 
   dimension: status_code {
