@@ -60,20 +60,19 @@ view: subscriptions {
     sql: ${TABLE}.plan ;;
   }
 
-  dimension: plan_bucket {
-    case:{
-      when:{
-        sql: ${plan} = 0 ;;
-        label: "Core"
-      }
-      when:{
-        sql: ${plan} = 1 ;;
-        label: "Core"
-      }
-      when:{
-        sql: ${plan} = 2 ;;
-        label: "TB12"
-      }}}
+  dimension: plan_name {
+    type: string
+    sql:  CASE WHEN ${plan} = 0 THEN 'Core'
+    WHEN ${plan} = 1 THEN 'Family'
+    WHEN ${plan} = 2 THEN 'TB12'
+    WHEN ${plan} = 3 THEN 'Chefs Choice'
+    WHEN ${plan} = 4 THEN 'Quick and Easy'
+    WHEN ${plan} = 5 THEN 'High Protein'
+    ELSE NULL
+    END
+    ;;
+
+  }
 
   dimension: status_code {
     type: number
