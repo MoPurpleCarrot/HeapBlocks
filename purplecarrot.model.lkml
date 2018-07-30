@@ -289,7 +289,7 @@ explore: google_analytics_wau {
 }
 
 explore: gift_purchases {
-  label: "Gift Purchases and Redemptions"
+  label: "Gift Purchases and Redemptions - Redeemer"
 
   join: gift_redemptions {
     relationship: one_to_one
@@ -297,18 +297,26 @@ explore: gift_purchases {
     sql_on: ${gift_purchases.id} = ${gift_redemptions.gift_purchase_id};;
   }
 
-  join: recipient_users {
-    from: users
+  join: users {
     relationship: one_to_one
     type: left_outer
-    sql_on: ${gift_redemptions.user_id} = ${recipient_users.id} ;;
+    sql_on: ${gift_redemptions.user_id} = ${users.id} ;;
   }
 
-  join: recipient_subscriptions {
-    from: subscriptions
+  join: subscriptions {
     relationship: one_to_one
     type: left_outer
-    sql_on: ${recipient_users.id}=${recipient_subscriptions.user_id};;
+    sql_on: ${users.id}=${subscriptions.user_id};;
+  }
+
+  join: orders {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
+  }
+
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id} ;;
   }
 }
 
