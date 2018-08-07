@@ -176,4 +176,23 @@ view: subscriptions {
       orders.count
     ]
   }
+
+
+#Pulling in winbacks
+
+dimension: winback_at  {
+  type: date
+  sql:  ${TABLE}.winback_at ;;
+}
+
+dimension: winback_type {
+  type: string
+  sql:  ${TABLE}.winback_type ;;
+}
+
+dimension: winback_coupon {
+  type:  string
+  sql: ${TABLE}.winback_coupon ;;
+}
+
 }

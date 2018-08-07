@@ -502,7 +502,7 @@ explore: live_chat_sessions {
 }
 
 
-#Intercom merging
+#Intercom joining
 
 explore: Intercom_users {
 
