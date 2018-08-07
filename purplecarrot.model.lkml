@@ -500,3 +500,30 @@ explore: live_chat_sessions {
     sql_on: ${live_chat_session_tags._sdc_source_key___sdc_primary_key} = ${live_chat_sessions.__sdc_primary_key} ;;
   }
 }
+
+
+#Intercom merging
+
+explore: Intercom_users {
+
+  join: Intercom_users__tags__tags {
+    relationship:  one_to_one
+    sql_on:  ${Intercom_users__tags__tags.id} = ${Intercom_users.id} ;;
+  }
+
+  join: Intercom_contacts {
+    relationship:  one_to_one
+    sql_on:  ${Intercom_users.id} = ${Intercom_contacts.id} ;;
+  }
+
+  join: Intercom_conversations {
+    relationship:  one_to_one
+    sql_on:  ${Intercom_conversations.id} = ${Intercom_contacts.id} ;;
+  }
+
+  join: Intercom_conversations__tags__tags {
+    relationship:  one_to_one
+    sql_on:  ${Intercom_conversations__tags__tags.id} = ${Intercom_contacts.id} ;;
+  }
+
+}
