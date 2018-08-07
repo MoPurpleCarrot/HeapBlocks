@@ -160,10 +160,7 @@ view: subscriptions {
     sql: ${TABLE}.user_id ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
@@ -180,17 +177,10 @@ view: subscriptions {
 
 #Pulling in winbacks
 
+
   dimension_group: winback {
     type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [time, date, week, month]
     sql: ${TABLE}.winback_at ;;
   }
 
@@ -202,6 +192,11 @@ view: subscriptions {
   dimension: winback_type {
     type: string
     sql: ${TABLE}.winback_type ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
   }
 
 }
