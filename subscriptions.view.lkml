@@ -180,19 +180,28 @@ view: subscriptions {
 
 #Pulling in winbacks
 
-dimension: winback_at  {
-  type: date
-  sql:  ${TABLE}.winback_at ;;
-}
+  dimension_group: winback {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.winback_at ;;
+  }
 
-dimension: winback_type {
-  type: string
-  sql:  ${TABLE}.winback_type ;;
-}
+  dimension: winback_coupon {
+    type: string
+    sql: ${TABLE}.winback_coupon ;;
+  }
 
-dimension: winback_coupon {
-  type:  string
-  sql: ${TABLE}.winback_coupon ;;
-}
+  dimension: winback_type {
+    type: string
+    sql: ${TABLE}.winback_type ;;
+  }
 
 }
