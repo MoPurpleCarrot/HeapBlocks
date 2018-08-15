@@ -504,26 +504,18 @@ explore: live_chat_sessions {
 
 #Intercom joining
 
-explore: Intercom_users {
-
-  join: Intercom_users__tags__tags {
-    relationship:  one_to_one
-    sql_on:  ${Intercom_users__tags__tags.id} = ${Intercom_users.id} ;;
-  }
+explore: Intercom_conversations {
 
   join: Intercom_contacts {
-    relationship:  one_to_one
-    sql_on:  ${Intercom_users.id} = ${Intercom_contacts.id} ;;
+    relationship:  one_to_many
+    sql_on:  ${Intercom_contacts.id} = ${Intercom_conversations.user__id} ;;
   }
 
-  join: Intercom_conversations {
-    relationship:  one_to_one
-    sql_on:  ${Intercom_conversations.id} = ${Intercom_contacts.id} ;;
+  join: Intercom_users {
+    relationship:  one_to_many
+    sql_on:  ${Intercom_users.id} = ${Intercom_conversations.id} ;;
   }
 
-  join: Intercom_conversations__tags__tags {
-    relationship:  one_to_one
-    sql_on:  ${Intercom_conversations__tags__tags.id} = ${Intercom_contacts.id} ;;
-  }
+
 
 }
