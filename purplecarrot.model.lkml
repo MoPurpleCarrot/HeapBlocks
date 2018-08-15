@@ -516,6 +516,10 @@ explore: Intercom_conversations {
     sql_on:  ${users.id} = ${Intercom_users.user_id} ;;
   }
 
+join: subscriptions {
+  relationship: one_to_one
+  sql_on:  ${subscriptions.user_id} = ${users.id} ;;
+}
 
 
 }
