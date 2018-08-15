@@ -202,4 +202,9 @@ view: Intercom_conversations {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_distinct {
+    type: count_distinct
+    drill_fields: [user__id]
+  }
 }
