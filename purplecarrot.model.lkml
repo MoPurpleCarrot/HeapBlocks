@@ -506,14 +506,14 @@ explore: live_chat_sessions {
 
 explore: Intercom_conversations {
 
-  join: Intercom_contacts {
-    relationship:  one_to_many
-    sql_on:  ${Intercom_contacts.id} = ${Intercom_conversations.user__id} ;;
-  }
-
   join: Intercom_users {
     relationship:  one_to_many
-    sql_on:  ${Intercom_users.id} = ${Intercom_conversations.id} ;;
+    sql_on:  ${Intercom_users.id} = ${Intercom_conversations.user__id} ;;
+  }
+
+  join: users {
+    relationship:  one_to_one
+    sql_on:  ${users.id} = ${Intercom_users.user_id} ;;
   }
 
 
