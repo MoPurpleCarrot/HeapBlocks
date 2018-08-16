@@ -92,6 +92,11 @@ view: orders {
     sql: ${TABLE}.donated ;;
   }
 
+  dimension: default_meals_were_overridden{
+    type: yesno
+    sql: ${TABLE}.overridden_status ;;
+  }
+
   dimension: menu_id {
     type: number
     sql: ${TABLE}.menu_id ;;
@@ -398,7 +403,6 @@ view: orders {
     sql: ${total_revenue_60day}/NULLIF(${users.count},0);;
   }
 
-  # 90 day
   dimension: is_90day_since_created {
     type: yesno
     sql: ${days_since_created} <= 90 ;;
