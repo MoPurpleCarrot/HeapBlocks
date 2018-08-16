@@ -94,7 +94,7 @@ view: orders {
 
   dimension: default_meals_were_overridden{
     type: yesno
-    sql: ${TABLE}.overridden_status ;;
+    sql: ${TABLE}.overridden_recipes ;;
   }
 
   dimension: menu_id {
