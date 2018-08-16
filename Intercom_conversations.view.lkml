@@ -207,4 +207,8 @@ view: Intercom_conversations {
     type: count_distinct
     drill_fields: [user__id]
   }
+
+
+
+
 }
