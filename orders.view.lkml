@@ -262,6 +262,12 @@ view: orders {
     drill_fields: [detail*]
   }
 
+  measure: count_distinct_plan {
+    type: count_distinct
+    sql: ${plan} ;;
+  }
+
+
   measure: total_revenue {
     type: sum
     value_format_name: usd
