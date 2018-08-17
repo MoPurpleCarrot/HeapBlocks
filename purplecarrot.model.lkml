@@ -522,4 +522,10 @@ join: subscriptions {
 }
 
 
+join: Intercom_conversations__tags__tags {
+  relationship:  many_to_one
+  sql_on:  ${Intercom_conversations__tags__tags._sdc_source_key_id} = ${Intercom_conversations.id}
+  ;;
+}
+
 }
