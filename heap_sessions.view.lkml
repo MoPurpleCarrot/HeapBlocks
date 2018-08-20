@@ -32,4 +32,8 @@ view: heap_sessions {
     sql: ${TABLE}.time ;;
   }
 
+  measure: count {
+    type:  count
+  }
+
   }
