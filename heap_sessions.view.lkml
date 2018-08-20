@@ -36,4 +36,7 @@ view: heap_sessions {
     type:  count
   }
 
+  measure: count_distinct {
+    type: count_distinct
+  }
   }
