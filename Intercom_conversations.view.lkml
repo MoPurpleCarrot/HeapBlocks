@@ -210,7 +210,7 @@ view: Intercom_conversations {
 
   dimension: Registereddate_minus_chatdate {
     type: number
-    sql: diff_days( ${created_date}, ${subscriptions.registered_at_date}) ;;
+    sql: datediff( 'day', ${created_date}, ${subscriptions.registered_at_date}) ;;
   }
 
 
