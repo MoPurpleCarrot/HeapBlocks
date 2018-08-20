@@ -83,6 +83,12 @@ explore: heap_users{
     sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
   }
 
+  join: heap_sessions {
+    relationship: one_to_one
+    sql_on:  ${heap_sessions.user_id} = ${heap_users.user_id} ;;
+  }
+
+
 
 }
 
