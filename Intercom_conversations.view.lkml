@@ -208,9 +208,9 @@ view: Intercom_conversations {
     drill_fields: [user__id]
   }
 
-  dimension: date_subtract {
+  dimension: Registereddate_minus_chatdate {
     type: number
-    sql: datediff(${created_date}, ${subscriptions.registered_at_date}) ;;
+    sql: datediff( day, ${created_date}, ${subscriptions.registered_at_date}) ;;
   }
 
 
