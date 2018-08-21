@@ -213,10 +213,7 @@ view: Intercom_conversations {
     sql: datediff( 'day', ${created_date}, ${subscriptions.registered_at_date}) ;;
   }
 
-  measure: sum {
-    type:  sum
-    drill_fields: [count]
-  }
+
 
 
 }
