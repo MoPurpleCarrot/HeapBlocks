@@ -194,6 +194,17 @@ view: subscriptions {
     sql: ${TABLE}.winback_type ;;
   }
 
+  dimension: winback_utm_source {
+    type: string
+    sql: ${TABLE}.winback_utm_source ;;
+  }
+
+  dimension: winback_utm_campaign {
+    type: string
+    sql: ${TABLE}.winback_utm_campaign ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [detail*]
