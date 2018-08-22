@@ -205,7 +205,7 @@ view: Intercom_conversations {
 
   measure: count_distinct {
     type: count_distinct
-    drill_fields: [id]
+    sql: ${user__id}
   }
 
   dimension: Registereddate_minus_chatdate {
