@@ -215,7 +215,7 @@ view: Intercom_conversations {
 
 
 measure: count_ifchatthenregistered {
-  type: count
+  type: count_distinct
   drill_fields: [Registereddate_minus_chatdate]
 }
 
