@@ -216,7 +216,7 @@ view: Intercom_conversations {
 
 measure: count_ifchatthenregistered {
   type: count
-  drill_fields: [Registereddate_minus_chatdate]
+  drill_fields: [user__id]
 }
 
 
