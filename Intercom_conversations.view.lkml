@@ -205,14 +205,13 @@ view: Intercom_conversations {
 
   measure: count_distinct {
     type: count_distinct
-    sql: ${user__id}
+    drill_fields: [user__id]
   }
 
   dimension: Registereddate_minus_chatdate {
     type: number
     sql: datediff( 'day', ${created_date}, ${subscriptions.registered_at_date}) ;;
   }
-
 
 
 
