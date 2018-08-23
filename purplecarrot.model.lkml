@@ -539,4 +539,10 @@ join: Intercom_contacts {
   sql_on:  ${Intercom_contacts.id} = ${Intercom_conversations.user__id} ;;
 }
 
+join: heap_account_created {
+  relationship:  one_to_one
+  sql_on: ${heap_account_created.user_id} = ${Intercom_users.user_id} ;;
+}
+
+
 }
