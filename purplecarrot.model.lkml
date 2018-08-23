@@ -534,4 +534,9 @@ join: Intercom_conversations__tags__tags {
   ;;
 }
 
+join: Intercom_contacts {
+  relationship:  one_to_one
+  sql_on:  ${Intercom_contacts.id} = ${Intercom_conversations.user__id} ;;
+}
+
 }
