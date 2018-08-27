@@ -210,7 +210,7 @@ view: subscriptions {
     drill_fields: [detail*]
   }
 
-  dimension: clean_winback_UTM_source{
+  dimension: clean_winback_utm_source{
     case: {
       when: {
         sql: ${winback_utm_source} = Organic or organic ;;
@@ -228,8 +228,6 @@ view: subscriptions {
         sql: ${winback_utm_source} = adwordsg_w ;;
         label: "adwords gmail"
       }
-
-
       when: {
         sql: ${winback_utm_source} = adwordsnb ;;
         label: "adwordsnb"
