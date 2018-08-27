@@ -210,4 +210,34 @@ view: subscriptions {
     drill_fields: [detail*]
   }
 
+  dimension: clean_winback_UTM{
+    case: {
+      when: {
+        sql: ${winback_utm_source} = Organic or organic ;;
+        label: "organic"
+      }
+      when: {
+        sql: ${winback_utm_source} = adwordsb or adwordsb_w or adwordstb ;;
+        label: "adwordsb"
+      }
+      when: {
+        sql: ${winback_utm_source} = adwordsnb or adwordgb_w ;;
+        label: "adwordsnb"
+      }
+
+      when: {
+        sql: ${winback_utm_source} = Facebook or facebook ;;
+        label: "facebook"
+      }
+
+      when: {
+        sql: ${winback_utm_source} = bingb ;;
+        label: "bingb"
+      }
+
+      else: "nuill"
+    }
+  }
+
+
 }
