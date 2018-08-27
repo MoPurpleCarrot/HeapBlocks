@@ -217,11 +217,21 @@ view: subscriptions {
         label: "organic"
       }
       when: {
-        sql: ${winback_utm_source} = adwordsb or adwordsb_w or adwordstb ;;
+        sql: ${winback_utm_source} = adwordsb or adwordsb_w ;;
         label: "adwordsb"
       }
       when: {
-        sql: ${winback_utm_source} = adwordsnb or adwordgb_w ;;
+        sql: ${winback_utm_source} = adwordstb;;
+        label: "adwordstb12"
+      }
+      when: {
+        sql: ${winback_utm_source} = adwordsg_w ;;
+        label: "adwords gmail"
+      }
+
+
+      when: {
+        sql: ${winback_utm_source} = adwordsnb ;;
         label: "adwordsnb"
       }
 
