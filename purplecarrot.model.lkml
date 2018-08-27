@@ -544,4 +544,9 @@ join: subscription_cancellations {
   sql_on: ${subscription_cancellations.user_id} = ${users.id} ;;
 }
 
+join: Intercom_conversation_parts {
+  relationship:  many_to_one
+  sql_on: ${Intercom_conversation_parts._sdc_source_key_id} = ${Intercom_conversations.id} ;;
+}
+
 }
