@@ -210,7 +210,7 @@ view: subscriptions {
     drill_fields: [detail*]
   }
 
-  dimension: clean_winback_UTM{
+  dimension: clean_winback_UTM_source{
     case: {
       when: {
         sql: ${winback_utm_source} = Organic or organic ;;
