@@ -539,19 +539,9 @@ join: Intercom_contacts {
   sql_on:  ${Intercom_contacts.id} = ${Intercom_conversations.user__id} ;;
 }
 
-join: heap_users{
+join: subscription_cancellations {
   relationship:  one_to_one
-  sql_on: ${heap_users._email} = ${users.email} ;;
-}
-
-join: heap_account_created {
-  relationship:  one_to_one
-  sql_on: ${heap_account_created.user_id} = ${heap_users.user_id} ;;
-}
-
-join: heap_registration_complete {
-  relationship:  one_to_one
-  sql_on:  ${heap_registration_complete.user_id} = ${heap_users.user_id} ;;
+  sql_on: ${subscription_cancellations.user_id} = ${users.id} ;;
 }
 
 }
