@@ -213,33 +213,33 @@ view: subscriptions {
   dimension: clean_winback_utm_source{
     case: {
       when: {
-        sql: ${winback_utm_source} = Organic or organic ;;
+        sql: ${TABLE}.winback_utm_source = Organic or organic ;;
         label: "organic"
       }
       when: {
-        sql: ${winback_utm_source} = adwordsb or adwordsb_w ;;
+        sql: ${TABLE}.winback_utm_source = adwordsb or adwordsb_w ;;
         label: "adwordsb"
       }
       when: {
-        sql: ${winback_utm_source} = adwordstb;;
+        sql: ${TABLE}.winback_utm_source = adwordstb;;
         label: "adwordstb12"
       }
       when: {
-        sql: ${winback_utm_source} = adwordsg_w ;;
+        sql: ${TABLE}.winback_utm_source = adwordsg_w ;;
         label: "adwords gmail"
       }
       when: {
-        sql: ${winback_utm_source} = adwordsnb ;;
+        sql: ${TABLE}.winback_utm_source = adwordsnb ;;
         label: "adwordsnb"
       }
 
       when: {
-        sql: ${winback_utm_source} = Facebook or facebook ;;
+        sql: ${TABLE}.winback_utm_source = Facebook or facebook ;;
         label: "facebook"
       }
 
       when: {
-        sql: ${winback_utm_source} = bingb ;;
+        sql: ${TABLE}.winback_utm_source = bingb ;;
         label: "bingb"
       }
 
