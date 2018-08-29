@@ -218,4 +218,18 @@ view: Intercom_conversations {
     sql: datediff( 'day', ${created_date}, ${users.created_date}) ;;
   }
 
+
+  dimension: Convoccreated_minus_firstresponse {
+    type: number
+    sql:  datediff( 'hour', ${Intercom_conversation_parts.created_date}, ${created_date}) ;;
+  }
+
+
+  dimension: Time_to_first_response{
+    type: date_hour
+    sql: if(Intercom_conversation_parts.author__type = "admin", MIN${Convoccreated_minus_firstresponse}, " ") ;;
+  }
+
+
+
 }
