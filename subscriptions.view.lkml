@@ -213,39 +213,50 @@ view: subscriptions {
   dimension: clean_winback_utm_source{
     case: {
       when: {
-        sql: ${TABLE}.winback_utm_source IN ('Organic' , 'organic') ;;
+        sql: ${TABLE}.winback_utm_source = 'Organic' ;;
         label: "organic"
       }
       when: {
-        sql: ${TABLE}.winback_utm_source IN ('adwordsb' , 'adwordsb_w') ;;
-        label: "adwordsb"
+        sql: ${TABLE}.winback_utm_source = 'organic' ;;
+        label: "organic"
       }
       when: {
-        sql: ${TABLE}.winback_utm_source IN ('adwordstb');;
+        sql: ${TABLE}.winback_utm_source = 'adwordsb' ;;
+        label: "adwords branded"
+      }
+
+      when: {
+        sql: ${TABLE}.winback_utm_source ='adwordsb_w' ;;
+        label: "adwords branded"
+      }
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'adwordstb';;
         label: "adwordstb12"
       }
       when: {
-        sql: ${TABLE}.winback_utm_source IN ('adwordsg_w') ;;
+        sql: ${TABLE}.winback_utm_source = 'adwordsg_w' ;;
         label: "adwords gmail"
       }
       when: {
-        sql: ${TABLE}.winback_utm_source IN ('adwordsnb') ;;
+        sql: ${TABLE}.winback_utm_source = 'adwordsnb' ;;
         label: "adwordsnb"
       }
 
       when: {
-        sql: ${TABLE}.winback_utm_source IN ('Facebook' , 'facebook') ;;
+        sql: ${TABLE}.winback_utm_source = 'Facebook' ;;
         label: "facebook"
       }
-
+    when: {
+      sql: ${TABLE}.winback_utm_source = 'facebook' ;;
+      label: "facebook"
+    }
       when: {
-        sql: ${TABLE}.winback_utm_source IN ('bingb') ;;
+        sql: ${TABLE}.winback_utm_source = 'bingb' ;;
         label: "bingb"
       }
 
       else: "null"
     }
   }
-
 
 }
