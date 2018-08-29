@@ -210,6 +210,9 @@ view: subscriptions {
     drill_fields: [detail*]
   }
 
+
+
+
   dimension: clean_winback_utm_source{
     case: {
       when: {

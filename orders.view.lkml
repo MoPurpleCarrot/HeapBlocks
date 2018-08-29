@@ -443,4 +443,33 @@ view: orders {
       users.name
     ]
   }
+
+
+  dimension: Orderdate_minus_winbackdate{
+    type: number
+    sql: datediff( 'day', ${subscriptions.winback_date}, ${created_date}) ;;
+  }
+
+  dimension: orderdate_after_winback{
+    type: yesno
+    sql: ${Orderdate_minus_winbackdate} >= 0 ;;
+  }
+
+
+  measure: total_billed_count_post_winback {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "3"
+    }
+    filters: {
+      field:  orderdate_after_winback
+      value: "yes"
+    }
+  }
+
+
+
+
 }
