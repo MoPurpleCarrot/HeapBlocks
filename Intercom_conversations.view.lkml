@@ -130,6 +130,7 @@ view: Intercom_conversations {
     timeframes: [
       raw,
       time,
+      hour,
       date,
       week,
       month,
