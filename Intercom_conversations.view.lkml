@@ -221,7 +221,7 @@ view: Intercom_conversations {
 
   dimension: Convoccreated_minus_firstresponse {
     type: number
-    sql:  datediff( 'hour', ${Intercom_conversation_parts.created_date}, ${created_date}) ;;
+    sql:  timediff( 'hour', ${Intercom_conversation_parts.created_date}, ${created_date}) ;;
   }
 
 
