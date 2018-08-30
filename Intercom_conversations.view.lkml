@@ -220,20 +220,31 @@ view: Intercom_conversations {
   }
 
 
+
   dimension: Convoccreated_minus_firstresponse {
     type: number
     sql:  datediff('hour', ${Intercom_conversation_parts.created_raw}, ${created_raw}) ;;
   }
 
+ dimension: time_to_first_response_test {
+   case: {
+    when: {
+      sql:${TABLE}.Intercom_conversation_parts.author__type = 'admin'THEN MIN${Convoccreated_minus_firstresponse}
+      ELSE 'NULL'
+      ;;
+    }
+    }
+    }
 
-  dimension: Time_to_first_response{
+
+  dimension: time_to_first_response{
     type: date_hour
     sql: if(Intercom_conversation_parts.author__type = "admin", MIN${Convoccreated_minus_firstresponse}, "Null") ;;
   }
 
   measure: Average_time_to_response {
     type: average
-    sql: ${Time_to_first_response} ;;
+    sql: ${time_to_first_response} ;;
     }
 
 
