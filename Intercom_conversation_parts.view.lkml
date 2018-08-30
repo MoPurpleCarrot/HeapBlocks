@@ -85,6 +85,7 @@ view: Intercom_conversation_parts {
     timeframes: [
       raw,
       time,
+      hour,
       date,
       week,
       month,
