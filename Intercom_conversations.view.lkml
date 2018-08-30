@@ -221,15 +221,25 @@ view: Intercom_conversations {
 
 
 
-  dimension: Convoccreated_minus_firstresponse {
+  dimension: Convoccreated_minus_response {
     type: number
     sql:  datediff('hour', ${Intercom_conversation_parts.created_raw}, ${created_raw}) ;;
   }
 
-
-  dimension: time_to_first_response{
+  dimension: Rank_responses{
     type: number
-    sql: if(${Intercom_conversation_parts.author__type} = 'admin', MIN${Convoccreated_minus_firstresponse}, null) ;;
+    sql: rank(${Convoccreated_minus_response}response} , ${Convoccreated_minus_response} ;;
+  }
+
+  dimension: time_to_first_response_forall {
+    type: number
+    sql: MAX(${Rank_responses}) ;;
+  }
+
+
+  dimension: time_to_first_response {
+    type: number
+    sql: if(${Intercom_conversation_parts.author__type} = 'admin', ${time_to_first_response_forall}, null) ;;
   }
 
   measure: Average_time_to_response {
@@ -238,10 +248,15 @@ view: Intercom_conversations {
     }
 
 
+
+
+
+
+
   dimension: time_to_first_response_test {
     case: {
       when: {
-        sql:${TABLE}.Intercom_conversation_parts.author__type = 'admin', MIN${Convoccreated_minus_firstresponse} ;;
+        sql:${TABLE}.Intercom_conversation_parts.author__type = 'admin', MIN${Convoccreated_minus_response} ;;
 
       }
     }
