@@ -228,7 +228,7 @@ view: Intercom_conversations {
 
   dimension: Rank_responses{
     type: number
-    sql: rank(${Convoccreated_minus_response}response} , ${Convoccreated_minus_response} ;;
+    sql: rank(${Convoccreated_minus_response}response} , ${Convoccreated_minus_response}) ;;
   }
 
   dimension: time_to_first_response_forall {
@@ -241,6 +241,9 @@ view: Intercom_conversations {
     type: number
     sql: if(${Intercom_conversation_parts.author__type} = 'admin', ${time_to_first_response_forall}, null) ;;
   }
+
+
+
 
   measure: Average_time_to_response {
     type: average
