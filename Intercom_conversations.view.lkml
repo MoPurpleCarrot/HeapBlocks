@@ -226,6 +226,7 @@ view: Intercom_conversations {
     sql:  datediff('hour', ${Intercom_conversation_parts.created_raw}, ${created_raw}) ;;
   }
 
+
  dimension: time_to_first_response_test {
    case: {
     when: {
@@ -238,7 +239,7 @@ view: Intercom_conversations {
 
   dimension: time_to_first_response{
     type: date_hour
-    sql: if(${TABLE}.Intercom_conversation_parts.author__type = 'admin', MIN${Convoccreated_minus_firstresponse}, 'Null') ;;
+    sql: if(${Intercom_conversation_parts.author__type} = 'admin', MIN${Convoccreated_minus_firstresponse}, null) ;;
   }
 
   measure: Average_time_to_response {
