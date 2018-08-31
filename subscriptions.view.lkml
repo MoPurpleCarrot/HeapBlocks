@@ -220,7 +220,7 @@ view: subscriptions {
         label: "organic"
       }
       when: {
-        sql: ${TABLE}.winback_utm_source = 'adwordsb' OR ${TABLE}.winback_utm_source = 'adwordsb_w' ;;
+        sql: ${TABLE}.winback_utm_source = 'adwordsb' OR ${TABLE}.winback_utm_source = 'adwordsb_w' OR ${TABLE}.winback_utm_source = 'adwordsb_i' ;;
         label: "adwords branded"
       }
       when: {
