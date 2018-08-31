@@ -469,7 +469,15 @@ view: orders {
     }
   }
 
+  dimension: users_with_winback {
+    type: number
+    sql:  if(${subscriptions.winback_date} IS NOT NULL, ${users.id} ;;
+  }
 
 
+  measure: average_orders_post_winback {
+    type: number
+    sql: ${total_billed_count_post_winback}/NULLIF(${users_with_winback},0) ;;
+  }
 
 }
