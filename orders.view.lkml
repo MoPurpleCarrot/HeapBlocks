@@ -472,7 +472,7 @@ view: orders {
 
   dimension: user_with_winback {
     type: yesno
-    sql: ${user_id} AND ${subscriptions.winback_date} IS NOT NULL ;;
+    sql: ${subscriptions.winback_date} IS NOT NULL ;;
   }
 
   measure: average_orders_post_winback {
