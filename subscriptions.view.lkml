@@ -246,7 +246,12 @@ view: subscriptions {
       }
 
       when: {
-        sql: ${TABLE}.winback_utm_source = 'Facebook' ;;
+        sql: ${TABLE}.winback_utm_source = 'Facebook';;
+        label: "facebook"
+      }
+
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'facebook' ;;
         label: "facebook"
       }
 
