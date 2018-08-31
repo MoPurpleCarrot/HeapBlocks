@@ -246,7 +246,7 @@ view: subscriptions {
       }
 
       when: {
-        sql: ${TABLE}.winback_utm_source = 'Facebook' or 'facebook' ;;
+        sql: ${TABLE}.winback_utm_source = 'Facebook' ;;
         label: "facebook"
       }
 
