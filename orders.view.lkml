@@ -475,6 +475,7 @@ view: orders {
     sql: ${subscriptions.winback_date} IS NOT NULL ;;
   }
 
+
   measure: average_orders_post_winback {
     type: number
     sql: ${total_billed_count_post_winback}/NULLIF(${user_with_winback},0) ;;
