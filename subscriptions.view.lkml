@@ -244,6 +244,10 @@ view: subscriptions {
         sql: ${TABLE}.winback_utm_source = 'bingb' ;;
         label: "bing branded"
       }
+      when: {
+        sql:  ${TABLE}.winback_coupon = 'pcsum18' ;;
+        label: "direct mail"
+      }
 
 
     }
