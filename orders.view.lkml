@@ -471,7 +471,7 @@ view: orders {
 
   dimension: users_with_winback {
     type: number
-    sql:  if(${subscriptions.winback_date} IS NOT NULL, ${users.id} ;;
+    sql:  if(${subscriptions.winback_date} IS NOT NULL, ${users.id}) ;;
   }
 
 
