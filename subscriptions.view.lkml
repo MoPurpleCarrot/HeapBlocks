@@ -255,7 +255,7 @@ view: subscriptions {
         label: "bingb"
       }
 
-      else: "null"
+
     }
   }
 
