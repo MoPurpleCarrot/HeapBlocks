@@ -440,7 +440,8 @@ view: orders {
       tracking_number,
       recipes.title,
       chefs.name,
-      users.name
+      users.name,
+      user_with_winback
     ]
   }
 
@@ -469,15 +470,14 @@ view: orders {
     }
   }
 
-  dimension: users_with_winback {
-    type: number
-    sql:  if(${subscriptions.winback_date} IS NOT NULL, ${users.id}) ;;
+  dimension: user_with_winback {
+    type: yesno
+    sql: ${user_id} AND ${subscriptions.winback_date} IS NOT NULL ;;
   }
-
 
   measure: average_orders_post_winback {
     type: number
-    sql: ${total_billed_count_post_winback}/NULLIF(${users_with_winback},0) ;;
+    sql: ${total_billed_count_post_winback}/NULLIF(${user_with_winback},0) ;;
   }
 
 }
