@@ -194,9 +194,63 @@ view: subscriptions {
     sql: ${TABLE}.winback_type ;;
   }
 
+  dimension: winback_utm_source {
+    type: string
+    sql: ${TABLE}.winback_utm_source ;;
+  }
+
+  dimension: winback_utm_campaign {
+    type: string
+    sql: ${TABLE}.winback_utm_campaign ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [detail*]
+  }
+
+
+
+
+  dimension: clean_winback_utm_source{
+    case: {
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'Organic' OR ${TABLE}.winback_utm_source = 'organic'  ;;
+        label: "organic"
+      }
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'adwordsb' OR ${TABLE}.winback_utm_source = 'adwordsb_w' OR ${TABLE}.winback_utm_source = 'adwordsb_i' ;;
+        label: "adwords branded"
+      }
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'adwordstb';;
+        label: "adwordstb12"
+      }
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'adwordsg_w' ;;
+        label: "adwords gmail"
+      }
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'adwordsnb' ;;
+        label: "adwords non-branded"
+      }
+
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'Facebook'OR ${TABLE}.winback_utm_source = 'facebook';;
+        label: "facebook"
+      }
+      when: {
+        sql: ${TABLE}.winback_utm_source = 'bingb' ;;
+        label: "bing branded"
+      }
+      when: {
+        sql:  ${TABLE}.winback_coupon = 'pcsum18' ;;
+        label: "direct mail"
+      }
+
+
+    }
   }
 
 }

@@ -440,7 +440,45 @@ view: orders {
       tracking_number,
       recipes.title,
       chefs.name,
-      users.name
+      users.name,
+      user_with_winback
     ]
   }
+
+
+  dimension: Orderdate_minus_winbackdate{
+    type: number
+    sql: datediff( 'day', ${subscriptions.winback_date}, ${created_date}) ;;
+  }
+
+  dimension: orderdate_after_winback{
+    type: yesno
+    sql: ${Orderdate_minus_winbackdate} >= 0 ;;
+  }
+
+
+  measure: total_billed_count_post_winback {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "3"
+    }
+    filters: {
+      field:  orderdate_after_winback
+      value: "yes"
+    }
+  }
+
+  dimension: user_with_winback {
+    type: yesno
+    sql: ${subscriptions.winback_date} IS NOT NULL ;;
+  }
+
+
+  measure: average_orders_post_winback {
+    type: number
+    sql: ${total_billed_count_post_winback}/NULLIF(${user_with_winback},0) ;;
+  }
+
 }

@@ -534,4 +534,19 @@ join: Intercom_conversations__tags__tags {
   ;;
 }
 
+join: Intercom_contacts {
+  relationship:  one_to_one
+  sql_on:  ${Intercom_contacts.id} = ${Intercom_conversations.user__id} ;;
+}
+
+join: subscription_cancellations {
+  relationship:  one_to_one
+  sql_on: ${subscription_cancellations.user_id} = ${users.id} ;;
+}
+
+join: Intercom_conversation_parts {
+  relationship:  many_to_one
+  sql_on: ${Intercom_conversation_parts._sdc_source_key_id} = ${Intercom_conversations.id} ;;
+}
+
 }

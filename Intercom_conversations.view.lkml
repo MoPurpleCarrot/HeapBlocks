@@ -130,6 +130,7 @@ view: Intercom_conversations {
     timeframes: [
       raw,
       time,
+      hour,
       date,
       week,
       month,
@@ -205,7 +206,7 @@ view: Intercom_conversations {
 
   measure: count_distinct {
     type: count_distinct
-    drill_fields: [user__id]
+    sql:  ${user__id} ;;
   }
 
   dimension: Registereddate_minus_chatdate {
@@ -213,6 +214,56 @@ view: Intercom_conversations {
     sql: datediff( 'day', ${created_date}, ${subscriptions.registered_at_date}) ;;
   }
 
+  dimension: Accountcreateddate_minus_chatdate {
+    type: number
+    sql: datediff( 'day', ${created_date}, ${users.created_date}) ;;
+  }
+
+
+
+  dimension: Convoccreated_minus_response {
+    type: number
+    sql:  datediff('hour', ${Intercom_conversation_parts.created_raw}, ${created_raw}) ;;
+  }
+
+  dimension: Rank_responses{
+    type: number
+    sql: rank(${Convoccreated_minus_response}response} , ${Convoccreated_minus_response}) ;;
+  }
+
+  dimension: time_to_first_response_forall {
+    type: number
+    sql: MAX(${Rank_responses}) ;;
+  }
+
+
+  dimension: time_to_first_response {
+    type: number
+    sql: if(${Intercom_conversation_parts.author__type} = 'admin', ${time_to_first_response_forall}, null) ;;
+  }
+
+
+
+
+  measure: Average_time_to_response {
+    type: average
+    sql: ${time_to_first_response} ;;
+    }
+
+
+
+
+
+
+
+  dimension: time_to_first_response_test {
+    case: {
+      when: {
+        sql:${TABLE}.Intercom_conversation_parts.author__type = 'admin', MIN${Convoccreated_minus_response} ;;
+
+      }
+    }
+  }
 
 
 
