@@ -130,19 +130,39 @@ view: zendesk_ticket_metrics {
 
   dimension: full_resolution_time_bucket {
     type: string
-    sql:
-        CASE
-        WHEN ${full_resolution_time_in_minutes__calendar} < 60 THEN 'Under 1 Hour'
-        WHEN ${full_resolution_time_in_minutes__calendar} < 120 THEN '1 to 2 Hours'
-        WHEN ${full_resolution_time_in_minutes__calendar} < 480 THEN '2 to 8 Hours'
-        WHEN ${full_resolution_time_in_minutes__calendar} < 1440 THEN '8 to 24 Hours'
-        WHEN ${full_resolution_time_in_minutes__calendar} < 2880 THEN '24 to 48 Hours'
-        WHEN ${full_resolution_time_in_minutes__calendar} < 10080 THEN '48 Hours to 1 Week'
-        WHEN ${full_resolution_time_in_minutes__calendar} < 100800 THEN 'Over 1 Week'
-        ELSE NULL
-        END
-        ;;
-    }
+    case: {
+
+        when: {
+          sql: ${full_resolution_time_in_minutes__calendar} < 60 ;;
+          label:"Under 1 Hour"
+        }
+        when: {
+          sql: ${full_resolution_time_in_minutes__calendar} < 120 ;;
+          label:"1 to 2 Hours"
+        }
+        when: {
+          sql: ${full_resolution_time_in_minutes__calendar} < 480 ;;
+          label:"2 to 8 Hours"
+        }
+        when: {
+          sql: ${full_resolution_time_in_minutes__calendar} < 1440 ;;
+          label:"8 to 24 Hours"
+        }
+        when: {
+          sql: ${full_resolution_time_in_minutes__calendar} < 2880 ;;
+          label:"24 to 48 Hours"
+        }
+        when: {
+          sql: ${full_resolution_time_in_minutes__calendar} < 10080 ;;
+          label:"48 Hours to 1 Week"
+        }
+        when: {
+          sql: ${full_resolution_time_in_minutes__calendar} < 100800 ;;
+          label:"Over 1 Week"
+        }
+        else: "Null"
+      }
+  }
 
 
   measure: full_resolution_time_in_minutes__calendar_sum {
