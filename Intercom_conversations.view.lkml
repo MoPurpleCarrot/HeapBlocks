@@ -220,6 +220,47 @@ view: Intercom_conversations {
   }
 
 
+  dimension: Rep {
+    case: {
+      when: {
+        sql: ${TABLE}.assignee__id = '2232036'  ;;
+        label: "Jessie T"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2232042'  ;;
+        label: "Courtney C"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2234323'  ;;
+        label: "Taylor N"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2189375'  ;;
+        label: "Laurie"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2235175'  ;;
+        label: "Sophia T"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2237627'  ;;
+        label: "Amelia Y"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2306277'  ;;
+        label: "Lindey G"
+      }
+
+      when: {
+        sql: ${TABLE}.assignee__id = ' 2331461'  ;;
+        label: "Stephanie M"
+      }
+
+}
+}
+
+
+
 
   dimension: Convoccreated_minus_response {
     type: number
