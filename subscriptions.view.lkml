@@ -215,6 +215,11 @@ view: subscriptions {
 
   dimension: clean_winback_utm_source{
     case: {
+
+      when: {
+        sql:  ${TABLE}.winback_coupon = 'pcsum18' ;;
+        label: "direct mail"
+      }
       when: {
         sql: ${TABLE}.winback_utm_source = 'Organic' OR ${TABLE}.winback_utm_source = 'organic'  ;;
         label: "organic"
@@ -244,10 +249,7 @@ view: subscriptions {
         sql: ${TABLE}.winback_utm_source = 'bingb' ;;
         label: "bing branded"
       }
-      when: {
-        sql:  ${TABLE}.winback_coupon = 'pcsum18' ;;
-        label: "direct mail"
-      }
+
 
 
     }
