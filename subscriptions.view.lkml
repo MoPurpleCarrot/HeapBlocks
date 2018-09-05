@@ -186,7 +186,7 @@ view: subscriptions {
 
   dimension_group: winback_plus4 {
     type: time
-    sql: add_days('4', ${winback_date}) ;;
+    sql: dateadd('day','4', ${winback_date}) ;;
   }
 
 
