@@ -462,7 +462,7 @@ view: orders {
   }
 
 
-  measure: total_billed_count_post_winback {
+  measure: count_total_billed_post_winback {
     type: count
     drill_fields: [detail*]
     filters: {
@@ -475,15 +475,20 @@ view: orders {
     }
   }
 
+
   dimension: user_with_winback {
     type: yesno
+    hidden: yes
     sql: ${subscriptions.winback_date} IS NOT NULL ;;
   }
 
 
   measure: average_orders_post_winback {
     type: number
-    sql: ${total_billed_count_post_winback}/NULLIF(${user_with_winback},0) ;;
+    hidden: yes
+    sql: ${count_total_billed_post_winback}/NULLIF(${user_with_winback},0) ;;
   }
+
+
 
 }
