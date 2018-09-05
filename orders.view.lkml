@@ -75,6 +75,11 @@ view: orders {
     sql: DATEDIFF('week', ${user_facts.first_order_date}, ${delivery_date}) ;;
   }
 
+  dimension: winback_week_num {
+    type: number
+    sql: DATEDIFF('week', ${subscriptions.winback_date}, ${delivery_date}) ;;
+  }
+
   dimension: credit_applied {
     type: number
     value_format_name: usd
