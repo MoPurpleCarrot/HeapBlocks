@@ -252,7 +252,7 @@ view: Intercom_conversations {
       }
 
       when: {
-        sql: ${TABLE}.assignee__id = ' 2331461'  ;;
+        sql: ${TABLE}.assignee__id = '2331461'  ;;
         label: "Stephanie M"
       }
 
