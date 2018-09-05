@@ -184,6 +184,12 @@ view: subscriptions {
     sql: ${TABLE}.winback_at ;;
   }
 
+  dimension_group: winback_plus4 {
+    type: time
+    sql: add_days('4', ${winback_date}) ;;
+  }
+
+
   dimension: winback_coupon {
     type: string
     sql: ${TABLE}.winback_coupon ;;
