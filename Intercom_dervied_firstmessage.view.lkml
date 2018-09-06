@@ -37,12 +37,22 @@ ON Intercom_conversation_parts._sdc_source_key_id = c._sdc_source_key_id ;;
     sql: ${TABLE}._sdc_source_key_id ;;
   }
 
+  dimension: first_message {
+    type: date_time
+    sql: ${TABLE}.first_message ;;
+  }
 
 
+measure: time_to_first_response {
+  type: number
+  sql: DATEDIFF('hour',${Intercom_conversations.created_hour}, ${first_message}) ;;
+}
 
 
-
-
+  measure: average_time_to_first_response {
+    type: average
+    sql: DATEDIFF('hour',${Intercom_conversations.created_hour}, ${first_message})  ;;
+  }
 
   }
 
