@@ -32,7 +32,10 @@ ON Intercom_conversation_parts._sdc_source_key_id = c._sdc_source_key_id ;;
   }
 
 
-
+  dimension: _sdc_source_key_id {
+    type: string
+    sql: ${TABLE}._sdc_source_key_id ;;
+  }
 
 
 
