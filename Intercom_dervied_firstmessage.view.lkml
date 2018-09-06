@@ -3,7 +3,7 @@ view: intercom_derived_firstmessage {
     sql:SELECT * FROM Intercom_conversation_parts
 LEFT JOIN
 ( SELECT _sdc_source_key_id, MIN(created_time) as first_message
-FROM Intercom_conversation_parts.created_at
+FROM Intercom_conversation_parts.created_time
 WHERE Intercom_conversation_part.author__type = "admin"
 GROUP BY _sdc_source_key_id ) c
 ON Intercom_conversation_parts._sdc_source_key_id = c._sdc_source_key_id ;;
@@ -26,8 +26,6 @@ ON Intercom_conversation_parts._sdc_source_key_id = c._sdc_source_key_id ;;
     sql: ${TABLE}.first_message ;;
   }
 
-
-
   dimension: id {
     primary_key: yes
     type: string
@@ -49,13 +47,10 @@ ON Intercom_conversation_parts._sdc_source_key_id = c._sdc_source_key_id ;;
     sql: ${TABLE}.created_at ;;
   }
 
-
   dimension: _sdc_source_key_id {
     type: string
     sql: ${TABLE}._sdc_source_key_id ;;
   }
-
-
 
   dimension: author__type {
     type: string
