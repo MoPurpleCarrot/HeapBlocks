@@ -549,4 +549,9 @@ join: Intercom_conversation_parts {
   sql_on: ${Intercom_conversation_parts._sdc_source_key_id} = ${Intercom_conversations.id} ;;
 }
 
+join: intercom_derived_firstmessage {
+  relationship: many_to_one
+  sql_on:  ${intercom_derived_firstmessage._sdc_source_key_id} = ${Intercom_conversations.id}  ;;
+}
+
 }
