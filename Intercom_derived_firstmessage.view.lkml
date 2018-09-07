@@ -68,7 +68,7 @@ ORDER BY secondstofirstmessage ASC ;;
 
   measure: avg_seconds_to_first_message {
     type: average
-    sql: ${TABLE}.seconds_to_first_message ;;
+    sql: ${seconds_to_first_message} ;;
   }
 
 
