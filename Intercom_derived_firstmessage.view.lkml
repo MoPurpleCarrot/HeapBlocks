@@ -61,14 +61,9 @@ ORDER BY secondstofirstmessage ASC ;;
     sql:  ${TABLE}.first_message ;;
   }
 
-  dimension:  secondstofirstmessage{
+  dimension:  seconds_to_first_message {
     type:  number
     sql:${TABLE}.secondstofirstmessage ;;
-  }
-
-  measure: seconds_to_first_message {
-    type:  date_second
-    sql: ${TABLE}.first_message  ;;
   }
 
   measure: avg_seconds_to_first_message {
