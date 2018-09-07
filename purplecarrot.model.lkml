@@ -549,6 +549,4 @@ join: Intercom_conversation_parts {
   sql_on: ${Intercom_conversation_parts._sdc_source_key_id} = ${Intercom_conversations.id} ;;
 }
 
-
-
 }

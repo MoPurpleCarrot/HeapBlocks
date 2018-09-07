@@ -1,4 +1,4 @@
-view: intercom_dervied_firstmessage {
+view: intercom_derived_firstmessage {
   derived_table: {
     sql:
     SELECT _sdc_source_key_id,
