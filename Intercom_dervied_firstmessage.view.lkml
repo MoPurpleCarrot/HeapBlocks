@@ -21,10 +21,56 @@ ORDER BY secondstofirstmessage ASC ;;
 }
 
 
+  dimension: id {
+    primary_key: yes
+    type: string
+    sql: ${TABLE}.id ;;
+  }
+
+
+
+  dimension: _sdc_source_key_id {
+    type: string
+    sql: ${TABLE}._sdc_source_key_id ;;
+  }
+
+
+  dimension: author__type {
+    type: string
+    sql: ${TABLE}.author__type ;;
+  }
+
+
+  dimension_group: created_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      hour,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: first_message {
+    type: date_time
+    sql:  ${TABLE}.first_message ;;
+  }
+
+  dimension:  secondstofirstmessage{
+    type:  number
+    sql:${TABLE}.secondstofirstmessage ;;
+  }
+
   measure: avg_seconds_to_first_message {
     type: average
     sql: ${TABLE}.first_message ;;
   }
+
 
 
 }
