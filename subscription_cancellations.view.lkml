@@ -163,21 +163,20 @@ view: subscription_cancellations {
 
     dimension: datediff_days_since_cancelled {
       type: number
-      sql:  DATEDIFF('day', ${created_date}, 'today')  ;;
+      sql:  DATEDIFF('day', ${subscription_cancellations.created_date}, ${subscriptions.winback_date})  ;;
     }
 
-    dimension: days_since_cancelled {
+
+   dimension: days_since_cancelled {
       case: {
         when: {
           sql: ${datediff_days_since_cancelled} < 30;;
           label: "30 days or less since cancelled"
         }
-
         when: {
           sql: ${datediff_days_since_cancelled} <60 AND ${datediff_days_since_cancelled} >= 30 ;;
           label: "30 to 60 days since cancelled"
         }
-
         when: {
           sql:  ${datediff_days_since_cancelled} >= 60 AND ${datediff_days_since_cancelled} < 90 ;;
           label: "60 to 90 days since cancelled"
@@ -191,12 +190,9 @@ view: subscription_cancellations {
           sql:  ${datediff_days_since_cancelled} >= 180;;
           label: "6 months or greater since cancelled"
         }
-
-
       }
-
-
     }
+
 
 
 
