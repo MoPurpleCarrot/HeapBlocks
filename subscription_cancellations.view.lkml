@@ -189,7 +189,7 @@ view: subscription_cancellations {
 
         when: {
           sql:  ${datediff_days_since_cancelled} >= 180;;
-          label: "6 months or greater sicne cancelled"
+          label: "6 months or greater since cancelled"
         }
 
 
