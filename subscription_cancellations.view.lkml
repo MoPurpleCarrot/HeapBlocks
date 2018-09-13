@@ -183,13 +183,13 @@ view: subscription_cancellations {
     # 60-90 day
     dimension: 60to90_days_since_since_cancelled {
       type: yesno
-      sql: 60 <= ${days_since_cancelled} < 90 ;;
+      sql: ${days_since_cancelled} >= 60 AND ${days_since_cancelled} < 90 ;;
     }
 
     # 90-180 day
     dimension: 90to180_days_since_since_cancelled {
       type: yesno
-      sql: 90 <= ${days_since_cancelled} < 180 ;;
+      sql: ${days_since_cancelled} >= 90 AND ${days_since_cancelled} < 180 ;;
     }
 
     # 180+ day
