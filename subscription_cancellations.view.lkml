@@ -163,13 +163,39 @@ view: subscription_cancellations {
 
     dimension: days_since_cancelled {
       type: number
-      sql:  DATEDIFF('day','today',${created_date})  ;;
+      sql:  DATEDIFF('day', ${created_date}, 'today')  ;;
     }
 
     # 30 day
-    dimension: less_than_30_days_since {
+    dimension: less_than_30_days_since_cancelled {
       type: yesno
-      sql: ${days_since_cancelled} <= 30 ;;
+      sql: ${days_since_cancelled} < 30 ;;
+    }
+
+
+
+    # 30-60 day
+    dimension: 30to60_days_since_since_cancelled {
+      type: yesno
+      sql: 30 <= ${days_since_cancelled} < 60 ;;
+    }
+
+    # 60-90 day
+    dimension: 60to90_days_since_since_cancelled {
+      type: yesno
+      sql: 60 <= ${days_since_cancelled} < 90 ;;
+    }
+
+    # 90-180 day
+    dimension: 90to180_days_since_since_cancelled {
+      type: yesno
+      sql: 90 <= ${days_since_cancelled} < 180 ;;
+    }
+
+    # 180+ day
+    dimension: greater_than_6months_since_since_cancelled {
+      type: yesno
+      sql:  ${days_since_cancelled} >= 180 ;;
     }
 
 
