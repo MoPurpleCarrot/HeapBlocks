@@ -158,4 +158,19 @@ view: subscription_cancellations {
     type: count
     drill_fields: [id]
   }
+
+
+
+    dimension: days_since_cancelled {
+      type: number
+      sql:  DATEDIFF('day','today',${created_date})  ;;
+    }
+
+    # 30 day
+    dimension: less_than_30_days_since {
+      type: yesno
+      sql: ${days_since_cancelled} <= 30 ;;
+    }
+
+
 }
