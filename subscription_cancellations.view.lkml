@@ -161,42 +161,43 @@ view: subscription_cancellations {
 
 
 
-    dimension: days_since_cancelled {
+    dimension: days_since_cancelled_count {
       type: number
       sql:  DATEDIFF('day', ${created_date}, 'today')  ;;
     }
 
-    # 30 day
-    dimension: 30_days_or_less_since_cancelled {
-      type: yesno
-      sql: ${days_since_cancelled} < 30 ;;
+    dimension: days_since_cancelled {
+      case: {
+        when: {
+          sql: ${days_since_cancelled_count} < 30;;
+          label: "30 days or less since cancelled"
+        }
+
+        when: {
+          sql: ${days_since_cancelled_count} <60 AND ${days_since_cancelled_count} >= 30 ;;
+          label: "30 to 60 days since cancelled"
+        }
+
+        when: {
+          sql:  ${days_since_cancelled_count} >= 60 AND ${days_since_cancelled_count} < 90 ;;
+          label: "60 to 90 days since cancelled"
+        }
+        when: {
+          sql: ${days_since_cancelled_count} >= 90 AND ${days_since_cancelled_count} < 180 ;;
+          label: "3 to 6 months since cancelled"
+        }
+
+        when: {
+          sql:  ${days_since_cancelled_count} >= 180;;
+          label: "6 months or greater sicne cancelled"
+        }
+
+
+      }
+
+
     }
 
-
-
-    # 30-60 day
-    dimension: 30to60_days_since_since_cancelled {
-      type: yesno
-      sql: ${days_since_cancelled} < 60 AND ${days_since_cancelled} >= 30 ;;
-    }
-
-    # 60-90 day
-    dimension: 60to90_days_since_since_cancelled {
-      type: yesno
-      sql: ${days_since_cancelled} >= 60 AND ${days_since_cancelled} < 90 ;;
-    }
-
-    # 90-180 day
-    dimension: 90to180_days_since_since_cancelled {
-      type: yesno
-      sql: ${days_since_cancelled} >= 90 AND ${days_since_cancelled} < 180 ;;
-    }
-
-    # 180+ day
-    dimension: 6months_or_greater_since_since_cancelled {
-      type: yesno
-      sql:  ${days_since_cancelled} >= 180 ;;
-    }
 
 
 }
