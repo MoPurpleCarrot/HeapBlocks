@@ -224,7 +224,7 @@ view: subscriptions {
     case: {
 
       when: {
-        sql:  ${TABLE}.winback_coupon = 'pcsum18' ;;
+        sql:  ${TABLE}.winback_coupon = 'pcsum18'OR ${TABLE}.winback_coupon = 'PCFALL18' ;;
         label: "direct mail"
       }
       when: {
