@@ -207,4 +207,87 @@ view: credit_transactions {
     type: count
     drill_fields: [id, source_id, created_date, amount, credit_reason_bucket, cx_reason]
   }
+
+
+  dimension: CX_rep_name {
+    case: {
+
+      when: {
+        sql: ${TABLE}.admin_id = '411053'  ;;
+        label: "Bond"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '606964'  ;;
+        label: "de Bourmont"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '134248'  ;;
+        label: "Cottle"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '606965'  ;;
+        label: "Gattoni"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '320390'  ;;
+        label: "Gendreau"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '568812'  ;;
+        label: "Gloyd"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '581336'  ;;
+        label: "Maville"
+      }
+
+
+      when: {
+        sql: ${TABLE}.admin_id = '370856'  ;;
+        label: "Newcomb"
+      }
+
+
+      when: {
+        sql: ${TABLE}.admin_id = '411741'  ;;
+        label: "Root"
+      }
+
+
+      when: {
+        sql: ${TABLE}.admin_id = '454797'  ;;
+        label: "Spencer"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '140588'  ;;
+        label: "Tarbox"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '401679'  ;;
+        label: "Tarquinio"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '591647'  ;;
+        label: "Yamaguchi"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '463607'  ;;
+        label: "Yono"
+      }
+
+
+    }
+  }
+
+
 }
