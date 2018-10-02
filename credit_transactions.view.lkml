@@ -218,13 +218,13 @@ view: credit_transactions {
       }
 
       when: {
-        sql: ${TABLE}.admin_id = '606964'  ;;
-        label: "de Bourmont"
+        sql: ${TABLE}.admin_id = '134248'  ;;
+        label: "Cottle"
       }
 
       when: {
-        sql: ${TABLE}.admin_id = '134248'  ;;
-        label: "Cottle"
+        sql: ${TABLE}.admin_id = '606964'  ;;
+        label: "de Bourmont"
       }
 
       when: {
