@@ -309,6 +309,42 @@ view: orders {
     }
   }
 
+  measure: CC_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "3"}
+    filters: {
+      field: status
+      value: "3"
+    }
+  }
+
+  measure: QE_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "4"}
+    filters: {
+      field: status
+      value: "3"
+    }
+  }
+
+  measure: HP_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "5"}
+    filters: {
+      field: status
+      value: "3"
+    }
+  }
+
   measure: admin_cancel_count {
     type: count
     drill_fields: [detail*]
