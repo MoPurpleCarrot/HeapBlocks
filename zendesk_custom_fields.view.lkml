@@ -338,6 +338,11 @@ view: zendesk_custom_fields {
     sql: ${TABLE}.fedex_claim_damage_detail ;;
   }
 
+  dimension: user_experience {
+    type: string
+    sql: ${TABLE}.user_experience ;;
+  }
+
     set: detail {
       fields: [
         _sdc_source_key_id,
