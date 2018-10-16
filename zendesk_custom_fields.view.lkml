@@ -181,6 +181,12 @@ view: zendesk_custom_fields {
         FROM zendesk.tickets__custom_fields
         WHERE id = 24160883) kitting_partner
         on ticket_id._sdc_source_key_id = kitting_partner._sdc_source_key_id
+
+        left join
+        (SELECT _sdc_source_key_id, value as user_experience
+        FROM zendesk.tickets__custom_fields
+        WHERE id = 24249023) user_experience
+        on ticket_id._sdc_source_key_id = user_experience._sdc_source_key_id
                ;;
 
     # persist_with: batch_date_update
