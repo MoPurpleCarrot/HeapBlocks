@@ -5,7 +5,7 @@ view: zendesk_custom_fields {
         ingredient_issue_type_1, ingredient_issue_detail_1, ingredient_issue_type_2, ingredient_issue_detail_2, ingredient_issue_type_3, ingredient_issue_detail_3,
         shipping_issue_type_1, shipping_issue_detail_1, shipping_issue_type_2, shipping_issue_detail_2,
         ontrac_tracking_number, ontrac_claim_reason, lasership_tracking_number, lasership_claim_reason, fedex_tracking_number, fedex_claim_reason, fedex_claim_damage_detail,
-        kitting_partner from
+        kitting_partner, user_experience from
 
         (select distinct _sdc_source_key_id FROM zendesk.tickets__custom_fields) ticket_id
 
