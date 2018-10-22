@@ -219,9 +219,9 @@ view: Intercom_conversations {
     sql: datediff( 'second', ${created_raw}, ${subscriptions.registered_at_raw}) ;;
   }
 
-  dimension: Accountcreateddate_minus_chatdate {
+  dimension: Accountcreateddate_minus_chatdate_seconds {
     type: number
-    sql: datediff( 'day', ${created_date}, ${users.created_date}) ;;
+    sql: datediff( 'second', ${created_raw}, ${users.created_raw}) ;;
   }
 
 
