@@ -194,6 +194,11 @@ explore: users {
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
 
+  join: subscription_order_num_derrived {
+    relationship: one_to_one
+    sql_on: ${subscription_order_num_derrived.subscriptions_id} = ${subscriptions.id} ;;
+  }
+
   join: scheduled_menus {
     relationship: many_to_one
     sql_on: ${scheduled_menus.subscription_id} =  ${subscriptions.id} ;;
