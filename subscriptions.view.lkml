@@ -92,6 +92,7 @@ view: subscriptions {
           WHEN ${status_code} = 4 THEN 'Skipped'
           WHEN ${status_code} = 5 THEN 'Suspended'
           WHEN ${status_code} = 6 THEN 'Force Skip'
+          WHEN ${status_code} = 7 THEN 'Returning'
           ELSE NULL
           END
           ;;
