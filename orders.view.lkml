@@ -177,6 +177,7 @@ view: orders {
           WHEN ${fulfillment_status_code} = 4 THEN 'Cancelled'
           WHEN ${fulfillment_status_code} = 5 THEN 'Suspended'
           WHEN ${fulfillment_status_code} = 6 THEN 'Admin Cancelled'
+          WHEN ${fulfillment_status_code} = 7 THEN 'Returning'
           ELSE NULL
           END
           ;;
