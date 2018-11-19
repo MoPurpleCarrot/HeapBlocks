@@ -218,9 +218,6 @@ view: subscriptions {
     drill_fields: [detail*]
   }
 
-
-
-
   dimension: clean_winback_utm_source{
     case: {
 
@@ -257,15 +254,21 @@ view: subscriptions {
         sql: ${TABLE}.winback_utm_source = 'bingb' ;;
         label: "bing branded"
       }
-
-
-
     }
   }
 
 
+  dimension_group: returning_status_start_at {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.returning_status_start_at ;;
+  }
 
-
+  dimension_group: returning_reactivation_on {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.returning_reactivation_on ;;
+  }
 
 
 
