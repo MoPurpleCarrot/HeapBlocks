@@ -271,7 +271,10 @@ view: subscriptions {
   }
 
 
-
+  dimension: Returning_weeks{
+    type: number
+    sql: datediff( 'week',${returning_status_start_at_date}, ${returning_reactivation_on_date}) ;;
+  }
 
 
 }
