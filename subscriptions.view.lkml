@@ -273,7 +273,7 @@ view: subscriptions {
 
   dimension: Returning_weeks{
     type: number
-    sql: datediff( 'week',${returning_status_start_at_week}, ${returning_reactivation_on_week}) ;;
+    sql: datediff('week',${returning_status_start_at_week}, ${returning_reactivation_on_week}) ;;
   }
 
 
