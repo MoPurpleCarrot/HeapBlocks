@@ -212,6 +212,20 @@ view: subscriptions {
     sql: ${TABLE}.winback_utm_campaign ;;
   }
 
+  dimension: extra_dinners {
+    type: number
+    sql: ${TABLE}.extra_dinners ;;
+  }
+
+  dimension: extra_lunch {
+    type: number
+    sql: ${TABLE}.extra_lunch ;;
+  }
+
+  dimension: extra_breakfast {
+    type: number
+    sql: ${TABLE}.extra_breakfast ;;
+  }
 
   measure: count {
     type: count
@@ -269,7 +283,6 @@ view: subscriptions {
     timeframes: [time, date, week, month]
     sql: ${TABLE}.returning_reactivation_on ;;
   }
-
 
   dimension: Returning_weeks{
     type: number
