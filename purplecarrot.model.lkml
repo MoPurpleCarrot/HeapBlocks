@@ -107,7 +107,7 @@ explore: subscriptions {
   }
 
   join: shipping_addresses {
-    relationship: one_to_one
+    relationship: one_to_many
     sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
   }
 
@@ -428,7 +428,7 @@ explore: credit_transactions{
   }
 
   join: shipping_addresses {
-    relationship: one_to_one
+    relationship: one_to_many
     sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
   }
 }
@@ -462,6 +462,11 @@ explore: refunds {
   join: subscriptions {
     relationship: many_to_one
     sql_on: ${orders.subscription_id}=${subscriptions.id} ;;
+  }
+
+  join: shipping_addresses {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
   }
 
   join: users {
