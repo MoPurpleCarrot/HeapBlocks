@@ -456,7 +456,7 @@ explore: refunds {
 
   join: orders {
     relationship: one_to_one
-    sql_on: ${refunds.refundable_id}_id}=${orders.id} ;;
+    sql_on: ${refunds.refundable_id}=${orders.id} ;;
   }
 
   join: subscriptions {
