@@ -292,6 +292,28 @@ view: refunds {
           label: "Yono"
         }
 
+        when: {
+          sql: ${TABLE}.admin_id = '11200'  ;;
+          label: "Deanna"
+        }
+
+
+        when: {
+          sql: ${TABLE}.admin_id = '619043'  ;;
+          label: "Longo"
+        }
+
+        when: {
+          sql: ${TABLE}.admin_id = '630814'  ;;
+          label: "Abi-Faraj"
+        }
+
+        when: {
+          sql: ${TABLE}.admin_id = '650495'  ;;
+          label: "Orcutt"
+        }
+
+
 
       }
     }
