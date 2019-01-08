@@ -13,6 +13,9 @@ view: user_facts {
       ON users.id = subscriptions.user_id
       LEFT JOIN heroku_postgres.orders as orders
       ON subscriptions.id = orders.subscription_id
+
+      WHERE orders.status = 3
+
       GROUP BY 1
        ;;
 #       sql_trigger_value: select current_date ;;
