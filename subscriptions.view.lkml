@@ -109,7 +109,7 @@ view: subscriptions {
           WHEN ${account_designation} = 1 THEN 'Employee'
           WHEN ${account_designation} = 2 THEN 'Comp'
           WHEN ${account_designation} = 3 THEN 'VIP'
-          ELSE NULL
+          ELSE 'Standard'
           END
           ;;
   }
