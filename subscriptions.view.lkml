@@ -105,7 +105,7 @@ view: subscriptions {
 
   dimension: account_designation_bucket {
     type: string
-    sql: CASE WHEN ${account_designation}_code} = 0 THEN 'Standard'
+    sql: CASE WHEN ${account_designation} = 0 THEN 'Standard'
           WHEN ${account_designation} = 1 THEN 'Employee'
           WHEN ${account_designation} = 2 THEN 'Comp'
           WHEN ${account_designation} = 3 THEN 'VIP'
