@@ -46,6 +46,7 @@ view: orders {
 
   dimension: cancelled_reason {
     type: string
+    hidden:  yes
     sql: ${TABLE}.cancelled_reason ;;
   }
 
@@ -115,6 +116,7 @@ view: orders {
 
   dimension: partner_label {
     type: string
+    hidden:  yes
     sql: ${TABLE}.partner_label ;;
   }
 
@@ -146,6 +148,7 @@ view: orders {
 
   dimension: billing_status_code {
     type: number
+    hidden:  yes
     sql: ${TABLE}.billing_status ;;
   }
 
@@ -165,6 +168,7 @@ view: orders {
 
   dimension: fulfillment_status_code {
     type: number
+    hidden:  yes
     sql: ${TABLE}.fulfillment_status ;;
   }
 
@@ -235,6 +239,7 @@ view: orders {
 
   dimension: is_through_partner {
     type: yesno
+    hidden:  yes
     sql: ${TABLE}.through_partner ;;
   }
 

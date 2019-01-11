@@ -80,6 +80,7 @@ view: subscriptions {
 
   dimension: preselected_meal_portfolio_plan_2018 {
     type: string
+    hidden:  yes
     sql: ${TABLE}.preselected_new_plan ;;
   }
 
@@ -100,6 +101,7 @@ view: subscriptions {
 
   dimension: account_designation {
     type: number
+    hidden:  yes
     sql: ${TABLE}.account_designation ;;
   }
 
