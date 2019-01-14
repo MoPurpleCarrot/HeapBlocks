@@ -131,6 +131,18 @@ view: orders {
     sql: ${TABLE}.price ;;
   }
 
+  dimension: plan_price {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.plan_price ;;
+  }
+
+  dimension: extras_price {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.extras_price ;;
+  }
+
   dimension: shipping_carrier {
     type: string
     sql: ${TABLE}.shipping_carrier ;;
