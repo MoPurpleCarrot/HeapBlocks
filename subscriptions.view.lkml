@@ -219,14 +219,14 @@ view: subscriptions {
     sql: ${TABLE}.extra_dinners ;;
   }
 
-  dimension: extra_lunch {
+  dimension: extra_lunches {
     type: number
-    sql: ${TABLE}.extra_lunch ;;
+    sql: ${TABLE}.extra_lunches ;;
   }
 
-  dimension: extra_breakfast {
+  dimension: extra_breakfasts {
     type: number
-    sql: ${TABLE}.extra_breakfast ;;
+    sql: ${TABLE}.extra_breakfasts ;;
   }
 
   measure: count {
