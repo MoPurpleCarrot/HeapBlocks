@@ -259,6 +259,11 @@ view: credit_transactions {
         label: "Root"
       }
 
+      when: {
+        sql: ${TABLE}.admin_id = '27245'  ;;
+        label: "Sheehan"
+      }
+
 
       when: {
         sql: ${TABLE}.admin_id = '454797'  ;;
