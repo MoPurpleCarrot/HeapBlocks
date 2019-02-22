@@ -367,6 +367,13 @@ view: tickets {
     sql: ${id} ;;
   }
 
+  dimension: Ticketdate_minus_canceldate{
+    type: number
+    sql: datediff( 'day', ${users.cancelled_date}, ${created_date}) ;;
+  }
+
+
+
   dimension: cx_associate_name {
     case:{
       when:{
