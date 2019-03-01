@@ -224,6 +224,11 @@ view: Intercom_conversations {
     sql: datediff( 'second', ${created_raw}, ${users.created_raw}) ;;
   }
 
+  dimension: Livechatdate_minus_canceldate{
+    type: number
+    sql: datediff( 'day', ${users.cancelled_date}, ${created_date}) ;;
+  }
+
 
   dimension: Rep {
     case: {
@@ -296,20 +301,6 @@ view: Intercom_conversations {
     sql: ${time_to_first_response} ;;
     }
 
-
-
-
-
-
-
-  dimension: time_to_first_response_test {
-    case: {
-      when: {
-        sql:${TABLE}.Intercom_conversation_parts.author__type = 'admin', MIN${Convoccreated_minus_response} ;;
-
-      }
-    }
-  }
 
 
 
