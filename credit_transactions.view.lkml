@@ -312,6 +312,25 @@ view: credit_transactions {
         label: "Orcutt"
       }
 
+      when: {
+        sql: ${TABLE}.admin_id = '726381'  ;;
+        label: "Paschal"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '739954'  ;;
+        label: "Altman"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '731691'  ;;
+        label: "Rees"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '726666'  ;;
+        label: "Reis"
+      }
 
     }
   }
