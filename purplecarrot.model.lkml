@@ -209,6 +209,11 @@ explore: users {
     sql_on: ${welcome_surveys.user_id} = ${users.id} ;;
   }
 
+  join: skip_menu_surveys {
+    relationship:  many_to_one
+    sql_on: ${skip_menu_surveys.user_id}=${user_facts.id} ;;
+  }
+
   join: shipping_addresses {
     relationship: one_to_many
     sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
@@ -390,7 +395,8 @@ explore: heap_sessions {}
 
 explore: facebook_ads_insights {}
 
-explore: skip_menu_surveys {}
+explore: skip_menu_surveys {
+}
 
 explore: credit_transactions{
 
