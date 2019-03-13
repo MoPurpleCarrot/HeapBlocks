@@ -226,6 +226,12 @@ view: users {
     sql: ${TABLE}.paused_at ;;
   }
 
+  dimension_group: suspended {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.suspended_at ;;
+  }
+
   dimension: provider {
     type: string
     sql: ${TABLE}.provider ;;
