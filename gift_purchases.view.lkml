@@ -150,6 +150,11 @@ view: gift_purchases {
     sql: ${TABLE}.stripe_charge_id ;;
   }
 
+  dimension: order_of_invite {
+    type: number
+    sql: ${TABLE}.order_of_invite ;;
+  }
+
   dimension: stripe_token {
     type: string
     sql: ${TABLE}.stripe_token ;;

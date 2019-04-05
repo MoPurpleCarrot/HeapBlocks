@@ -289,6 +289,11 @@ view: users {
     sql: ${TABLE}.role ;;
   }
 
+  dimension: feature_flags {
+    type: string
+    sql: ${TABLE}.feature_flags ;;
+  }
+
   dimension: sign_in_count {
     type: number
     sql: ${TABLE}.sign_in_count ;;

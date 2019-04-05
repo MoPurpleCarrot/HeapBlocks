@@ -224,6 +224,19 @@ explore: users {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+  join: order_recipes {
+    relationship: one_to_many
+    sql_on: ${orders.id} = ${order_recipes.order_id}
+    type:inner;;
+  }
+
+  join: recipes {
+    relationship: many_to_one
+    sql_on: ${order_recipes.recipe_id} = ${recipes.id}
+      type:inner;;
+  }
+
+
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders.coupon_id} = coupons.id ;;
