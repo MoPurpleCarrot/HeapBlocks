@@ -262,6 +262,21 @@ view: recipes {
     hidden: yes
   }
 
+  dimension: meal_type_code {
+    type: number
+    sql: ${TABLE}.meal_type ;;
+  }
+
+  dimension: meal_type {
+    type: string
+    sql:  CASE WHEN ${meal_type_code} = 0 THEN 'Dinner'
+          WHEN ${meal_type_code} = 1 THEN 'Breakfast'
+          WHEN ${meal_type_code} = 2 THEN 'Lunch'
+          ELSE NULL
+          END
+          ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, menu_items.count]
