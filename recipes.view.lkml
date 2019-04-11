@@ -55,6 +55,17 @@ view: recipes {
     sql: ${calories} ;;
   }
 
+  measure: average_calories {
+    type: average
+    sql: ${calories} ;;
+  }
+
+  measure: average_calories_unique_recipe {
+    type: average_distinct
+    sql_distinct_key: ${id} ;;
+    sql: ${calories} ;;
+  }
+
   dimension: carbs {
     type: number
     sql: ${TABLE}.carbs ;;
@@ -65,6 +76,16 @@ view: recipes {
     sql: ${carbs} ;;
   }
 
+  measure: average_carbs {
+    type: average
+    sql: ${carbs} ;;
+  }
+
+  measure: average_carbs_unique_recipe {
+    type: average_distinct
+    sql_distinct_key: ${id} ;;
+    sql: ${carbs} ;;
+  }
 
   dimension: chef_id {
     type: number
@@ -95,6 +116,17 @@ view: recipes {
 
   measure: total_fat {
     type: sum
+    sql: ${fat} ;;
+  }
+
+  measure: average_fat {
+    type: average
+    sql: ${fat} ;;
+  }
+
+  measure: average_fat_unique_recipe {
+    type: average_distinct
+    sql_distinct_key: ${id} ;;
     sql: ${fat} ;;
   }
 
@@ -165,6 +197,17 @@ view: recipes {
 
   measure: total_protein {
     type: sum
+    sql: ${protein} ;;
+  }
+
+  measure: average_protein {
+    type: average
+    sql: ${protein} ;;
+  }
+
+  measure: average_protein_unique_recipe {
+    type: average_distinct
+    sql_distinct_key: ${id} ;;
     sql: ${protein} ;;
   }
 
