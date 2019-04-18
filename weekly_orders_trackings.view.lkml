@@ -180,23 +180,23 @@ view: weekly_orders_trackings {
     drill_fields: [id, region_name]
   }
 
-  measure: average_QE {
-    type: average
+  measure: sum_QE {
+    type: sum
     sql: ${TABLE}.quick_easy ;;
   }
 
-  measure: average_CC {
-    type: average
+  measure: sum_CC {
+    type: sum
     sql: ${TABLE}.chefs_choice ;;
   }
 
-  measure: average_HP {
-    type: average
+  measure: sum_HP {
+    type: sum
     sql: ${TABLE}.high_protein ;;
   }
 
-  measure: average_TB12 {
-    type: average
+  measure: sum_TB12 {
+    type: sum
     sql: ${TABLE}.tb_12 ;;
   }
 }
