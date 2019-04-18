@@ -125,9 +125,20 @@ view: weekly_orders_trackings {
     sql: ${TABLE}.quick_easy ;;
   }
 
+  dimension: region_name_code {
+    type: string
+    hidden: yes
+    sql: ${TABLE}.region_name ;;
+  }
+
   dimension: region_name {
     type: string
-    sql: ${TABLE}.region_name ;;
+    sql:  CASE WHEN ${region_name_code} = 'get_fresh_las_vegas' THEN '1. Get Fresh'
+    WHEN ${region_name_code} = 'spezia_parsippany' THEN '2. ShipOnce'
+    WHEN ${region_name_code} = 'fdm_chicago' THEN '3. FDM'
+    ELSE NULL
+    END
+    ;;
   }
 
   dimension: six_servings {
