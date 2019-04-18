@@ -168,4 +168,24 @@ view: weekly_orders_trackings {
     type: count
     drill_fields: [id, region_name]
   }
+
+  measure: average_QE {
+    type: average
+    sql: ${TABLE}.quick_easy ;;
+  }
+
+  measure: average_CC {
+    type: average
+    sql: ${TABLE}.chefs_choice ;;
+  }
+
+  measure: average_HP {
+    type: average
+    sql: ${TABLE}.high_protein ;;
+  }
+
+  measure: average_TB12 {
+    type: average
+    sql: ${TABLE}.tb_12 ;;
+  }
 }
