@@ -199,4 +199,80 @@ view: weekly_orders_trackings {
     type: sum
     sql: ${TABLE}.tb_12 ;;
   }
+
+  measure: sum_6_SERV {
+    type: sum
+    sql: ${TABLE}.six_servings ;;
+  }
+
+  measure: sum_A {
+    type: sum
+    sql: ${TABLE}.meal_a ;;
+  }
+
+  measure: sum_B {
+    type: sum
+    sql: ${TABLE}.meal_b ;;
+  }
+
+  measure: sum_C {
+    type: sum
+    sql: ${TABLE}.meal_c ;;
+  }
+
+  measure: sum_D {
+    type: sum
+    sql: ${TABLE}.meal_d ;;
+  }
+
+  measure: sum_E {
+    type: sum
+    sql: ${TABLE}.meal_e ;;
+  }
+
+  measure: sum_F {
+    type: sum
+    sql: ${TABLE}.meal_f ;;
+  }
+
+  measure: sum_G {
+    type: sum
+    sql: ${TABLE}.meal_g ;;
+  }
+
+  measure: sum_H {
+    type: sum
+    sql: ${TABLE}.meal_h ;;
+  }
+
+  measure: sum_I {
+    type: sum
+    sql: ${TABLE}.meal_i ;;
+  }
+
+  measure: sum_J {
+    type: sum
+    sql: ${TABLE}.meal_j ;;
+  }
+
+  measure: sum_M {
+    type: sum
+    sql: ${TABLE}.meal_m ;;
+  }
+
+  measure: sum_N {
+    type: sum
+    sql: ${TABLE}.meal_n ;;
+  }
+
+  measure: sum_Q {
+    type: sum
+    sql: ${TABLE}.meal_q ;;
+  }
+
+  measure: sum_R {
+    type: sum
+    sql: ${TABLE}.meal_r ;;
+  }
+
 }
