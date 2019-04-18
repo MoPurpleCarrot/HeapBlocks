@@ -18,8 +18,13 @@ datagroup:batch_date_update {
 explore:heap_registration_complete {}
 explore:heap_first_session {}
 explore:heap_account_created {}
-explore:weekly_orders_trackings {}
-  label: "Order Volume Tracking"
+explore:weekly_orders_trackings {
+
+  join: menus {
+    relationship: one_to_many
+    sql_on: ${menus.id}=${weekly_orders_trackings.menu_id} ;;
+  }
+  }
 
 
 explore: heap_users{
