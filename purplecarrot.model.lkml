@@ -18,6 +18,9 @@ datagroup:batch_date_update {
 explore:heap_registration_complete {}
 explore:heap_first_session {}
 explore:heap_account_created {}
+explore:weekly_orders_trackings {}
+  label: "Order Volume Tracking"
+
 
 explore: heap_users{
   label: "Heap Attribution"
