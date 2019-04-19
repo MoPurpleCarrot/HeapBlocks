@@ -275,14 +275,24 @@ view: weekly_orders_trackings {
     sql: ${TABLE}.meal_r ;;
   }
 
-  measure: sum_box_total {
+  dimension: box_total {
     type: number
-    sql: ${TABLE}.sum_QE + ${TABLE}.sum_TB12 + ${TABLE}.sum_CC + ${TABLE}.sum_HP + ${TABLE}.sum_6_SERV ;;
+    sql: ${TABLE}.chefs_choice + ${TABLE}.tb_12 + ${TABLE}.quick_easy + ${TABLE}.high_protein + ${TABLE}.six_servings ;;
   }
 
-  measure: sum_meal_total {
+  measure: sum_box_total {
+    type: sum
+    sql: ${box_total} ;;
+  }
+
+  dimension: meal_total {
     type: number
-    sql: ${TABLE}.sum_A + ${TABLE}.sum_B + ${TABLE}.sum_C + ${TABLE}.sum_D + ${TABLE}.sum_E + ${TABLE}.sum_F + ${TABLE}.sum_G + ${TABLE}.sum_H + ${TABLE}.sum_I + ${TABLE}.sum_J + ${TABLE}.sum_M + ${TABLE}.sum_N + ${TABLE}.sum_Q + ${TABLE}.sum_R ;;
+    sql: ${TABLE}.meal_a + ${TABLE}.meal_b + ${TABLE}.meal_c + ${TABLE}.meal_d + ${TABLE}.meal_e + ${TABLE}.meal_f + ${TABLE}.meal_g + ${TABLE}.meal_h + ${TABLE}.meal_i + ${TABLE}.meal_j + ${TABLE}.meal_m + ${TABLE}.meal_n + ${TABLE}.meal_q + ${TABLE}.meal_r;;
+  }
+
+  measure: sum_meal_total{
+    type: sum
+    sql: ${meal_total} ;;
   }
 
 }
