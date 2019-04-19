@@ -275,4 +275,14 @@ view: weekly_orders_trackings {
     sql: ${TABLE}.meal_r ;;
   }
 
+  measure: sum_box_total {
+    type: number
+    sql: ${TABLE}.sum_QE + ${TABLE}.sum_TB12 + ${TABLE}.sum_CC + ${TABLE}.sum_HP + ${TABLE}.sum_6_SERV ;;
+  }
+
+  measure: sum_meal_total {
+    type: number
+    sql: ${TABLE}.sum_A + ${TABLE}.sum_B + ${TABLE}.sum_C + ${TABLE}.sum_D + ${TABLE}.sum_E + ${TABLE}.sum_F + ${TABLE}.sum_G + ${TABLE}.sum_H + ${TABLE}.sum_I + ${TABLE}.sum_J + ${TABLE}.sum_M + ${TABLE}.sum_N + ${TABLE}.sum_Q + ${TABLE}.sum_R ;;
+  }
+
 }
