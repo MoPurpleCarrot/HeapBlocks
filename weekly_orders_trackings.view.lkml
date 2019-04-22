@@ -295,4 +295,34 @@ view: weekly_orders_trackings {
     sql: ${meal_total} ;;
   }
 
+  dimension: plan_meal_total {
+    type: number
+    sql: (${TABLE}.chefs_choice + ${TABLE}.quick_easy + ${TABLE}.high_protein + ${TABLE}.tb_12 ) * 3 + ${TABLE}.six_servings * 2 ;;
+  }
+
+  dimension: extra_meal_total {
+    type: number
+    sql: ${meal_total} - ${plan_meal_total} ;;
+  }
+
+  dimension: large_box_total {
+    type: number
+    sql: ${extra_meal_total} / 1.45 ;;
+  }
+
+  measure: sum_large_box_total{
+    type: sum
+    sql: ${large_box_total} ;;
+  }
+
+  dimension: small_box_total {
+    type: number
+    sql: (${TABLE}.chefs_choice + ${TABLE}.quick_easy + ${TABLE}.high_protein) - ${large_box_total}  ;;
+  }
+
+  measure: sum_small_box_total{
+    type: sum
+    sql: ${small_box_total} ;;
+  }
+
 }
