@@ -151,6 +151,11 @@ view: weekly_orders_trackings {
     sql: ${TABLE}.tb_12 ;;
   }
 
+  dimension: gluten_free {
+    type: number
+    sql: ${TABLE}.two_person_gluten_free ;;
+  }
+
   dimension: total_meals_count {
     type: number
     sql: ${TABLE}.total_meals_count ;;
@@ -203,6 +208,11 @@ view: weekly_orders_trackings {
   measure: sum_6_SERV {
     type: sum
     sql: ${TABLE}.six_servings ;;
+  }
+
+  measure: sum_gf {
+    type: sum
+    sql: ${gluten_free} ;;
   }
 
   measure: sum_A {
