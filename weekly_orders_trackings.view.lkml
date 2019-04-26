@@ -153,7 +153,7 @@ view: weekly_orders_trackings {
 
   dimension: gluten_free {
     type: number
-    sql: ${TABLE}.two_person_gluten_free ;;
+    sql: 0 ;;
   }
 
   dimension: total_meals_count {
