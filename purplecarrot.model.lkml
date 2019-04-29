@@ -234,16 +234,13 @@ explore: users {
 
   join: order_recipes {
     relationship: one_to_many
-    sql_on: ${orders.id} = ${order_recipes.order_id}
-    type:inner;;
+    sql_on: ${orders.id} = ${order_recipes.order_id};;
   }
 
   join: recipes {
     relationship: many_to_one
-    sql_on: ${order_recipes.recipe_id} = ${recipes.id}
-      type:inner;;
+    sql_on: ${order_recipes.recipe_id} = ${recipes.id};;
   }
-
 
   join: coupons {
     relationship: many_to_one
