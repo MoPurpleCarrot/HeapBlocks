@@ -307,7 +307,7 @@ view: users {
 
   dimension: cancel_paused_max {
     type: date
-    sql: max(${paused_date},${cancelled_date}) ;;
+    sql: if(${paused_date}>${cancelled_date},${paused_date},${cancelled_date}) ;;
   }
 
   dimension: state {
