@@ -134,6 +134,7 @@ view: weekly_orders_trackings {
   dimension: region_name {
     type: string
     sql:  CASE WHEN ${region_name_code} = 'get_fresh_las_vegas' THEN '1. Get Fresh'
+    WHEN ${region_name_code} = 'shiponce_parsippany' THEN '2. ShipOnce'
     WHEN ${region_name_code} = 'spezia_parsippany' THEN '2. ShipOnce'
     WHEN ${region_name_code} = 'fdm_chicago' THEN '3. FDM'
     ELSE NULL
