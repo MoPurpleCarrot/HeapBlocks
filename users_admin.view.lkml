@@ -305,11 +305,6 @@ view: users {
     sql: ${TABLE}.skipped_at ;;
   }
 
-  dimension: cancel_paused_max {
-    type: date
-    sql: if(${paused_date}>${cancelled_date},${paused_date},${cancelled_date}) ;;
-  }
-
   dimension: state {
     type: string
     group_label: "Location"
