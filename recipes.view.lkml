@@ -281,4 +281,37 @@ view: recipes {
     type: count
     drill_fields: [id, menu_items.count]
   }
+
+  measure: count_dinner_meals {
+    type: count
+    filters:{
+      field: meal_type_code
+      value: "0"
+    }
+  }
+
+  measure: count_lunch_meals {
+    type: count
+    filters:{
+      field: meal_type_code
+      value: "2"
+    }
+  }
+
+  measure: count_breakfast_meals {
+    type: count
+    filters:{
+      field: meal_type_code
+      value: "1"
+    }
+  }
+
+  measure: count_brunch_meals {
+    type: count
+    filters:{
+      field: meal_type_code
+      value: "1, 2"
+    }
+  }
+
 }

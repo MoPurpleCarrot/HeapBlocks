@@ -469,6 +469,7 @@ view: orders {
     sql: ${total_revenue_60day}/NULLIF(${users.count},0);;
   }
 
+
   dimension: is_90day_since_created {
     type: yesno
     sql: ${days_since_created} <= 90 ;;
@@ -516,7 +517,6 @@ view: orders {
     sql: ${Orderdate_minus_winbackdate} >= 0 ;;
   }
 
-
   measure: count_total_billed_post_winback {
     type: count
     drill_fields: [detail*]
@@ -530,13 +530,11 @@ view: orders {
     }
   }
 
-
   dimension: user_with_winback {
     type: yesno
     hidden: yes
     sql: ${subscriptions.winback_date} IS NOT NULL ;;
   }
-
 
   measure: average_orders_post_winback {
     type: number
