@@ -59,7 +59,7 @@ view: user_facts {
 
   dimension: days_step_2_to_3 {
     type: number
-    sql: DATEDIFF(day, ${TABLE}.created, ${TABLE}.registered_at);;
+    sql: DATEDIFF(day, ${TABLE}.created, subscriptions.registered_at);;
   }
 
   dimension: under_16_days_step_2_to_3 {
