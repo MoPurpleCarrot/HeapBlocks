@@ -193,6 +193,11 @@ view: subscriptions {
     sql: dateadd('day','4', ${winback_date}) ;;
   }
 
+  dimension_group: registered_plus4 {
+    type: time
+    hidden:  yes
+    sql: dateadd('day','4', ${registered_at_date}) ;;
+  }
 
   dimension: winback_coupon {
     type: string
