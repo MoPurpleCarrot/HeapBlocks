@@ -81,6 +81,11 @@ view: orders {
     sql: DATEDIFF('week', ${subscriptions.registered_plus4_date}, ${delivery_date}) ;;
   }
 
+  dimension: months_after_registered {
+    type: number
+    sql: DATEDIFF('month', ${subscriptions.registered_plus4_date}, ${delivery_date}) ;;
+  }
+
   dimension: winback_week_num {
     type: number
     sql: DATEDIFF('week', ${subscriptions.winback_plus4_date}, ${delivery_date}) ;;
