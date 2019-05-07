@@ -81,10 +81,7 @@ view: user_facts_extras {
 
   dimension: week_registered_to_extra_order{
     type: number
-    sql:
-      if round(${days_registered_to_extra_order}/7,0) < 0
-      then 0
-      else round(${days_registered_to_extra_order}/7,0)
+    sql: round(${days_registered_to_extra_order}/7,0)
       ;;
   }
 
