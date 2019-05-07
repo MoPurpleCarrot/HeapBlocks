@@ -55,7 +55,7 @@ explore: heap_users{
 
   join: user_facts {
     relationship: one_to_one
-    sql_on: ${users.id} = ${user_facts.id} ;;
+    sql_on: ${users.id} = ${user_facts.id}    ;;
   }
 
   join: email_delivered {

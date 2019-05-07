@@ -79,5 +79,10 @@ view: user_facts_extras {
     sql: DATEDIFF(day, subscriptions.registered_at, ${TABLE}.first_extras_order);;
   }
 
+  dimension: week_registered_to_extra_order{
+    type: number
+    sql: max(0,round(${days_registered_to_extra_order}/7,0)) ;;
+  }
+
 
   }
