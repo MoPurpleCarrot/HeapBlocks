@@ -143,6 +143,12 @@ view: orders {
     sql: ${TABLE}.extras_price ;;
   }
 
+  dimension: price_less_extras {
+    type: number
+    value_format_name: usd
+    sql: ${price}-${extras_price} ;;
+  }
+
   dimension: shipping_carrier {
     type: string
     sql: ${TABLE}.shipping_carrier ;;
@@ -297,6 +303,27 @@ view: orders {
     value_format_name: usd
     drill_fields: [detail*]
     sql: ${price} ;;
+  }
+
+  measure: total_plan_gross_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${plan_price} ;;
+  }
+
+  measure: total_net_revenue_less_extras {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${price_less_extras} ;;
+  }
+
+  measure: total_extra_gross_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${extras_price} ;;
   }
 
   measure: total_amount_charged {
