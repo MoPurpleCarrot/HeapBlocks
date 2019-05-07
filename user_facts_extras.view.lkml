@@ -15,7 +15,7 @@ view: user_facts_extras {
       LEFT JOIN heroku_postgres.orders as orders
       ON subscriptions.id = orders.subscription_id
 
-      WHERE orders.status = 3 AND orders.extras_revenue > 0
+      WHERE orders.status = 3 AND orders.extras_price > 0
 
       GROUP BY 1
        ;;
