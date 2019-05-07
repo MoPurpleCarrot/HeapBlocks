@@ -74,5 +74,10 @@ view: user_facts_extras {
       sql: ${TABLE}.last_extras_order_id ;;
     }
 
+  dimension: days_registered_to_extra_order {
+    type: number
+    sql: DATEDIFF(day, ${TABLE}.registered_at, ${TABLE}.first_extras_order);;
+  }
+
 
   }
