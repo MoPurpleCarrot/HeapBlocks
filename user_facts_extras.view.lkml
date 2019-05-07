@@ -76,7 +76,7 @@ view: user_facts_extras {
 
   dimension: days_registered_to_extra_order {
     type: number
-    sql: DATEDIFF(day, ${TABLE}.registered_at, ${TABLE}.first_extras_order);;
+    sql: DATEDIFF(day, subscriptions.registered_at, ${TABLE}.first_extras_order);;
   }
 
 
