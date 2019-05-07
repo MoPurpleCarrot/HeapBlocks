@@ -272,6 +272,11 @@ explore: users {
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
 
+  join: user_facts_extras {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts_extras.id} ;;
+  }
+
   join: last_order {
     from: orders
     relationship: many_to_one
