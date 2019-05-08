@@ -233,20 +233,12 @@ view: Intercom_conversations {
   dimension: Rep {
     case: {
       when: {
-        sql: ${TABLE}.assignee__id = '2232036'  ;;
-        label: "Jessie T"
+        sql: ${TABLE}.assignee__id = '2635474'  ;;
+        label: "Moira G"
       }
       when: {
         sql: ${TABLE}.assignee__id = '2232042'  ;;
         label: "Courtney C"
-      }
-      when: {
-        sql: ${TABLE}.assignee__id = '2234323'  ;;
-        label: "Taylor N"
-      }
-      when: {
-        sql: ${TABLE}.assignee__id = '2189375'  ;;
-        label: "Laurie"
       }
       when: {
         sql: ${TABLE}.assignee__id = '2235175'  ;;
@@ -260,12 +252,50 @@ view: Intercom_conversations {
         sql: ${TABLE}.assignee__id = '2306277'  ;;
         label: "Lindey G"
       }
-
       when: {
         sql: ${TABLE}.assignee__id = '2331461'  ;;
         label: "Stephanie M"
       }
-
+      when: {
+        sql: ${TABLE}.assignee__id = '2617089'  ;;
+        label: "Yumi Y"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2676140'  ;;
+        label: "Ashley L"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2698743'  ;;
+        label: "Daniel A"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2713178'  ;;
+        label: "Sarah S"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2779654'  ;;
+        label: "Laura O"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2812063'  ;;
+        label: "Rachel R"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2958310'  ;;
+        label: "Noah"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2977996'  ;;
+        label: "Rachel R"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2997017'  ;;
+        label: "Milena"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2997017'  ;;
+        label: "Milena"
+      }
 }
 }
 
