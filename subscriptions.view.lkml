@@ -68,6 +68,8 @@ view: subscriptions {
     WHEN ${plan} = 3 THEN 'Chefs Choice'
     WHEN ${plan} = 4 THEN 'Quick and Easy'
     WHEN ${plan} = 5 THEN 'High Protein'
+    WHEN ${plan} = 6 THEN 'Six Serving'
+    WHEN ${plan} = 7 THEN 'Gluten Free'
     ELSE NULL
     END
     ;;
