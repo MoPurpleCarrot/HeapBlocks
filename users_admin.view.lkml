@@ -452,6 +452,7 @@ view: users {
           WHEN ${utm_source} = 'Organic' THEN 'Organic'
           WHEN ${utm_source} = 'pin' THEN 'Pinterest'
           WHEN ${utm_source} = 'bingb' THEN 'Bing B'
+          WHEN ${utm_source} = 'IG' THEN 'Facebook'
           WHEN ${utm_source} = '[utm_source]' THEN 'Adwords NB'
           WHEN ${utm_source} = 'affiliate' THEN 'Affiliate'
           WHEN ${utm_source} = 'adwordstb' THEN 'Adwords TB12'
