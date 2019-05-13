@@ -385,6 +385,67 @@ view: users {
     sql: ${TABLE}.utm_source ;;
   }
 
+  dimension: utm_source_bucket {
+    type: string
+    sql:  CASE WHEN ${utm_source} = 'organic' THEN 'Organic'
+          WHEN ${utm_source} = 'adwordsbranded_su' THEN 'Organic'
+          WHEN ${utm_source} = 'Facebook' THEN 'Facebook'
+          WHEN ${utm_source} = 'Adwords' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'sfm' THEN 'Share a Box'
+          WHEN ${utm_source} = 'none' THEN 'Organic'
+          WHEN ${utm_source} = 'veganbox' THEN 'AdWords NB'
+          WHEN ${utm_source} = 'adwordsplant' THEN 'AdWords NB'
+          WHEN ${utm_source} = 'Friendbuy' THEN 'Friendbuy'
+          WHEN ${utm_source} = 'adwordsvegan' THEN 'AdWords NB'
+          WHEN ${utm_source} = 'vegandelivery' THEN 'AdWords NB'
+          WHEN ${utm_source} = 'facebook' THEN 'Facebook'
+          WHEN ${utm_source} = 'adwordsbrandcoupon' THEN 'Adwords B'
+          WHEN ${utm_source} = 'adwordsbrandsite' THEN 'Adwords B'
+          WHEN ${utm_source} = 'adwordsbrandservice' THEN 'Adwords B'
+          WHEN ${utm_source} = null THEN 'Organic'
+          WHEN ${utm_source} = 'adwordsbrand_suextwm' THEN 'Adwords B'
+          WHEN ${utm_source} = 'adwordstb12tombrady' THEN 'Adwords TB12'
+          WHEN ${utm_source} = 'adwordstb12' THEN 'Adwords TB12'
+          WHEN ${utm_source} = 'veganstarted' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'adwordsbrandproduct' THEN 'Adwords B'
+          WHEN ${utm_source} = 'adwordstb12tb12' THEN 'Adwords TB12'
+          WHEN ${utm_source} = 'FOKlander' THEN 'Organic'
+          WHEN ${utm_source} = 'adwordswhole' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'veganrecipes' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'adwordsbrand_suexttb12' THEN 'Adwords B'
+          WHEN ${utm_source} = 'veganstartednew' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'adwordsbrand4extwm' THEN 'Adwords B'
+          WHEN ${utm_source} = 'adwordsbrand_suexthiw' THEN 'Adwords B'
+          WHEN ${utm_source} = 'FB_23.3a' THEN 'Facebook'
+          WHEN ${utm_source} = 'adwordssvmkextwm' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'vegetarian' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'FB_11.1a' THEN 'Facebook'
+          WHEN ${utm_source} = 'facebookad' THEN 'Facebook'
+          WHEN ${utm_source} = 'FB_16.1a' THEN 'Facebook'
+          WHEN ${utm_source} = 'adwordspbexthiw' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'FB_16.3a' THEN 'Facebook'
+          WHEN ${utm_source} = 'FB_60.8a' THEN 'Facebook'
+          WHEN ${utm_source} = 'FB_90.4a' THEN 'Facebook'
+          WHEN ${utm_source} = 'FB_7.7a' THEN 'Facebook'
+          WHEN ${utm_source} = 'emailcta' THEN 'Organic'
+          WHEN ${utm_source} = 'FB_7.8a' THEN 'Facebook'
+          WHEN ${utm_source} = 'adwordspbextwm' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'facebookads' THEN 'Facebook'
+          WHEN ${utm_source} = 'veganbox2' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'adwordstb12howext' THEN 'Adwords TB12'
+          WHEN ${utm_source} = 'F_91.4a' THEN 'Facebook'
+          WHEN ${utm_source} = 'fmbinsta' THEN 'Facebook'
+          WHEN ${utm_source} = 'FB_16.2a' THEN 'Facebook'
+          WHEN ${utm_source} = 'FB_7.16a' THEN 'Facebook'
+          WHEN ${utm_source} = 'adwordsdisp_100pb_bowl_retarg' THEN 'Adwords Display'
+          WHEN ${utm_source} = 'bluevegan' THEN 'Adwords NB'
+          WHEN ${utm_source} = 'FB_90.6a' THEN 'Facebook'
+          WHEN ${utm_source} = 'facebookads' THEN 'Facebook'
+          ELSE NULL
+          END
+          ;;
+  }
+
   measure: count {
     type: count
   }
