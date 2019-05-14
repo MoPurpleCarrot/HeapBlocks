@@ -46,19 +46,6 @@ view: users {
     sql: ${TABLE}.cancelled_at ;;
   }
 
-  dimension: is_cancelled {
-    type: yesno
-    sql: ${cancelled_raw} IS NOT NULL ;;
-  }
-
-  measure: cancelled_count {
-    type: count
-
-    filters: {
-      field: is_cancelled
-      value: "yes"
-    }
-  }
 
   dimension: weeks_as_customer {
     type: number
@@ -106,22 +93,6 @@ view: users {
 
     filters: {
       field: is_purple_carrot_employee
-      value: "yes"
-    }
-  }
-
-  dimension: is_active_customer {
-    type: yesno
-    sql: CASE WHEN ${cancelled_raw} IS NULL THEN TRUE ELSE FALSE END ;;
-  }
-
-  measure: total_active_credit {
-    type: sum
-    value_format_name: usd
-    sql: ${credit} ;;
-
-    filters: {
-      field: is_active_customer
       value: "yes"
     }
   }
