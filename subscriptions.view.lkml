@@ -94,8 +94,22 @@ view: subscriptions {
           WHEN ${status_code} = 3 THEN 'Paused'
           WHEN ${status_code} = 4 THEN 'Skipped'
           WHEN ${status_code} = 5 THEN 'Suspended'
-          WHEN ${status_code} = 6 THEN 'Force Skip'
+          WHEN ${status_code} = 6 THEN 'Delayed Start'
           WHEN ${status_code} = 7 THEN 'Returning'
+          ELSE NULL
+          END
+          ;;
+  }
+
+  dimension: active_status_bucket {
+    type: string
+    sql:  CASE WHEN ${status} = 'Active' THEN 'Active'
+          WHEN ${status} = 'Skipped' THEN 'Active'
+          WHEN ${status} = 'Returning' THEN 'Active'
+          WHEN ${status} = 'Delayed Start' THEN 'Active'
+          WHEN ${status} = 'Cancelled' THEN 'Cancelled'
+          WHEN ${status} = 'Paused' THEN 'Cancelled'
+          WHEN ${status} = 'Suspended' THEN 'Cancelled'
           ELSE NULL
           END
           ;;
