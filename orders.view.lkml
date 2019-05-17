@@ -530,6 +530,17 @@ view: orders {
     sql: ${total_revenue_90day}/NULLIF(${users.count},0);;
   }
 
+  dimension: shipping_address {
+    type: string
+    sql: ${TABLE}.shipping_address ;;
+  }
+
+
+
+
+
+
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
