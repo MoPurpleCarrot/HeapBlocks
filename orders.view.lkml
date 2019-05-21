@@ -307,6 +307,13 @@ view: orders {
     sql: ${plan} ;;
   }
 
+  measure: net_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${amount_charged} ;;
+  }
+
 
   measure: total_revenue {
     type: sum
