@@ -309,6 +309,16 @@ explore: users {
     sql_on: ${user_facts.id} = ${user_facts_credit.id} ;;
   }
 
+
+  join: credit_transaction_groups {
+    relationship: many_to_one
+    sql_on: ${credit_transaction_groups.user_id} = ${users.id};;
+  }
+  join: credit_transactions {
+    relationship: one_to_one
+    sql_on: ${credit_transactions.credit_transaction_group_id} = ${credit_transaction_groups.id} ;;
+  }
+
 }
 
 explore: google_analytics_age {}
