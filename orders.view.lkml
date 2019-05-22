@@ -307,7 +307,7 @@ view: orders {
     sql: ${plan} ;;
   }
 
-  measure: net_revenue {
+  measure: net_revenue_without_refunds {
     type: sum
     value_format_name: usd
     drill_fields: [detail*]
