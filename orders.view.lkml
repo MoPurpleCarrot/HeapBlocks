@@ -215,6 +215,22 @@ view: orders {
           ;;
   }
 
+  dimension: active_fulfillment_status {
+    type: string
+    sql:  CASE WHEN ${fulfillment_status_code} = 0 THEN 'Active'
+          WHEN ${fulfillment_status_code} = 1 THEN 'Active'
+          WHEN ${fulfillment_status_code} = 2 THEN 'Active'
+          WHEN ${fulfillment_status_code} = 3 THEN 'Active'
+          WHEN ${fulfillment_status_code} = 4 THEN 'Cancelled'
+          WHEN ${fulfillment_status_code} = 5 THEN 'Cancelled'
+          WHEN ${fulfillment_status_code} = 6 THEN 'Cancelled'
+          WHEN ${fulfillment_status_code} = 7 THEN 'Active'
+          ELSE NULL
+          END
+          ;;
+  }
+
+
   dimension: status_old {
     type: string
     sql: ${TABLE}.status_old ;;
@@ -359,6 +375,15 @@ view: orders {
     filters: {
       field: status
       value: "3"
+    }
+  }
+
+  measure: total_active_status_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: active_fulfillment_status
+      value: "Active"
     }
   }
 
