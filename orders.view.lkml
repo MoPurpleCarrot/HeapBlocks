@@ -366,6 +366,10 @@ view: orders {
     type: sum
     value_format_name: usd
     drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "3"
+    }
     sql: ${amount_charged} ;;
   }
 
