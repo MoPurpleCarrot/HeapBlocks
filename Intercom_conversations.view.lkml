@@ -278,7 +278,7 @@ view: Intercom_conversations {
       }
       when: {
         sql: ${TABLE}.assignee__id = '2812063'  ;;
-        label: "Rachel R"
+        label: "Rachel Root"
       }
       when: {
         sql: ${TABLE}.assignee__id = '2958310'  ;;
@@ -286,15 +286,19 @@ view: Intercom_conversations {
       }
       when: {
         sql: ${TABLE}.assignee__id = '2977996'  ;;
-        label: "Rachel R"
+        label: "Rachel Rees"
       }
       when: {
         sql: ${TABLE}.assignee__id = '2997017'  ;;
         label: "Milena"
       }
       when: {
-        sql: ${TABLE}.assignee__id = '2997017'  ;;
-        label: "Milena"
+        sql: ${TABLE}.assignee__id = '2958534'  ;;
+        label: "Erika R"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '3248925'  ;;
+        label: "Sandra R"
       }
 }
 }
