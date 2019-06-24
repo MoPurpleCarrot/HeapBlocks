@@ -250,6 +250,11 @@ view: subscriptions {
     sql: ${TABLE}.extra_breakfasts ;;
   }
 
+  dimension: legacy_tb12_plan {
+    type: number
+    sql: ${TABLE}.legacy_tb12_plan ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -297,23 +302,27 @@ view: subscriptions {
 
   dimension_group: returning_status_start_at {
     type: time
+    hidden: yes
     timeframes: [time, date, week, month]
     sql: ${TABLE}.returning_status_start_at ;;
   }
 
   dimension_group: returning_reactivation_on {
     type: time
+    hidden:  yes
     timeframes: [time, date, week, month]
     sql: ${TABLE}.returning_reactivation_on ;;
   }
 
   dimension: returning_days{
     type: number
+    hidden:  yes
     sql: diffdays(${returning_status_start_at_week}, ${returning_reactivation_on_week}) ;;
   }
 
   dimension: Returning_weeks{
     type: number
+    hidden:  yes
     sql: datediff('week',${returning_status_start_at_week}, ${returning_reactivation_on_week}) ;;
   }
 
