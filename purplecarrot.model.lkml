@@ -571,10 +571,20 @@ explore: Intercom_conversations {
     sql_on:  ${users.id} = ${Intercom_users.user_id} ;;
   }
 
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id} ;;
+  }
+
 join: subscriptions {
   relationship: one_to_one
   sql_on:  ${subscriptions.user_id} = ${users.id} ;;
 }
+
+  join: orders {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
+  }
 
 
 join: Intercom_conversations__tags__tags {
