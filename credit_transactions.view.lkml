@@ -293,7 +293,7 @@ view: credit_transactions {
 
       when: {
         sql: ${TABLE}.admin_id = '11200'  ;;
-        label: "Deanna"
+        label: "Rios"
       }
 
 
@@ -332,6 +332,10 @@ view: credit_transactions {
         label: "Reis"
       }
 
+      when: {
+        sql: ${TABLE}.admin_id = '96902'  ;;
+        label: "Deanna Banovsky"
+      }
     }
   }
 

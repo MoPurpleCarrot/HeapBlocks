@@ -298,7 +298,7 @@ view: refunds {
 
         when: {
           sql: ${TABLE}.admin_id = '11200'  ;;
-          label: "Deanna"
+          label: "Rios"
         }
 
 
@@ -337,6 +337,10 @@ view: refunds {
           label: "Reis"
         }
 
+        when: {
+          sql: ${TABLE}.admin_id = '96902'  ;;
+          label: "Deanna Banovsky"
+        }
 
       }
     }
