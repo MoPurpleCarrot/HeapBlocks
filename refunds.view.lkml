@@ -298,7 +298,7 @@ view: refunds {
 
         when: {
           sql: ${TABLE}.admin_id = '11200'  ;;
-          label: "Rios"
+          label: "Deanna"
         }
 
 

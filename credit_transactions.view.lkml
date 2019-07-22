@@ -293,7 +293,7 @@ view: credit_transactions {
 
       when: {
         sql: ${TABLE}.admin_id = '11200'  ;;
-        label: "Rios"
+        label: "Deanna"
       }
 
 
