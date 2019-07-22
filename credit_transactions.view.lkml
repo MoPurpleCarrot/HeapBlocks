@@ -333,8 +333,8 @@ view: credit_transactions {
       }
 
       when: {
-        sql: ${TABLE}.admin_id = '96902'  ;;
-        label: "Deanna Banovsky"
+        sql: ${TABLE}.admin_id = '812935'  ;;
+        label: "Rios"
       }
     }
   }
