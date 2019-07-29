@@ -154,7 +154,7 @@ view: weekly_orders_trackings {
 
   dimension: gluten_free {
     type: number
-    sql: 0 ;;
+    sql: ${TABLE}.gluten_free ;;
   }
 
   dimension: total_meals_count {
@@ -213,7 +213,7 @@ view: weekly_orders_trackings {
 
   measure: sum_gf {
     type: sum
-    sql: ${gluten_free} ;;
+    sql: ${TABLE}.gluten_free ;;
   }
 
   measure: sum_A {
@@ -288,7 +288,7 @@ view: weekly_orders_trackings {
 
   dimension: box_total {
     type: number
-    sql: ${TABLE}.chefs_choice + ${TABLE}.tb_12 + ${TABLE}.quick_easy + ${TABLE}.high_protein + ${TABLE}.six_servings ;;
+    sql: ${TABLE}.total_orders_count ;;
   }
 
   measure: sum_box_total {
@@ -308,7 +308,7 @@ view: weekly_orders_trackings {
 
   dimension: plan_meal_total {
     type: number
-    sql: (${TABLE}.chefs_choice + ${TABLE}.quick_easy + ${TABLE}.high_protein + ${TABLE}.tb_12 ) * 3 + ${TABLE}.six_servings * 2 ;;
+    sql: (${TABLE}.chefs_choice + ${TABLE}.quick_easy + ${TABLE}.high_protein + ${TABLE}.tb_12 + ${TABLE}.gluten_free) * 3 + ${TABLE}.six_servings * 2 ;;
   }
 
   dimension: extra_meal_total {
@@ -316,9 +316,19 @@ view: weekly_orders_trackings {
     sql: ${meal_total} - ${plan_meal_total} ;;
   }
 
+  dimension: small_box_total{
+    type: number
+    sql: ${TABLE}.small;;
+  }
+
+  measure: sum_small_box_total{
+    type: sum
+    sql: ${small_box_total} ;;
+  }
+
   dimension: large_box_total {
     type: number
-    sql: ${extra_meal_total} / 1.45 ;;
+    sql: ${TABLE}.large ;;
   }
 
   measure: sum_large_box_total{
@@ -326,14 +336,5 @@ view: weekly_orders_trackings {
     sql: ${large_box_total} ;;
   }
 
-  dimension: small_box_total {
-    type: number
-    sql: (${TABLE}.chefs_choice + ${TABLE}.quick_easy + ${TABLE}.high_protein) - ${large_box_total}  ;;
-  }
-
-  measure: sum_small_box_total{
-    type: sum
-    sql: ${small_box_total} ;;
-  }
 
 }
