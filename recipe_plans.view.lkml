@@ -79,6 +79,31 @@ view: recipe_plans {
     sql: ${TABLE}.recipe_id ;;
   }
 
+  dimension: fat {
+    type: number
+    sql: ${TABLE}.fat ;;
+  }
+
+  dimension: protein {
+    type: number
+    sql: ${TABLE}.protein ;;
+  }
+
+  dimension: carbs {
+    type: number
+    sql: ${TABLE}.carbs ;;
+  }
+
+  dimension: calories {
+    type: number
+    sql: ${TABLE}.calories ;;
+  }
+
+  dimension: description {
+    type: number
+    sql: ${TABLE}.description ;;
+  }
+
   dimension: search_keywords {
     type: string
     sql: ${TABLE}.search_keywords ;;
