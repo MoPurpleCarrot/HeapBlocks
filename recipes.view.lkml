@@ -48,40 +48,48 @@ view: recipes {
   dimension: calories {
     type: number
     sql: ${TABLE}.calories ;;
+    hidden: yes
   }
 
   measure: total_calories {
     type: sum
     sql: ${calories} ;;
+    hidden: yes
   }
 
   measure: average_calories {
     type: average
     sql: ${calories} ;;
+    hidden: yes
   }
 
   measure: average_calories_unique_recipe {
     type: average_distinct
     sql_distinct_key: ${id} ;;
     sql: ${calories} ;;
+    hidden: yes
   }
 
   dimension: carbs {
+    hidden: yes
     type: number
     sql: ${TABLE}.carbs ;;
   }
 
   measure: total_carbs {
+    hidden: yes
     type: sum
     sql: ${carbs} ;;
   }
 
   measure: average_carbs {
+    hidden: yes
     type: average
     sql: ${carbs} ;;
   }
 
   measure: average_carbs_unique_recipe {
+    hidden: yes
     type: average_distinct
     sql_distinct_key: ${id} ;;
     sql: ${carbs} ;;
@@ -110,16 +118,19 @@ view: recipes {
   }
 
   dimension: fat {
+    hidden: yes
     type: number
     sql: ${TABLE}.fat ;;
   }
 
   measure: total_fat {
+    hidden: yes
     type: sum
     sql: ${fat} ;;
   }
 
   measure: average_fat {
+    hidden: yes
     type: average
     sql: ${fat} ;;
   }
@@ -191,16 +202,19 @@ view: recipes {
   }
 
   dimension: protein {
+    hidden: yes
     type: number
     sql: ${TABLE}.protein ;;
   }
 
   measure: total_protein {
+    hidden: yes
     type: sum
     sql: ${protein} ;;
   }
 
   measure: average_protein {
+    hidden: yes
     type: average
     sql: ${protein} ;;
   }
