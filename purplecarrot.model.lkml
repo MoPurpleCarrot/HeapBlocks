@@ -217,6 +217,12 @@ explore: users {
     sql_on: ${welcome_surveys.user_id} = ${users.id} ;;
   }
 
+  join: ces_surveys {
+    relationship: many_to_one
+    sql_on: ${ces_surveys.user_id} = ${users.id} ;;
+  }
+
+
   join: skip_menu_surveys {
     relationship:  many_to_one
     sql_on: ${skip_menu_surveys.user_id}=${user_facts.id} ;;
