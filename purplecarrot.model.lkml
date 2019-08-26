@@ -232,6 +232,11 @@ explore: users {
     sql_on: ${recipe_feedback_surveys.user_id} = ${users.id} ;;
   }
 
+  join: recipe_feedbacks {
+    relationship: many_to_one
+    sql_on: ${recipe_feedbacks.recipe_feedback_survey_id} = ${recipe_feedback_surveys.id} ;;
+  }
+
   join: skip_menu_surveys {
     relationship:  many_to_one
     sql_on: ${skip_menu_surveys.user_id}=${user_facts.id} ;;
