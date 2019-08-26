@@ -71,7 +71,7 @@ view: ces_surveys {
   }
 
   dimension: question_6_answer {
-    label: "Overall, has Purple Carrot met your expectations?"
+    label: "Overall, has Purple Carrot met your expectations? (1-4)"
     type: number
     sql: ${TABLE}.question_6_answer ;;
   }
