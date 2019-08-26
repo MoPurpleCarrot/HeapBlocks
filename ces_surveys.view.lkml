@@ -41,31 +41,37 @@ view: ces_surveys {
   }
 
   dimension: question_1_answer {
+    label: "How likely are you to recommend Purple Carrot to a friend or colleague? (0-10)"
     type: number
     sql: ${TABLE}.question_1_answer ;;
   }
 
   dimension: question_2_answer {
+    label: "Is it easy to be a Purple Carrot subscriber? (1-4)"
     type: number
     sql: ${TABLE}.question_2_answer ;;
   }
 
   dimension: question_3_answer {
+    label: "Is it easy to use the Purple Carrot website? (1-4)"
     type: number
     sql: ${TABLE}.question_3_answer ;;
   }
 
   dimension: question_4_answer {
+    label: "Is it easy to follow the recipe instructions? (1-4)"
     type: number
     sql: ${TABLE}.question_4_answer ;;
   }
 
   dimension: question_5_answer {
+    label: "Is it easy to get support from the Purple Carrot team when/if needed? (1-4)"
     type: number
     sql: ${TABLE}.question_5_answer ;;
   }
 
   dimension: question_6_answer {
+    label: "Overall, has Purple Carrot met your expectations?"
     type: number
     sql: ${TABLE}.question_6_answer ;;
   }
