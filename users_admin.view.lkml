@@ -356,6 +356,15 @@ view: users {
     sql: ${TABLE}.utm_source ;;
   }
 
+  dimension: utm_bucket_ORD {
+    type: string
+    sql: case when ${utm_source_bucket} = 'Organic' then 'Organic'
+         When ${utm_source_bucket} = 'Friendbuy' then 'Other'
+        Else null
+        End
+    ;;
+  }
+
   dimension: utm_source_bucket {
     type: string
     sql:  CASE WHEN ${utm_source} = 'organic' THEN 'Organic'

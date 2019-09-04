@@ -287,11 +287,6 @@ explore: users {
     sql_on: ${orders.menu_id} = ${menus.id} ;;
   }
 
-  join: google_analytics_user {
-    relationship: one_to_many
-    sql_on: ${users.id} = ${google_analytics_user.dimension1} ;;
-  }
-
   join: user_facts {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
@@ -314,11 +309,6 @@ explore: users {
     sql_on: ${first_order.id} = ${user_facts.first_order_id} ;;
   }
 
-  join: google_analytics_traffic {
-    relationship: one_to_one
-    sql_on: ${orders.id} = ${google_analytics_traffic.transactionid} ;;
-  }
-
   join: user_facts_traffic {
     relationship: one_to_one
     sql_on: ${user_facts.id} = ${user_facts_traffic.id} ;;
@@ -334,7 +324,6 @@ explore: users {
     sql_on: ${user_facts.id} = ${user_facts_credit.id} ;;
   }
 
-
   join: credit_transaction_groups {
     relationship: many_to_one
     sql_on: ${credit_transaction_groups.user_id} = ${users.id};;
@@ -344,22 +333,6 @@ explore: users {
     sql_on: ${credit_transactions.credit_transaction_group_id} = ${credit_transaction_groups.id} ;;
   }
 
-}
-
-explore: google_analytics_age {}
-
-explore: google_analytics_wau {
-  label: "Google Analytics Active Users"
-
-  join: google_analytics_mau {
-    relationship: one_to_one
-    sql_on: ${google_analytics_wau.date_date} = ${google_analytics_mau.date_date} ;;
-  }
-
-  join: google_analytics_dau {
-    relationship: one_to_one
-    sql_on: ${google_analytics_wau.date_date} = ${google_analytics_dau.date_date} ;;
-  }
 }
 
 explore: gift_purchases {
@@ -445,13 +418,7 @@ explore: email_delivered {
 }
 
 
-explore: google_analytics_data {}
-
-explore: google_adwords {}
-
 explore: heap_sessions {}
-
-explore: facebook_ads_insights {}
 
 explore: skip_menu_surveys {
 }

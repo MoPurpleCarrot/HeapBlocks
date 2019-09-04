@@ -330,10 +330,6 @@ view: orders {
     sql: ${amount_charged} ;;
   }
 
-
-
-
-
   measure: total_revenue {
     type: sum
     value_format_name: usd
