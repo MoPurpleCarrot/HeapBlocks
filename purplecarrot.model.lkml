@@ -58,11 +58,6 @@ explore: heap_users{
     sql_on: ${users.id} = ${user_facts.id}    ;;
   }
 
-  join: subscription_events {
-    relationship: many_to_one
-    sql_on: ${subscription_events.user_id}=${users.id} ;;
-  }
-
   join: email_delivered {
     relationship: many_to_one
     sql_on: ${email_delivered.user_id} = ${users.id} ;;
@@ -205,6 +200,11 @@ explore: users {
   join: subscriptions {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+
+  join: subscription_events {
+    relationship: many_to_one
+    sql_on: ${subscription_events.user_id}=${users.id} ;;
   }
 
   join: subscription_order_num_derrived {
