@@ -103,6 +103,21 @@ view: skip_menu_surveys {
     sql: ${TABLE}.updated_at ;;
   }
 
+  dimension: skip_reason_bucket {
+    type: string
+    sql:  CASE WHEN ${reason} = 'I am travelling' THEN 'Travel'
+          WHEN ${reason} = 'I did not like the meals' THEN 'Meal Options'
+          WHEN ${reason} = 'I am too busy to cook' THEN 'Busy'
+          WHEN ${reason} = 'I have remaining meals to cook from previous weeks' THEN 'Leftover Meals'
+          WHEN ${reason} = 'I need to save money' THEN 'Save Money'
+          WHEN ${reason} = 'I plan on cancelling' THEN 'Cancelling'
+          WHEN ${reason} = "I'm planning on cancelling in the future" THEN 'Cancelling'
+          ELSE NULL
+          END
+          ;;
+  }
+
+
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
