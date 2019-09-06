@@ -99,4 +99,9 @@ view: ces_surveys {
     type: count
     drill_fields: [id]
   }
+
+  measure: average_ease {
+    type: average
+    sql: ${question_5_answer} ;;
+  }
 }
