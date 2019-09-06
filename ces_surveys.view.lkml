@@ -100,8 +100,34 @@ view: ces_surveys {
     drill_fields: [id]
   }
 
-  measure: average_ease {
+  measure: average_recommends {
+    type: average
+    sql: ${question_1_answer} ;;
+  }
+
+  measure: average_subscriber {
+    type: average
+    sql: ${question_2_answer} ;;
+  }
+
+  measure: average_website {
+    type: average
+    sql: ${question_3_answer} ;;
+  }
+
+  measure: average_instructions {
+    type: average
+    sql: ${question_4_answer} ;;
+  }
+
+  measure: average_support {
     type: average
     sql: ${question_5_answer} ;;
   }
+
+  measure: average_expectations {
+    type: average
+    sql: ${question_6_answer} ;;
+  }
+
 }
