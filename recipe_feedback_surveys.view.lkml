@@ -59,9 +59,28 @@ view: recipe_feedback_surveys {
     sql: ${TABLE}.updated_at ;;
   }
 
+  dimension_group: completed {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.completed_at ;;
+  }
+
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
+  }
+
+  dimension: comment {
+    type: string
+    sql: ${TABLE}.question_comment_answer ;;
   }
 
   measure: count {

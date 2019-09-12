@@ -64,8 +64,17 @@ view: nps_surveys {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension: completed {
-    type: number
+  dimension_group: completed {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.completed_at ;;
   }
 
