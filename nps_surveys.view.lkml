@@ -79,11 +79,13 @@ view: nps_surveys {
   }
 
   dimension: question_1_answer {
+    label: "How likely are you to recommend Purple Carrot to a friend? (0-10)"
     type: number
     sql: ${TABLE}.question_1_answer ;;
   }
 
   dimension: question_2_answer {
+    label: "Comments"
     type: string
     sql: ${TABLE}.question_2_answer ;;
   }
