@@ -64,6 +64,21 @@ view: nps_surveys {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: completed {
+    type: number
+    sql: ${TABLE}.completed_at ;;
+  }
+
+  dimension: question_1_answer {
+    type: number
+    sql: ${TABLE}.question_1_answer ;;
+  }
+
+  dimension: question_2_answer {
+    type: string
+    sql: ${TABLE}.question_2_answer ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, name]
