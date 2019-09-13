@@ -100,6 +100,20 @@ view: ces_surveys {
     drill_fields: [id]
   }
 
+  measure: count_q1_10 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "10"
+    }
+  }
+
+
+
+
+
+
+
   measure: average_recommends {
     type: average
     sql: ${question_1_answer} ;;
