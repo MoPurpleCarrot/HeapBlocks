@@ -40,6 +40,8 @@ view: ces_surveys {
     sql: ${TABLE}.created_at ;;
   }
 
+
+
   dimension: question_1_answer {
     label: "How likely are you to recommend Purple Carrot to a friend or colleague? (0-10)"
     type: number
@@ -108,7 +110,13 @@ view: ces_surveys {
     }
   }
 
-
+  measure: count_q1_9 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "9"
+    }
+  }
 
 
 
