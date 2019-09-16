@@ -41,6 +41,11 @@ view: ces_surveys {
   }
 
 
+  dimension: question_6_answer {
+    label: "Overall, has Purple Carrot met your expectations? (1-4)"
+    type: number
+    sql: ${TABLE}.question_6_answer ;;
+  }
 
   dimension: question_1_answer {
     label: "How likely are you to recommend Purple Carrot to a friend or colleague? (0-10)"
@@ -72,11 +77,6 @@ view: ces_surveys {
     sql: ${TABLE}.question_5_answer ;;
   }
 
-  dimension: question_6_answer {
-    label: "Overall, has Purple Carrot met your expectations? (1-4)"
-    type: number
-    sql: ${TABLE}.question_6_answer ;;
-  }
 
   dimension_group: updated {
     type: time
