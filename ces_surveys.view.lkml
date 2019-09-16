@@ -118,7 +118,78 @@ view: ces_surveys {
     }
   }
 
+  measure: count_q1_8 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "8"
+    }
+  }
 
+  measure: count_q1_7 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "7"
+    }
+  }
+
+  measure: count_q1_6 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "6"
+    }
+  }
+
+  measure: count_q1_5 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "5"
+    }
+  }
+
+  measure: count_q1_4 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "4"
+    }
+  }
+
+
+  measure: count_q1_3 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "3"
+    }
+  }
+
+  measure: count_q1_2 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "2"
+    }
+  }
+
+  measure: count_q1_1 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "1"
+    }
+  }
+
+  measure: count_q1_0 {
+    type: count
+    filters: {
+      field: question_1_answer
+      value: "0"
+    }
+  }
 
 
 
