@@ -94,4 +94,12 @@ view: nps_surveys {
     type: count
     drill_fields: [id, name]
   }
+
+  measure: average_nps_answer {
+    type: average
+    sql: ${question_1_answer} ;;
+  }
+
+
+
 }
