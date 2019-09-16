@@ -90,6 +90,40 @@ view: nps_surveys {
     sql: ${TABLE}.question_2_answer ;;
   }
 
+  dimension: customer_nps_type {
+    type: string
+    sql:  CASE WHEN ${question_1_answer} > 8 THEN 'Promoter'
+          WHEN ${question_1_answer} > 6 THEN 'Passive'
+          WHEN ${question_1_answer} > -1 THEN 'Detractor'
+          ELSE NULL
+          END
+          ;;
+  }
+
+  measure: promoter_count {
+    type: count
+    filters: {
+      field: customer_nps_type
+      value: "Promoter"
+    }
+  }
+
+  measure: passive_count {
+    type: count
+    filters: {
+      field: customer_nps_type
+      value: "Passive"
+    }
+  }
+
+  measure: detractor_count {
+    type: count
+    filters: {
+      field: customer_nps_type
+      value: "Detractor"
+    }
+  }
+
   measure: count {
     type: count
     drill_fields: [id, name]
