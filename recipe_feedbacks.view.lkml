@@ -67,4 +67,23 @@ view: recipe_feedbacks {
     type: count
     drill_fields: [id]
   }
+
+  measure: average_overall {
+    type: average
+    sql: ${question_1} ;;
+  }
+
+  measure: average_flavor {
+    type: average
+    sql: ${question_2} ;;
+  }
+
+  measure: average_ease {
+    type: average
+    sql: ${question_3} ;;
+  }
+
+
+
+
 }
