@@ -111,7 +111,7 @@ view: skip_menu_surveys {
           WHEN ${reason} = 'I have remaining meals to cook from previous weeks' THEN 'Leftover Meals'
           WHEN ${reason} = 'I need to save money' THEN 'Save Money'
           WHEN ${reason} = 'I plan on cancelling' THEN 'Cancelling'
-          WHEN ${reason} = "I'm planning on cancelling in the future" THEN 'Cancelling'
+          WHEN ${reason} = 'I''m planning on cancelling in the future' THEN 'Cancelling'
           ELSE NULL
           END
           ;;

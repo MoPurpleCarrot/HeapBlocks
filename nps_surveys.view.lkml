@@ -134,6 +134,4 @@ view: nps_surveys {
     sql: ${question_1_answer} ;;
   }
 
-
-
 }
