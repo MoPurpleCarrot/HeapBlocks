@@ -407,6 +407,20 @@ explore: paused_and_cancelled_users {}
 
 explore: recipes {}
 
+explore: recipe_feedback_surveys {
+
+  join: recipe_feedbacks {
+    relationship: one_to_many
+    sql_on: ${recipe_feedback_surveys.id} = ${recipe_feedbacks.recipe_feedback_survey_id} ;;
+  }
+
+  join: recipes {
+    relationship: many_to_one
+    sql_on: ${recipe_feedbacks.recipe_id} = ${recipes.id} ;;
+  }
+
+}
+
 explore: email_delivered {
   label: "Customer.io Email"
 
