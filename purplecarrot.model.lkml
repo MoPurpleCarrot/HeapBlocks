@@ -419,6 +419,32 @@ explore: recipe_feedback_surveys {
     sql_on: ${recipe_feedbacks.recipe_id} = ${recipes.id} ;;
   }
 
+  join: order_recipes {
+    relationship: one_to_many
+    sql_on: ${recipes.id} = ${order_recipes.recipe_id} ;;
+  }
+
+  join: orders {
+    relationship: one_to_many
+    sql_on: ${orders.id} = ${order_recipes.order_id} ;;
+  }
+
+  join: subscriptions {
+    relationship: many_to_one
+    sql_on: ${orders.subscription_id}=${subscriptions.id} ;;
+  }
+
+  join: users {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id} ;;
+  }
+
+
 }
 
 explore: email_delivered {
