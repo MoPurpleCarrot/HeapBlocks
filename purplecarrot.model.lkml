@@ -588,14 +588,6 @@ explore: seasonal_order {
     relationship:many_to_one
     sql_on: ${seasonal_order.customer_id}=${users.id} ;;
 }
-join: subscriptions {
-  relationship: many_to_one
-  sql_on: ${seasonal_order.subscription_id}=${subscriptions.id} ;;
-  }
-join: subscription_order_num_derrived {
-  relationship: many_to_one
-  sql_on: ${seasonal_order.subscription_id}=${subscription_order_num_derrived.subscriptions_id} ;;
-}
 }
 
 explore: coupons {}
