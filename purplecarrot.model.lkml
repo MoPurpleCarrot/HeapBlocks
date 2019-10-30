@@ -583,7 +583,13 @@ explore: prep_needs {
   }
 }
 
-explore: seasonal_order {}
+explore: seasonal_order {
+  join: users {
+    relationship:many_to_one
+    sql_on: ${seasonal_order.customer_id}=${users.id} ;;
+  }
+
+}
 explore: coupons {}
 explore: stripe_charges {}
 explore: live_chat_sessions {
