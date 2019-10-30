@@ -525,6 +525,10 @@ view: users {
           END
           ;;
   }
+  dimension: origin {
+    type: string
+    sql: ${TABLE}.customer_origin ;;
+  }
 
   measure: count {
     type: count
