@@ -66,6 +66,11 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: customer_id {
+    type: number
+    sql: ${TABLE}.customer_id ;;
+  }
+
   dimension: month_num {
     type: number
     sql: DATEDIFF('month', ${user_facts.first_order_date}, ${delivery_date}) ;;
@@ -483,6 +488,9 @@ view: orders {
     type: number
     sql:  DATEDIFF('day',${users.created_date},${created_date})  ;;
   }
+
+
+
 
   # 30 day
   dimension: is_30day_since_created {
