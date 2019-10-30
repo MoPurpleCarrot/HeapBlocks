@@ -530,6 +530,14 @@ view: users {
     sql: ${TABLE}.customer_origin ;;
   }
 
+  dimension: origin_name{
+    type: string
+    sql:  CASE WHEN ${origin} = 1 THEN 'Thanksgiving'
+          ELSE 'Non-Thanksgiving'
+          END
+          ;;
+  }
+
   measure: count {
     type: count
   }
