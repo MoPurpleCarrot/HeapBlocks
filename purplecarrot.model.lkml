@@ -587,9 +587,13 @@ explore: seasonal_order {
   join: users {
     relationship:many_to_one
     sql_on: ${seasonal_order.customer_id}=${users.id} ;;
-  }
-
 }
+join: subscriptions {
+  relationship: many_to_one
+  sql_on: ${seasonal_order.subscription_id}=${subscriptions.id} ;;
+  }
+}
+
 explore: coupons {}
 explore: stripe_charges {}
 explore: live_chat_sessions {
