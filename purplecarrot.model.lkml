@@ -583,6 +583,7 @@ explore: prep_needs {
   }
 }
 
+explore: seasonal_order {}
 explore: coupons {}
 explore: stripe_charges {}
 explore: live_chat_sessions {
