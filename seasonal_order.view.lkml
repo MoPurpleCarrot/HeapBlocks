@@ -207,6 +207,11 @@ view: seasonal_order {
     sql: ${TABLE}.ship_template_ship_date ;;
   }
 
+  dimension: shipping_address {
+    type: string
+    sql: ${TABLE}.shipping_address ;;
+  }
+
   dimension: projected_delivery{
     type: date
     sql: ${TABLE}.projected_delivery_on ;;
@@ -449,6 +454,7 @@ view: seasonal_order {
           END
           ;;
   }
+
 
   measure: total_revenue_30day {
     type:  sum
