@@ -588,10 +588,6 @@ explore: seasonal_order {
     relationship:many_to_one
     sql_on: ${seasonal_order.customer_id}=${users.id} ;;
     }
-    join: shipping_addresses {
-      relationship:many_to_many
-      sql_on: ${seasonal_order.customer_id}=${shipping_addresses.user_id} ;;
-}
 }
 
 explore: coupons {}

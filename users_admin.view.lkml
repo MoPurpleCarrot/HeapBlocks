@@ -537,6 +537,10 @@ view: users {
           END
           ;;
   }
+  dimension: zip{
+    type: zipcode
+    sql: ${TABLE}.zip(seasonal) ;;
+  }
 
   measure: count {
     type: count
