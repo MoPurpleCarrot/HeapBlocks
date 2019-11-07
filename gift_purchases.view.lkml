@@ -208,6 +208,20 @@ view: gift_purchases {
     sql: ${TABLE}.giveaway_sent_at ;;
   }
 
+    dimension_group: expired_at {
+      type: time
+      timeframes: [
+        raw,
+        time,
+        date,
+        week,
+        month,
+        quarter,
+        year
+      ]
+      sql: ${TABLE}.expired_at ;;
+    }
+
   measure: count {
     type: count
     drill_fields: [id, purchaser_name, recipient_name, gift_redemptions.count]
