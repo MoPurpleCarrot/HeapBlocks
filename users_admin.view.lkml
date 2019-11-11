@@ -299,13 +299,17 @@ view: users {
   #     type: string
   #     sql: ${TABLE}.stripe_cc_type
   #
-  #   - dimension: stripe_customer_id
-  #     type: string
-  #     sql: ${TABLE}.stripe_customer_id
+
   #
   #   - dimension: stripe_token
   #     type: string
   #     sql: ${TABLE}.stripe_token
+
+  dimension: stripe_customer_id {
+    type: string
+    sql: ${TABLE}.stripe_customer_id
+  }
+
 
   dimension_group: subscribed {
     type: time

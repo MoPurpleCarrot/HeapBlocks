@@ -257,6 +257,7 @@ explore: users {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+
   join: order_recipes {
     relationship: one_to_many
     sql_on: ${orders.id} = ${order_recipes.order_id};;
@@ -339,6 +340,9 @@ explore: users {
   }
 
 }
+
+
+
 
 explore: gift_purchases {
   label: "Gift Purchases and Redemptions - Redeemer"
