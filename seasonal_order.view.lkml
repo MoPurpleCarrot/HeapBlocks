@@ -1,5 +1,14 @@
-view: orders {
-  sql_table_name: heroku_postgres.orders ;;
+view: seasonal_order {
+  derived_table: {
+    sql: SELECT * FROM heroku_postgres.orders
+      WHERE plan = 9
+       ;;
+
+      datagroup_trigger: hourly_sync
+      distribution: "updated_at"
+      sortkeys: ["updated_at"]
+
+    }
 
   dimension: id {
     primary_key: yes
@@ -7,47 +16,10 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
-  dimension_group: sdc_batched {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}._sdc_batched_at ;;
-    hidden: yes
-  }
-
-  dimension_group: sdc_received {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}._sdc_received_at ;;
-    hidden: yes
-  }
-
-  dimension: sdc_sequence {
-    type: number
-    sql: ${TABLE}._sdc_sequence ;;
-    hidden: yes
-  }
-
-  dimension: sdc_table_version {
-    type: number
-    sql: ${TABLE}._sdc_table_version ;;
-    hidden: yes
-  }
-
-  dimension: admin_id {
-    type: number
-    sql: ${TABLE}.admin_id ;;
-  }
-
   dimension: amount_charged {
     type: number
     value_format_name: usd
     sql: ${TABLE}.amount_charged ;;
-  }
-
-  dimension: cancelled_reason {
-    type: string
-    hidden:  yes
-    sql: ${TABLE}.cancelled_reason ;;
   }
 
   dimension: coupon_code {
@@ -70,33 +42,6 @@ view: orders {
     type: number
     sql: ${TABLE}.customer_id ;;
   }
-
-  dimension: month_num {
-    type: number
-    sql: DATEDIFF('month', ${user_facts.first_order_date}, ${delivery_date}) ;;
-  }
-
-  dimension: week_num {
-    type: number
-    sql: DATEDIFF('week', ${user_facts.first_order_date}, ${delivery_date}) ;;
-  }
-
-  dimension: weeks_after_registered {
-    type: number
-    sql: DATEDIFF('week', ${subscriptions.registered_plus4_date}, ${delivery_date}) ;;
-  }
-
-  dimension: months_after_registered {
-    type: number
-    sql: DATEDIFF('month', ${subscriptions.registered_plus4_date}, ${delivery_date}) ;;
-  }
-
-  dimension: winback_week_num {
-    type: number
-    sql: DATEDIFF('week', ${subscriptions.winback_plus4_date}, ${delivery_date}) ;;
-  }
-
-
   dimension: credit_applied {
     type: number
     value_format_name: usd
@@ -109,15 +54,6 @@ view: orders {
     sql: ${TABLE}.delivery_on ;;
   }
 
-  dimension: is_donated {
-    type: yesno
-    sql: ${TABLE}.donated ;;
-  }
-
-  dimension: default_meals_were_overridden{
-    type: yesno
-    sql: ${TABLE}.overridden_recipes ;;
-  }
 
   dimension: menu_id {
     type: number
@@ -269,6 +205,11 @@ view: orders {
   dimension: ship_template_delivery {
     type: date
     sql: ${TABLE}.ship_template_ship_date ;;
+  }
+
+  dimension: shipping_address {
+    type: string
+    sql: ${TABLE}.shipping_address ;;
   }
 
   dimension: projected_delivery{
@@ -514,6 +455,7 @@ view: orders {
           ;;
   }
 
+
   measure: total_revenue_30day {
     type:  sum
     value_format_name: usd
@@ -587,44 +529,7 @@ view: orders {
       recipes.title,
       chefs.name,
       users.name,
-      user_with_winback
     ]
-  }
-
-
-  dimension: Orderdate_minus_winbackdate{
-    type: number
-    sql: datediff( 'day', ${subscriptions.winback_date}, ${created_date}) ;;
-  }
-
-  dimension: orderdate_after_winback{
-    type: yesno
-    sql: ${Orderdate_minus_winbackdate} >= 0 ;;
-  }
-
-  measure: count_total_billed_post_winback {
-    type: count
-    drill_fields: [detail*]
-    filters: {
-      field: status
-      value: "3"
-    }
-    filters: {
-      field:  orderdate_after_winback
-      value: "yes"
-    }
-  }
-
-  dimension: user_with_winback {
-    type: yesno
-    hidden: yes
-    sql: ${subscriptions.winback_date} IS NOT NULL ;;
-  }
-
-  measure: average_orders_post_winback {
-    type: number
-    hidden: yes
-    sql: ${count_total_billed_post_winback}/NULLIF(${user_with_winback},0) ;;
   }
 
 
