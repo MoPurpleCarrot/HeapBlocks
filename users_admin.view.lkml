@@ -307,7 +307,7 @@ view: users {
 
   dimension: stripe_customer_id {
     type: string
-    sql: ${TABLE}.stripe_customer_id
+    sql: ${TABLE}.stripe_customer_id;;
   }
 
 
