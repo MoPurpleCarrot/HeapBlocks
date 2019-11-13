@@ -1004,6 +1004,11 @@ view: stripe_events {
     sql: ${TABLE}.data__previous_attributes__transfers_enabled ;;
   }
 
+  dimension: data__object__payment_method_types {
+    type: string
+    sql: ${TABLE}.data__object__payment_method_types ;;
+  }
+
   dimension: livemode {
     type: yesno
     sql: ${TABLE}.livemode ;;
