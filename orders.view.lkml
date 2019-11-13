@@ -164,12 +164,6 @@ view: orders {
     sql: ${price}-${extras_price} ;;
   }
 
-  dimension: payment_provider {
-    type: string
-    sql: ${TABLE}.payment_provider ;;
-  }
-
-
   dimension: shipping_carrier {
     type: string
     sql: ${TABLE}.shipping_carrier ;;
