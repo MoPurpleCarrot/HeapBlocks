@@ -106,6 +106,7 @@ view: skip_menu_surveys {
   dimension: skip_reason_bucket {
     type: string
     sql:  CASE WHEN ${reason} = 'I am travelling' THEN 'Travel'
+          WHEN ${reason} = 'I am traveling' THEN 'Travel'
           WHEN ${reason} = 'I did not like the meals' THEN 'Meal Options'
           WHEN ${reason} = 'I am too busy to cook' THEN 'Busy'
           WHEN ${reason} = 'I have remaining meals to cook from previous weeks' THEN 'Leftover Meals'
