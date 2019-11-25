@@ -180,6 +180,11 @@ view: subscriptions {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: legacy_6serving_customer {
+    type: string
+    sql: ${TABLE}.legacy_6serving_customer ;;
+  }
+
 
 
   # ----- Sets of fields for drilling ------
