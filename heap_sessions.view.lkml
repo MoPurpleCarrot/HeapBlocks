@@ -32,6 +32,21 @@ view: heap_sessions {
     sql: ${TABLE}.time ;;
   }
 
+  dimension: ip_address {
+    type: string
+    sql: ${TABLE}.ip ;;
+  }
+
+  dimension: operating_system{
+    type: string
+    sql: ${TABLE}.platform ;;
+  }
+
+  dimension: browser_information {
+    type: string
+    sql: ${TABLE}.browser ;;
+  }
+
   measure: count {
     type:  count
   }
