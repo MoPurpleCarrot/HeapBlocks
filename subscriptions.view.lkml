@@ -180,9 +180,9 @@ view: subscriptions {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension: legacy_6serving_customer {
+  dimension: legacy_sixserving_customer {
     type: string
-    sql: ${TABLE}.legacy_6serving_customer ;;
+    sql: ${TABLE}.legacy_sixserving_customer ;;
   }
 
 
