@@ -508,6 +508,7 @@ view: orders {
           WHEN ${plan} = 5 THEN 'High Protein'
           WHEN ${plan} = 6 THEN 'Six Serving'
           WHEN ${plan} = 7 THEN 'Gluten Free'
+          WHEN ${plan} = 8 THEN 'Four Serving'
           WHEN ${plan} = 9 THEN 'Seasonal Box'
           ELSE NULL
           END
