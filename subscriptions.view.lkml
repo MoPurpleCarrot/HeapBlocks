@@ -182,7 +182,7 @@ view: subscriptions {
 
   dimension: legacy_sixserving_customer {
     type: string
-    sql: ${TABLE}.legacy_sixserving_customer ;;
+    sql: ${TABLE}.legacy_6servin_customer ;;
   }
 
 
