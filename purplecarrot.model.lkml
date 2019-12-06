@@ -651,6 +651,11 @@ join: Intercom_contacts {
   sql_on:  ${Intercom_contacts.id} = ${Intercom_conversations.user__id} ;;
 }
 
+join: Intercom_contacts__social_profiles {
+  relationship:  one_to_one
+  sql_on:  ${Intercom_contacts__social_profiles.id} = ${Intercom_conversations.user__id} ;;
+}
+
 join: subscription_cancellations {
   relationship:  one_to_one
   sql_on: ${subscription_cancellations.user_id} = ${users.id} ;;
