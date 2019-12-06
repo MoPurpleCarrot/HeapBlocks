@@ -459,6 +459,11 @@ explore: email_delivered {
     sql_on: ${email_delivered.email_id} = ${email_opened.email_id} ;;
   }
 
+  join: email_link_clicked {
+    relationship: many_to_many
+    sql_on: ${email_delivered.email_id} = ${email_link_clicked.email_id} ;;
+  }
+
   join: users {
     relationship: many_to_one
     sql_on: ${email_delivered.user_id} = ${users.id} ;;
