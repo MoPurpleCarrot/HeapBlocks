@@ -174,6 +174,11 @@ view: orders {
     sql: ${TABLE}.shipping_label ;;
   }
 
+  dimension: shippingaddress_forPIPull_ONLY {
+    type: string
+    sql: ${TABLE}.shipping_address ;;
+  }
+
   dimension: status {
     type: number
     sql: ${TABLE}.status ;;
