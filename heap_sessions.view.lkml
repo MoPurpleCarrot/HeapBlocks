@@ -47,6 +47,21 @@ view: heap_sessions {
     sql: ${TABLE}.browser ;;
   }
 
+  dimension: city {
+    type: string
+    sql: ${TABLE}.city ;;
+  }
+
+  dimension: region {
+    type: string
+    sql: ${TABLE}.region ;;
+  }
+
+  dimension: country {
+    type: string
+    sql: ${TABLE}.country ;;
+  }
+
   measure: count {
     type:  count
   }
