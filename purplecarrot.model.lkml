@@ -177,6 +177,11 @@ explore: users {
     sql_on: ${users.email} = ${tickets.email} ;;
   }
 
+  join: zendesk_users {
+    relationship: one_to_many
+    sql_on: ${tickets.requester_id} = ${zendesk_users.id} ;;
+  }
+
   join: zendesk_ticket_metrics {
     relationship: one_to_one
     sql_on: ${tickets.id} = ${zendesk_ticket_metrics.ticket_id} ;;
