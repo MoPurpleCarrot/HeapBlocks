@@ -605,7 +605,22 @@ explore: seasonal_order {
 }
 
 explore: coupons {}
-explore: stripe_charges {}
+
+explore: stripe_events {
+  join: stripe_charges {
+    relationship: one_to_one
+    sql_on:  ${stripe_charges.balance_transaction} = ${stripe_events.data__object__balance_transaction} ;;
+  }
+
+  join: stripe_transfers {
+    relationship: one_to_many
+    sql_on:  ${stripe_transfers.balance_transaction} = ${stripe_events.data__object__balance_transaction} ;;
+  }
+
+
+}
+
+
 explore: live_chat_sessions {
 
   join: live_chat_session_tags {
