@@ -227,7 +227,6 @@ view: tickets {
 
   dimension: email {
     type: string
-    hidden: yes
     sql: ${TABLE}.via__source__from__address ;;
   }
 
