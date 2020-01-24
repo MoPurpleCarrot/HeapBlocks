@@ -166,6 +166,11 @@ view: shipping_addresses {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: sms_notification_status {
+    type: string
+    sql: ${TABLE}.sms_notification_status ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
