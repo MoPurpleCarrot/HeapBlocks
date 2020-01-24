@@ -168,7 +168,7 @@ view: shipping_addresses {
 
   dimension: sms_notification_status{
     type: string
-    sql:  CASE WHEN $sms_notification_status} = 1 THEN 'Enabled'
+    sql:  CASE WHEN ${TABLE}.sms_notification_status = 1 THEN 'Enabled'
           ELSE 'Not Enabled'
           END
           ;;
