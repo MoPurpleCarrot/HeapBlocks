@@ -129,6 +129,18 @@ view: order_items {
     sql: ${TABLE}.type ;;
   }
 
+  dimension: type_name {
+    type: string
+    sql:  CASE WHEN ${type} = 0 THEN 'Dinner'
+          WHEN ${type} = 1 THEN 'Breakfast'
+          WHEN ${type} = 2 THEN 'Lunch'
+          WHEN ${type} = 3 THEN 'Other'
+          WHEN ${type} = 9 THEN 'WTF IS HAPPENING???'
+          ELSE NULL
+          END
+          ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [

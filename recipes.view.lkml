@@ -286,6 +286,7 @@ view: recipes {
     sql:  CASE WHEN ${meal_type_code} = 0 THEN 'Dinner'
           WHEN ${meal_type_code} = 1 THEN 'Breakfast'
           WHEN ${meal_type_code} = 2 THEN 'Lunch'
+          When ${meal_type_code} = 3 THEN 'Other'
           ELSE NULL
           END
           ;;
