@@ -153,10 +153,6 @@ explore: subscriptions {
     sql_on: ${scheduled_menus.subscription_id} =  ${subscriptions.id} ;;
   }
 
-  join: chefs {
-    relationship: many_to_one
-    sql_on: ${recipes.chef_id} = ${chefs.id} ;;
-  }
 
   join: stripe_charges {
     relationship: one_to_one
@@ -175,11 +171,6 @@ explore: users {
   join: tickets {
     relationship: one_to_many
     sql_on: ${users.email} = ${tickets.email} ;;
-  }
-
-  join: zendesk_users {
-    relationship: one_to_many
-    sql_on: ${tickets.requester_id} = ${zendesk_users.id} ;;
   }
 
   join: zendesk_ticket_metrics {
@@ -262,21 +253,21 @@ explore: users {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
-
-  join: order_recipes {
+  join: order_items {
     relationship: one_to_many
-    sql_on: ${orders.id} = ${order_recipes.order_id};;
+    sql_on: ${orders.id} = ${order_items.order_id} ;;
   }
 
   join: recipes {
-    relationship: many_to_one
-    sql_on: ${order_recipes.recipe_id} = ${recipes.id};;
+    relationship: one_to_one
+    sql_on: ${order_items.recipe_id} = ${recipes.id};;
   }
 
   join: recipe_plans {
     relationship: many_to_one
     sql_on: ${recipe_plans.recipe_id} = ${recipes.id};;
   }
+
 
   join: coupons {
     relationship: many_to_one
@@ -410,8 +401,6 @@ explore: ingredients {
   }
   }
 
-explore: google_analytics_conversion {}
-
 explore: paused_and_cancelled_users {}
 
 explore: recipes {}
@@ -428,14 +417,14 @@ explore: recipe_feedback_surveys {
     sql_on: ${recipe_feedbacks.recipe_id} = ${recipes.id} ;;
   }
 
-  join: order_recipes {
+  join: order_items {
     relationship: one_to_many
-    sql_on: ${recipes.id} = ${order_recipes.recipe_id} ;;
+    sql_on: ${recipes.id} = ${order_items.recipe_id} ;;
   }
 
   join: orders {
     relationship: one_to_many
-    sql_on: ${orders.id} = ${order_recipes.order_id} ;;
+    sql_on: ${orders.id} = ${order_items.order_id} ;;
   }
 
   join: subscriptions {
