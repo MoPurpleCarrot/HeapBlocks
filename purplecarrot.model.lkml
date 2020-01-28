@@ -152,12 +152,6 @@ explore: subscriptions {
     relationship: many_to_one
     sql_on: ${scheduled_menus.subscription_id} =  ${subscriptions.id} ;;
   }
-
-
-  join: stripe_charges {
-    relationship: one_to_one
-    sql_on: ${orders.stripe_charge_id} = ${stripe_charges.id} ;;
-  }
 }
 #  join: stripe_customers__cards_data {
 #    relationship: many_to_one
@@ -311,11 +305,6 @@ explore: users {
     sql_on: ${first_order.id} = ${user_facts.first_order_id} ;;
   }
 
-  join: user_facts_traffic {
-    relationship: one_to_one
-    sql_on: ${user_facts.id} = ${user_facts_traffic.id} ;;
-  }
-
   join: user_facts_order {
     relationship: one_to_one
     sql_on: ${user_facts.id} = ${user_facts_order.id} ;;
@@ -400,8 +389,6 @@ explore: ingredients {
     sql_on: ${menu_items.menu_id} = ${menus.id} ;;
   }
   }
-
-explore: paused_and_cancelled_users {}
 
 explore: recipes {}
 
@@ -559,25 +546,6 @@ explore: refunds {
   }
   }
 
-explore: stripe_customers {
-
-  join: stripe_customers__cards__data {
-    relationship: many_to_one
-    sql_on: ${stripe_customers__cards__data.id} = ${stripe_customers.default_card} ;;
-  }
-
-  join: users {
-    relationship: one_to_one
-    sql_on: ${users.email}=${stripe_customers.email} ;;
-  }
-
-  join: subscriptions {
-    relationship: one_to_one
-    sql_on: ${subscriptions.user_id} = ${users.id} ;;
-  }
-
-}
-
 explore: prep_needs {
 
   join: recipe_plans {
@@ -594,21 +562,6 @@ explore: seasonal_order {
 }
 
 explore: coupons {}
-
-explore: stripe_events {
-  join: stripe_charges {
-    relationship: one_to_one
-    sql_on:  ${stripe_charges.balance_transaction} = ${stripe_events.data__object__balance_transaction} ;;
-  }
-
-  join: stripe_transfers {
-    relationship: one_to_many
-    sql_on:  ${stripe_transfers.balance_transaction} = ${stripe_events.data__object__balance_transaction} ;;
-  }
-
-
-}
-
 
 explore: live_chat_sessions {
 
