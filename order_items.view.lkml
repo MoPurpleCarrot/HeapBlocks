@@ -74,9 +74,9 @@ view: order_items {
     sql: ${TABLE}.deleted_at ;;
   }
 
-  dimension:  active {
+  dimension:  deleted {
     type: yesno
-    sql:  ${deleted_date} = Null;;
+    sql:  ${deleted_date} > 2015-01-01;;
   }
 
   dimension: discount_cents {
