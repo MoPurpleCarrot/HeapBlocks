@@ -257,6 +257,11 @@ explore: users {
     sql_on: ${order_items.recipe_id} = ${recipes.id};;
   }
 
+  join: skus {
+    relationship: one_to_one
+    sql_on: $order_items ;;
+  }
+
   join: recipe_plans {
     relationship: many_to_one
     sql_on: ${recipe_plans.recipe_id} = ${recipes.id};;

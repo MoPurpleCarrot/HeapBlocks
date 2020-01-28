@@ -1,5 +1,5 @@
-view: order_items {
-  sql_table_name: heroku_postgres.order_items ;;
+view: skus {
+  sql_table_name: heroku_postgres.skus ;;
   drill_fields: [id]
 
   dimension: id {
@@ -46,6 +46,21 @@ view: order_items {
     sql: ${TABLE}._sdc_table_version ;;
   }
 
+  dimension: allergens {
+    type: string
+    sql: ${TABLE}.allergens ;;
+  }
+
+  dimension: brand {
+    type: string
+    sql: ${TABLE}.brand ;;
+  }
+
+  dimension: code {
+    type: string
+    sql: ${TABLE}.code ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -60,43 +75,39 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension_group: deleted {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.deleted_at ;;
-  }
-
-  dimension:  deleted {
-    type: yesno
-    sql:  ${deleted_date} > 2015-01-01;;
-  }
-
-  dimension: discount_cents {
-    type: number
-    sql: ${TABLE}.discount_cents ;;
-  }
-
-  dimension: discount_currency {
+  dimension: description {
     type: string
-    sql: ${TABLE}.discount_currency ;;
+    sql: ${TABLE}.description ;;
   }
 
-  dimension: order_id {
-    type: number
-    sql: ${TABLE}.order_id ;;
+  dimension: display {
+    type: yesno
+    sql: ${TABLE}.display ;;
   }
 
-  dimension: price_cents {
+  dimension: enabled_per_region {
+    type: string
+    sql: ${TABLE}.enabled_per_region ;;
+  }
+
+  dimension: ingredients {
+    type: string
+    sql: ${TABLE}.ingredients ;;
+  }
+
+  dimension: min_quantity {
     type: number
-    sql: ${TABLE}.price_cents ;;
+    sql: ${TABLE}.min_quantity ;;
+  }
+
+  dimension: point_value {
+    type: number
+    sql: ${TABLE}.point_value ;;
+  }
+
+  dimension: price {
+    type: number
+    sql: ${TABLE}.price ;;
   }
 
   dimension: price_currency {
@@ -104,24 +115,34 @@ view: order_items {
     sql: ${TABLE}.price_currency ;;
   }
 
-  dimension: quantity {
-    type: number
-    sql: ${TABLE}.quantity ;;
-  }
-
-  dimension: recipe_id {
-    type: number
-    sql: ${TABLE}.recipe_id ;;
-  }
-
-  dimension: tax_amount_cents {
-    type: number
-    sql: ${TABLE}.tax_amount_cents ;;
-  }
-
-  dimension: tax_amount_currency {
+  dimension: search_keywords {
     type: string
-    sql: ${TABLE}.tax_amount_currency ;;
+    sql: ${TABLE}.search_keywords ;;
+  }
+
+  dimension: seo_description {
+    type: string
+    sql: ${TABLE}.seo_description ;;
+  }
+
+  dimension: seo_title {
+    type: string
+    sql: ${TABLE}.seo_title ;;
+  }
+
+  dimension: slug {
+    type: string
+    sql: ${TABLE}.slug ;;
+  }
+
+  dimension: spec {
+    type: string
+    sql: ${TABLE}.spec ;;
+  }
+
+  dimension: subtitle {
+    type: string
+    sql: ${TABLE}.subtitle ;;
   }
 
   dimension: tax_code {
@@ -129,21 +150,9 @@ view: order_items {
     sql: ${TABLE}.tax_code ;;
   }
 
-  dimension: type {
+  dimension: title {
     type: string
-    sql: ${TABLE}.type ;;
-  }
-
-  dimension: type_name {
-    type: string
-    sql:  CASE WHEN ${type} = 0 THEN 'Dinner'
-          WHEN ${type} = 1 THEN 'Breakfast'
-          WHEN ${type} = 2 THEN 'Lunch'
-          WHEN ${type} = 3 THEN 'Other'
-          WHEN ${type} = 9 THEN 'WTF IS HAPPENING???'
-          ELSE NULL
-          END
-          ;;
+    sql: ${TABLE}.title ;;
   }
 
   dimension_group: updated {
@@ -163,11 +172,5 @@ view: order_items {
   measure: count {
     type: count
     drill_fields: [id]
-  }
-
-  measure: total_revenue{
-    type: sum
-    sql: ${price_cents} ;;
-    value_format_name: usd
   }
 }
