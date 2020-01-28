@@ -563,15 +563,6 @@ explore: seasonal_order {
 
 explore: coupons {}
 
-explore: live_chat_sessions {
-
-  join: live_chat_session_tags {
-    relationship: many_to_one
-    sql_on: ${live_chat_session_tags._sdc_source_key___sdc_primary_key} = ${live_chat_sessions.__sdc_primary_key} ;;
-  }
-}
-
-
 #Intercom joining
 
 explore: Intercom_conversations {
