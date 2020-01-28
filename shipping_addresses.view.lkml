@@ -166,6 +166,14 @@ view: shipping_addresses {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: sms_notification_status{
+    type: string
+    sql:  CASE WHEN ${TABLE}.sms_notification_status = 1 THEN 'Enabled'
+          ELSE 'Not Enabled'
+          END
+          ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]

@@ -541,6 +541,10 @@ view: users {
           END
           ;;
   }
+  dimension: do_not_sell{
+    type: string
+    sql: ${TABLE}.do_not_sell ;;
+  }
 
   measure: count {
     type: count
