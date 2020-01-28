@@ -76,9 +76,7 @@ view: order_items {
 
   dimension:  active {
     type: yesno
-    sql:  case when ${deleted_date} = -Null, 0
-          else  1
-    ;;
+    sql:  ${deleted_date} = Null;;
   }
 
   dimension: discount_cents {
