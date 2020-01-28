@@ -297,6 +297,11 @@ view: orders {
     sql: ${TABLE}.through_partner ;;
   }
 
+  dimension: test_account {
+    type: yesno
+    sql: ${TABLE}.test_account ;;
+  }
+
   dimension: tracking_number {
     type: string
     sql: ${TABLE}.tracking_number ;;

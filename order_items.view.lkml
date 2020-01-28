@@ -74,6 +74,13 @@ view: order_items {
     sql: ${TABLE}.deleted_at ;;
   }
 
+  dimension:  active {
+    type: yesno
+    sql:  case when ${deleted_date} = -Null, 0
+          else  1
+    ;;
+  }
+
   dimension: discount_cents {
     type: number
     sql: ${TABLE}.discount_cents ;;
