@@ -81,6 +81,16 @@ explore: heap_users{
     sql_on: ${first_order.id} = ${user_facts.first_order_id} ;;
   }
 
+  join: order_items {
+    relationship: one_to_many
+    sql_on: ${first_order.id} = ${order_items.order_id} ;;
+  }
+
+  join: recipes {
+    relationship: one_to_one
+    sql_on: ${order_items.recipe_id} = ${recipes.id};;
+  }
+
   join: subscriptions {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
@@ -107,6 +117,11 @@ explore: subscriptions {
   join: orders {
     relationship: many_to_one
     sql_on: ${orders.subscription_id} = ${subscriptions.id} ;;
+  }
+
+  join: order_items {
+    relationship: one_to_many
+    sql_on: ${orders.id}=${order_items.order_id} ;;
   }
 
   join: users {
@@ -360,6 +375,16 @@ explore: gift_purchases {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+  join: order_items {
+    relationship: one_to_many
+    sql_on: ${orders.id} = ${order_items.order_id}  ;;
+  }
+
+  join: recipes {
+    relationship: one_to_one
+    sql_on: ${order_items.recipe_id} = ${recipes.id};;
+  }
+
   join: user_facts {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
@@ -530,6 +555,16 @@ explore: refunds {
     sql_on: ${refunds.refundable_id}=${orders.id} ;;
   }
 
+  join: order_items {
+    relationship: one_to_many
+    sql_on: ${orders.id}=${order_items.order_id} ;;
+  }
+
+  join: recipes {
+    relationship: one_to_one
+    sql_on: ${order_items.recipe_id} = ${recipes.id};;
+  }
+
   join: subscriptions {
     relationship: many_to_one
     sql_on: ${orders.subscription_id}=${subscriptions.id} ;;
@@ -597,6 +632,15 @@ join: subscriptions {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+  join: order_items {
+    relationship:  one_to_many
+    sql_on: ${orders.id} = ${order_items.order_id} ;;
+  }
+
+  join: recipes {
+    relationship: one_to_one
+    sql_on: ${order_items.recipe_id} = ${recipes.id};;
+  }
 
 join: Intercom_conversations__tags__tags {
   relationship:  many_to_one

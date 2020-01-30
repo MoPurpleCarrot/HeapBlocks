@@ -74,7 +74,7 @@ view: order_items {
     sql: ${TABLE}.deleted_at ;;
   }
 
-  dimension:  deleted {
+  dimension:  deleted_yn {
     type: yesno
     sql:  ${deleted_date} > 2015-01-01;;
   }

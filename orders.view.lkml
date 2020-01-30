@@ -373,6 +373,12 @@ view: orders {
     sql: ${extras_price} ;;
   }
 
+  measure: total_breakfast_revenue{
+    type: sum
+    value_format_name: usd
+    sql: ${order_items.price_cents} ;;
+  }
+
   measure: total_amount_charged {
     type: sum
     value_format_name: usd
