@@ -129,19 +129,22 @@ view: order_items {
     sql: ${TABLE}.tax_code ;;
   }
 
-  dimension: type {
+  dimension: recipe_or_sku {
     type: string
     sql: ${TABLE}.type ;;
   }
 
-  dimension: type_name {
+  dimension: recipe_meal_type {
     type: string
-    sql:  CASE WHEN ${type} = 0 THEN 'Dinner'
-          WHEN ${type} = 1 THEN 'Breakfast'
-          WHEN ${type} = 2 THEN 'Lunch'
-          WHEN ${type} = 3 THEN 'Other'
-          WHEN ${type} = 9 THEN 'WTF IS HAPPENING???'
-          ELSE NULL
+    sql: ${recipes.meal_type} ;;
+  }
+
+  dimension: item_type {
+    type: string
+    sql:  CASE WHEN ${recipe_meal_type} = 'Dinner' THEN 'Dinner'
+          WHEN ${recipe_meal_type} = 'Lunch' THEN 'Lunch'
+          WHEN ${recipe_meal_type} = 'Breakfast' THEN 'Breakfast'
+          ELSE 'Extension'
           END
           ;;
   }
