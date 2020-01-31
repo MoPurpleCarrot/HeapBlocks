@@ -149,6 +149,39 @@ view: order_items {
           ;;
   }
 
+  dimension: breakfast_revenue {
+    type: number
+    sql: case when ${item_type} = "Breakfast" Then ${price_cents}
+    Else 0
+    END
+    ;;
+  }
+
+  dimension: lunch_revenue {
+    type: number
+    sql: case when ${item_type} = "Lunch" Then ${price_cents}
+          Else 0
+          END
+          ;;
+  }
+
+  dimension: dinner_revenue {
+    type: number
+    sql: case when ${item_type} = "Dinner" Then ${price_cents}
+          Else 0
+          END
+          ;;
+  }
+
+  dimension: extension_revenue {
+    type: number
+    sql: case when ${item_type} = "Extension" Then ${price_cents}
+          Else 0
+          END
+          ;;
+  }
+
+
   dimension_group: updated {
     type: time
     timeframes: [

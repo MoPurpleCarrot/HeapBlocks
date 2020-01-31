@@ -376,7 +376,25 @@ view: orders {
   measure: total_breakfast_revenue{
     type: sum
     value_format_name: usd
-    sql: ${order_items.price_cents} ;;
+    sql: ${order_items.breakfast_revenue} ;;
+  }
+
+  measure: total_lunch_revenue{
+    type: sum
+    value_format_name: usd
+    sql: ${order_items.lunch_revenue} ;;
+  }
+
+  measure: total_dinner_revenue{
+    type: sum
+    value_format_name: usd
+    sql: ${order_items.dinner_revenue} ;;
+  }
+
+  measure: total_extension_revenue{
+    type: sum
+    value_format_name: usd
+    sql: ${order_items.extension_revenue} ;;
   }
 
   measure: total_amount_charged {
