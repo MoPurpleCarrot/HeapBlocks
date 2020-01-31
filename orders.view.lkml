@@ -530,6 +530,7 @@ view: orders {
     sql:  case when ${plan} = 8 then 2
           when ${plan} = 6 then 2
           else 3
+          end
     ;;
   }
 
