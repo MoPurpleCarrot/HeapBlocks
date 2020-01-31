@@ -198,7 +198,7 @@ view: order_items {
     sql: ${lunch_binary} ;;
   }
 
-  measure: count_dinnert_binary {
+  measure: count_dinner_binary {
     type: sum
     sql: ${dinner_binary} ;;
   }

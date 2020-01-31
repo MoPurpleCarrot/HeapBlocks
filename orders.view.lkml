@@ -525,6 +525,19 @@ view: orders {
           ;;
   }
 
+  dimension: default_plan_meal_num {
+    type: number
+    sql:  case when ${plan_name} = 'Four Serving' then 2
+          when ${plan_name} = 'Six Serving' then 2
+          else 3
+    ;;
+  }
+
+  measure: total_default_plan_meal {
+    type: sum
+    sql:  ${default_plan_meal_num} ;;
+  }
+
   measure: total_revenue_30day {
     type:  sum
     value_format_name: usd
