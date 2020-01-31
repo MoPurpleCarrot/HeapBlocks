@@ -190,7 +190,7 @@ view: order_items {
 
   dimension: breakfast_revenue {
     type: number
-    sql: case when ${item_type} = "Breakfast" Then ${price_cents}
+    sql: case when ${breakfast_binary} = 1 Then ${price_cents}
     Else 0
     END
     ;;
@@ -198,7 +198,7 @@ view: order_items {
 
   dimension: lunch_revenue {
     type: number
-    sql: case when ${item_type} = "Lunch" Then ${price_cents}
+    sql: case when ${lunch_binary} = 1 Then ${price_cents}
           Else 0
           END
           ;;
@@ -206,7 +206,7 @@ view: order_items {
 
   dimension: dinner_revenue {
     type: number
-    sql: case when ${item_type} = "Dinner" Then ${price_cents}
+    sql: case when ${dinner_binary} = 1 Then ${price_cents}
           Else 0
           END
           ;;
@@ -214,7 +214,7 @@ view: order_items {
 
   dimension: extension_revenue {
     type: number
-    sql: case when ${item_type} = "Extension" Then ${price_cents}
+    sql: case when ${extension_binary} = 1 Then ${price_cents}
           Else 0
           END
           ;;
