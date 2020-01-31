@@ -139,6 +139,16 @@ view: order_items {
     sql: ${recipes.meal_type} ;;
   }
 
+  dimension: order_plan_code {
+    type: number
+    sql: ${orders.plan} ;;
+  }
+
+  dimension: order_plan_name {
+    type: string
+    sql: ${orders.plan_name} ;;
+  }
+
   dimension: item_type {
     type: string
     sql:  CASE WHEN ${recipe_meal_type} = 'Dinner' THEN 'Dinner'
@@ -178,6 +188,16 @@ view: order_items {
           ;;
   }
 
+  dimension: dinner_kit_count {
+    type: number
+    sql: case when ${recipe_meal_type_code} = 0 and ${order_plan_code} = 8 Then 2
+          When ${recipe_meal_type_code} = 0 and ${order_plan_code} = 6 Then 2
+          When ${recipe_meal_type_code} = 0 Then 1
+          Else 0
+          END
+          ;;
+  }
+
   dimension: extension_binary {
     type: number
     sql: case when ${dinner_binary} = 1 Then 0
@@ -201,6 +221,11 @@ view: order_items {
   measure: count_dinner_binary {
     type: sum
     sql: ${dinner_binary} ;;
+  }
+
+  measure: count_dinner_kit {
+    type: sum
+    sql: ${dinner_kit_count} ;;
   }
 
   measure: count_extension_binary {

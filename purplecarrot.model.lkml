@@ -86,6 +86,11 @@ explore: heap_users{
     sql_on: ${first_order.id} = ${order_items.order_id} ;;
   }
 
+  join: orders {
+    relationship: many_to_one
+    sql_on: ${order_items.order_id}=${orders.id} ;;
+  }
+
   join: recipes {
     relationship: one_to_one
     sql_on: ${order_items.recipe_id} = ${recipes.id};;
