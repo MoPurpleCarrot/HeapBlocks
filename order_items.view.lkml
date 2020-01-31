@@ -149,9 +149,14 @@ view: order_items {
           ;;
   }
 
+  dimension: recipe_meal_type_code {
+    type:  number
+    sql: ${recipes.meal_type_code} ;;
+  }
+
   dimension: breakfast_binary {
     type: number
-    sql: case when ${item_type} = "Breakfast" Then 1
+    sql: case when ${recipe_meal_type_code} = 1 Then 1
           Else 0
           END
           ;;
