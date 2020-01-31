@@ -528,7 +528,7 @@ view: orders {
   dimension: default_plan_meal_num {
     type: number
     sql:  case when ${plan} = 8 then 4
-          when ${plan} = 6 then 6
+          when ${plan} = 6 then 2
           else 3
           end
     ;;
