@@ -18,6 +18,7 @@ datagroup:batch_date_update {
 explore:heap_registration_complete {}
 explore:heap_first_session {}
 explore:heap_account_created {}
+explore:skus {}
 explore:weekly_orders_trackings {
 
   join: menus {
