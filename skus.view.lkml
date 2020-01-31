@@ -155,6 +155,11 @@ view: skus {
     sql: ${TABLE}.title ;;
   }
 
+  dimension: brand_title  {
+    type: string
+    sql: ${brand} & " " *& ${title} ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
