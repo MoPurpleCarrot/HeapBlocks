@@ -162,6 +162,11 @@ view: order_items {
           ;;
   }
 
+  measure: count_breakfast_binary {
+    type: sum
+    sql: ${breakfast_binary} ;;
+  }
+
   dimension: lunch_binary {
     type: number
     sql: case when ${recipe_meal_type_code} = 2 Then 1
