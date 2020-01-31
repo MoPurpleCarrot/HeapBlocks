@@ -157,7 +157,7 @@ view: skus {
 
   dimension: brand_title  {
     type: string
-    sql: ${brand} & " " *& ${title} ;;
+    sql: ${brand} & " " & ${title} ;;
   }
 
   dimension_group: updated {
