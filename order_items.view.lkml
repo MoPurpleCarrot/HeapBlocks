@@ -164,7 +164,7 @@ view: order_items {
 
   dimension: lunch_binary {
     type: number
-    sql: case when ${item_type} = "Lunch" Then 1
+    sql: case when ${recipe_meal_type_code} = 2 Then 1
           Else 0
           END
           ;;
@@ -172,7 +172,7 @@ view: order_items {
 
   dimension: dinner_binary {
     type: number
-    sql: case when ${item_type} = "Dinner" Then 1
+    sql: case when ${recipe_meal_type_code} = 0 Then 1
           Else 0
           END
           ;;
@@ -180,8 +180,10 @@ view: order_items {
 
   dimension: extension_binary {
     type: number
-    sql: case when ${item_type} = "Extension" Then 1
-          Else 0
+    sql: case when ${dinner_binary} = 1 Then 0
+          when  ${lunch_binary} = 1 Then 0
+          when ${breakfast_binary} = 1 Then 0
+          Else 1
           END
           ;;
   }
