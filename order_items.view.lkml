@@ -162,11 +162,6 @@ view: order_items {
           ;;
   }
 
-  measure: count_breakfast_binary {
-    type: sum
-    sql: ${breakfast_binary} ;;
-  }
-
   dimension: lunch_binary {
     type: number
     sql: case when ${recipe_meal_type_code} = 2 Then 1
@@ -191,6 +186,26 @@ view: order_items {
           Else 1
           END
           ;;
+  }
+
+  measure: count_breakfast_binary {
+    type: sum
+    sql: ${breakfast_binary} ;;
+  }
+
+  measure: count_lunch_binary {
+    type: sum
+    sql: ${lunch_binary} ;;
+  }
+
+  measure: count_dinnert_binary {
+    type: sum
+    sql: ${dinner_binary} ;;
+  }
+
+  measure: count_extension_binary {
+    type: sum
+    sql: ${extension_binary} ;;
   }
 
   dimension: breakfast_revenue {
@@ -225,6 +240,25 @@ view: order_items {
           ;;
   }
 
+  measure: sum_breakfast_rev {
+    type: sum
+    sql: ${breakfast_revenue} ;;
+  }
+
+  measure: sum_lunch_rev {
+    type: sum
+    sql: ${lunch_revenue} ;;
+  }
+
+  measure: sum_dinner_rev {
+    type: sum
+    sql: ${dinner_revenue} ;;
+  }
+
+  measure: sum_extension_rev {
+    type: sum
+    sql: ${extension_revenue} ;;
+  }
 
   dimension_group: updated {
     type: time

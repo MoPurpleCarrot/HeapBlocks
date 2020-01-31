@@ -373,50 +373,6 @@ view: orders {
     sql: ${extras_price} ;;
   }
 
-  measure: total_breakfast_revenue{
-    type: sum
-    value_format_name: usd
-    sql: ${order_items.breakfast_revenue} ;;
-  }
-
-  measure: total_lunch_revenue{
-    type: sum
-    value_format_name: usd
-    sql: ${order_items.lunch_revenue} ;;
-  }
-
-  measure: total_dinner_revenue{
-    type: sum
-    value_format_name: usd
-    sql: ${order_items.dinner_revenue} ;;
-  }
-
-  measure: total_extension_revenue{
-    type: sum
-    value_format_name: usd
-    sql: ${order_items.extension_revenue} ;;
-  }
-
-  measure: count_breakfast_items {
-    type: sum
-    sql: ${order_items.breakfast_binary} ;;
-  }
-
-  measure: count_lunch_items {
-    type: sum
-    sql: ${order_items.lunch_binary} ;;
-  }
-
-  measure: count_dinner_items {
-    type: sum
-    sql: ${order_items.dinner_binary} ;;
-  }
-
-  measure: count_extension_items {
-    type: sum
-    sql: ${order_items.extension_binary} ;;
-  }
-
   measure: total_amount_charged {
     type: sum
     value_format_name: usd
