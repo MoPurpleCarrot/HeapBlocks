@@ -157,7 +157,7 @@ view: skus {
 
   dimension: brand_title  {
     type: string
-    sql: concat(${brand}, " ", ${title}) ;;
+    sql: concat(${brand}, ' ', ${title}) ;;
   }
 
   dimension_group: updated {
