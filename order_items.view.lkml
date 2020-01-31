@@ -149,6 +149,38 @@ view: order_items {
           ;;
   }
 
+  dimension: breakfast_binary {
+    type: number
+    sql: case when ${item_type} = "Breakfast" Then 1
+          Else 0
+          END
+          ;;
+  }
+
+  dimension: lunch_binary {
+    type: number
+    sql: case when ${item_type} = "Lunch" Then 1
+          Else 0
+          END
+          ;;
+  }
+
+  dimension: dinner_binary {
+    type: number
+    sql: case when ${item_type} = "Dinner" Then 1
+          Else 0
+          END
+          ;;
+  }
+
+  dimension: extension_binary {
+    type: number
+    sql: case when ${item_type} = "Extension" Then 1
+          Else 0
+          END
+          ;;
+  }
+
   dimension: breakfast_revenue {
     type: number
     sql: case when ${item_type} = "Breakfast" Then ${price_cents}
