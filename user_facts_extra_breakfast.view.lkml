@@ -18,7 +18,7 @@ view: user_facts_extra_breakfast {
       left join heroku_postgres.recipes as recipes
       on order_items.recipe_id = recipes.id
 
-      WHERE orders.status = 3 AND orders.extras_price > 0 AND recipes.meal_type = 1 And order_items.deleted_at !> '2018-01-01'
+      WHERE orders.status = 3 AND orders.extras_price > 0 AND recipes.meal_type = 1 And order_items.deleted_at !> '2017-01-01 10:21:08'
 
       GROUP BY 1
        ;;
