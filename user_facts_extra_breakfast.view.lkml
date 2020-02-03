@@ -7,7 +7,7 @@ view: user_facts_extra_breakfast {
       MIN(orders.id) as first_breakfast_order_id,
       MAX(orders.delivery_on) as last_breakfast_order,
       MAX(orders.id) as last_breakfast_order_id
-      CAST(CASE WHEN order_items.deleted_at IS NULL then 0 ELSE 1 END as bit) as deleted_boolean
+      CAST(CASE WHEN order_items.deleted_at IS NULL then 0 ELSE 1 END as binary) as deleted_boolean
 
 
       FROM heroku_postgres.users as users
