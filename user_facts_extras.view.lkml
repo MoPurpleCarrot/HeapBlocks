@@ -37,15 +37,18 @@ view: user_facts_extras {
       sql: ${TABLE}.num_extras_orders ;;
     }
 
-    dimension: orders_group {
-      type: string
-      sql:  CASE WHEN ${num_extras_orders} > 5 THEN 'c) Long Term (6+)'
-            WHEN ${num_extras_orders} > 1 THEN 'b) Short Term (2-5)'
-            WHEN ${num_extras_orders} = 1 THEN 'a) One & Done'
+  dimension: extra_num_orders_group {
+    type: string
+    sql:  CASE WHEN ${num_extras_orders} = 1 THEN '1'
+            WHEN ${num_extras_orders} = 2 THEN '2'
+            WHEN ${num_extras_orders} = 3 THEN '3'
+            WHEN ${num_extras_orders} = 4 THEN '4'
+            WHEN ${num_extras_orders} = 5 THEN '5'
+            WHEN ${num_extras_orders} > 5 THEN '6+'
             ELSE NULL
             END
             ;;
-    }
+  }
 
     dimension: total_extras_revenue {
       type: number
