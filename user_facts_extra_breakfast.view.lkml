@@ -1,6 +1,6 @@
 view: user_facts_extra_breakfast {
   derived_table: {
-    sql: SELECT users.id, recipes.meal_type, order_items.deleted_at,
+    sql: SELECT users.id,
       COUNT(orders.id) as num_breakfast_orders,
       SUM(order_items.price_cents) as total_breakfast_revenue,
       MIN(orders.delivery_on) as first_breakfast_order,
