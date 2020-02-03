@@ -1,6 +1,6 @@
 view: user_facts_extra_breakfast {
   derived_table: {
-    sql: SELECT users.id, recipes.meal_type, order_items.deleted_date,
+    sql: SELECT users.id, recipes.meal_type, order_items.deleted_at,
       COUNT(orders.id) as num_breakfast_orders,
       SUM(order_items.price_cents) as total_breakfast_revenue,
       MIN(orders.delivery_on) as first_breakfast_order,
@@ -18,7 +18,7 @@ view: user_facts_extra_breakfast {
       left join heroku_postgres.recipes as recipes
       on order_items.recipe_id = recipes.id
 
-      WHERE orders.status = 3 AND orders.extras_price > 0 AND recipes.meal_type = 1 AND order_items.deleted_date = null
+      WHERE orders.status = 3 AND orders.extras_price > 0 AND recipes.meal_type = 1 AND order_items.deleted_at = null
 
       GROUP BY 1
        ;;
