@@ -318,6 +318,11 @@ explore: users {
     sql_on: ${users.id} = ${user_facts_extras.id} ;;
   }
 
+  join: user_facts_extra_breakfast {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts_extra_breakfast.id} ;;
+  }
+
   join: last_order {
     from: orders
     relationship: many_to_one
