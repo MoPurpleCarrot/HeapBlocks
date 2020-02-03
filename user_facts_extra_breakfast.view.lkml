@@ -7,6 +7,8 @@ view: user_facts_extra_breakfast {
       MIN(orders.id) as first_breakfast_order_id,
       MAX(orders.delivery_on) as last_breakfast_order,
       MAX(orders.id) as last_breakfast_order_id
+      CAST(CASE WHEN order_items.deleted_at IS NULL then 0 ELSE 1 END as bit) as deleted_boolean
+
 
       FROM heroku_postgres.users as users
       LEFT JOIN heroku_postgres.subscriptions as subscriptions
@@ -18,7 +20,7 @@ view: user_facts_extra_breakfast {
       left join heroku_postgres.recipes as recipes
       on order_items.recipe_id = recipes.id
 
-      WHERE orders.status = 3 AND orders.extras_price > 0 AND recipes.meal_type = 1 And Coalesce(order_items.deleted_at,0) = 0
+      WHERE orders.status = 3 AND orders.extras_price > 0 AND recipes.meal_type = 1 And deleted_boolean = 0
 
       GROUP BY 1
        ;;
