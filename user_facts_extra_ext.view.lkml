@@ -16,7 +16,7 @@ view: user_facts_extra_extension {
       Left Join heroku_postgres.order_items as order_items
       on orders.id = order_items.order_id
 
-      WHERE orders.status = 3 AND orders.extras_price > 0 and order_items.type <> ‘RecipeOrderItem’
+      WHERE orders.status = 3 AND orders.extras_price > 0 and order_items.type <> "RecipeOrderItem"
       GROUP BY 1
        ;;
 # AND order_items.deleted_at = NULL
@@ -104,4 +104,3 @@ view: user_facts_extra_extension {
 
 
   }
-
