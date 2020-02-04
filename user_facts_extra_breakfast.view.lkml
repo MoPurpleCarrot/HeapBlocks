@@ -53,6 +53,19 @@ view: user_facts_extra_breakfast {
             ;;
     }
 
+  dimension: breakfast_wk_adoption_group {
+    type: string
+    sql:  CASE WHEN ${week_registered_to_breakfast_order} = 1 THEN '1'
+            WHEN ${week_registered_to_breakfast_order} = 2 THEN '2'
+            WHEN ${week_registered_to_breakfast_order} = 3 THEN '3'
+            WHEN ${week_registered_to_breakfast_order} = 4 THEN '4'
+            WHEN ${week_registered_to_breakfast_order} = 5 THEN '5'
+            WHEN ${week_registered_to_breakfast_order} > 5 THEN '6+'
+            ELSE NULL
+            END
+            ;;
+  }
+
     dimension: total_breakfast_revenue {
       type: number
       sql: ${TABLE}.total_breakfast_revenue ;;

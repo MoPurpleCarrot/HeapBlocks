@@ -50,6 +50,19 @@ view: user_facts_extras {
             ;;
   }
 
+  dimension: extra_wk_adoption_group {
+    type: string
+    sql:  CASE WHEN ${week_registered_to_extra_order} = 1 THEN '1'
+            WHEN ${week_registered_to_extra_order} = 2 THEN '2'
+            WHEN ${week_registered_to_extra_order} = 3 THEN '3'
+            WHEN ${week_registered_to_extra_order} = 4 THEN '4'
+            WHEN ${week_registered_to_extra_order} = 5 THEN '5'
+            WHEN ${week_registered_to_extra_order} > 5 THEN '6+'
+            ELSE NULL
+            END
+            ;;
+  }
+
     dimension: total_extras_revenue {
       type: number
       sql: ${TABLE}.total_extras_revenue ;;
