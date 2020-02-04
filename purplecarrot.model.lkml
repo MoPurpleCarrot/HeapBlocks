@@ -328,11 +328,6 @@ explore: users {
     sql_on: ${users.id} = ${user_facts_extra_lunch.id} ;;
   }
 
-  join: user_facts_extra_dinner {
-    relationship: one_to_one
-    sql_on: ${users.id} = ${user_facts_extra_dinner.id} ;;
-  }
-
   join: user_facts_extra_extension {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts_extra_extension.id} ;;
