@@ -41,6 +41,12 @@ view: gift_purchases {
     sql: ${TABLE}.purchaser_name ;;
   }
 
+  dimension: purchaser_id {
+    type: string
+    sql: ${TABLE}.purchaser_id ;;
+  }
+
+
   dimension: recipient_email {
     type: string
     sql: ${TABLE}.recipient_email ;;
