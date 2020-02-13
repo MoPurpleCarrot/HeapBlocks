@@ -279,7 +279,7 @@ explore: users {
 
   join: skus {
     relationship: one_to_one
-    sql_on: $order_items ;;
+    sql_on: ${order_items.sku_id}=${skus.id} ;;
   }
 
   join: recipe_plans {

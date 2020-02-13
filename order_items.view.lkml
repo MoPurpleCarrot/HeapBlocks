@@ -149,6 +149,11 @@ view: order_items {
     sql: ${orders.plan_name} ;;
   }
 
+  dimension: sku_id {
+    type: string
+    sql: ${TABLE}.sku_id ;;
+  }
+
   dimension: item_type {
     type: string
     sql:  CASE WHEN ${recipe_meal_type} = 'Dinner' THEN 'Dinner'
