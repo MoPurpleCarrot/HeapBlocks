@@ -47,8 +47,10 @@ ORDER BY secondstofirstmessage ASC ;;
       raw,
       time,
       hour,
+      hour_of_day,
       date,
       week,
+      day_of_week_index,
       month,
       quarter,
       year
