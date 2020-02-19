@@ -131,6 +131,8 @@ view: Intercom_conversations {
       raw,
       time,
       hour,
+      hour_of_day,
+      day_of_week_index,
       date,
       week,
       month,
