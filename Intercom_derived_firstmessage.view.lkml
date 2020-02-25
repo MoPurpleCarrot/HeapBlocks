@@ -12,7 +12,7 @@ LEFT JOIN
 
 SELECT _sdc_source_key_id AS secondary_sourcekey, MIN(created_at) as first_message
 FROM intercom_full_integration.conversations__conversation_parts b
-WHERE author__type = 'admin'
+WHERE author__type = 'admin'AND
 WHERE part_type = 'comment'
 GROUP BY _sdc_source_key_id ) c
 
