@@ -239,10 +239,6 @@ view: Intercom_conversations {
         label: "Moira G"
       }
       when: {
-        sql: ${TABLE}.assignee__id = '2232042'  ;;
-        label: "Courtney C"
-      }
-      when: {
         sql: ${TABLE}.assignee__id = '2235175'  ;;
         label: "Sophia T"
       }
@@ -250,25 +246,10 @@ view: Intercom_conversations {
         sql: ${TABLE}.assignee__id = '2237627'  ;;
         label: "Amelia Y"
       }
-      when: {
-        sql: ${TABLE}.assignee__id = '2306277'  ;;
-        label: "Lindey G"
-      }
+
       when: {
         sql: ${TABLE}.assignee__id = '2331461'  ;;
         label: "Stephanie M"
-      }
-      when: {
-        sql: ${TABLE}.assignee__id = '2617089'  ;;
-        label: "Yumi Y"
-      }
-      when: {
-        sql: ${TABLE}.assignee__id = '2676140'  ;;
-        label: "Ashley L"
-      }
-      when: {
-        sql: ${TABLE}.assignee__id = '2698743'  ;;
-        label: "Daniel A"
       }
       when: {
         sql: ${TABLE}.assignee__id = '2713178'  ;;
@@ -295,12 +276,12 @@ view: Intercom_conversations {
         label: "Milena"
       }
       when: {
-        sql: ${TABLE}.assignee__id = '2958534'  ;;
-        label: "Erika R"
-      }
-      when: {
         sql: ${TABLE}.assignee__id = '3248925'  ;;
         label: "Sandra R"
+      }
+      when: {
+        sql: ${TABLE}.assignee__id = '2617089'  ;;
+        label: "Stephanie Y"
       }
 }
 }
