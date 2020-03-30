@@ -84,58 +84,7 @@ view: nps_surveys {
     sql: ${TABLE}.question_1_answer ;;
   }
 
-  dimension: NPS_Type{
-    case: {
-      when: {
-        sql: ${TABLE}.question_1_answer = 9;;
-        label: "Promoter"
-      }
-      when: {
-        sql: ${TABLE}.question_1_answer = 10;;
-        label: "Promoter"
-      }
-      when: {
-        sql: ${TABLE}.question_1_answer = 7;;
-        label: "Neutral"
-      }
-      when: {
-        sql: ${TABLE}.question_1_answer = 8;;
-        label: "Neutral"
-      }
 
-      when: {
-        sql: ${TABLE}.question_1_answer = 0;;
-        label: "Detractor"
-      }
-      when: {
-        sql: ${TABLE}.question_1_answer = 1;;
-        label: "Detractor"
-      }
-      when: {
-        sql: ${TABLE}.question_1_answer = 2;;
-        label: "Detractor"
-      }
-      when: {
-        sql: ${TABLE}.question_1_answer = 3;;
-        label: "Detractor"
-      }
-
-      when: {
-        sql: ${TABLE}.question_1_answer = 4;;
-        label: "Detractor"
-      }
-
-      when: {
-        sql: ${TABLE}.question_1_answer = 5;;
-        label: "Detractor"
-      }
-      when: {
-        sql: ${TABLE}.question_1_answer = 6;;
-        label: "Detractor"
-      }
-
-    }
-  }
 
   dimension: question_2_answer {
     label: "Comments"
