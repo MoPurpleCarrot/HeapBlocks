@@ -190,6 +190,7 @@ view: orders {
     sql: ${TABLE}.billing_status ;;
   }
 
+
   dimension: billing_status {
     type: string
     sql:  CASE WHEN ${billing_status_code} = 0 THEN 'No Billing'
