@@ -190,6 +190,7 @@ view: orders {
     sql: ${TABLE}.billing_status ;;
   }
 
+
   dimension: billing_status {
     type: string
     sql:  CASE WHEN ${billing_status_code} = 0 THEN 'No Billing'
@@ -197,7 +198,7 @@ view: orders {
           WHEN ${billing_status_code} = 2 THEN 'Auth Error'
           WHEN ${billing_status_code} = 3 THEN 'No Charge'
           WHEN ${billing_status_code} = 4 THEN 'Billed'
-          WHEN ${billing_status_code} = 5 THEN 'Unknown'
+          WHEN ${billing_status_code} = 5 THEN 'Bill Error'
           WHEN ${billing_status_code} = 6 THEN 'Refunded'
           ELSE NULL
           END

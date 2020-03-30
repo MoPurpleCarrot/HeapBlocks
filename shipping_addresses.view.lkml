@@ -119,6 +119,14 @@ view: shipping_addresses {
     sql: ${TABLE}.state ;;
   }
 
+  dimension: region {
+    type: string
+    sql: case when ${state} = "Massachusetts" then "Northeast"
+          when ${state} = "Rhode Island" then "Northeast"
+          else "error"
+    ;;
+  }
+
   dimension: state_geo {
     type: string
     group_label: "Location"
