@@ -102,6 +102,10 @@ view: nps_surveys {
           ;;
   }
 
+dimension: follow_up_consent {
+  type: yesno
+  sql: ${TABLE}.follow_up_consent ;;
+}
 
 
   measure: promoter_count {
