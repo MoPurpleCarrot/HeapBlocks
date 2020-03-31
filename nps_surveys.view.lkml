@@ -102,32 +102,7 @@ view: nps_surveys {
           ;;
   }
 
-dimension:  nps_promotor{
-  case: {
-    when: {
-      sql: ${TABLE}.${customer_nps_type} >8 ;;
-      label: "Promotor"
-    }
-  }
-}
 
-  dimension:  nps_neutral {
-    case: {
-      when: {
-        sql: ${TABLE}.${customer_nps_type} < 9 AND ${TABLE}.${customer_nps_type} >6 ;;
-        label: "Neutral"
-      }
-    }
-  }
-
-  dimension:  nps_demoter {
-    case: {
-      when: {
-        sql: ${TABLE}.${customer_nps_type} < 7 ;;
-        label: "Demoter"
-      }
-    }
-  }
 
   measure: promoter_count {
     type: count
