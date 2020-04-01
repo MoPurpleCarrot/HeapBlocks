@@ -315,7 +315,6 @@ view: subscriptions {
 
   dimension_group: returning_reactivation_on {
     type: time
-    hidden:  yes
     timeframes: [time, date, week, month]
     sql: ${TABLE}.returning_reactivation_on ;;
   }
