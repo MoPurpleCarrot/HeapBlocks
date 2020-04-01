@@ -294,7 +294,7 @@ explore: users {
 
   }
   join: gift_redemptions {
-    relationship: one_to_many
+    relationship: many_to_one
     sql_on: ${gift_redemptions.user_id} = ${users.id} ;;
   }
 
