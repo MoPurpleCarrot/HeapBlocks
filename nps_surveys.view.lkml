@@ -84,6 +84,8 @@ view: nps_surveys {
     sql: ${TABLE}.question_1_answer ;;
   }
 
+
+
   dimension: question_2_answer {
     label: "Comments"
     type: string
@@ -99,6 +101,12 @@ view: nps_surveys {
           END
           ;;
   }
+
+dimension: follow_up_consent {
+  type: yesno
+  sql: ${TABLE}.follow_up_consent ;;
+}
+
 
   measure: promoter_count {
     type: count
