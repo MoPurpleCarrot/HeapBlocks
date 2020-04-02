@@ -203,7 +203,7 @@ explore: users {
   }
 
   join: subscription_cancellations {
-    relationship: one_to_one
+    relationship: one_to_many
     sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
   }
 
