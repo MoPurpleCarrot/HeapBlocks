@@ -254,7 +254,7 @@ explore: users {
 
   join: skip_menu_surveys {
     relationship:  many_to_one
-    sql_on: ${skip_menu_surveys.user_id}=${user_facts.id} ;;
+    sql_on: ${skip_menu_surveys.user_id}=${users.id} ;;
   }
 
   join: shipping_addresses {
