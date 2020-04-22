@@ -63,6 +63,11 @@ view: recipe_feedbacks {
     sql: ${TABLE}.question_3_answer ;;
   }
 
+  dimension: question_5 {
+    label: "Comments"
+    type: number
+    sql: ${TABLE}.question_5_answer ;;
+  }
   measure: count {
     type: count
     drill_fields: [id]
