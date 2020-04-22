@@ -65,7 +65,7 @@ view: recipe_feedbacks {
 
   dimension: question_5 {
     label: "Comments"
-    type: number
+    type: string
     sql: ${TABLE}.question_5_answer ;;
   }
   measure: count {
