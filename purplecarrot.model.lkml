@@ -287,6 +287,15 @@ explore: users {
     sql_on: ${recipe_plans.recipe_id} = ${recipes.id};;
   }
 
+  join: recipe_tags_recipes {
+    relationship: many_to_one
+    sql_on: ${recipe_tags_recipes.recipe_id} = ${recipes.id} ;;
+  }
+
+  join: recipe_tags {
+    relationship: one_to_many
+    sql_on: ${recipe_tags.id} = ${recipe_tags_recipes.recipe_tag_id} ;;
+  }
 
   join: coupons {
     relationship: many_to_one
