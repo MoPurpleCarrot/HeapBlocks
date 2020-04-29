@@ -50,6 +50,11 @@ view: recipe_tags {
     sql: ${TABLE}.name ;;
   }
 
+  dimension: tag_category {
+    type: string
+    sql: ${TABLE}.parent ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, name, recipe_tags_recipes.count]

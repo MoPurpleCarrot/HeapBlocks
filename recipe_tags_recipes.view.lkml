@@ -46,13 +46,11 @@ view: recipe_tags_recipes {
 
   dimension: recipe_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.recipe_id ;;
   }
 
   dimension: recipe_tag_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.recipe_tag_id ;;
   }
 
