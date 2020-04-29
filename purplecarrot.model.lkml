@@ -460,7 +460,7 @@ explore: recipe_feedback_surveys {
   }
 
   join: recipes {
-    relationship: one_to_one
+    relationship: many_to_one
     sql_on: ${recipe_feedbacks.recipe_id} = ${recipes.id} ;;
   }
 
