@@ -75,13 +75,13 @@ view: recipe_feedbacks {
 
   measure: average_overall {
     type: average
-    value_format: "#.#;(#.#)"
+    value_format: "0.0;(0.0)"
     sql: ${question_1} ;;
   }
 
   measure: average_flavor {
     type: average
-    value_format: "#.#;(#.#)"
+    value_format: "0.0;(0.0)"
     sql: ${question_2} ;;
   }
 
