@@ -48,21 +48,18 @@ view: recipe_feedbacks {
   dimension: question_1 {
     label: "What was your overall reaction to this recipe? (1-5)"
     type: number
-    value_format: "#.0;(#.0)"
     sql: ${TABLE}.question_1_answer ;;
   }
 
   dimension: question_2 {
     label: "How would you rate the flavor of this recipe? (1-5)"
     type: number
-    value_format: "#.0;(#.0)"
     sql: ${TABLE}.question_2_answer ;;
   }
 
   dimension: question_3 {
     label: "How easy was this recipe to complete? (1-5)"
     type: number
-    value_format: "#.0;(#.0)"
     sql: ${TABLE}.question_3_answer ;;
   }
 
@@ -78,19 +75,19 @@ view: recipe_feedbacks {
 
   measure: average_overall {
     type: average
-    value_format: "#.0;(#.0)"
+    value_format: "#.#;(#.#)"
     sql: ${question_1} ;;
   }
 
   measure: average_flavor {
     type: average
-    value_format: "#.0;(#.0)"
+    value_format: "#.#;(#.#)"
     sql: ${question_2} ;;
   }
 
   measure: average_ease {
     type: average
-    value_format: "#.0;(#.0)"
+    value_format: "#.#;(#.#)"
     sql: ${question_3} ;;
   }
 
