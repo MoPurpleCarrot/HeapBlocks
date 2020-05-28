@@ -75,6 +75,7 @@ view: recipe_feedbacks {
 
   measure: average_overall {
     type: average
+    value_format: "0.0"
     sql: ${question_1}*1.0 ;;
   }
 
