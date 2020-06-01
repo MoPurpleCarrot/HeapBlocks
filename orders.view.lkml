@@ -545,6 +545,12 @@ view: orders {
     sql:  ${default_plan_meal_num} ;;
   }
 
+  measure: total_sales_tax {
+    type: sum
+    sql:  ${sales_tax} ;;
+  }
+
+
   measure: total_revenue_30day {
     type:  sum
     value_format_name: usd
