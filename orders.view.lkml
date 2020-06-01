@@ -329,6 +329,11 @@ view: orders {
     sql: ${TABLE}.account_number ;;
   }
 
+  dimension: sales_tax {
+    type: number
+    sql: ${TABLE}.tax_amount ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
