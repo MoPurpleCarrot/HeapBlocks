@@ -31,6 +31,12 @@ view: recipe_feedbacks {
     sql: ${TABLE}.recipe_id ;;
   }
 
+  dimension: sku_id {
+    type: number
+    sql: ${TABLE}.sku_id ;;
+  }
+
+
   dimension_group: updated {
     type: time
     timeframes: [
