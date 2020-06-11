@@ -459,6 +459,11 @@ explore: recipe_feedback_surveys {
     sql_on: ${recipe_feedback_surveys.id} = ${recipe_feedbacks.recipe_feedback_survey_id} ;;
   }
 
+  join: skus {
+    relationship:  many_to_one
+    sql_on: ${recipe_feedbacks.sku_id} = ${skus.id} ;;
+  }
+
   join: recipes {
     relationship: many_to_one
     sql_on: ${recipe_feedbacks.recipe_id} = ${recipes.id} ;;
