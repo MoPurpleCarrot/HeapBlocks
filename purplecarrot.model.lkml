@@ -91,6 +91,16 @@ explore: heap_users{
     sql_on: ${order_items.order_id}=${orders.id} ;;
   }
 
+  join: skus {
+    relationship: one_to_many
+    sql_on: ${skus.id} = ${order_items.sku_id};;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id}=${skus.product_id};;
+  }
+
   join: recipes {
     relationship: one_to_one
     sql_on: ${order_items.recipe_id} = ${recipes.id};;
@@ -128,7 +138,15 @@ explore: subscriptions {
     relationship: one_to_many
     sql_on: ${orders.id}=${order_items.order_id} ;;
   }
+  join: skus {
+    relationship: one_to_many
+    sql_on: ${skus.id} = ${order_items.sku_id};;
+  }
 
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id}=${skus.product_id};;
+  }
   join: users {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
@@ -278,8 +296,13 @@ explore: users {
   }
 
   join: skus {
-    relationship: one_to_one
-    sql_on: ${order_items.sku_id}=${skus.id} ;;
+    relationship: one_to_many
+    sql_on: ${skus.id} = ${order_items.sku_id};;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id}=${skus.product_id};;
   }
 
   join: recipe_plans {
@@ -410,6 +433,16 @@ explore: gift_purchases {
     sql_on: ${orders.id} = ${order_items.order_id}  ;;
   }
 
+  join: skus {
+    relationship: one_to_many
+    sql_on: ${skus.id} = ${order_items.sku_id};;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id}=${skus.product_id};;
+  }
+
   join: recipes {
     relationship: one_to_one
     sql_on: ${order_items.recipe_id} = ${recipes.id};;
@@ -462,6 +495,11 @@ explore: recipe_feedback_surveys {
   join: skus {
     relationship:  many_to_one
     sql_on: ${recipe_feedbacks.sku_id} = ${skus.id} ;;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id}=${skus.product_id};;
   }
 
   join: recipes {
@@ -595,6 +633,16 @@ explore: refunds {
     sql_on: ${orders.id}=${order_items.order_id} ;;
   }
 
+  join: skus {
+    relationship: one_to_many
+    sql_on: ${skus.id} = ${order_items.sku_id};;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id}=${skus.product_id};;
+  }
+
   join: recipes {
     relationship: one_to_one
     sql_on: ${order_items.recipe_id} = ${recipes.id};;
@@ -670,6 +718,16 @@ join: subscriptions {
   join: order_items {
     relationship:  one_to_many
     sql_on: ${orders.id} = ${order_items.order_id} ;;
+  }
+
+  join: skus {
+    relationship: one_to_many
+    sql_on: ${skus.id} = ${order_items.sku_id};;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id}=${skus.product_id};;
   }
 
   join: recipes {

@@ -1,5 +1,5 @@
-view: skus {
-  sql_table_name: heroku_postgres.skus ;;
+view: products {
+  sql_table_name: heroku_postgres.products ;;
   drill_fields: [id]
 
   dimension: id {
@@ -60,29 +60,23 @@ view: skus {
     sql: ${TABLE}._sdc_table_version ;;
   }
 
-  dimension: allergens {
-    type: string
-    sql: ${TABLE}.allergens ;;
+  dimension_group: admin_updated {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.admin_updated_at ;;
   }
 
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
-  }
-
-  dimension: calories {
-    type: number
-    sql: ${TABLE}.calories ;;
-  }
-
-  dimension: carbs {
-    type: number
-    sql: ${TABLE}.carbs ;;
-  }
-
-  dimension: code {
-    type: string
-    sql: ${TABLE}.code ;;
   }
 
   dimension_group: created {
@@ -99,99 +93,19 @@ view: skus {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: description {
+  dimension: image_alt {
     type: string
-    sql: ${TABLE}.description ;;
+    sql: ${TABLE}.image_alt ;;
   }
 
-  dimension: display {
-    type: yesno
-    sql: ${TABLE}.display ;;
-  }
-
-  dimension: enabled_per_region {
-    type: string
-    sql: ${TABLE}.enabled_per_region ;;
-  }
-
-  dimension: fat {
+  dimension: product_type {
     type: number
-    sql: ${TABLE}.fat ;;
+    sql: ${TABLE}.product_type ;;
   }
 
-  dimension: home_image_alt {
-    type: string
-    sql: ${TABLE}.home_image_alt ;;
-  }
-
-  dimension: ingredients {
-    type: string
-    sql: ${TABLE}.ingredients ;;
-  }
-
-  dimension: min_quantity__bigint {
+  dimension: recipe_meal_type {
     type: number
-    sql: ${TABLE}.min_quantity__bigint ;;
-  }
-
-  dimension: min_quantity__string {
-    type: string
-    sql: ${TABLE}.min_quantity__string ;;
-  }
-
-  dimension: nutrition_label {
-    type: string
-    sql: ${TABLE}.nutrition_label ;;
-  }
-
-  dimension: plan_group {
-    type: string
-    sql: ${TABLE}.plan_group ;;
-  }
-
-  dimension: point_value {
-    type: number
-    sql: ${TABLE}.point_value ;;
-  }
-
-  dimension: pre_sale_price {
-    type: number
-    sql: ${TABLE}.pre_sale_price ;;
-  }
-
-  dimension: prep_and_cook_time {
-    type: string
-    sql: ${TABLE}.prep_and_cook_time ;;
-  }
-
-  dimension: presale_price_cents {
-    type: number
-    sql: ${TABLE}.presale_price_cents ;;
-  }
-
-  dimension: presale_price_currency {
-    type: string
-    sql: ${TABLE}.presale_price_currency ;;
-  }
-
-  dimension: price {
-    type: number
-    sql: ${TABLE}.price ;;
-  }
-
-  dimension: price_currency {
-    type: string
-    sql: ${TABLE}.price_currency ;;
-  }
-
-  dimension: product_id {
-    type: number
-    sql: ${TABLE}.product_id ;;
-  }
-
-  dimension: protein {
-    type: number
-    sql: ${TABLE}.protein ;;
+    sql: ${TABLE}.recipe_meal_type ;;
   }
 
   dimension: rectangle_image {
@@ -214,24 +128,14 @@ view: skus {
     sql: ${TABLE}.seo_title ;;
   }
 
-  dimension: servings {
-    type: string
-    sql: ${TABLE}.servings ;;
-  }
-
-  dimension: sku_code {
-    type: string
-    sql: ${TABLE}.sku_code ;;
+  dimension: show_in_products_catalog {
+    type: yesno
+    sql: ${TABLE}.show_in_products_catalog ;;
   }
 
   dimension: slug {
     type: string
     sql: ${TABLE}.slug ;;
-  }
-
-  dimension: spec {
-    type: string
-    sql: ${TABLE}.spec ;;
   }
 
   dimension: square_image {
@@ -270,6 +174,6 @@ view: skus {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [id, product_tags_products.count]
   }
 }

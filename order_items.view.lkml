@@ -136,7 +136,7 @@ view: order_items {
 
   dimension: recipe_meal_type {
     type: string
-    sql: ${recipes.meal_type} ;;
+    sql: ${products.recipe_meal_type};;
   }
 
   dimension: order_plan_code {
@@ -156,22 +156,18 @@ view: order_items {
 
   dimension: item_type {
     type: string
-    sql:  CASE WHEN ${recipe_meal_type} = 'Dinner' THEN 'Dinner'
-          WHEN ${recipe_meal_type} = 'Lunch' THEN 'Lunch'
-          WHEN ${recipe_meal_type} = 'Breakfast' THEN 'Breakfast'
-          ELSE 'Extension'
+    sql:  CASE WHEN ${recipe_meal_type} = 0 THEN 'Dinner'
+          WHEN ${recipe_meal_type} = 2 THEN 'Lunch'
+          WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
+          WHEN ${recipe_meal_type} = 3 THEN 'Extension'
           END
           ;;
   }
 
-  dimension: recipe_meal_type_code {
-    type:  number
-    sql: ${recipes.meal_type_code} ;;
-  }
 
   dimension: breakfast_binary {
     type: number
-    sql: case when ${recipe_meal_type_code} = 1 Then 1
+    sql: case when ${recipe_meal_type} = 1 Then 1
           Else 0
           END
           ;;
@@ -179,7 +175,7 @@ view: order_items {
 
   dimension: lunch_binary {
     type: number
-    sql: case when ${recipe_meal_type_code} = 2 Then 1
+    sql: case when ${recipe_meal_type} = 2 Then 1
           Else 0
           END
           ;;
@@ -187,7 +183,7 @@ view: order_items {
 
   dimension: dinner_binary {
     type: number
-    sql: case when ${recipe_meal_type_code} = 0 Then 1
+    sql: case when ${recipe_meal_type} = 0 Then 1
           Else 0
           END
           ;;
@@ -195,9 +191,9 @@ view: order_items {
 
   dimension: dinner_kit_count {
     type: number
-    sql: case when ${recipe_meal_type_code} = 0 and ${order_plan_code} = 8 Then 2
-          When ${recipe_meal_type_code} = 0 and ${order_plan_code} = 6 Then 1
-          When ${recipe_meal_type_code} = 0 Then 1
+    sql: case when ${recipe_meal_type} = 0 and ${order_plan_code} = 8 Then 2
+          When ${recipe_meal_type} = 0 and ${order_plan_code} = 6 Then 1
+          When ${recipe_meal_type} = 0 Then 1
           Else 0
           END
           ;;

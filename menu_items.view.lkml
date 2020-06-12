@@ -56,6 +56,12 @@ view: menu_items {
     sql: ${TABLE}.recipe_id ;;
   }
 
+  dimension: sku_id {
+    type: number
+    # hidden: true
+    sql: ${TABLE}.sku_id ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, menus.id, recipes.id]
