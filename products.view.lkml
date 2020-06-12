@@ -108,6 +108,17 @@ view: products {
     sql: ${TABLE}.recipe_meal_type ;;
   }
 
+  dimension: recipe_meal_type_name {
+    type: string
+    sql:  CASE WHEN ${recipe_meal_type} = 0 THEN 'Dinner'
+          WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
+          WHEN ${recipe_meal_type} = 2 THEN 'Lunch'
+          When ${recipe_meal_type} = 3 THEN 'Exension'
+          ELSE NULL
+          END
+          ;;
+  }
+
   dimension: rectangle_image {
     type: string
     sql: ${TABLE}.rectangle_image ;;
