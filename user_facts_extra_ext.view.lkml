@@ -15,8 +15,12 @@ view: user_facts_extra_extension {
       ON subscriptions.id = orders.subscription_id
       Left Join heroku_postgres.order_items as order_items
       on orders.id = order_items.order_id
+      left join heroku_postgres.skus as skus
+      on order_items.sku_id = skus.id
+      left join heroku_postgres.products as products
+      on skus.product_id = products.id
 
-      WHERE orders.status = 3 AND orders.extras_price > 0 and order_items.type <> 'RecipeOrderItem'
+      WHERE orders.status = 3 AND orders.extras_price > 0 AND products.recipe_meal_type = 3 and order_items.deleted_at is null
       GROUP BY 1
        ;;
 # AND order_items.deleted_at = NULL

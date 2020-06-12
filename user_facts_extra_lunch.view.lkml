@@ -15,10 +15,12 @@ view: user_facts_extra_lunch {
       ON subscriptions.id = orders.subscription_id
       Left Join heroku_postgres.order_items as order_items
       on orders.id = order_items.order_id
-      left join heroku_postgres.recipes as recipes
-      on order_items.recipe_id = recipes.id
+      left join heroku_postgres.skus as skus
+      on order_items.sku_id = skus.id
+      left join heroku_postgres.products as products
+      on skus.product_id = products.id
 
-      WHERE orders.status = 3 AND orders.extras_price > 0 AND recipes.meal_type = 2 and order_items.deleted_at is null
+      WHERE orders.status = 3 AND orders.extras_price > 0 AND products.recipe_meal_type = 2 and order_items.deleted_at is null
       GROUP BY 1
        ;;
 # AND order_items.deleted_at = NULL
