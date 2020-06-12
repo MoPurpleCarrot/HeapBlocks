@@ -509,7 +509,7 @@ explore: recipe_feedback_surveys {
 
   join: order_items {
     relationship: one_to_many
-    sql_on: ${recipes.id} = ${order_items.recipe_id} ;;
+    sql_on: ${skus.id} = ${order_items.sku_id} ;;
   }
 
   join: orders {
