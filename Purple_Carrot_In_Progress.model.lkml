@@ -133,7 +133,7 @@ explore: users {
 
   join: products{
     relationship: one_to_many
-    sql_on:${products.id}=:${skus.product_id};;
+    sql_on:${products.id}=${skus.product_id};;
 
   }
 
