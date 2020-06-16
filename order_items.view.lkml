@@ -191,7 +191,7 @@ view: order_items {
 
   dimension: dinner_kit_count {
     type: number
-    sql: case when ${recipe_meal_type} = 0 and ${order_plan_code} = 8 Then 2
+    sql: case when ${recipe_meal_type} = 0 and ${order_plan_code} = 8 Then 1
           When ${recipe_meal_type} = 0 and ${order_plan_code} = 6 Then 1
           When ${recipe_meal_type} = 0 Then 1
           Else 0
