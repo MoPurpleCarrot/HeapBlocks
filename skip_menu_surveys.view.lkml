@@ -60,7 +60,7 @@ view: skip_menu_surveys {
   }
 
   dimension: menu_ids {
-    type: string
+    type: number
     sql: ${TABLE}.menu_ids ;;
   }
 
