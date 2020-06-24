@@ -2,7 +2,7 @@ view: user_facts_extra_extension {
   derived_table: {
     sql: SELECT users.id,
       COUNT(orders.id) as num_extension_orders,
-      SUM(order_items.price_cents) as total_extension_revenue,
+      SUM(order_items.price_cents*order_items.quantity) as total_extension_revenue,
       MIN(orders.delivery_on) as first_extension_order,
       MIN(orders.id) as first_extension_order_id,
       MAX(orders.delivery_on) as last_extension_order,
