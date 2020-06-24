@@ -283,6 +283,37 @@ view: Intercom_conversations {
         sql: ${TABLE}.assignee__id = '2617089'  ;;
         label: "Stephanie Y"
       }
+
+      when: {
+        sql: ${TABLE}.assignee__id = '4184125'  ;;
+        label: "Annaluz C"
+      }
+
+      when: {
+        sql: ${TABLE}.assignee__id = '4183617'  ;;
+        label: "Charlotte E"
+      }
+
+      when: {
+        sql: ${TABLE}.assignee__id = '4183798'  ;;
+        label: "Jamie V"
+      }
+
+      when: {
+        sql: ${TABLE}.assignee__id = '3959507'  ;;
+        label: "Jessica R"
+      }
+
+      when: {
+        sql: ${TABLE}.assignee__id = '4183805'  ;;
+        label: "Kristen K"
+      }
+
+      when: {
+        sql: ${TABLE}.assignee__id = '3957628'  ;;
+        label: "Sara N"
+      }
+
 }
 }
 
