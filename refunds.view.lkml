@@ -220,16 +220,6 @@ view: refunds {
       case: {
 
         when: {
-          sql: ${TABLE}.admin_id = '411053'  ;;
-          label: "Bond"
-        }
-
-        when: {
-          sql: ${TABLE}.admin_id = '134248'  ;;
-          label: "Cottle"
-        }
-
-        when: {
           sql: ${TABLE}.admin_id = '606964'  ;;
           label: "de Bourmont"
         }
@@ -240,24 +230,8 @@ view: refunds {
         }
 
         when: {
-          sql: ${TABLE}.admin_id = '320390'  ;;
-          label: "Gendreau"
-        }
-
-        when: {
-          sql: ${TABLE}.admin_id = '568812'  ;;
-          label: "Gloyd"
-        }
-
-        when: {
           sql: ${TABLE}.admin_id = '581336'  ;;
           label: "Maville"
-        }
-
-
-        when: {
-          sql: ${TABLE}.admin_id = '370856'  ;;
-          label: "Newcomb"
         }
 
 
@@ -267,18 +241,8 @@ view: refunds {
         }
 
         when: {
-          sql: ${TABLE}.admin_id = '27245'  ;;
-          label: "Sheehan"
-        }
-
-        when: {
           sql: ${TABLE}.admin_id = '454797'  ;;
           label: "Spencer"
-        }
-
-        when: {
-          sql: ${TABLE}.admin_id = '140588'  ;;
-          label: "Tarbox"
         }
 
         when: {
@@ -303,16 +267,6 @@ view: refunds {
 
 
         when: {
-          sql: ${TABLE}.admin_id = '619043'  ;;
-          label: "Longo"
-        }
-
-        when: {
-          sql: ${TABLE}.admin_id = '630814'  ;;
-          label: "Abi-Faraj"
-        }
-
-        when: {
           sql: ${TABLE}.admin_id = '650495'  ;;
           label: "Orcutt"
         }
@@ -320,11 +274,6 @@ view: refunds {
         when: {
           sql: ${TABLE}.admin_id = '726381'  ;;
           label: "Paschal"
-        }
-
-        when: {
-          sql: ${TABLE}.admin_id = '739954'  ;;
-          label: "Altman"
         }
 
         when: {
