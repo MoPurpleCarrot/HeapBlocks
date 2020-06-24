@@ -204,7 +204,7 @@ view: order_items {
     sql: case when ${dinner_binary} = 1 Then 0
           when  ${lunch_binary} = 1 Then 0
           when ${breakfast_binary} = 1 Then 0
-          Else 1
+          Else 1*${quantity}
           END
           ;;
   }
@@ -260,7 +260,7 @@ view: order_items {
 
   dimension: extension_revenue {
     type: number
-    sql: case when ${extension_binary} = 1 Then ${price_cents}
+    sql: case when ${extension_binary} > 0 Then ${price_cents}*${quantity}
           Else 0
           END
           ;;
