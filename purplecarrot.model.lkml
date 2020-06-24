@@ -270,15 +270,6 @@ explore: users {
     sql_on: ${recipe_feedbacks.recipe_feedback_survey_id} = ${recipe_feedback_surveys.id} ;;
   }
 
-  join: skip_menu_surveys__menu_ids {
-    relationship:  one_to_one
-    sql_on: ${skip_menu_surveys__menu_ids.menu_id}=${menus.id} ;;
-  }
-  join: skip_menu_surveys {
-    relationship:  one_to_one
-    sql_on: ${skip_menu_surveys.id}=${skip_menu_surveys__menu_ids._sdc_source_key_id} ;;
-  }
-
   join: shipping_addresses {
     relationship: one_to_many
     sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
@@ -566,6 +557,7 @@ explore: skip_menu_surveys {
   join: skip_menu_surveys__menu_ids {
     relationship: many_to_one
     sql_on: ${skip_menu_surveys__menu_ids._sdc_source_key_id}=${skip_menu_surveys.id} ;;
+    fields: [skip_menu_surveys__menu_ids.menu_id]
   }
 }
 
