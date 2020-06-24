@@ -270,9 +270,13 @@ explore: users {
     sql_on: ${recipe_feedbacks.recipe_feedback_survey_id} = ${recipe_feedback_surveys.id} ;;
   }
 
+  join: skip_menu_surveys__menu_ids {
+    relationship:  one_to_one
+    sql_on: ${skip_menu_surveys.menu_ids}=${menus.id} ;;
+  }
   join: skip_menu_surveys {
-    relationship:  many_to_one
-    sql_on: ${skip_menu_surveys.user_id}=${users.id} ;;
+    relationship:  one_to_one
+    sql_on: ${skip_menu_surveys.id}=${skip_menu_surveys__menu_ids._sdc_source_key_id} ;;
   }
 
   join: shipping_addresses {

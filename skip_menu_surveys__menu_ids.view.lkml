@@ -49,7 +49,7 @@ view: skip_menu_surveys__menu_ids {
     sql: ${TABLE}._sdc_table_version ;;
   }
 
-  dimension: value {
+  dimension: menu_id {
     type: number
     sql: ${TABLE}.value ;;
   }
