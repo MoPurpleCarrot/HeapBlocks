@@ -272,7 +272,7 @@ explore: users {
 
   join: skip_menu_surveys__menu_ids {
     relationship:  one_to_one
-    sql_on: ${skip_menu_surveys.menu_ids}=${menus.id} ;;
+    sql_on: ${skip_menu_surveys__menu_ids.menu_id}=${menus.id} ;;
   }
   join: skip_menu_surveys {
     relationship:  one_to_one
