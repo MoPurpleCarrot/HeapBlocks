@@ -291,6 +291,36 @@ view: refunds {
           label: "Rios"
         }
 
+        when: {
+          sql: ${TABLE}.admin_id = '1147732'  ;;
+          label: "Cabrera"
+        }
+
+        when: {
+          sql: ${TABLE}.admin_id = '1133372'  ;;
+          label: "Vespa"
+        }
+
+        when: {
+          sql: ${TABLE}.admin_id = '1153590'  ;;
+          label: "Kaneb"
+        }
+
+        when: {
+          sql: ${TABLE}.admin_id = '1148155'  ;;
+          label: "Ellison"
+        }
+
+        when: {
+          sql: ${TABLE}.admin_id = '1070325'  ;;
+          label: "Velazquez"
+        }
+
+        when: {
+          sql: ${TABLE}.admin_id = '1070382'  ;;
+          label: "Niezgoda"
+        }
+
       }
     }
 }
