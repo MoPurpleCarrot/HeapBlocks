@@ -488,7 +488,7 @@ explore: recipe_feedback_surveys {
   }
 
   join: skus {
-    relationship:  many_to_one
+    relationship:  one_to_one
     sql_on: ${recipe_feedbacks.sku_id} = ${skus.id} ;;
   }
 

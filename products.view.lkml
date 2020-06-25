@@ -113,7 +113,7 @@ view: products {
     sql:  CASE WHEN ${recipe_meal_type} = 0 THEN 'Dinner'
           WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
           WHEN ${recipe_meal_type} = 2 THEN 'Lunch'
-          When ${recipe_meal_type} = 3 THEN 'Exension'
+          When ${recipe_meal_type} = 3 THEN 'Extension'
           ELSE NULL
           END
           ;;
