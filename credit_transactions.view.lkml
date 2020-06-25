@@ -212,17 +212,7 @@ view: credit_transactions {
   dimension: CX_rep_name {
     case: {
 
-      when: {
-        sql: ${TABLE}.admin_id = '411053'  ;;
-        label: "Bond"
-      }
-
-      when: {
-        sql: ${TABLE}.admin_id = '134248'  ;;
-        label: "Cottle"
-      }
-
-      when: {
+       when: {
         sql: ${TABLE}.admin_id = '606964'  ;;
         label: "de Bourmont"
       }
@@ -233,24 +223,8 @@ view: credit_transactions {
       }
 
       when: {
-        sql: ${TABLE}.admin_id = '320390'  ;;
-        label: "Gendreau"
-      }
-
-      when: {
-        sql: ${TABLE}.admin_id = '568812'  ;;
-        label: "Gloyd"
-      }
-
-      when: {
         sql: ${TABLE}.admin_id = '581336'  ;;
         label: "Maville"
-      }
-
-
-      when: {
-        sql: ${TABLE}.admin_id = '370856'  ;;
-        label: "Newcomb"
       }
 
 
@@ -260,19 +234,8 @@ view: credit_transactions {
       }
 
       when: {
-        sql: ${TABLE}.admin_id = '27245'  ;;
-        label: "Sheehan"
-      }
-
-
-      when: {
         sql: ${TABLE}.admin_id = '454797'  ;;
         label: "Spencer"
-      }
-
-      when: {
-        sql: ${TABLE}.admin_id = '140588'  ;;
-        label: "Tarbox"
       }
 
       when: {
@@ -290,22 +253,11 @@ view: credit_transactions {
         label: "Yono"
       }
 
-
       when: {
         sql: ${TABLE}.admin_id = '11200'  ;;
         label: "Deanna"
       }
 
-
-      when: {
-        sql: ${TABLE}.admin_id = '619043'  ;;
-        label: "Longo"
-      }
-
-      when: {
-        sql: ${TABLE}.admin_id = '630814'  ;;
-        label: "Abi-Faraj"
-      }
 
       when: {
         sql: ${TABLE}.admin_id = '650495'  ;;
@@ -315,11 +267,6 @@ view: credit_transactions {
       when: {
         sql: ${TABLE}.admin_id = '726381'  ;;
         label: "Paschal"
-      }
-
-      when: {
-        sql: ${TABLE}.admin_id = '739954'  ;;
-        label: "Altman"
       }
 
       when: {
@@ -336,6 +283,37 @@ view: credit_transactions {
         sql: ${TABLE}.admin_id = '812935'  ;;
         label: "Rios"
       }
+
+      when: {
+        sql: ${TABLE}.admin_id = '1147732'  ;;
+        label: "Cabrera"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '1133372'  ;;
+        label: "Vespa"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '1153590'  ;;
+        label: "Kaneb"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '1148155'  ;;
+        label: "Ellison"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '1070325'  ;;
+        label: "Velazquez"
+      }
+
+      when: {
+        sql: ${TABLE}.admin_id = '1070382'  ;;
+        label: "Niezgoda"
+      }
+
     }
   }
 
