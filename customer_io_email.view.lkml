@@ -86,6 +86,7 @@ view: customer_io_email {
   dimension_group: timestamp {
     type: time
     timeframes: [time, date, week, month, raw]
+    datatype: epoch
     sql: ${TABLE}.timestamp ;;
   }
 
