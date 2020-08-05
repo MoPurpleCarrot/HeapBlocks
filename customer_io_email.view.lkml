@@ -1,4 +1,4 @@
-view: customer_io {
+view: customer_io_email {
   sql_table_name: customerio_email.data ;;
 
   dimension_group: _sdc_batched {
@@ -39,49 +39,38 @@ view: customer_io {
     sql: ${TABLE}._sdc_table_version ;;
   }
 
-  dimension: data__action_id {
+  dimension: message_id {
     type: number
     sql: ${TABLE}.data__action_id ;;
   }
 
-  dimension: data__broadcast_id {
-    type: number
-    sql: ${TABLE}.data__broadcast_id ;;
-  }
 
   dimension: campaign_id {
     type: number
     sql: ${TABLE}.data__campaign_id ;;
   }
 
+
   dimension: user_id {
     type: string
     sql: ${TABLE}.data__customer_id ;;
   }
 
-  dimension: delivery_id {
-    type: string
-    sql: ${TABLE}.data__delivery_id ;;
-  }
-
-  dimension: journey_id {
-    type: string
-    sql: ${TABLE}.data__journey_id ;;
-  }
 
   dimension: user_email {
     type: string
     sql: ${TABLE}.data__recipient ;;
   }
 
-  dimension: data__subject {
+  dimension: subject {
     type: string
     sql: ${TABLE}.data__subject ;;
   }
 
-  dimension: event_id {
+
+  dimension: broadcast_id {
     type: string
-    sql: ${TABLE}.event_id ;;
+    sql: ${TABLE}.newsletter_id ;;
   }
 
   dimension: action {
@@ -89,7 +78,7 @@ view: customer_io {
     sql: ${TABLE}.metric ;;
   }
 
-  dimension: object_type {
+  dimension: message_type {
     type: string
     sql: ${TABLE}.object_type ;;
   }
@@ -99,6 +88,7 @@ view: customer_io {
     timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.timestamp ;;
   }
+
 
   measure: count {
     type: count

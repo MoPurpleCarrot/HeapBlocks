@@ -393,8 +393,30 @@ explore: users {
 
 }
 
+explore: customer_io_email{
+  label: "Customer.io Email"
+  join: users {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${customer_io_email.user_id};;
+  }
 
+  join: subscriptions {
+    relationship: one_to_one
+    type: left_outer
+    sql_on: ${users.id}=${subscriptions.user_id};;
+  }
 
+  join: orders {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
+  }
+
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id} ;;
+  }
+
+  }
 
 
 explore: gift_purchases {
