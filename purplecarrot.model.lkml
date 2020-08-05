@@ -416,6 +416,11 @@ explore: customer_io_email{
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
 
+  join: menus {
+    relationship: many_to_one
+    sql_on: ${orders.menu_id} = ${menus.id} ;;
+  }
+
   }
 
 
@@ -549,26 +554,6 @@ explore: recipe_feedback_surveys {
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
 
-
-}
-
-explore: email_delivered {
-  label: "Customer.io Email"
-
-  join: email_opened {
-    relationship: many_to_many
-    sql_on: ${email_delivered.email_id} = ${email_opened.email_id} ;;
-  }
-
-  join: email_link_clicked {
-    relationship: many_to_many
-    sql_on: ${email_delivered.email_id} = ${email_link_clicked.email_id} ;;
-  }
-
-  join: users {
-    relationship: many_to_one
-    sql_on: ${email_delivered.user_id} = ${users.id} ;;
-  }
 
 }
 
