@@ -390,6 +390,10 @@ explore: users {
     relationship: one_to_one
     sql_on: ${credit_transactions.credit_transaction_group_id} = ${credit_transaction_groups.id} ;;
   }
+  join: skip_surveys {
+    relationship: one_to_one
+    sql_on: ${skip_surveys.order_id} = ${orders.id} ;;
+  }
 
 }
 
@@ -419,11 +423,6 @@ explore: customer_io_email{
   join: menus {
     relationship: many_to_one
     sql_on: ${orders.menu_id} = ${menus.id} ;;
-  }
-
-  join: skip_surveys {
-    relationship: one_to_one
-    sql_on: ${skip_surveys.order_id} = ${orders.id} ;;
   }
 
   }
