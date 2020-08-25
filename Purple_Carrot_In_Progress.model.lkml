@@ -313,9 +313,6 @@ explore: recipe_feedback_surveys {
 }
 
 
-explore: skip_menu_surveys {
-}
-
 
 
 

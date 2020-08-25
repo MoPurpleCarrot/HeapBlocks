@@ -564,14 +564,6 @@ explore: recipe_feedback_surveys {
 
 explore: heap_sessions {}
 
-explore: skip_menu_surveys {
-  join: skip_menu_surveys__menu_ids {
-    relationship: many_to_one
-    sql_on: ${skip_menu_surveys__menu_ids._sdc_source_key_id}=${skip_menu_surveys.id} ;;
-    fields: [skip_menu_surveys__menu_ids.menu_id]
-  }
-}
-
 
 explore: credit_transactions{
 
