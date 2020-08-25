@@ -421,6 +421,11 @@ explore: customer_io_email{
     sql_on: ${orders.menu_id} = ${menus.id} ;;
   }
 
+  join: skip_surveys {
+    relationship: one_to_one
+    sql_on: ${skip_surveys.order_id} = ${orders.id} ;;
+  }
+
   }
 
 
