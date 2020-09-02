@@ -397,7 +397,6 @@ explore: users {
 
 }
 
-explore: skip_surveys {}
 
 explore: customer_io_email{
   label: "Customer.io Email"

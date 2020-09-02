@@ -71,6 +71,7 @@ view: subscriptions {
     WHEN ${plan} = 6 THEN 'Six Serving'
     WHEN ${plan} = 7 THEN 'Gluten Free'
     WHEN ${plan} = 8 THEN 'Four Serving'
+    WHEN ${plan} = 10 THEN 'Prepared'
     ELSE NULL
     END
     ;;

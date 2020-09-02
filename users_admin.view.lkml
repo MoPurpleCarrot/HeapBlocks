@@ -46,6 +46,11 @@ view: users {
     sql: ${TABLE}.cancelled_at ;;
   }
 
+  dimension: vwo_signup_ab_test_variants {
+    type: string
+    sql:${TABLE}.vwo_signup_ab_test_variants ;;
+  }
+
 
   dimension: weeks_as_customer {
     type: number
