@@ -49,7 +49,15 @@ view: users {
   dimension: vwo_signup_ab_test_variants {
     type: string
     sql:${TABLE}.vwo_signup_ab_test_variants ;;
-  }
+    }
+
+    dimension:prepared_new_customers{
+    type: string
+    sql:  CASE WHEN ${vwo_signup_ab_test_variants} = {"208":"2"} THEN 'Prepared and Meal Kit'
+    WHEN ${vwo_signup_ab_test_variants} = {"208":"1"} THEN 'Meal Kit Only'
+    ELSE NULL
+    END;;
+    }
 
 
   dimension: weeks_as_customer {
