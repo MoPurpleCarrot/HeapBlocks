@@ -567,10 +567,5 @@ view: users {
     type: count_distinct
     sql: ${id} ;;
   }
-  measure: P_and_MK_Count{
-    type: string
-    value_format: "0%"
-    sql:${prepared_new_customers}="Prepared and Meal Kit"/${prepared_new_customers}="Meal Kit Only";;
-  }
 
 }
