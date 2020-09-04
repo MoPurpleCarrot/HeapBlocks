@@ -394,6 +394,10 @@ explore: users {
     relationship: one_to_one
     sql_on: ${skip_surveys.order_id} = ${orders.id} ;;
   }
+  join: events {
+    relationship: many_to_one
+    sql_on: ${events.subscription_id} = ${subscriptions.id} ;;
+  }
 
 }
 
