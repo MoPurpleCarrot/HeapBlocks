@@ -74,7 +74,7 @@ view: events {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: data {
+  dimension: data_json {
     type: string
     sql: ${TABLE}.data ;;
   }
@@ -116,6 +116,22 @@ view: events {
   dimension: version {
     type: number
     sql: ${TABLE}.version ;;
+  }
+
+  dimension: data {
+    sql: ${TABLE}.request -> 'data';;
+  }
+
+  dimension: order_id {
+    sql: json_object_keys((${TABLE}.request->> 'data')::json) ->> 'order_id' ;;
+  }
+
+  dimension: ship_week {
+    sql: json_object_keys((${TABLE}.request->> 'data')::json) ->> 'ship_week' ;;
+  }
+
+  dimension: error_message {
+    sql: json_object_keys((${TABLE}.request->> 'data')::json) ->> 'error_message' ;;
   }
 
   measure: count {
