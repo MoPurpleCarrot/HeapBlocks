@@ -119,21 +119,14 @@ view: events {
   }
 
   dimension: data {
-    sql: ${TABLE}.data -> 'data';;
-  }
-
-  dimension: order_id {
-    sql: json_object_keys((${TABLE}.data ->> 'data')::json) ->> 'order_id' ;;
-  }
-
-  dimension: ship_week {
-    sql: json_object_keys((${TABLE}.data->> 'data')::json) ->> 'ship_week' ;;
-  }
-
-  dimension: error_message {
-    sql: json_object_keys((${TABLE}.data->> 'data')::json) ->> 'error_message' ;;
-  }
-
+    type: number
+    sql: SELECT row_number() OVER(order by 1) AS events.test1
+  , events.id as event_id
+  , split_part(events.data, ', ', numbers.num) AS events.test2
+FROM events
+JOIN numbers
+ON numbers.num <= regexp_count(events.data, ',\\s') + 1;;
+}
   measure: count {
     type: count
     drill_fields: [followed_up_event_id, name]
