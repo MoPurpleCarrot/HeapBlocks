@@ -119,19 +119,19 @@ view: events {
   }
 
   dimension: data {
-    sql: ${TABLE}.request -> 'data';;
+    sql: ${TABLE}.events -> 'data';;
   }
 
   dimension: order_id {
-    sql: json_object_keys((${TABLE}.request->> 'data')::json) ->> 'order_id' ;;
+    sql: json_object_keys((${TABLE}.events->> 'data')::json) ->> 'order_id' ;;
   }
 
   dimension: ship_week {
-    sql: json_object_keys((${TABLE}.request->> 'data')::json) ->> 'ship_week' ;;
+    sql: json_object_keys((${TABLE}.events->> 'data')::json) ->> 'ship_week' ;;
   }
 
   dimension: error_message {
-    sql: json_object_keys((${TABLE}.request->> 'data')::json) ->> 'error_message' ;;
+    sql: json_object_keys((${TABLE}.events->> 'data')::json) ->> 'error_message' ;;
   }
 
   measure: count {
