@@ -18,6 +18,7 @@ view: subscription_order_num_derrived {
   }
 
   dimension: subscriptions_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}."subscriptions.id" ;;
   }
@@ -38,7 +39,7 @@ view: subscription_order_num_derrived {
           ;;
   }
 
-  measure: avgerage_orders{
+  measure: average_orders{
     type: average
     value_format: "0.0"
     sql: ${orders_total_billed_count};;
