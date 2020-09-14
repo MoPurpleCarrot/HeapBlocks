@@ -40,9 +40,10 @@ view: subscription_order_num_derrived {
   }
 
   measure: average_orders{
-    type: average
+    type: average_distinct
+    sql_distinct_key: ${subscriptions_id} ;;
+    sql: ${orders_total_billed_count} ;;
     value_format: "0.0"
-    sql: ${orders_total_billed_count};;
   }
 
   set: detail {
