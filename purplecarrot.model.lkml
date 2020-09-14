@@ -429,6 +429,10 @@ explore: customer_io_email{
     relationship: many_to_one
     sql_on: ${orders.menu_id} = ${menus.id} ;;
   }
+  join: subscription_order_num_derrived {
+    relationship: one_to_one
+    sql_on: ${subscription_order_num_derrived.subscriptions_id} = ${subscriptions.id} ;;
+  }
 
   }
 
