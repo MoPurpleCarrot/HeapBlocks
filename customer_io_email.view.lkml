@@ -107,6 +107,7 @@ view: customer_io_email {
           WHEN ${message_id} = 1002023 THEN '3 Messages - SMS 2&3'
           WHEN ${message_id} = 1002029 THEN '3 Messages - Email 2&3'
           ELSE NULL
+          END
           ;;
   }
 
