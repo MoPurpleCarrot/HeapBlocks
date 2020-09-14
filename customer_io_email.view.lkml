@@ -90,6 +90,25 @@ view: customer_io_email {
     sql: ${TABLE}.timestamp ;;
   }
 
+  dimension: customization_emails {
+    type: string
+    sql:  CASE WHEN ${message_id} = 1001995 THEN '0 Messages - SMS'
+          WHEN ${message_id} = 1001996 THEN '0 Messages - Email'
+          WHEN ${message_id} = 1002005 THEN '1 Message - SMS'
+          WHEN ${message_id} = 1002030 THEN '1 Message - Email'
+          WHEN ${message_id} = 1002019 THEN '1 Message - SMS Draft'
+          WHEN ${message_id} = 1002027 THEN '1 Message - Email Draft'
+          WHEN ${message_id} = 1002007 THEN '2 Messages - SMS 1'
+          WHEN ${message_id} = 1002031 THEN '2 Messages - Email 1'
+          WHEN ${message_id} = 1002021 THEN '2 Messages - SMS 2'
+          WHEN ${message_id} = 1002028 THEN '2 Messages - Email 2'
+          WHEN ${message_id} = 1002008 THEN '3 Messages - SMS 1'
+          WHEN ${message_id} = 1002032 THEN '3 Messages - Email 1'
+          WHEN ${message_id} = 1002023 THEN '3 Messages - SMS 2&3'
+          WHEN ${message_id} = 1002029 THEN '3 Messages - Email 2&3'
+          ELSE NULL
+          ;;
+  }
 
   measure: count {
     type: count
