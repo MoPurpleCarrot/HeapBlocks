@@ -38,6 +38,12 @@ view: subscription_order_num_derrived {
           ;;
   }
 
+  measure: avgerage_orders{
+    type: average
+    value_format: "0.0"
+    sql: ${orders_total_billed_count};;
+  }
+
   set: detail {
     fields: [subscriptions_id, orders_total_billed_count]
   }
