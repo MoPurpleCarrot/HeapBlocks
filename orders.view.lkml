@@ -526,6 +526,15 @@ view: orders {
           WHEN ${plan} = 7 THEN 'Gluten Free'
           WHEN ${plan} = 8 THEN 'Four Serving'
           WHEN ${plan} = 9 THEN 'Seasonal Box'
+          WHEN ${plan} = 10 THEN 'Prepared'
+          ELSE NULL
+          END
+          ;;
+  }
+  dimension: prepared_pilot_plan {
+    type: string
+    sql:  CASE WHEN ${plan} < 9 THEN 'Meal Kit'
+          WHEN ${plan} = 10 THEN 'Prepared'
           ELSE NULL
           END
           ;;
