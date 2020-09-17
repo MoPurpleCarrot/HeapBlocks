@@ -61,13 +61,13 @@ view: users {
 
   dimension: ab_tests {
     type: string
-    sql:${TABLE}ab_tests ;;
+    sql:${TABLE}.ab_tests ;;
   }
 
   dimension:prepared_current_customers{
     type: string
     sql:  CASE WHEN ${ab_tests} = '{"prepared": 2}' THEN 'Prepared and Meal Kit'
-          WHEN ${vwo_signup_ab_test_variants} = '{"prepared": 1}' THEN 'Meal Kit Only'
+          WHEN ${ab_tests} = '{"prepared": 1}' THEN 'Meal Kit Only'
           ELSE NULL
           END;;
   }
