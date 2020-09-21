@@ -234,6 +234,11 @@ view: order_items {
     sql: ${extension_binary} ;;
   }
 
+  measure: item_quantity{
+    type: number
+    sql: ${quantity}*${count} ;;
+  }
+
   dimension: breakfast_revenue {
     type: number
     sql: case when ${breakfast_binary} = 1 Then ${price_cents}
