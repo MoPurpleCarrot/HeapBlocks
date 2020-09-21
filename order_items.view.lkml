@@ -234,9 +234,9 @@ view: order_items {
     sql: ${extension_binary} ;;
   }
 
-  measure: item_quantity{
-    type: number
-    sql: ${quantity}*${count} ;;
+  measure: item_quantity {
+    type: sum
+    sql: ${quantity} ;;
   }
 
   dimension: breakfast_revenue {
