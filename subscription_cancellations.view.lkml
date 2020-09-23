@@ -128,6 +128,22 @@ view: subscription_cancellations {
         sql: ${reason} = 11 ;;
         label: "Cooking Independently"
       }
+      when: {
+        sql: ${reason} = 12 ;;
+        label: "Not Kid-Friendly"
+      }
+      when: {
+        sql: ${reason} = 13 ;;
+        label: "Prefer Meal Kit"
+      }
+      when: {
+        sql: ${reason} = 14 ;;
+        label: "Want to Grocery Shop & Prepare"
+      }
+      when: {
+        sql: ${reason} = 15 ;;
+        label: "Want More Variety"
+      }
       }}
 
   dimension: reason_details {
