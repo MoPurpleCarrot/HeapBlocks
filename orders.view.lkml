@@ -358,6 +358,13 @@ view: orders {
     sql: ${price} ;;
   }
 
+  measure: billed_net_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${price} ;;
+  }
+
   measure: total_plan_gross_revenue {
     type: sum
     value_format_name: usd
@@ -388,6 +395,17 @@ view: orders {
       value: "3"
     }
     sql: ${amount_charged} ;;
+  }
+
+  measure: total_billed_net_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "3"
+    }
+    sql: ${price} ;;
   }
 
   measure: total_billed_count {
