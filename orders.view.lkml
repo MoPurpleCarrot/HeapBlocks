@@ -685,6 +685,13 @@ view: orders {
     sql: ${subscriptions.winback_date} IS NOT NULL ;;
   }
 
+  dimension_group: deleted_at {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}._sdc_batched_at ;;
+  }
+
+
   measure: average_orders_post_winback {
     type: number
     hidden: yes
