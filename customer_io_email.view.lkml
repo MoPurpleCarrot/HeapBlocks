@@ -42,6 +42,7 @@ view: customer_io_email {
   dimension: message_id {
     type: number
     sql: ${TABLE}.data__action_id ;;
+    primary_key: yes
   }
 
 
