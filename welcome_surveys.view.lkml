@@ -59,6 +59,13 @@ view: welcome_surveys {
     sql: ${TABLE}.birthday ;;
   }
 
+  dimension: age_group{
+    type: string
+    sql:  CASE WHEN diff_years(${birthday_year},now()) < 25 THEN '<25'
+      else NULL
+      END;;
+  }
+
   dimension: chosen_meal_kit {
     type: string
     sql: ${TABLE}.chosen_meal_kit ;;
