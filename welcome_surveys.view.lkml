@@ -61,7 +61,7 @@ view: welcome_surveys {
 
   dimension: age_group{
     type: string
-    sql:  CASE WHEN extract(year from DATE now())-${birthday_year} < 25 THEN '<25'
+    sql:  CASE WHEN diff_years(${birthday_date}, now()) < 25 THEN '<25'
       else NULL
       END;;
   }
