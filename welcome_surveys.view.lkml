@@ -61,7 +61,7 @@ view: welcome_surveys {
 
   dimension: age_group{
     type: string
-    sql:  CASE WHEN EXTRACT ( year FROM { TIMESTAMP 'now()' | timestamp)-${birthday_year}  < 25 THEN '<25'
+    sql:  CASE WHEN EXTRACT ( year FROM 'now()')-${birthday_year}  < 25 THEN '<25'
       else NULL
       END;;
   }
