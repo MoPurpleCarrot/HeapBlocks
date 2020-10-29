@@ -398,6 +398,10 @@ explore: users {
     relationship: many_to_one
     sql_on: ${events.subscription_id} = ${subscriptions.id} ;;
   }
+  join: payment_methods {
+    relationship: many_to_one
+    sql_on: ${payment_methods.user_id} = ${users.id} ;;
+  }
 
 }
 
