@@ -272,7 +272,7 @@ explore: users {
 
   join: shipping_addresses {
     relationship: one_to_many
-    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
+    sql_on: ${users.id} = ${shipping_addresses.user_id} ;;
   }
 
   join: orders {
@@ -392,7 +392,7 @@ explore: users {
   }
   join: skip_surveys {
     relationship: one_to_one
-    sql_on: ${skip_surveys.order_id} = ${orders.id} ;;
+    sql_on: ${skip_surveys.menu_id} = ${menus.id} ;;
   }
   join: events {
     relationship: many_to_one
