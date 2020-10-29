@@ -391,8 +391,8 @@ explore: users {
     sql_on: ${credit_transactions.credit_transaction_group_id} = ${credit_transaction_groups.id} ;;
   }
   join: skip_surveys {
-    relationship: one_to_one
-    sql_on: ${skip_surveys.menu_id} = ${menus.id} ;;
+    relationship: many_to_one
+    sql_on: ${skip_surveys.menu_id} = ${menus.id} AND ${skip_surveys.user_id} = ${users.id} ;;
   }
   join: events {
     relationship: many_to_one
