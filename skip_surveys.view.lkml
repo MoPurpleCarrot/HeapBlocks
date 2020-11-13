@@ -147,6 +147,7 @@ view: skip_surveys {
           WHEN ${reason} = 'I need to save money' THEN 'Save Money'
           WHEN ${reason} = 'I plan on cancelling' THEN 'Cancelling'
           WHEN ${reason} = 'I''m planning on cancelling in the future' THEN 'Cancelling'
+          WHEN ${reason} is NULL then NULL
           ELSE 'Other'
           END
           ;;

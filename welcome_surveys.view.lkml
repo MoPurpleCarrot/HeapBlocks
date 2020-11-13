@@ -59,6 +59,18 @@ view: welcome_surveys {
     sql: ${TABLE}.birthday ;;
   }
 
+  dimension: age_group{
+    type: string
+    sql:  CASE WHEN DATE_PART_YEAR(trunc(getdate())) - ${birthday_year}  < 25 THEN '<25'
+          WHEN DATE_PART_YEAR(trunc(getdate())) - ${birthday_year}  < 35 THEN '25-34'
+          WHEN DATE_PART_YEAR(trunc(getdate())) - ${birthday_year}  < 45 THEN '35-44'
+          WHEN DATE_PART_YEAR(trunc(getdate())) - ${birthday_year}  < 55 THEN '45-54'
+          WHEN DATE_PART_YEAR(trunc(getdate())) - ${birthday_year}  < 65 THEN '55-64'
+          WHEN DATE_PART_YEAR(trunc(getdate())) - ${birthday_year}  < 90  THEN '65+'
+      else NULL
+      END;;
+  }
+
   dimension: chosen_meal_kit {
     type: string
     sql: ${TABLE}.chosen_meal_kit ;;

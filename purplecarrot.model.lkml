@@ -272,7 +272,7 @@ explore: users {
 
   join: shipping_addresses {
     relationship: one_to_many
-    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
+    sql_on: ${users.id} = ${shipping_addresses.user_id} ;;
   }
 
   join: orders {
@@ -391,12 +391,16 @@ explore: users {
     sql_on: ${credit_transactions.credit_transaction_group_id} = ${credit_transaction_groups.id} ;;
   }
   join: skip_surveys {
-    relationship: one_to_one
-    sql_on: ${skip_surveys.order_id} = ${orders.id} ;;
+    relationship: many_to_one
+    sql_on: ${skip_surveys.menu_id} = ${menus.id} AND ${skip_surveys.user_id} = ${users.id} ;;
   }
   join: events {
     relationship: many_to_one
     sql_on: ${events.subscription_id} = ${subscriptions.id} ;;
+  }
+  join: payment_methods {
+    relationship: many_to_one
+    sql_on: ${payment_methods.user_id} = ${users.id} ;;
   }
 
 }

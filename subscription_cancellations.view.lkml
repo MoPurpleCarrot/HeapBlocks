@@ -170,6 +170,11 @@ view: subscription_cancellations {
     sql: ${TABLE}.user_id ;;
   }
 
+    dimension: prepared_opt_in {
+      type: string
+      sql: ${TABLE}.prepared_follow_up_opt_in ;;
+    }
+
   measure: count {
     type: count
     drill_fields: [id]
