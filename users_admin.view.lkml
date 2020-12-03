@@ -54,16 +54,24 @@ view: users {
     dimension:prepared_new_customers{
     type: string
     sql:  CASE WHEN ${vwo_signup_ab_test_variants} LIKE '%"208":"2"%' THEN 'Prepared and Meal Kit'
-    WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"2"%' THEN 'Prepared and Meal Kit'
-    WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"3"%' THEN 'Prepared and Meal Kit'
     WHEN ${vwo_signup_ab_test_variants} LIKE '%"208":"1"%' THEN 'Meal Kit Only'
-    WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"1"%' THEN 'Meal Kit Only'
 
     ELSE NULL
     END;;
     }
 
   dimension:prepared_new_customers_menu_test{
+    type: string
+    sql:  CASE
+          WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"2"%' THEN 'Prepared and Meal Kit'
+          WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"3"%' THEN 'Prepared and Meal Kit'
+          WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"1"%' THEN 'Meal Kit Only'
+
+          ELSE NULL
+          END;;
+  }
+
+  dimension:prepared_new_customers_menu_test_breakout{
     type: string
     sql:  CASE
           WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"2"%' THEN 'Prepared and Meal Kit - Current Menu'
