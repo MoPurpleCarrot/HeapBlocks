@@ -75,11 +75,6 @@ view: recipe_feedbacks {
     sql: ${TABLE}.question_5_answer ;;
   }
 
-  dimension: question_6 {
-    label: "Anything else you'd like to share"
-    type: string
-    sql: ${TABLE}.question_6_answer ;;
-   }
 
   measure: count {
     type: count
