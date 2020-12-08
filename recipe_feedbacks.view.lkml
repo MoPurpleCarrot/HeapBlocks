@@ -105,6 +105,12 @@ view: recipe_feedbacks {
     sql: ${question_3}*1.0 ;;
   }
 
+  measure: average_ingredient_quality {
+    type: average
+    value_format: "0.0"
+    sql: ${question_6}*1.0 ;;
+  }
+
 
 
 
