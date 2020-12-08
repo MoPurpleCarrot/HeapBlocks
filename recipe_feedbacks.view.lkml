@@ -69,6 +69,12 @@ view: recipe_feedbacks {
     sql: ${TABLE}.question_3_answer ;;
   }
 
+  dimension: question_6 {
+    label: "How was the quality of the ingredients? (1-5)"
+    type: string
+    sql: ${TABLE}.question_6_answer ;;
+  }
+
   dimension: question_5 {
     label: "Comments"
     type: string
