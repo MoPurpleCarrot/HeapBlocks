@@ -96,6 +96,14 @@ view: users {
           END;;
   }
 
+  dimension:Preferences_ABtestgroups{
+    type: string
+    sql:  CASE WHEN ${ab_tests} = '{"recipe_preferences": 2}' THEN 'Variant'
+          WHEN ${ab_tests} = '{"recipe_preferences": 1}' THEN 'Control'
+          ELSE NULL
+          END;;
+  }
+
   dimension: weeks_as_customer {
     type: number
     sql: DATEDIFF(WEEKS, ${created_raw}, CASE WHEN ${cancelled_raw} IS NULL THEN current_date ELSE ${cancelled_raw} END) ;;
