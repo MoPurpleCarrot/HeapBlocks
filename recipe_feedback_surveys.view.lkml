@@ -78,6 +78,12 @@ view: recipe_feedback_surveys {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: other_comments{
+    label: "Any other comments or feedback you'd like to share"
+    type: string
+    sql: ${TABLE}.question_suggestion_answer ;;
+  }
+
   dimension: comments {
     type: string
     sql: ${TABLE}.question_comment_answer ;;

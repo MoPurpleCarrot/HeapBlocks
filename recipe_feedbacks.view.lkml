@@ -69,17 +69,18 @@ view: recipe_feedbacks {
     sql: ${TABLE}.question_3_answer ;;
   }
 
+  dimension: question_6 {
+    label: "How was the quality of the ingredients? (1-5)"
+    type: string
+    sql: ${TABLE}.question_6_answer ;;
+  }
+
   dimension: question_5 {
     label: "Comments"
     type: string
     sql: ${TABLE}.question_5_answer ;;
   }
 
-  dimension: question_6 {
-    label: "Anything else you'd like to share"
-    type: string
-    sql: ${TABLE}.question_6_answer ;;
-   }
 
   measure: count {
     type: count
@@ -102,6 +103,12 @@ view: recipe_feedbacks {
     type: average
     value_format: "0.0"
     sql: ${question_3}*1.0 ;;
+  }
+
+  measure: average_ingredient_quality {
+    type: average
+    value_format: "0.0"
+    sql: ${question_6}*1.0 ;;
   }
 
 
