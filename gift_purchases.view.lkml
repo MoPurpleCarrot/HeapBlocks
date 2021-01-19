@@ -76,15 +76,9 @@ view: gift_purchases {
   dimension: gift_program_bucket {
     case:{
       when:{
-        sql: ${sending_method} = 0 ;;
+        sql: ${sending_method} = 0 OR ${sending_method} = 1 ;;
         label: "Gift"
       }
-
-      when:{
-        sql: ${sending_method} = 1 ;;
-        label: "Gift"
-      }
-
       when:{
         sql: ${sending_method} = 3 ;;
         label: "Send Free Meal"
@@ -199,6 +193,27 @@ view: gift_purchases {
     type: number
     sql: ${TABLE}.value_refunded ;;
   }
+
+    dimension: pc_customer{
+      type: string
+      case:{
+        when:{
+          sql:${purchaser_id} is NULL  ;;
+          label: "No"
+          }
+          else: "Yes"
+    }}
+
+      dimension: gift_used{
+        type: string
+        case:{
+          when:{
+            sql:${value_applied} = 0  ;;
+            label: "No"
+          }
+          else: "Yes"
+        }}
+
 
   dimension_group: sent_to_recipient {
     type: time
