@@ -417,6 +417,23 @@ view: users {
     sql: ${TABLE}.utm_source ;;
   }
 
+  dimension: utm_source_groups {
+    type: string
+    sql: case when ${utm_source} = 'Organic' then 'Organic'
+        when ${utm_source} = 'organic' then 'Organic'
+        when ${utm_source} = 'null' then 'Organic'
+        when ${utm_source} is null then 'Organic'
+        when ${utm_source} is 'facebook' then 'Facebook'
+        when ${utm_source} is 'Facebook' then 'Facebook'
+        when ${utm_source} is 'adwordsb' then 'AdWords Branded'
+        when ${utm_source} is 'adwordsnb' then 'AdWords Non-Branded'
+        when ${utm_source} is 'affiliate' then 'Affiliates'
+        when ${utm_source} is 'sfm' then 'Share a Box'
+        Else null
+        End
+    ;;
+  }
+
   dimension: utm_bucket_ORD {
     type: string
     sql: case when ${utm_source_bucket} = 'Organic' then 'Organic'
