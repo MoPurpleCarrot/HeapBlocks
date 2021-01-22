@@ -422,7 +422,7 @@ view: users {
     sql: case when ${utm_source} = 'Organic' then 'Organic'
         when ${utm_source} = 'organic' then 'Organic'
         when ${utm_source} = 'null' then 'Organic'
-        when ${utm_source} is 'facebook' then 'Facebook'
+        when ${utm_source} = 'facebook' then 'Facebook'
         when ${utm_source} is 'Facebook' then 'Facebook'
         when ${utm_source} is 'adwordsb' then 'AdWords Branded'
         when ${utm_source} is 'adwordsnb' then 'AdWords Non-Branded'
