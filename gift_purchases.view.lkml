@@ -194,7 +194,7 @@ view: gift_purchases {
     sql: ${TABLE}.value_refunded ;;
   }
 
-    dimension: pc_customer{
+    dimension: PC_customer{
       type: string
       case:{
         when:{
