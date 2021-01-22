@@ -239,7 +239,7 @@ view: welcome_surveys {
   }
 
   dimension: how_many_meals_each_week{
-    type: number
+    type: string
     sql: ${TABLE}.how_many_meals_each_week ;;
   }
 
