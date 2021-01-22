@@ -603,6 +603,11 @@ view: users {
     sql: ${TABLE}.do_not_sell ;;
   }
 
+  dimension: Segment{
+    type: string
+    sql: ${TABLE}.segment_membership ;;
+  }
+
   measure: count {
     type: count
   }
