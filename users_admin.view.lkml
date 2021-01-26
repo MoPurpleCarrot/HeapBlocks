@@ -625,6 +625,11 @@ view: users {
     sql: ${TABLE}.segment_membership ;;
   }
 
+  dimension: sign_up_method{
+    type: string
+    sql: ${TABLE}.sign_up_method ;;
+  }
+
   measure: count {
     type: count
   }
