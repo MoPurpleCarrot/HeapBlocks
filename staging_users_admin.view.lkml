@@ -1,5 +1,5 @@
 view: staging_users {
-  sql_table_name: users ;;
+  sql_table_name: public.users ;;
 
   dimension: id {
     primary_key: yes
