@@ -119,13 +119,8 @@ view: events {
   }
 
   dimension: data {
-    type: number
-    sql: SELECT row_number() OVER(order by 1) AS events.test1
-  , events.id as event_id
-  , split_part(events.data, ', ', numbers.num) AS events.test2
-FROM events
-JOIN numbers
-ON numbers.num <= regexp_count(events.data, ',\\s') + 1;;
+    type: string
+    sql: ${TABLE}.data;;
 }
   measure: count {
     type: count
