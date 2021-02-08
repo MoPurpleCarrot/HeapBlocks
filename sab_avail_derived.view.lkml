@@ -1,8 +1,8 @@
-view: sab_count_derived {
+view: sab_avail_derived {
     derived_table: {
 sql:SELECT
   gift_purchases.purchaser_id  AS "sab_purchaser_id",
-  COUNT(*) AS "available_sab_count"
+  COUNT(*) AS "available_sab"
 FROM heroku_postgres.gift_purchases  AS gift_purchases
 WHERE (((CASE
 WHEN gift_purchases.sending_method = 0 OR gift_purchases.sending_method = 1  THEN 'Gift'
@@ -24,20 +24,20 @@ ORDER BY 2 DESC
     sql: ${TABLE}."sab_purchaser_id" ;;
   }
 
-  dimension: available_sab_count {
+  dimension: available_sab {
     type: number
-    sql: ${TABLE}."available_sab_count" ;;
+    sql: ${TABLE}."available_sab" ;;
   }
 
   dimension: available_sab_group {
     type: string
-    sql:  CASE WHEN ${available_sab_count} = 0 THEN '0)'
-          WHEN ${available_sab_count} = 1 THEN '1'
-          WHEN ${available_sab_count} = 2 THEN '2'
-          WHEN ${available_sab_count} = 3 THEN '3'
-          WHEN ${available_sab_count} = 4 THEN '4'
-          WHEN ${available_sab_count} = 5 THEN '5'
-          WHEN ${available_sab_count} > 5 THEN '>5'
+    sql:  CASE WHEN ${available_sab} = 0 THEN '0)'
+          WHEN ${available_sab} = 1 THEN '1'
+          WHEN ${available_sab} = 2 THEN '2'
+          WHEN ${available_sab} = 3 THEN '3'
+          WHEN ${available_sab} = 4 THEN '4'
+          WHEN ${available_sab} = 5 THEN '5'
+          WHEN ${available_sab} > 5 THEN '>5'
           ELSE NULL
           END
           ;;

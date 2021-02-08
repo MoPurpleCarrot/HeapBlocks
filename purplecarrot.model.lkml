@@ -403,6 +403,18 @@ explore: users {
     sql_on: ${payment_methods.user_id} = ${users.id} ;;
   }
 
+  join: sab_avail_derived {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${sab_avail_derived.sab_purchaser_id} ;;
+
+  }
+
+  join: sab_sent_derived {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${sab_sent_derived.sab_purchaser_id} ;;
+
+  }
+
 }
 
 
@@ -491,9 +503,16 @@ explore: gift_purchases {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
-  join: sab_count_derived {
+  join: sab_avail_derived {
     relationship: one_to_one
-    sql_on: ${gift_purchases.purchaser_id} = ${sab_count_derived.sab_purchaser_id} ;;
+    sql_on: ${gift_purchases.purchaser_id} = ${sab_avail_derived.sab_purchaser_id} ;;
+
+  }
+
+  join: sab_sent_derived {
+    relationship: one_to_one
+    sql_on: ${gift_purchases.purchaser_id} = ${sab_sent_derived.sab_purchaser_id} ;;
+
   }
 
 }
