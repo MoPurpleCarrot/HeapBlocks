@@ -2,7 +2,7 @@ view: sab_sent_derived {
     derived_table: {
       sql:SELECT
           gift_purchases.purchaser_id  AS "sab_purchaser_id",
-          COUNT(*) AS "sent_sab_count"
+          COUNT(*) AS "sent_sab"
         FROM heroku_postgres.gift_purchases  AS gift_purchases
         WHERE (((CASE
         WHEN gift_purchases.sending_method = 0 OR gift_purchases.sending_method = 1  THEN 'Gift'
