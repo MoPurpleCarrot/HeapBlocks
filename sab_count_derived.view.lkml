@@ -13,8 +13,9 @@ GROUP BY 1
 ORDER BY 2 DESC
 ;;
 }
-  measure: count {
-    type: count
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${sab_purchaser_id} ;;
   }
 
   dimension: sab_purchaser_id {
