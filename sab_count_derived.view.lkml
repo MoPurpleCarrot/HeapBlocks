@@ -36,7 +36,7 @@ ORDER BY 2 DESC
           WHEN ${available_sab_count} = 3 THEN '3'
           WHEN ${available_sab_count} = 4 THEN '4'
           WHEN ${available_sab_count} = 5 THEN '5'
-          WHEN ${available_sab_count > 5 THEN '>5'
+          WHEN ${available_sab_count} > 5 THEN '>5'
           ELSE NULL
           END
           ;;
