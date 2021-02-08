@@ -491,6 +491,11 @@ explore: gift_purchases {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
+  join: sab_count_derived {
+    relationship: one_to_one
+    sql_on: ${gift_purchases.purchaser_id} = ${sab_count_derived.sab_purchaser_id} ;;
+  }
+
 }
 
 explore: ingredients {
