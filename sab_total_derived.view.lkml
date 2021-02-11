@@ -39,7 +39,6 @@ view: sab_total_derived {
   }
 
   dimension: sab_id {
-    primary_key: yes
     type: number
     sql: ${TABLE}."sab_id" ;;
   }
