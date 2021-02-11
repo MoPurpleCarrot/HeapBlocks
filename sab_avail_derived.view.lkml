@@ -9,11 +9,11 @@ WHEN gift_purchases.sending_method = 0 OR gift_purchases.sending_method = 1  THE
 WHEN gift_purchases.sending_method = 3  THEN 'Send Free Meal'
 ELSE 'Other'
 END) = 'Send Free Meal')) AND (gift_purchases.giveaway_sent_at  IS NULL) AND (gift_purchases.expired_at  IS NULL)
-GROUP BY 2
+GROUP BY 1
 ORDER BY 2 DESC
 ;;
 }
-  measure: count_distinct_users {
+  measure: count_distinct {
     type: count_distinct
     sql: ${sab_purchaser_id} ;;
   }

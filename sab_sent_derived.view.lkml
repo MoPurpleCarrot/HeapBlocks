@@ -15,7 +15,7 @@ view: sab_sent_derived {
         ORDER BY 2 DESC
         ;;
     }
-    measure: count_distinct_users {
+    measure: count_distinct {
       type: count_distinct
       sql: ${sab_purchaser_id} ;;
   }
