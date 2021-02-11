@@ -2,39 +2,29 @@ view: sab_sent_derived {
     derived_table: {
       sql:SELECT
           gift_purchases.purchaser_id  AS "sab_purchaser_id",
-          gift_purchases.id  AS "sab_id",
           COUNT(*) AS "sent_sab"
+
         FROM heroku_postgres.gift_purchases  AS gift_purchases
+
         WHERE (((CASE
         WHEN gift_purchases.sending_method = 0 OR gift_purchases.sending_method = 1  THEN 'Gift'
         WHEN gift_purchases.sending_method = 3  THEN 'Send Free Meal'
         ELSE 'Other'
         END) = 'Send Free Meal')) AND (gift_purchases.giveaway_sent_at  IS NOT NULL) AND (gift_purchases.expired_at  IS NULL)
-        GROUP BY 2
+        GROUP BY 1
         ORDER BY 2 DESC
         ;;
     }
     measure: count_distinct_users {
       type: count_distinct
       sql: ${sab_purchaser_id} ;;
-    }
-
-    measure: count_distinct_sab {
-    type: count_distinct
-    sql: ${sab_id} ;;
   }
 
-  dimension: sab_id {
+  dimension: sab_purchaser_id {
+    primary_key: yes
     type: number
-    sql: ${TABLE}."sab_id" ;;
+    sql: ${TABLE}."sab_purchaser_id" ;;
   }
-
-    dimension: sab_purchaser_id {
-      primary_key: yes
-      type: number
-      sql: ${TABLE}."sab_purchaser_id" ;;
-    }
-
     dimension: sent_sab {
       type: number
       sql: ${TABLE}."sent_sab" ;;
@@ -53,4 +43,4 @@ view: sab_sent_derived {
           END
           ;;
     }
-  }
+}
