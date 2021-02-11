@@ -2,6 +2,7 @@ view: sab_avail_derived {
     derived_table: {
 sql:SELECT
   gift_purchases.purchaser_id  AS "sab_purchaser_id",
+  gift_purchases.id  AS "sab_id",
   COUNT(*) AS "available_sab"
 FROM heroku_postgres.gift_purchases  AS gift_purchases
 WHERE (((CASE
@@ -13,9 +14,19 @@ GROUP BY 1
 ORDER BY 2 DESC
 ;;
 }
-  measure: count_distinct {
+  measure: count_distinct_users {
     type: count_distinct
     sql: ${sab_purchaser_id} ;;
+  }
+
+  measure: count_distinct_sab {
+    type: count_distinct
+    sql: ${sab_id} ;;
+  }
+
+  dimension: sab_id {
+    type: number
+    sql: ${TABLE}."sab_id" ;;
   }
 
   dimension: sab_purchaser_id {
