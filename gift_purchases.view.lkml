@@ -194,6 +194,7 @@ view: gift_purchases {
     sql: ${TABLE}.value_refunded ;;
   }
 
+
     dimension: PC_customer{
       type: string
       case:{
@@ -242,6 +243,17 @@ view: gift_purchases {
       ]
       sql: ${TABLE}.expired_at ;;
     }
+
+        dimension: sent{
+          type: string
+          case:{
+            when:{
+              sql:${sent_to_recipient_date} is null  ;;
+              label: "No"
+            }
+            else: "Yes"
+          }}
+
 
   measure: count {
     type: count
