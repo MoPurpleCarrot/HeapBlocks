@@ -38,7 +38,7 @@ view: sab_sent_derived {
           WHEN ${sent_sab} = 4 THEN '4'
           WHEN ${sent_sab} = 5 THEN '5'
           WHEN ${sent_sab} > 5 THEN '6+'
-          ELSE NULL
+          ELSE 'Never Sent'
           END
           ;;
     }

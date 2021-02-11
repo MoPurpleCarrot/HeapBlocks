@@ -415,12 +415,6 @@ explore: users {
 
   }
 
-  join: sab_total_derived {
-    relationship: one_to_one
-    sql_on: ${users.id} = ${sab_total_derived.sab_purchaser_id} ;;
-
-  }
-
 }
 
 
