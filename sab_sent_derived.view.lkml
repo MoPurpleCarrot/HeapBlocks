@@ -10,7 +10,7 @@ view: sab_sent_derived {
         WHEN gift_purchases.sending_method = 3  THEN 'Send Free Meal'
         ELSE 'Other'
         END) = 'Send Free Meal')) AND (gift_purchases.giveaway_sent_at  IS NOT NULL) AND (gift_purchases.expired_at  IS NULL)
-        GROUP BY 1
+        GROUP BY 2
         ORDER BY 2 DESC
         ;;
     }
