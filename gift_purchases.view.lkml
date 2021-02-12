@@ -259,10 +259,20 @@ view: gift_purchases {
             case:{
               when:{
                 sql:datediff(day,${created_date},${sent_to_recipient_date})<8  ;;
-                label: "No"
+                label: "Yes"
               }
-              else: "Yes"
+              else: "No"
             }}
+
+            dimension: sent_2_weeks{
+              type: string
+              case:{
+                when:{
+                  sql:datediff(day,${created_date},${sent_to_recipient_date})<15  ;;
+                  label: "Yes"
+                }
+                else: "No"
+              }}
 
 
   measure: count {
