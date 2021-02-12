@@ -320,14 +320,10 @@ explore: users {
     sql_on: ${orders.coupon_id} = coupons.id ;;
 
   }
-  join: gift_redemptions {
-    relationship: many_to_one
-    sql_on: ${gift_redemptions.user_id} = ${users.id} ;;
-  }
 
   join: gift_purchases {
-    relationship: one_to_one
-    sql_on: ${gift_purchases.id} = ${gift_redemptions.gift_purchase_id} ;;
+    relationship: many_to_one
+    sql_on: ${gift_purchases.purchaser_id} = ${users.id} ;;
   }
 
   join: menus {
@@ -414,6 +410,7 @@ explore: users {
     sql_on: ${users.id} = ${sab_sent_derived.sab_purchaser_id} ;;
 
   }
+
 
 }
 
