@@ -38,7 +38,7 @@ ORDER BY 2 DESC
           WHEN ${available_sab} = 4 THEN '4'
           WHEN ${available_sab} = 5 THEN '5'
           WHEN ${available_sab} > 5 THEN '6+'
-          ELSE NULL
+          ELSE 'None Available'
           END
           ;;
   }
