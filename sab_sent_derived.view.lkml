@@ -32,7 +32,7 @@ view: sab_sent_derived {
 
     dimension: sent_sab_group {
       type: string
-      sql:  CASE WHEN ${sent_sab} = 0 THEN '0)'
+      sql:  CASE WHEN ${sent_sab} = 0 THEN '0'
           WHEN ${sent_sab} = 1 THEN '1'
           WHEN ${sent_sab} = 2 THEN '2'
           WHEN ${sent_sab} = 3 THEN '3'

@@ -254,6 +254,16 @@ view: gift_purchases {
             else: "Yes"
           }}
 
+          dimension: sent_1_week{
+            type: string
+            case:{
+              when:{
+                sql:datediff(day,${created_date},${sent_to_recipient_date})<8  ;;
+                label: "No"
+              }
+              else: "Yes"
+            }}
+
 
   measure: count {
     type: count

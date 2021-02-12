@@ -31,7 +31,7 @@ ORDER BY 2 DESC
 
   dimension: available_sab_group {
     type: string
-    sql:  CASE WHEN ${available_sab} = 0 THEN '0)'
+    sql:  CASE WHEN ${available_sab} = 0 THEN '0'
           WHEN ${available_sab} = 1 THEN '1'
           WHEN ${available_sab} = 2 THEN '2'
           WHEN ${available_sab} = 3 THEN '3'
