@@ -236,8 +236,12 @@ view: order_items {
 
  dimension: item_quantity {
     type: number
-    sql: ${quantity}*${dinner_binary} ;;
-  }
+    sql:  CASE WHEN ${recipe_meal_type} = 3 THEN '{quantity}'
+  WHEN ${order_plan_name} = 'Prepared' THEN '{quantity}'
+  Else '1'
+  END
+  ;;
+}
 
   measure: total_items {
     type: sum
