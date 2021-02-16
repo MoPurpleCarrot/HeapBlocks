@@ -156,10 +156,12 @@ view: order_items {
 
   dimension: item_type {
     type: string
-    sql:  CASE WHEN ${recipe_meal_type} = 0 THEN 'Dinner'
+    sql:  CASE
           WHEN ${recipe_meal_type} = 2 THEN 'Lunch'
           WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
           WHEN ${recipe_meal_type} = 3 THEN 'Extension'
+          WHEN ${recipe_meal_type} = 0 AND ${order_plan_name} = 'Prepared' THEN 'Dinner - Prep'
+          WHEN ${recipe_meal_type} = 0 THEN 'Dinner - MK'
           END
           ;;
   }
@@ -236,9 +238,9 @@ view: order_items {
 
  dimension: item_quantity {
     type: number
-    sql:  CASE WHEN ${recipe_meal_type} = 3 THEN '{quantity}'
-  WHEN ${order_plan_name} = 'Prepared' THEN '{quantity}'
-  Else '1'
+    sql:  CASE WHEN ${recipe_meal_type} = 3 THEN ${TABLE}.quantity
+  WHEN ${order_plan_name} = 'Prepared' THEN ${TABLE}.quantity
+  Else 1
   END
   ;;
 }
