@@ -331,9 +331,9 @@ explore: users {
     sql_on: ${orders.menu_id} = ${menus.id} ;;
   }
 
-  join: menu_items {
+  join: menu_items_new {
     relationship: many_to_one
-    sql_on: ${menu_items.sku_id} = ${skus.id} ;;
+    sql_on: ${menu_items_new.sku_id}= ${skus.id} and ${menu_items_new.menu_id}=${menus.id} ;;
   }
 
   join: user_facts {
