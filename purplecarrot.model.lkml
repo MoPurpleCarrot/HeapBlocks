@@ -331,6 +331,11 @@ explore: users {
     sql_on: ${orders.menu_id} = ${menus.id} ;;
   }
 
+  join: menu_items {
+    relationship: many_to_one
+    sql_on: ${menu_items.sku_id} = ${skus.id} ;;
+  }
+
   join: user_facts {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
@@ -426,7 +431,26 @@ explore: zd_tickets{
     relationship: one_to_one
     sql_on: ${zd_field_join.id} = ${zd_ticket_fields.id};;
   }
-
+  join: users {
+    relationship: one_to_one
+    sql_on: ${zd_users.email} = ${users.email};;
+  }
+  join: subscriptions{
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id};;
+  }
+  join: orders{
+    relationship: one_to_one
+    sql_on: ${orders.subscription_id} = ${subscriptions.id};;
+  }
+  join: menus{
+    relationship: one_to_one
+    sql_on: ${orders.menu_id} = ${menus.id} and ${zd_field_join.field_detail}=add_days(1,${menus.shipping_date});;
+  }
+  join: user_facts{
+    relationship: one_to_one
+    sql_on: ${user_facts.id} = ${users.id};;
+  }
 }
 
 

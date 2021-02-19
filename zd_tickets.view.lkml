@@ -76,6 +76,6 @@ view: zd_tickets {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [ticket_id]
   }
 }
