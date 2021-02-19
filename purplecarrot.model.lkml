@@ -411,8 +411,24 @@ explore: users {
 
   }
 
+}
+
+explore: zd_tickets{
+  join: zd_users {
+    relationship: one_to_one
+    sql_on: ${zd_tickets.submitter_id} = ${zd_users.zd_id};;
+  }
+  join: zd_field_join {
+    relationship: one_to_one
+    sql_on: ${zd_tickets.id} = ${zd_field_join.ticket_id};;
+  }
+  join: zd_ticket_fields {
+    relationship: one_to_one
+    sql_on: ${zd_field_join.id} = ${zd_ticket_fields.id};;
+  }
 
 }
+
 
 
 explore: customer_io_email{
