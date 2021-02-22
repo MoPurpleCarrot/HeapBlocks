@@ -421,6 +421,7 @@ view: users {
     type: string
     sql: case when
         ${coupons.code} = 'pcjan21' then 'Direct Mail'
+        when ${coupons.code} = 'letsdothispc21' then 'Direct Mail'
         when ${utm_source} like '%Facebook%' then 'Facebook'
         when ${utm_source} like '%FB%' then 'Facebook'
         when ${utm_source} like '%utm_source%' then 'Facebook'
