@@ -320,19 +320,20 @@ explore: users {
     sql_on: ${orders.coupon_id} = coupons.id ;;
 
   }
-  join: gift_redemptions {
-    relationship: many_to_one
-    sql_on: ${gift_redemptions.user_id} = ${users.id} ;;
-  }
 
   join: gift_purchases {
-    relationship: one_to_one
-    sql_on: ${gift_purchases.id} = ${gift_redemptions.gift_purchase_id} ;;
+    relationship: many_to_one
+    sql_on: ${gift_purchases.purchaser_id} = ${users.id} ;;
   }
 
   join: menus {
     relationship: many_to_one
     sql_on: ${orders.menu_id} = ${menus.id} ;;
+  }
+
+  join: menu_items_new {
+    relationship: many_to_one
+    sql_on: ${menu_items_new.sku_id}= ${skus.id} and ${menu_items_new.menu_id}=${menus.id} ;;
   }
 
   join: user_facts {
@@ -416,6 +417,42 @@ explore: users {
   }
 
 }
+
+explore: zd_tickets{
+  join: zd_users {
+    relationship: one_to_one
+    sql_on: ${zd_tickets.submitter_id} = ${zd_users.zd_id};;
+  }
+  join: zd_field_join {
+    relationship: one_to_one
+    sql_on: ${zd_tickets.id} = ${zd_field_join.ticket_id};;
+  }
+  join: zd_ticket_fields {
+    relationship: one_to_one
+    sql_on: ${zd_field_join.id} = ${zd_ticket_fields.id};;
+  }
+  join: users {
+    relationship: one_to_one
+    sql_on: ${zd_users.email} = ${users.email};;
+  }
+  join: subscriptions{
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id};;
+  }
+  join: orders{
+    relationship: one_to_one
+    sql_on: ${orders.subscription_id} = ${subscriptions.id};;
+  }
+  join: menus{
+    relationship: one_to_one
+    sql_on: ${orders.menu_id} = ${menus.id} and ${zd_field_join.ship_date}=${menus.shipping_date});;
+  }
+  join: user_facts{
+    relationship: one_to_one
+    sql_on: ${user_facts.id} = ${users.id};;
+  }
+}
+
 
 
 explore: customer_io_email{
