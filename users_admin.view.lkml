@@ -431,10 +431,12 @@ view: users {
         when ${utm_source} like '%adwords%' then 'Adwords NB'
         when ${utm_source} like '%veganbox%' then 'Adwords NB'
         when ${utm_source} = 'gift' then 'Gift'
+        when ${utm_source} = 'Organic' then 'Organic'
         when ${utm_source} is null then 'Organic'
         Else 'Other'
         End
     ;;
+    case_sensitive: no
   }
 
 
