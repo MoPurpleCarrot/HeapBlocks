@@ -458,7 +458,7 @@ explore: zd_tickets{
   }
   join: menus{
     relationship: one_to_one
-    sql_on: ${orders.menu_id} = ${menus.id} and ${zd_field_join.ship_date}=${menus.shipping_date});;
+    sql_on: ${orders.menu_id} = ${menus.id};;
   }
   join: user_facts{
     relationship: one_to_one
@@ -719,13 +719,14 @@ explore: credit_transactions{
   }
   join: coupons {
     relationship: many_to_one
-    sql_on: ${orders.coupon_id} = coupons.id ;;
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
 
   }
   join: user_facts {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id}    ;;
   }
+
 
 
 }
