@@ -419,7 +419,7 @@ view: users {
 
   dimension: utm_source_groups {
     type: string
-    sql: case when ${utm_source} like '%Facebook%' then 'Facebook'
+    sql: case when lower(${utm_source}) like '%facebook%' then 'Facebook'
         when ${utm_source} like '%FB%' then 'Facebook'
         when ${utm_source} like '%utm_source%' then 'Facebook'
         when ${utm_source} = 'affiliate' then 'Affiliate'
@@ -428,15 +428,16 @@ view: users {
         when ${utm_source} like '%bing%' then 'Bing B'
         when ${utm_source} like '%adwordsdis%' then 'Google Discovery'
         when ${utm_source} like '%adwordsb%' then 'Adwords B'
-        when ${utm_source} like '%adwords%' then 'Adwords NB'
+        when lower(${utm_source}) like '%adwords%' then 'Adwords NB'
         when ${utm_source} like '%veganbox%' then 'Adwords NB'
         when ${utm_source} = 'gift' then 'Gift'
-        when ${utm_source} = 'Organic' then 'Organic'
+        when lower(${utm_source}) = 'organic' then 'Organic'
+        when ${utm_source} = 'none' then 'Organic'
         when ${utm_source} is null then 'Organic'
         Else 'Other'
         End
     ;;
-    case_sensitive: no
+
   }
 
 
