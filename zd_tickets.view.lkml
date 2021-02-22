@@ -78,4 +78,10 @@ view: zd_tickets {
     type: count
     drill_fields: [ticket_id]
   }
+
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${ticket_id};;
+  }
+
 }

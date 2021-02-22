@@ -17,7 +17,13 @@ view: zd_field_join {
   dimension: field_detail{
     type: string
     sql: ${TABLE}.value__string ;;
+  }
 
+  dimension: ship_date{
+    type: string
+    sql: case when ${zd_ticket_fields.title} = 'Ship Week' THEN ${field_detail}
+    else null
+    end;;
   }
 
   measure: count {

@@ -445,7 +445,7 @@ explore: zd_tickets{
   }
   join: menus{
     relationship: one_to_one
-    sql_on: ${orders.menu_id} = ${menus.id} and ${zd_field_join.field_detail}=add_days(1,${menus.shipping_date});;
+    sql_on: ${orders.menu_id} = ${menus.id} and ${zd_field_join.ship_date}=${menus.shipping_date});;
   }
   join: user_facts{
     relationship: one_to_one
