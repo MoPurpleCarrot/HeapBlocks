@@ -419,16 +419,19 @@ view: users {
 
   dimension: utm_source_groups {
     type: string
-    sql: case when ${utm_source} = 'Organic' then 'Organic'
-        when ${utm_source} = 'organic' then 'Organic'
-        when ${utm_source} = 'null' then 'Organic'
+    sql: case when ${utm_source} like '%Facebook%' then 'Facebook'
+        when ${utm_source} like '%FB%' then 'Facebook'
+        when ${utm_source} like '%utm_source%' then 'Facebook'
+        when ${utm_source} = 'affiliate' then 'Affiliate'
+        when ${utm_source} = 'sfm' then 'SAB'
+        when ${utm_source} like '%pin%' then 'Pinterest'
+        when ${utm_source} like '%bing%' then 'Bing B'
+        when ${utm_source} like '%adwordsdis%' then 'Google Discovery'
+        when ${utm_source} like '%adwordsb%' then 'Adwords B'
+        when ${utm_source} like '%adwords%' then 'Adwords NB'
+        when ${utm_source} like '%veganbox%' then 'Adwords NB'
+        when ${utm_source} = 'gift' then 'Gift'
         when ${utm_source} is null then 'Organic'
-        when ${utm_source} = 'facebook' then 'Facebook'
-        when ${utm_source} = 'Facebook' then 'Facebook'
-        when ${utm_source} = 'adwordsb' then 'AdWords Branded'
-        when ${utm_source} = 'adwordsnb' then 'AdWords Non-Branded'
-        when ${utm_source} = 'affiliate' then 'Affiliates'
-        when ${utm_source} = 'sfm' then 'Share a Box'
         Else 'Other'
         End
     ;;
