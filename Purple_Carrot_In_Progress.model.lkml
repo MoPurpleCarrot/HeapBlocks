@@ -73,7 +73,11 @@ explore: heap_users{
     relationship: one_to_one
     sql_on:  ${heap_sessions.user_id} = ${heap_users.user_id} ;;
   }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
 
+  }
 
 
 }
@@ -93,7 +97,6 @@ explore: users {
     relationship: one_to_one
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
-
 
   join: subscription_order_num_derrived {
     relationship: one_to_one
@@ -264,6 +267,11 @@ explore: gift_purchases {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
 }
 
 
@@ -308,7 +316,11 @@ explore: recipe_feedback_surveys {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
 
+  }
 
 }
 
@@ -321,81 +333,22 @@ explore: seasonal_order {
     relationship:many_to_one
     sql_on: ${seasonal_order.customer_id}=${users.id} ;;
   }
-}
-
-#Intercom joining
-
-explore: Intercom_conversations {
-
-  join: Intercom_users {
-    relationship:  one_to_many
-    sql_on:  ${Intercom_users.id} = ${Intercom_conversations.user__id} ;;
-  }
-
-  join: users {
-    relationship:  one_to_one
-    sql_on:  ${users.id} = ${Intercom_users.user_id} ;;
-  }
-
-  join: user_facts {
-    relationship: one_to_one
-    sql_on: ${users.id} = ${user_facts.id} ;;
-  }
-
   join: subscriptions {
     relationship: one_to_one
-    sql_on:  ${subscriptions.user_id} = ${users.id} ;;
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
-
   join: orders {
     relationship: one_to_many
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
-
-  join: order_items {
-    relationship:  one_to_many
-    sql_on: ${orders.id} = ${order_items.order_id} ;;
-  }
-
-  join: skus {
-    relationship: one_to_many
-    sql_on: ${skus.id} = ${order_items.sku_id};;
-  }
-
-  join: products {
-    relationship: one_to_many
-    sql_on: ${products.id}=${skus.product_id};;
-  }
-
-  join: Intercom_conversations__tags__tags {
-    relationship:  many_to_one
-    sql_on:  ${Intercom_conversations__tags__tags._sdc_source_key_id} = ${Intercom_conversations.id}
-      ;;
-  }
-
-  join: Intercom_contacts {
-    relationship:  one_to_one
-    sql_on:  ${Intercom_contacts.id} = ${Intercom_conversations.user__id} ;;
-  }
-
-  join: Intercom_contacts__social_profiles {
-    relationship:  one_to_one
-    sql_on:  ${Intercom_contacts__social_profiles.id} = ${Intercom_conversations.user__id} ;;
-  }
-
-  join: subscription_cancellations {
-    relationship:  one_to_one
-    sql_on: ${subscription_cancellations.user_id} = ${users.id} ;;
-  }
-
-  join: Intercom_conversation_parts {
-    relationship:  many_to_one
-    sql_on: ${Intercom_conversation_parts._sdc_source_key_id} = ${Intercom_conversations.id} ;;
-  }
-
-  join: intercom_derived_firstmessage {
+  join: coupons {
     relationship: many_to_one
-    sql_on:  ${intercom_derived_firstmessage._sdc_source_key_id} = ${Intercom_conversations.id}  ;;
+    sql_on: ${orders.coupon_id} = coupons.id ;;
+
+  }
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id}    ;;
   }
 
 
