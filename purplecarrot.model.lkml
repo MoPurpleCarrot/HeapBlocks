@@ -53,6 +53,12 @@ explore: heap_users{
     sql_on: ${users.email} = ${heap_users._email} ;;
   }
 
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
+
   join: user_facts {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id}    ;;
@@ -190,6 +196,13 @@ explore: subscriptions {
     relationship: many_to_one
     sql_on: ${scheduled_menus.subscription_id} =  ${subscriptions.id} ;;
   }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
+
+
 }
 #  join: stripe_customers__cards_data {
 #    relationship: many_to_one
@@ -317,7 +330,7 @@ explore: users {
 
   join: coupons {
     relationship: many_to_one
-    sql_on: ${orders.coupon_id} = coupons.id ;;
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
 
   }
 
@@ -451,6 +464,11 @@ explore: zd_tickets{
     relationship: one_to_one
     sql_on: ${user_facts.id} = ${users.id};;
   }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
 }
 
 
@@ -485,6 +503,11 @@ explore: customer_io_email{
   join: subscription_order_num_derrived {
     relationship: one_to_one
     sql_on: ${subscription_order_num_derrived.subscriptions_id} = ${subscriptions.id} ;;
+  }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
   }
 
   }
@@ -551,6 +574,11 @@ explore: gift_purchases {
     sql_on: ${gift_purchases.purchaser_id} = ${sab_sent_derived.sab_purchaser_id} ;;
 
   }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
 
 }
 
@@ -581,6 +609,7 @@ explore: ingredients {
     relationship: one_to_one
     sql_on: ${menu_items.menu_id} = ${menus.id} ;;
   }
+
   }
 
 explore: recipes {}
@@ -631,6 +660,11 @@ explore: recipe_feedback_surveys {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
 
 
 }
@@ -678,6 +712,22 @@ explore: credit_transactions{
     relationship: one_to_many
     sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
   }
+
+  join: orders {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
+  }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = coupons.id ;;
+
+  }
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id}    ;;
+  }
+
+
 }
 
 explore: refunds {
@@ -745,6 +795,11 @@ explore: refunds {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
   }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
   }
 
 explore: prep_needs {
@@ -760,6 +815,24 @@ explore: seasonal_order {
     relationship:many_to_one
     sql_on: ${seasonal_order.customer_id}=${users.id} ;;
     }
+  join: subscriptions {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+  join: orders {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
+  }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = coupons.id ;;
+
+  }
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts.id}    ;;
+  }
+
 }
 
 explore: coupons {}
@@ -843,6 +916,10 @@ join: intercom_derived_firstmessage {
   relationship: many_to_one
   sql_on:  ${intercom_derived_firstmessage._sdc_source_key_id} = ${Intercom_conversations.id}  ;;
 }
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders.coupon_id} = coupons.id ;;
 
+  }
 
 }
