@@ -436,7 +436,7 @@ view: users {
         when lower(${utm_source}) = 'organic' then 'Organic'
         when ${utm_source} = 'none' then 'Organic'
         when ${utm_source} is null then 'Organic'
-        Else 'Other'
+        Else 'Organic'
         End
     ;;
 
