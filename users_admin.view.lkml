@@ -470,6 +470,15 @@ view: users {
     sql: ${TABLE}.sign_up_method ;;
   }
 
+  dimension: admin_email{
+    type: string
+    sql: case
+    when ${is_purple_carrot_employee} = 'yes' then SPLIT_PART(${email}, '@', 1)
+    else null
+    end
+    ;;
+  }
+
   measure: count {
     type: count
   }
