@@ -148,4 +148,8 @@ view: menu_items_new {
     type: count
     drill_fields: [id]
   }
+  measure: meal_combo_list {
+    type: list
+    list_field: print_label
+  }
 }

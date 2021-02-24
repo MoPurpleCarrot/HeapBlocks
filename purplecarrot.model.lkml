@@ -429,20 +429,26 @@ explore: users {
 
   }
 
+  join: meal_combo_derived {
+    relationship: one_to_one
+    sql_on: ${meal_combo_derived.order_id}=${orders.id} ;;
+
+  }
+
 }
 
 explore: zd_tickets{
   join: zd_users {
-    relationship: one_to_one
+    relationship: many_to_one
     sql_on: ${zd_tickets.submitter_id} = ${zd_users.zd_id};;
   }
-  join: zd_field_join {
-    relationship: one_to_one
-    sql_on: ${zd_tickets.id} = ${zd_field_join.ticket_id};;
-  }
   join: zd_ticket_fields {
-    relationship: one_to_one
-    sql_on: ${zd_field_join.id} = ${zd_ticket_fields.id};;
+    relationship: many_to_one
+    sql_on: ${zd_ticket_fields.field_id}=${zd_ticket_fields.field_id};;
+  }
+  join: zd_field_values {
+    relationship: many_to_one
+    sql_on: ${zd_field_values.value_id}=${zd_ticket_fields.value_id};;
   }
   join: users {
     relationship: one_to_one
