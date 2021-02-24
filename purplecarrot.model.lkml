@@ -442,26 +442,23 @@ explore: zd_tickets{
     relationship: many_to_one
     sql_on: ${zd_tickets.submitter_id} = ${zd_users.zd_id};;
   }
-  join: zd_custom_join {
+  join: zd_custom_fields {
     relationship: many_to_one
-    sql_on: ${zd_tickets.id}=${zd_custom_join.ticket_id};;
-  }
-  join: zd_custom_value_join {
-    relationship: many_to_one
-    sql_on: ${zd_tickets.id}=${zd_custom_value_join.ticket_id};;
+    sql_on: ${zd_custom_fields.ticket_id} = ${zd_tickets.id};;
   }
   join: zd_ticket_fields {
     relationship: many_to_one
-    sql_on: ${zd_ticket_fields.field_id}=${zd_custom_join.id};;
+    sql_on: ${zd_custom_fields.field_id} = ${zd_ticket_fields.field_id};;
   }
   join: zd_field_custom_values {
     relationship: many_to_one
-    sql_on: ${zd_field_custom_values.field_id}=${zd_ticket_fields.field_id};;
+    sql_on: ${zd_field_custom_values.field_id} = ${zd_ticket_fields.field_id};;
   }
   join: zd_field_system_values {
     relationship: many_to_one
-    sql_on: ${zd_field_system_values.field_id}=${zd_ticket_fields.field_id};;
+    sql_on: ${zd_field_system_values.field_id} = ${zd_ticket_fields.field_id};;
   }
+
   join: users {
     relationship: one_to_one
     sql_on: ${zd_users.email} = ${users.email};;

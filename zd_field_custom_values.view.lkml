@@ -1,28 +1,22 @@
 view: zd_field_custom_values {
-  sql_table_name: zendesk_current.tickets__custom_fields ;;
-  drill_fields: [value_id]
-
-  dimension: value_id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.id ;;
-  }
-
-  dimension: field_detail{
-    type: string
-    sql: ${TABLE}.value__string ;;
-  }
-
-  dimension: ship_date{
-    type: string
-    sql: case when ${zd_ticket_fields.title} = 'Ship Week' THEN ${field_detail}
-    else null
-    end;;
-  }
+  sql_table_name: zendesk_current.ticket_fields__custom_field_options ;;
+  drill_fields: [field_id]
 
   dimension: field_id {
+    primary_key: yes
     type: number
-    sql:${TABLE}._sdc_source_key_id ;;
+    sql: ${TABLE}._sdc_source_key_id ;;
   }
+
+  dimension: name{
+    type: string
+    sql: ${TABLE}.name ;;
+  }
+
+  dimension: value{
+    type: string
+    sql: ${TABLE}.value;;
+  }
+
 
 }
