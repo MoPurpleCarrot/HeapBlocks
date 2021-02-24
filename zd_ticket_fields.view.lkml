@@ -1,16 +1,11 @@
 view: zd_ticket_fields {
   sql_table_name: zendesk_current.ticket_fields ;;
-  drill_fields: [value_id]
-
-  dimension: value_id {
-    type: number
-    sql: ${TABLE}.id ;;
-  }
+  drill_fields: [field_id]
 
   dimension: field_id {
     primary_key: yes
     type: number
-    sql: ${TABLE}._sdc_sequence ;;
+    sql: ${TABLE}.id ;;
   }
 
 

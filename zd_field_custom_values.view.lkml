@@ -1,4 +1,4 @@
-view: zd_field_values {
+view: zd_field_custom_values {
   sql_table_name: zendesk_current.tickets__custom_fields ;;
   drill_fields: [value_id]
 
@@ -19,4 +19,10 @@ view: zd_field_values {
     else null
     end;;
   }
+
+  dimension: field_id {
+    type: number
+    sql:${TABLE}._sdc_source_key_id ;;
+  }
+
 }

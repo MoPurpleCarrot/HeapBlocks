@@ -442,13 +442,25 @@ explore: zd_tickets{
     relationship: many_to_one
     sql_on: ${zd_tickets.submitter_id} = ${zd_users.zd_id};;
   }
+  join: zd_custom_join {
+    relationship: many_to_one
+    sql_on: ${zd_tickets.id}=${zd_custom_join.ticket_id};;
+  }
+  join: zd_custom_value_join {
+    relationship: many_to_one
+    sql_on: ${zd_tickets.id}=${zd_custom_value_join.ticket_id};;
+  }
   join: zd_ticket_fields {
     relationship: many_to_one
-    sql_on: ${zd_ticket_fields.field_id}=${zd_ticket_fields.field_id};;
+    sql_on: ${zd_ticket_fields.field_id}=${zd_custom_join.id};;
   }
-  join: zd_field_values {
+  join: zd_field_custom_values {
     relationship: many_to_one
-    sql_on: ${zd_field_values.value_id}=${zd_ticket_fields.value_id};;
+    sql_on: ${zd_field_custom_values.field_id}=${zd_ticket_fields.field_id};;
+  }
+  join: zd_field_system_values {
+    relationship: many_to_one
+    sql_on: ${zd_field_system_values.field_id}=${zd_ticket_fields.field_id};;
   }
   join: users {
     relationship: one_to_one
