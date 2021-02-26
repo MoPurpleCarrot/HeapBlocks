@@ -243,6 +243,11 @@ explore: users {
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
 
+  join: subscription_recipe_preferences {
+    relationship: many_to_one
+    sql_on: ${subscription_recipe_preferences.subscription_id} = ${subscriptions.id} ;;
+  }
+
   join: subscription_events {
     relationship: many_to_one
     sql_on: ${subscription_events.user_id}=${users.id} ;;
