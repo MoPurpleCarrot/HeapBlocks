@@ -223,6 +223,26 @@ view: welcome_surveys {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: fun_to_make_the_meals {
+    type:  string
+    sql: ${TABLE}.fun_to_make_the_meals ;;
+  }
+
+  dimension: food_is_medicine{
+    type:  string
+    sql: ${TABLE}.food_is_medicine ;;
+  }
+
+  dimension: how_often_go_to_the_gym{
+    type:  string
+    sql: ${TABLE}.how_often_go_to_the_gym ;;
+  }
+
+  dimension: how_many_meals_each_week{
+    type: string
+    sql: ${TABLE}.how_many_meals_each_week ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
@@ -257,5 +277,6 @@ view: welcome_surveys {
     type: average
     sql: ${improving_health_and_wellbeing} ;;
   }
+
 
 }

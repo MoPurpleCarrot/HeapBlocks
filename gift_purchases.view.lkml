@@ -194,7 +194,8 @@ view: gift_purchases {
     sql: ${TABLE}.value_refunded ;;
   }
 
-    dimension: pc_customer{
+
+    dimension: PC_customer{
       type: string
       case:{
         when:{
@@ -242,6 +243,37 @@ view: gift_purchases {
       ]
       sql: ${TABLE}.expired_at ;;
     }
+
+        dimension: sent{
+          type: string
+          case:{
+            when:{
+              sql:${sent_to_recipient_date} is null  ;;
+              label: "No"
+            }
+            else: "Yes"
+          }}
+
+          dimension: sent_1_week{
+            type: string
+            case:{
+              when:{
+                sql:datediff(day,${created_date},${sent_to_recipient_date})<8  ;;
+                label: "Yes"
+              }
+              else: "No"
+            }}
+
+            dimension: sent_2_weeks{
+              type: string
+              case:{
+                when:{
+                  sql:datediff(day,${created_date},${sent_to_recipient_date})<15  ;;
+                  label: "Yes"
+                }
+                else: "No"
+              }}
+
 
   measure: count {
     type: count

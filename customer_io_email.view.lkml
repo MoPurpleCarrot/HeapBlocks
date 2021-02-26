@@ -71,7 +71,7 @@ view: customer_io_email {
 
   dimension: broadcast_id {
     type: string
-    sql: ${TABLE}.newsletter_id ;;
+    sql: ${TABLE}.data__newsletter_id ;;
   }
 
   dimension: action {

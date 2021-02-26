@@ -1,11 +1,11 @@
-view: events {
-  sql_table_name: heroku_postgres.events ;;
-  drill_fields: [followed_up_event_id]
+view: ticket_forms {
+  sql_table_name: zendesk_current.ticket_forms ;;
+  drill_fields: [id]
 
-  dimension: followed_up_event_id {
+  dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.followed_up_event_id ;;
+    sql: ${TABLE}.id ;;
   }
 
   dimension_group: _sdc_batched {
@@ -20,20 +20,6 @@ view: events {
       year
     ]
     sql: ${TABLE}._sdc_batched_at ;;
-  }
-
-  dimension_group: _sdc_extracted {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}._sdc_extracted_at ;;
   }
 
   dimension_group: _sdc_received {
@@ -60,6 +46,11 @@ view: events {
     sql: ${TABLE}._sdc_table_version ;;
   }
 
+  dimension: active {
+    type: yesno
+    sql: ${TABLE}.active ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -74,14 +65,24 @@ view: events {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: data_json {
-    type: string
-    sql: ${TABLE}.data ;;
+  dimension: default {
+    type: yesno
+    sql: ${TABLE}."default" ;;
   }
 
-  dimension: id {
-    type: number
-    sql: ${TABLE}.id ;;
+  dimension: display_name {
+    type: string
+    sql: ${TABLE}.display_name ;;
+  }
+
+  dimension: end_user_visible {
+    type: yesno
+    sql: ${TABLE}.end_user_visible ;;
+  }
+
+  dimension: in_all_brands {
+    type: yesno
+    sql: ${TABLE}.in_all_brands ;;
   }
 
   dimension: name {
@@ -89,14 +90,19 @@ view: events {
     sql: ${TABLE}.name ;;
   }
 
-  dimension: source {
+  dimension: position {
     type: number
-    sql: ${TABLE}.source ;;
+    sql: ${TABLE}.position ;;
   }
 
-  dimension: subscription_id {
-    type: number
-    sql: ${TABLE}.subscription_id ;;
+  dimension: raw_display_name {
+    type: string
+    sql: ${TABLE}.raw_display_name ;;
+  }
+
+  dimension: raw_name {
+    type: string
+    sql: ${TABLE}.raw_name ;;
   }
 
   dimension_group: updated {
@@ -113,17 +119,13 @@ view: events {
     sql: ${TABLE}.updated_at ;;
   }
 
-  dimension: version {
-    type: number
-    sql: ${TABLE}.version ;;
+  dimension: url {
+    type: string
+    sql: ${TABLE}.url ;;
   }
 
-  dimension: data {
-    type: string
-    sql: ${TABLE}.data;;
-}
   measure: count {
     type: count
-    drill_fields: [followed_up_event_id, name]
+    drill_fields: [id, raw_name, raw_display_name, name, display_name]
   }
 }
