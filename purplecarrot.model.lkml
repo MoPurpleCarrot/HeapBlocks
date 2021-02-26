@@ -447,17 +447,19 @@ explore: zd_tickets{
     sql_on: ${zd_custom_fields.ticket_id} = ${zd_tickets.id};;
   }
   join: zd_ticket_fields {
-    relationship: many_to_one
-    sql_on: ${zd_custom_fields.field_id} = ${zd_ticket_fields.field_id};;
+    relationship: one_to_many
+    sql_on:  ${zd_ticket_fields.field_id}=${zd_custom_fields.field_id};;
   }
   join: zd_field_custom_values {
-    relationship: many_to_one
-    sql_on: ${zd_field_custom_values.field_id} = ${zd_ticket_fields.field_id};;
+    relationship: one_to_many
+    sql_on: ${zd_field_custom_values.options_customfield}=${zd_custom_fields.customfield_options} and ${zd_field_custom_values.field_id}=${zd_ticket_fields.field_id};;
   }
   join: zd_field_system_values {
-    relationship: many_to_one
-    sql_on: ${zd_field_system_values.field_id} = ${zd_ticket_fields.field_id};;
+    relationship: one_to_many
+    sql_on: ${zd_field_system_values.options_customfield}=${zd_custom_fields.customfield_options}and ${zd_field_custom_values.field_id}=${zd_ticket_fields.field_id};;
   }
+
+
 
   join: users {
     relationship: one_to_one
