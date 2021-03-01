@@ -532,6 +532,12 @@ explore: customer_io_email{
 
   }
 
+  join: customer_io_opens_derived {
+    relationship: many_to_one
+    sql_on: ${customer_io_opens_derived.message_id} = ${customer_io_email.message_id} ;;
+
+  }
+
   }
 
 
