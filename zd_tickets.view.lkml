@@ -58,30 +58,18 @@ view: zd_tickets {
     sql: ${TABLE}.via__channel ;;
   }
 
-  dimension: email_address {
-    type: string
-    sql: ${TABLE}.via__source__from__address ;;
-  }
-
-  dimension: name {
-    type: string
-    sql: ${TABLE}.via__source__from__name ;;
-  }
-
-  dimension: ticket_id {
+  dimension: field_id {
     type: number
-    sql: ${TABLE}.via__source__from__ticket_id ;;
+    sql: ${TABLE}._sdc_sequence ;;
   }
-
 
   measure: count {
     type: count
-    drill_fields: [ticket_id]
   }
 
   measure: count_distinct {
     type: count_distinct
-    sql: ${ticket_id};;
+    sql: ${id};;
   }
 
 }

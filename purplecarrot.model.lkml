@@ -243,6 +243,11 @@ explore: users {
     sql_on: ${subscriptions.user_id} = ${users.id} ;;
   }
 
+  join: subscription_recipe_preferences {
+    relationship: many_to_one
+    sql_on: ${subscription_recipe_preferences.subscription_id} = ${subscriptions.id} ;;
+  }
+
   join: subscription_events {
     relationship: many_to_one
     sql_on: ${subscription_events.user_id}=${users.id} ;;
@@ -429,21 +434,38 @@ explore: users {
 
   }
 
+  join: meal_combo_derived {
+    relationship: one_to_one
+    sql_on: ${meal_combo_derived.order_id}=${orders.id} ;;
+
+  }
+
 }
 
 explore: zd_tickets{
   join: zd_users {
-    relationship: one_to_one
+    relationship: many_to_one
     sql_on: ${zd_tickets.submitter_id} = ${zd_users.zd_id};;
   }
-  join: zd_field_join {
-    relationship: one_to_one
-    sql_on: ${zd_tickets.id} = ${zd_field_join.ticket_id};;
+  join: zd_custom_fields {
+    relationship: many_to_one
+    sql_on: ${zd_custom_fields.ticket_id} = ${zd_tickets.id};;
   }
   join: zd_ticket_fields {
-    relationship: one_to_one
-    sql_on: ${zd_field_join.id} = ${zd_ticket_fields.id};;
+    relationship: one_to_many
+    sql_on:  ${zd_ticket_fields.field_id}=${zd_custom_fields.field_id};;
   }
+  join: zd_field_custom_values {
+    relationship: one_to_many
+    sql_on: ${zd_field_custom_values.options_customfield}=${zd_custom_fields.customfield_options} and ${zd_field_custom_values.field_id}=${zd_ticket_fields.field_id};;
+  }
+  join: zd_field_system_values {
+    relationship: one_to_many
+    sql_on: ${zd_field_system_values.options_customfield}=${zd_custom_fields.customfield_options}and ${zd_field_custom_values.field_id}=${zd_ticket_fields.field_id};;
+  }
+
+
+
   join: users {
     relationship: one_to_one
     sql_on: ${zd_users.email} = ${users.email};;

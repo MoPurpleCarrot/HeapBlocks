@@ -1,12 +1,13 @@
 view: zd_ticket_fields {
   sql_table_name: zendesk_current.ticket_fields ;;
-  drill_fields: [id]
+  drill_fields: [field_id]
 
-  dimension: id {
+  dimension: field_id {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
   }
+
 
   dimension_group: created {
     type: time
@@ -46,6 +47,5 @@ view: zd_ticket_fields {
 
   measure: count {
     type: count
-    drill_fields: [id]
   }
 }
