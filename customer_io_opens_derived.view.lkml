@@ -8,10 +8,6 @@ view: customer_io_opens_derived {
        ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
 
   dimension_group: _sdc_batched {
     type: time
@@ -67,13 +63,4 @@ view: customer_io_opens_derived {
     sql: ${TABLE}.total_user_ids ;;
   }
 
-  set: detail {
-    fields: [
-      message_id,
-      campaign_id,
-      action,
-      broadcast_id,
-      total_user_ids
-    ]
-  }
 }
