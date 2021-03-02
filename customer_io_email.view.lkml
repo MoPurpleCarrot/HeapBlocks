@@ -69,9 +69,14 @@ view: customer_io_email {
   }
 
 
-  dimension: broadcast_id {
+  dimension: broadcast_newsletter_id {
     type: string
     sql: ${TABLE}.data__newsletter_id ;;
+  }
+
+  dimension: broadcast_api_id {
+    type: string
+    sql: ${TABLE}.data__broadcast_id ;;
   }
 
   dimension: action {
