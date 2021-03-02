@@ -119,4 +119,5 @@ view: customer_io_email {
     type: count
     drill_fields: []
   }
+
 }
