@@ -1,40 +1,17 @@
 view: customer_io_opens_derived {
   derived_table: {
-    sql: select _sdc_batched_at, _sdc_received_at,data__action_id,data__campaign_id, metric, data__newsletter_id
-      ,count(*)
+    sql: select data__action_id, data__campaign_id, metric, data__newsletter_id
+      ,count(*) opens
       from customerio_email.data
       where metric = 'opened'
-      group by _sdc_batched_at, _sdc_received_at,data__action_id,data__campaign_id, metric, data__newsletter_id
-       ;;
+      group by data__action_id,data__campaign_id, metric, data__newsletter_id
+       ;
+ ;;
   }
 
-
-  dimension_group: _sdc_batched {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}._sdc_batched_at ;;
-  }
-
-  dimension_group: _sdc_received {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}._sdc_received_at ;;
+  measure: count {
+    type: count
+    drill_fields: [detail*]
   }
 
   dimension: message_id {
@@ -54,13 +31,16 @@ view: customer_io_opens_derived {
   }
 
   dimension: broadcast_id {
-    type: string
+    type: number
     sql: ${TABLE}.data__newsletter_id ;;
   }
 
-  dimension: total_user_ids {
+  dimension: opens {
     type: number
-    sql: ${TABLE}.total_user_ids ;;
+    sql: ${TABLE}.opens ;;
   }
 
+  set: detail {
+    fields: [message_id, campaign_id, action, broadcast_id, opens]
+  }
 }
