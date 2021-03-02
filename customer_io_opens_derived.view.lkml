@@ -5,7 +5,7 @@ view: customer_io_opens_derived {
       from customerio_email.data
       where metric = 'opened'
       group by data__action_id,data__campaign_id, metric, data__newsletter_id
-       ;
+
  ;;
   }
 
