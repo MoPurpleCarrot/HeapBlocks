@@ -1,7 +1,7 @@
 view: customer_io_opens_derived {
   derived_table: {
     sql: select _sdc_batched_at, _sdc_received_at,data__action_id,data__campaign_id, metric, data__newsletter_id
-      ,count(distinct data__customer_id) total_user_ids
+      ,count(*)
       from customerio_email.data
       where metric = 'opened'
       group by _sdc_batched_at, _sdc_received_at,data__action_id,data__campaign_id, metric, data__newsletter_id
