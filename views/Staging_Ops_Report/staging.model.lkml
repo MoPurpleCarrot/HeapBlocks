@@ -43,6 +43,26 @@ join: staging_subscriptions {
     sql_on: ${staging_menus.id} = ${staging_orders.menu_id} ;;
   }
 
+  join: staging_order_items {
+    relationship: one_to_many
+    sql_on: ${staging_orders.id} = ${staging_order_items.order_id}  ;;
+  }
+
+  join: staging_skus {
+    relationship: one_to_many
+    sql_on: ${staging_skus.id} = ${staging_customer_issues.sku_id}  ;;
+  }
+
+  join: staging_ingredients {
+    relationship: one_to_many
+    sql_on: ${staging_ingredients.id} = ${staging_customer_issues.ingredient_id}  ;;
+  }
+
+  join: staging_products {
+    relationship: one_to_many
+    sql_on: ${staging_products.id} = ${staging_skus.product_id}  ;;
+  }
+
   join: staging_orders_derived {
     relationship: one_to_one
     sql_on: ${staging_orders_derived.menus_id} = ${staging_menus.id}  ;;
