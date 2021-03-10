@@ -298,6 +298,10 @@ explore: users {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+  join: customization_events_derived {
+    relationship: many_to_one
+    sql_on: ${customization_events_derived.order_id} = ${orders.id} ;;
+  }
   join: order_items {
     relationship: one_to_many
     sql_on: ${orders.id} = ${order_items.order_id} ;;
