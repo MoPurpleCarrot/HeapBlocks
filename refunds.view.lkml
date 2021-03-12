@@ -163,6 +163,7 @@ view: refunds {
       raw,
       time,
       date,
+      day_of_week,
       week,
       month,
       quarter,
@@ -170,6 +171,23 @@ view: refunds {
     ]
     sql: ${TABLE}.created_at ;;
   }
+
+    dimension: created_sun_start{
+      type: date
+      convert_tz: no
+      sql: case
+            when ${created_day_of_week} = 'Sunday' then ${created_date}
+            when ${created_day_of_week} = 'Monday' THEN dateadd(d, -1, ${created_date})
+            when ${created_day_of_week} = 'Tuesday' THEN dateadd(d, -2, ${created_date})
+            when ${created_day_of_week} = 'Wednesday' THEN dateadd(d, -3, ${created_date})
+            when ${created_day_of_week} = 'Thursday' THEN dateadd(d, -4, ${created_date})
+            when ${created_day_of_week} = 'Friday' THEN dateadd(d, -5, ${created_date})
+            when ${created_day_of_week} = 'Saturday' THEN dateadd(d, -6, ${created_date})
+            END;;
+
+      }
+
+
 
   dimension: description {
     type: string
