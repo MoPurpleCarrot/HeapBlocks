@@ -706,6 +706,7 @@ explore: heap_sessions {}
 
 
 explore: credit_transactions{
+  label: "Credits & Refunds"
 
   join: credit_transaction_groups {
     relationship: many_to_one
@@ -758,7 +759,6 @@ explore: credit_transactions{
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id}    ;;
   }
-
 
 
 }
