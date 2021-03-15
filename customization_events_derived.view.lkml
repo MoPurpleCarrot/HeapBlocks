@@ -33,7 +33,7 @@ view: customization_events_derived {
   }
 
   dimension: ship_week {
-    type: string
+    type: date
     sql: ${TABLE}.ship_week ;;
   }
 
