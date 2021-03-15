@@ -1,6 +1,6 @@
 view: customization_events_derived {
   derived_table: {
-    sql: select name, created_at,subscription_id, data
+    sql: select created_at, name, subscription_id, json_extract_path_text(data, 'order_id') order_id, json_extract_path_text(data, 'ship_week') ship_week
       from heroku_postgres.events
       where name = 'meals_swapped'
        ;;
@@ -11,14 +11,15 @@ view: customization_events_derived {
     drill_fields: [detail*]
   }
 
+  dimension_group: created_at {
+    type: time
+    timeframes: [time, date, week, month, day_of_week]
+    sql: ${TABLE}.created_at ;;
+  }
+
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
-  }
-
-  dimension_group: created_at {
-    type: time
-    sql: ${TABLE}.created_at ;;
   }
 
   dimension: subscription_id {
@@ -27,19 +28,16 @@ view: customization_events_derived {
   }
 
   dimension: order_id {
-    sql: cast(json_extract_path(${TABLE}.data, 'order_id') as number) ;;
+    type: string
+    sql: ${TABLE}.order_id ;;
   }
 
   dimension: ship_week {
-    sql: cast(json_extract_path(${TABLE}.data, 'ship_week') as date) ;;
-  }
-
-  dimension: data {
     type: string
-    sql: ${TABLE}.data ;;
+    sql: ${TABLE}.ship_week ;;
   }
 
   set: detail {
-    fields: [name, created_at_time, subscription_id, data]
+    fields: [created_at_time, name, subscription_id, order_id, ship_week]
   }
 }
