@@ -333,5 +333,10 @@ view: credit_transactions {
     }
   }
 
+    dimension: customer_issue_id {
+      type: number
+      sql: ${TABLE}.customer_issue_id ;;
+    }
+
 
 }

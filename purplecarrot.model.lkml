@@ -951,7 +951,69 @@ join: intercom_derived_firstmessage {
 }
   join: coupons {
     relationship: many_to_one
-    sql_on: ${orders.coupon_id} = coupons.id ;;
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
+}
+
+explore: users_data{
+  from: users
+  label: "Ops Report"
+
+  join: subscriptions {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users_data.id};;
+  }
+
+  join: orders_data {
+    relationship: one_to_many
+    sql_on: ${orders_data.subscription_id} = ${subscriptions.id} ;;
+  }
+
+  join: customer_issues {
+    relationship: many_to_one
+    sql_on: ${customer_issues.order_id} = ${orders_data.id};;
+  }
+
+
+  join: credit_transactions {
+    relationship: one_to_one
+    sql_on: ${credit_transactions.customer_issue_id} = ${customer_issues.id} ;;
+  }
+
+  join: menus {
+    relationship: one_to_many
+    sql_on: ${menus.id} = ${orders_data.menu_id} ;;
+  }
+
+  join: order_items_data {
+    relationship: one_to_many
+    sql_on: ${orders_data.id} = ${order_items_data.order_id}  ;;
+  }
+
+  join: skus {
+    relationship: one_to_many
+    sql_on: ${skus.id} = ${customer_issues.sku_id}  ;;
+  }
+
+  join: ingredients {
+    relationship: one_to_many
+    sql_on: ${ingredients.id} = ${customer_issues.ingredient_id}  ;;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id} = ${skus.product_id}  ;;
+  }
+
+  join: orders_derived {
+    relationship: one_to_one
+    sql_on: ${orders_derived.menus_id} = ${menus.id}  ;;
+  }
+
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders_data.coupon_id} = ${coupons.id} ;;
 
   }
 
