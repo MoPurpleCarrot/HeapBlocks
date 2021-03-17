@@ -105,7 +105,7 @@ view: orders {
 
   dimension_group: delivery {
     type: time
-    timeframes: [time, date, week, month, quarter, raw]
+    timeframes: [time, date, week, month, quarter, raw, day_of_week]
     sql: ${TABLE}.delivery_on ;;
   }
 
