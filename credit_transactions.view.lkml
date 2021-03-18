@@ -338,5 +338,11 @@ view: credit_transactions {
       sql: ${TABLE}.customer_issue_id ;;
     }
 
+    measure: sum_cx_credits {
+      type: sum
+      sql:(case when ${action}=3 then ${amount} else null end);;
+      value_format_name: usd
+    }
+
 
 }
