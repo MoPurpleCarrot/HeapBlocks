@@ -116,6 +116,7 @@ view: customer_issues {
 
   dimension: notes {
     type: string
+    case_sensitive: no
     sql: ${TABLE}.notes ;;
   }
 

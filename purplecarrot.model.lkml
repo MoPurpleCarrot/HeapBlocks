@@ -1016,5 +1016,9 @@ explore: users_data{
     sql_on: ${orders_data.coupon_id} = ${coupons.id} ;;
 
   }
+  join: refunds {
+    relationship: one_to_many
+    sql_on: ${refunds.id} = ${customer_issues.refund_id} ;;
+  }
 
 }

@@ -341,4 +341,12 @@ view: refunds {
 
       }
     }
+
+    measure: sum_cx_refunds {
+      type: sum
+      sql:${amount};;
+      value_format_name: usd
+    }
+
+
 }
