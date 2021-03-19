@@ -706,7 +706,7 @@ explore: heap_sessions {}
 
 
 explore: credit_transactions{
-  label: "Credits & Refunds"
+  label: "Order Credits"
 
   join: credit_transaction_groups {
     relationship: many_to_one
@@ -758,6 +758,11 @@ explore: credit_transactions{
   join: user_facts {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id}    ;;
+  }
+
+  join: customer_issues {
+    relationship: one_to_one
+    sql_on: ${credit_transactions.customer_issue_id} = ${customer_issues.id} ;;
   }
 
 
@@ -833,6 +838,12 @@ explore: refunds {
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
 
   }
+  join: customer_issues {
+    relationship: one_to_many
+    sql_on: ${refunds.id} = ${customer_issues.refund_id} ;;
+  }
+
+
   }
 
 explore: prep_needs {
