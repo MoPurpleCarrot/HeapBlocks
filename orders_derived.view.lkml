@@ -40,8 +40,22 @@ view: orders_derived {
 
     measure: total_orders_measure{
       type:  sum_distinct
-      sql: ${total_orders_dimension} ;;
+      sql: ${total_orders_dimension};;
     }
 
+  measure: total_orders_get_fresh_measure{
+    type:  sum_distinct
+    sql: ${total_orders_get_fresh} ;;
+  }
+
+  measure: total_orders_ship_once_measure{
+    type:  sum_distinct
+    sql: ${total_orders_ship_once} ;;
+  }
+
+  measure: total_orders_fdm_measure{
+    type:  sum_distinct
+    sql: ${total_orders_fdm} ;;
+  }
 
   }

@@ -61,6 +61,7 @@ view: ingredients {
 
   dimension: name {
     type: string
+    case_sensitive: no
     sql: ${TABLE}.name ;;
   }
 

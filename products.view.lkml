@@ -166,6 +166,7 @@ view: products {
 
   dimension: title {
     type: string
+    case_sensitive: no
     sql: ${TABLE}.title ;;
   }
 

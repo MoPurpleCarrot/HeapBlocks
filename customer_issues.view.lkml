@@ -117,6 +117,7 @@ view: customer_issues {
   dimension: notes {
     type: string
     case_sensitive: no
+    drill_fields: [created_date, menus.shipping_date, reason, print_label, meal_combo, notes, orders_data.count, count, credit_transactions.sum_cx_credits, refunds.sum_cx_refunds]
     sql: ${TABLE}.notes ;;
   }
 
