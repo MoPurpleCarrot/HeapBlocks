@@ -551,15 +551,11 @@ view: orders_data {
     # ----- Sets of fields for drilling ------
     set: detail {
       fields: [
-        id,
-        created_date,
-        delivery_date,
-        days_to_process,
-        tracking_number,
-        recipes.title,
-        chefs.name,
-        users.name,
-        user_with_winback
+        orders_data.id,
+        customer_issues.category,
+        customer_issues.reason,
+        credit_transactions.sum_cx_credits,
+        refunds.sum_cx_refunds
       ]
     }
 

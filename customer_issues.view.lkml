@@ -213,8 +213,63 @@ view: customer_issues {
     sql: ${TABLE}.zendesk_ticket_id ;;
   }
 
+  dimension: category {
+    type: string
+    sql: case
+          when ${TABLE}."reason" = 'Arrived After Dinner' then 'Shipping'
+          when ${TABLE}."reason" = 'Arrived Late 1+ Days' then 'Shipping'
+          when ${TABLE}."reason" = 'Arrived Warm' then 'Shipping'
+          when ${TABLE}."reason" = 'Damaged Box' then 'Shipping'
+          when ${TABLE}."reason" = 'Delivery Instructions Not Followed' then 'Shipping'
+          when ${TABLE}."reason" = 'Didn''t Arrive' then 'Shipping'
+          when ${TABLE}."reason" = 'Tape Lifted/Open Box' then 'Shipping'
+          when ${TABLE}."reason" = 'Tracking Number Issue' then 'Shipping'
+          when ${TABLE}."reason" = 'Container Broken' then 'Shipping'
+          when ${TABLE}."reason" = 'Broken Gel Pack' then 'Shipping'
+
+          when ${TABLE}."reason" = 'Damaged' then 'Ingredient'
+          when ${TABLE}."reason" = 'Food Poisoning' then 'Ingredient'
+          when ${TABLE}."reason" = 'Spoiled' then 'Ingredient'
+          when ${TABLE}."reason" = 'Overripe' then 'Ingredient'
+          when ${TABLE}."reason" = 'Underripe' then 'Ingredient'
+          when ${TABLE}."reason" = 'Damaged Garlic' then 'Ingredient'
+
+          when ${TABLE}."reason" = 'Arrived Passed Expiration Date' then 'Fulfillment'
+          when ${TABLE}."reason" = 'Incorrect Measurement' then 'Fulfillment'
+          when ${TABLE}."reason" = 'Missing Ingredient' then 'Fulfillment'
+          when ${TABLE}."reason" = 'Missing Meal' then 'Fulfillment'
+          when ${TABLE}."reason" = 'Missing Snack' then 'Fulfillment'
+          when ${TABLE}."reason" = 'Missing Booklet' then 'Fulfillment'
+          when ${TABLE}."reason" = 'Missing Garlic' then 'Fulfillment'
+          when ${TABLE}."reason" = 'Foreign Object' then 'Fulfillment'
+
+          when ${TABLE}."reason" is null then null
+
+          else 'Other'
+          end;;
+  }
+
+
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      orders_data.count,
+      customer_issues.reason,
+      products.title,
+      customer_issues.print_label,
+      customer_issues.meal_combo,
+      customer_issues.number_of_skus,
+      customer_issues.number_of_ingredients,
+      ingredients.name,
+      credit_transactions.sum_cx_credits,
+      refunds.sum_cx_refunds
+    ]
+  }
+
+
 }
