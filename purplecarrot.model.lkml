@@ -438,6 +438,18 @@ explore: users {
 
   }
 
+  join: sab_redeem_derived {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${sab_redeem_derived.sab_purchaser_id} ;;
+
+  }
+
+  join: sab_order_derived {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${sab_order_derived.sab_purchaser_id} ;;
+
+  }
+
   join: meal_combo_derived {
     relationship: one_to_one
     sql_on: ${meal_combo_derived.order_id}=${orders.id} ;;
@@ -609,6 +621,26 @@ explore: gift_purchases {
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+
+  }
+
+  join: shipping_addresses {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${shipping_addresses.user_id} ;;
+
+  }
+
+  join: users_referrer {
+    from:  users
+    relationship: one_to_many
+    sql_on: ${users_referrer.id} = ${gift_purchases.purchaser_id} ;;
+
+  }
+
+  join: shipping_addresses_referrer {
+    from: shipping_addresses
+    relationship: one_to_many
+    sql_on: ${users_referrer.id} = ${shipping_addresses_referrer.user_id} ;;
 
   }
 
