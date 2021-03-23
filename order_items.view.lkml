@@ -231,7 +231,7 @@ view: order_items {
   }
 
   measure: count_breakfast_lunch_binary {
-    type: sum
+    type: max
     sql: ${breakfast_lunch_binary} ;;
   }
 
