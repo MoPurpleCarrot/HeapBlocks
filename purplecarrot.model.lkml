@@ -438,6 +438,18 @@ explore: users {
 
   }
 
+  join: sab_redeem_derived {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${sab_redeem_derived.sab_purchaser_id} ;;
+
+  }
+
+  join: sab_order_derived {
+    relationship: one_to_one
+    sql_on: ${users.id} = ${sab_order_derived.sab_purchaser_id} ;;
+
+  }
+
   join: meal_combo_derived {
     relationship: one_to_one
     sql_on: ${meal_combo_derived.order_id}=${orders.id} ;;
@@ -612,6 +624,26 @@ explore: gift_purchases {
 
   }
 
+  join: shipping_addresses {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${shipping_addresses.user_id} ;;
+
+  }
+
+  join: users_referrer {
+    from:  users
+    relationship: one_to_many
+    sql_on: ${users_referrer.id} = ${gift_purchases.purchaser_id} ;;
+
+  }
+
+  join: shipping_addresses_referrer {
+    from: shipping_addresses
+    relationship: one_to_many
+    sql_on: ${users_referrer.id} = ${shipping_addresses_referrer.user_id} ;;
+
+  }
+
 }
 
 explore: ingredients {
@@ -706,7 +738,7 @@ explore: heap_sessions {}
 
 
 explore: credit_transactions{
-  label: "Credits & Refunds"
+  label: "Order Credits"
 
   join: credit_transaction_groups {
     relationship: many_to_one
@@ -758,6 +790,11 @@ explore: credit_transactions{
   join: user_facts {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id}    ;;
+  }
+
+  join: customer_issues {
+    relationship: one_to_one
+    sql_on: ${credit_transactions.customer_issue_id} = ${customer_issues.id} ;;
   }
 
 
@@ -833,6 +870,12 @@ explore: refunds {
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
 
   }
+  join: customer_issues {
+    relationship: one_to_many
+    sql_on: ${refunds.id} = ${customer_issues.refund_id} ;;
+  }
+
+
   }
 
 explore: prep_needs {
@@ -951,8 +994,74 @@ join: intercom_derived_firstmessage {
 }
   join: coupons {
     relationship: many_to_one
-    sql_on: ${orders.coupon_id} = coupons.id ;;
+    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
 
+  }
+}
+
+explore: users_data{
+  from: users
+  label: "Ops Report"
+
+  join: subscriptions {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users_data.id};;
+  }
+
+  join: orders_data {
+    relationship: one_to_many
+    sql_on: ${orders_data.subscription_id} = ${subscriptions.id} ;;
+  }
+
+  join: customer_issues {
+    relationship: many_to_one
+    sql_on: ${customer_issues.order_id} = ${orders_data.id};;
+  }
+
+
+  join: credit_transactions {
+    relationship: one_to_one
+    sql_on: ${credit_transactions.customer_issue_id} = ${customer_issues.id} ;;
+  }
+
+  join: menus {
+    relationship: one_to_many
+    sql_on: ${menus.id} = ${orders_data.menu_id} ;;
+  }
+
+  join: order_items_data {
+    relationship: one_to_many
+    sql_on: ${orders_data.id} = ${order_items_data.order_id}  ;;
+  }
+
+  join: skus {
+    relationship: one_to_many
+    sql_on: ${skus.id} = ${customer_issues.sku_id}  ;;
+  }
+
+  join: ingredients {
+    relationship: one_to_many
+    sql_on: ${ingredients.id} = ${customer_issues.ingredient_id}  ;;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id} = ${skus.product_id}  ;;
+  }
+
+  join: orders_derived {
+    relationship: one_to_one
+    sql_on: ${orders_derived.menus_id} = ${menus.id}  ;;
+  }
+
+  join: coupons {
+    relationship: many_to_one
+    sql_on: ${orders_data.coupon_id} = ${coupons.id} ;;
+
+  }
+  join: refunds {
+    relationship: one_to_many
+    sql_on: ${refunds.id} = ${customer_issues.refund_id} ;;
   }
 
 }

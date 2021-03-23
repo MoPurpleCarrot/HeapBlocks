@@ -523,9 +523,6 @@ view: orders {
     sql:  DATEDIFF('day',${users.created_date},${created_date})  ;;
   }
 
-
-
-
   # 30 day
   dimension: is_30day_since_created {
     type: yesno
