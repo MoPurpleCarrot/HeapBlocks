@@ -59,7 +59,7 @@ view: ingredients {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: name {
+  dimension: ingredient_name {
     type: string
     case_sensitive: no
     sql: ${TABLE}.name ;;
@@ -102,6 +102,6 @@ view: ingredients {
 
   measure: count {
     type: count
-    drill_fields: [id, name, recipes.id]
+    drill_fields: [id, ingredient_name, recipes.id]
   }
 }

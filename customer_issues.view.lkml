@@ -117,16 +117,16 @@ view: customer_issues {
   dimension: notes {
     type: string
     case_sensitive: no
-    drill_fields: [created_date, menus.shipping_date, reason, print_label, meal_combo, notes, orders_data.count, count, credit_transactions.sum_cx_credits, refunds.sum_cx_refunds]
+    drill_fields: [created_date, menus.shipping_date, reason, meal_letter, meal_combo, notes, orders_data.count, count, credit_transactions.sum_cx_credits, refunds.sum_cx_refunds]
     sql: ${TABLE}.notes ;;
   }
 
-  dimension: number_of_ingredients {
+  dimension: ingredient_quantity {
     type: number
     sql: ${TABLE}.number_of_ingredients ;;
   }
 
-  dimension: number_of_skus {
+  dimension: meal_quantity {
     type: number
     sql: ${TABLE}.number_of_skus ;;
   }
@@ -146,7 +146,7 @@ view: customer_issues {
     sql: ${TABLE}.plan ;;
   }
 
-  dimension: print_label {
+  dimension: meal_letter {
     type: string
     sql: ${TABLE}.print_label ;;
   }
@@ -251,36 +251,51 @@ view: customer_issues {
   }
 
 
-  measure: count {
+  measure: count_fulfillment_drills {
     type: count
     link: {
       label: "Issues Drilldown"
-      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[customer_issues.fulfillment_center]={{ customer_issues.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
     }
     link: {
       label: "Orders Drilldown"
-      url: "/explore/purplecarrot/users_data?fields=users_data.orders_drilldown*"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[customer_issues.fulfillment_center]={{ customer_issues.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
     }
+    }
+
+    measure: count_no_fulfillment_drills {
+      type: count
+      link: {
+        label: "Issues Drilldown"
+        url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      }
+      link: {
+        label: "Orders Drilldown"
+        url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      }
+     }
+
+  measure: count {
+    type: count
   }
 
-
-  set: Issues_Drilldown{
+  set: issues_drilldown{
     fields: [
-     orders_data.count,
+      customer_issues.count,
       customer_issues.reason,
-      products.title,
-      customer_issues.print_label,
+      products.meal_name,
+      customer_issues.meal_letter,
       customer_issues.meal_combo,
-      customer_issues.number_of_skus,
-      customer_issues.number_of_ingredients,
-      ingredients.name,
+      customer_issues.meal_quantity,
+      customer_issues.ingredient_quantity,
+      ingredients.ingredient_name,
       credit_transactions.sum_cx_credits,
       refunds.sum_cx_refunds
     ]
   }
 
 
-  set: Orders_Drilldown{
+  set: orders_drilldown{
     fields: [
         orders_data.id,
         customer_issues.category,
@@ -291,29 +306,4 @@ view: customer_issues {
   }
 
 
-
-  # ----- Sets of fields for drilling ------
-  set: issues_detail {
-    fields: [
-      orders_data.count,
-      customer_issues.reason,
-      products.title,
-      customer_issues.print_label,
-      customer_issues.meal_combo,
-      customer_issues.number_of_skus,
-      customer_issues.number_of_ingredients,
-      ingredients.name,
-      credit_transactions.sum_cx_credits,
-      refunds.sum_cx_refunds
-    ]
-  }
-  set: orders_detail {
-    fields: [
-        orders_data.id,
-        customer_issues.category,
-        customer_issues.reason,
-        credit_transactions.sum_cx_credits,
-        refunds.sum_cx_refunds
-    ]
-  }
 }

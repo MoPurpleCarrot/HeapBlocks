@@ -164,7 +164,7 @@ view: products {
     sql: ${TABLE}.tax_code ;;
   }
 
-  dimension: title {
+  dimension: meal_name {
     type: string
     case_sensitive: no
     sql: ${TABLE}.title ;;
