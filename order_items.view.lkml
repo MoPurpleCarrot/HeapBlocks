@@ -231,9 +231,13 @@ view: order_items {
   }
 
   measure: count_breakfast_lunch_binary {
-    type: sum
-    sql: ${breakfast_lunch_binary} ;;
+    type: count_distinct
+    sql: case when ${breakfast_lunch_binary} > 0
+         then ${order_id}
+         else null
+         end;;
   }
+
 
   measure: count_dinner_binary {
     type: sum
