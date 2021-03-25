@@ -488,4 +488,31 @@ view: users {
     sql: ${id} ;;
   }
 
+  set: Issues_Drilldown{
+    fields: [
+      orders_data.count,
+      customer_issues.reason,
+      products.title,
+      customer_issues.print_label,
+      customer_issues.meal_combo,
+      customer_issues.number_of_skus,
+      customer_issues.number_of_ingredients,
+      ingredients.name,
+      credit_transactions.sum_cx_credits,
+      refunds.sum_cx_refunds
+    ]
+  }
+
+
+  set: Orders_Drilldown{
+    fields: [
+      orders_data.id,
+      customer_issues.category,
+      customer_issues.reason,
+      credit_transactions.sum_cx_credits,
+      refunds.sum_cx_refunds
+    ]
+  }
+
+
 }

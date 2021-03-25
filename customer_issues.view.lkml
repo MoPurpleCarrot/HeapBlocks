@@ -253,13 +253,20 @@ view: customer_issues {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
+    link: {
+      label: "Issues Drilldown"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*"
+    }
+    link: {
+      label: "Orders Drilldown"
+      url: "/explore/purplecarrot/users_data?fields=users_data.orders_drilldown*"
+    }
   }
 
-  # ----- Sets of fields for drilling ------
-  set: detail {
+
+  set: Issues_Drilldown{
     fields: [
-      orders_data.count,
+     orders_data.count,
       customer_issues.reason,
       products.title,
       customer_issues.print_label,
@@ -273,4 +280,40 @@ view: customer_issues {
   }
 
 
+  set: Orders_Drilldown{
+    fields: [
+        orders_data.id,
+        customer_issues.category,
+        customer_issues.reason,
+        credit_transactions.sum_cx_credits,
+        refunds.sum_cx_refunds
+    ]
+  }
+
+
+
+  # ----- Sets of fields for drilling ------
+  set: issues_detail {
+    fields: [
+      orders_data.count,
+      customer_issues.reason,
+      products.title,
+      customer_issues.print_label,
+      customer_issues.meal_combo,
+      customer_issues.number_of_skus,
+      customer_issues.number_of_ingredients,
+      ingredients.name,
+      credit_transactions.sum_cx_credits,
+      refunds.sum_cx_refunds
+    ]
+  }
+  set: orders_detail {
+    fields: [
+        orders_data.id,
+        customer_issues.category,
+        customer_issues.reason,
+        credit_transactions.sum_cx_credits,
+        refunds.sum_cx_refunds
+    ]
+  }
 }
