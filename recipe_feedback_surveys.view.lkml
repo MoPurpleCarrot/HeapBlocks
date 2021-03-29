@@ -89,6 +89,11 @@ view: recipe_feedback_surveys {
     sql: ${TABLE}.question_comment_answer ;;
   }
 
+  dimension: order_id {
+    type: string
+    sql: ${TABLE}.order_id ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, name]
