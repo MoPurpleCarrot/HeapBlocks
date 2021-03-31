@@ -250,6 +250,19 @@ view: customer_issues {
           end;;
   }
 
+  dimension: 2021_budget {
+    type: number
+    value_format_name: percent_2
+    sql: case
+    when ${category} = 'Shipping' then 0.0092
+    when ${category} = 'Fulfillment' then 0.0079
+    when ${category} = 'Ingredient' then .0117
+    else null
+    end
+    ;;
+    }
+
+
 
   measure: count_fulfillment_drills {
     type: count
@@ -304,6 +317,7 @@ view: customer_issues {
         refunds.sum_cx_refunds
     ]
   }
+
 
 
 }
