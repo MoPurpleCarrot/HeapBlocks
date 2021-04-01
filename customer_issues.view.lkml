@@ -117,16 +117,16 @@ view: customer_issues {
   dimension: notes {
     type: string
     case_sensitive: no
-    drill_fields: [created_date, menus.shipping_date, reason, print_label, meal_combo, notes, orders_data.count, count, credit_transactions.sum_cx_credits, refunds.sum_cx_refunds]
+    drill_fields: [created_date, menus.shipping_date, reason, meal_letter, meal_combo, notes, orders_data.count, count, credit_transactions.sum_cx_credits, refunds.sum_cx_refunds]
     sql: ${TABLE}.notes ;;
   }
 
-  dimension: number_of_ingredients {
+  dimension: ingredient_quantity {
     type: number
     sql: ${TABLE}.number_of_ingredients ;;
   }
 
-  dimension: number_of_skus {
+  dimension: meal_quantity {
     type: number
     sql: ${TABLE}.number_of_skus ;;
   }
@@ -146,7 +146,7 @@ view: customer_issues {
     sql: ${TABLE}.plan ;;
   }
 
-  dimension: print_label {
+  dimension: meal_letter {
     type: string
     sql: ${TABLE}.print_label ;;
   }
@@ -250,27 +250,74 @@ view: customer_issues {
           end;;
   }
 
+  dimension: 2021_budget {
+    type: number
+    value_format_name: percent_2
+    sql: case
+    when ${category} = 'Shipping' then 0.0092
+    when ${category} = 'Fulfillment' then 0.0079
+    when ${category} = 'Ingredient' then .0117
+    else null
+    end
+    ;;
+    }
+
+
+
+  measure: count_fulfillment_drills {
+    type: count
+    link: {
+      label: "Issues Drilldown"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[customer_issues.fulfillment_center]={{ customer_issues.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+    }
+    link: {
+      label: "Orders Drilldown"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[customer_issues.fulfillment_center]={{ customer_issues.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+    }
+    }
+
+    measure: count_no_fulfillment_drills {
+      type: count
+      link: {
+        label: "Issues Drilldown"
+        url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      }
+      link: {
+        label: "Orders Drilldown"
+        url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      }
+     }
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
-  # ----- Sets of fields for drilling ------
-  set: detail {
+  set: issues_drilldown{
     fields: [
-      orders_data.count,
+      customer_issues.count,
       customer_issues.reason,
-      products.title,
-      customer_issues.print_label,
+      products.meal_name,
+      customer_issues.meal_letter,
       customer_issues.meal_combo,
-      customer_issues.number_of_skus,
-      customer_issues.number_of_ingredients,
-      ingredients.name,
+      customer_issues.meal_quantity,
+      customer_issues.ingredient_quantity,
+      ingredients.ingredient_name,
       credit_transactions.sum_cx_credits,
       refunds.sum_cx_refunds
     ]
   }
+
+
+  set: orders_drilldown{
+    fields: [
+        orders_data.id,
+        customer_issues.category,
+        customer_issues.reason,
+        credit_transactions.sum_cx_credits,
+        refunds.sum_cx_refunds
+    ]
+  }
+
 
 
 }

@@ -679,40 +679,26 @@ explore: ingredients {
 explore: recipes {}
 
 explore: recipe_feedback_surveys {
+  label: "Recipe Feedback Surveys"
 
   join: recipe_feedbacks {
     relationship: one_to_many
     sql_on: ${recipe_feedback_surveys.id} = ${recipe_feedbacks.recipe_feedback_survey_id} ;;
   }
 
-  join: skus {
-    relationship:  one_to_one
-    sql_on: ${recipe_feedbacks.sku_id} = ${skus.id} ;;
-  }
-
-  join: products {
-    relationship: one_to_many
-    sql_on: ${products.id}=${skus.product_id};;
-  }
-
-  join: recipes {
-    relationship: many_to_one
-    sql_on: ${recipe_feedbacks.recipe_id} = ${recipes.id} ;;
+  join: orders {
+    relationship: one_to_one
+    sql_on: ${recipe_feedback_surveys.order_id}=${orders.id} ;;
   }
 
   join: order_items {
     relationship: one_to_many
-    sql_on: ${skus.id} = ${order_items.sku_id} ;;
-  }
-
-  join: orders {
-    relationship: one_to_many
-    sql_on: ${orders.id} = ${order_items.order_id} ;;
+    sql_on:${order_items.order_id}=${orders.id};;
   }
 
   join: subscriptions {
-    relationship: many_to_one
-    sql_on: ${orders.subscription_id}=${subscriptions.id} ;;
+    relationship: one_to_many
+    sql_on: ${subscriptions.id}=${orders.subscription_id} ;;
   }
 
   join: users {
@@ -729,6 +715,17 @@ explore: recipe_feedback_surveys {
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
 
   }
+
+  join: skus {
+    relationship: one_to_many
+    sql_on: ${skus.id}=${recipe_feedbacks.sku_id} and ${skus.id}=${order_items.sku_id} ;;
+  }
+
+  join: products {
+    relationship: one_to_many
+    sql_on: ${products.id}=${skus.product_id};;
+  }
+
 
 
 }

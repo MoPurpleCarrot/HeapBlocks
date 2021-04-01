@@ -441,6 +441,29 @@ view: users {
     ;;
 
   }
+  dimension: utm_source_groups_no_dm {
+    type: string
+    sql: case
+        when lower(${utm_source}) like '%facebook%' then 'Facebook'
+        when ${utm_source} like '%FB%' then 'Facebook'
+        when ${utm_source} like '%utm_source%' then 'Facebook'
+        when ${utm_source} = 'affiliate' then 'Affiliate'
+        when ${utm_source} = 'sfm' then 'SAB'
+        when ${utm_source} like '%pin%' then 'Pinterest'
+        when ${utm_source} like '%bing%' then 'Bing B'
+        when ${utm_source} like '%adwordsdis%' then 'Google Discovery'
+        when ${utm_source} like '%adwordsb%' then 'Adwords B'
+        when lower(${utm_source}) like '%adwords%' then 'Adwords NB'
+        when ${utm_source} like '%veganbox%' then 'Adwords NB'
+        when ${utm_source} = 'gift' then 'Gift'
+        when lower(${utm_source}) = 'organic' then 'Organic'
+        when ${utm_source} = 'none' then 'Organic'
+        when ${utm_source} is null then 'Organic'
+        Else 'Organic'
+        End
+    ;;
+
+    }
 
 
   dimension: origin {
@@ -487,5 +510,6 @@ view: users {
     type: count_distinct
     sql: ${id} ;;
   }
+
 
 }
