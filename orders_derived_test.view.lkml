@@ -14,12 +14,9 @@ view: orders_derived_test {
  ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
 
   dimension: menus_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.menus_id ;;
   }
@@ -44,12 +41,10 @@ view: orders_derived_test {
     sql: ${TABLE}.ship_template_shipping_provider ;;
   }
 
-  measure: total_orders_measure{
+  measure: total_orders_measure {
     type:  sum
-    sql: ${total_orders};;
+    sql: ${total_orders} ;;
   }
 
-  set: detail {
-    fields: [menus_id, total_orders, ship_template_fulfillment_center, plan, ship_template_shipping_provider,total_orders_measure]
-  }
+
 }

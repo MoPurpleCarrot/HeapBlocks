@@ -1052,7 +1052,7 @@ explore: users_data{
   }
 
   join: orders_derived_test {
-    relationship: many_to_one
+    relationship: one_to_many
     sql_on: ${orders_derived_test.menus_id} = ${menus.id}  ;;
   }
 
