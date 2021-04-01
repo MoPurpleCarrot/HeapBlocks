@@ -16,7 +16,9 @@ view: orders_derived_test {
     drill_fields: [detail*]
   }
 
+
   dimension: menus_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.menus_id ;;
   }
@@ -30,6 +32,12 @@ view: orders_derived_test {
     type: string
     sql: ${TABLE}.ship_template_fulfillment_center ;;
   }
+
+  measure: total_orders_measure{
+    type:  sum_distinct
+    sql: ${total_orders};;
+  }
+
 
   set: detail {
     fields: [menus_id, total_orders, ship_template_fulfillment_center]
