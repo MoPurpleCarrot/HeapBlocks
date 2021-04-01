@@ -72,9 +72,26 @@ view: menus {
 
   dimension_group: shipping {
     type: time
-    timeframes: [time, date, week, quarter, month]
+    timeframes: [time, date, day_of_week, week, quarter, month]
     sql: ${TABLE}.shipping_on ;;
   }
+
+  dimension_group: ship_sun_start{
+    type: time
+    timeframes: [date, day_of_week]
+    convert_tz: no
+    sql: case
+            when ${shipping_day_of_week} = 'Sunday' then ${shipping_date}
+            when ${shipping_day_of_week} = 'Monday' THEN dateadd(d, -1, ${shipping_date})
+            when ${shipping_day_of_week} = 'Tuesday' THEN dateadd(d, -2, ${shipping_date})
+            when ${shipping_day_of_week} = 'Wednesday' THEN dateadd(d, -3, ${shipping_date})
+            when ${shipping_day_of_week} = 'Thursday' THEN dateadd(d, -4, ${shipping_date})
+            when ${shipping_day_of_week} = 'Friday' THEN dateadd(d, -5, ${shipping_date})
+            when ${shipping_day_of_week} = 'Saturday' THEN dateadd(d, -6, ${shipping_date})
+            END;;
+
+    }
+
 
   dimension_group: start {
     type: time

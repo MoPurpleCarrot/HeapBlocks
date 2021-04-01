@@ -10,7 +10,7 @@ view: orders_derived {
         join heroku_postgres.orders on orders.menu_id = menus.id
         group by 1
         ;;
-    }
+        }
 
     dimension: menus_id {
       primary_key: yes
@@ -38,6 +38,36 @@ view: orders_derived {
     sql: ${TABLE}."total_orders_fdm" ;;
   }
 
+  dimension: total_orders_fedex_air {
+    type: number
+    sql: ${TABLE}."total_orders_fedex_air" ;;
+  }
+
+  dimension: total_orders_fedex_ground {
+    type: number
+    sql: ${TABLE}."total_orders_fedex_ground" ;;
+  }
+
+  dimension: total_orders_fedex_ground_sunday {
+    type: number
+    sql: ${TABLE}."total_orders_fedex_ground_sunday" ;;
+  }
+
+  dimension: total_orders_lasership {
+    type: number
+    sql: ${TABLE}."total_orders_lasership" ;;
+  }
+
+  dimension: total_orders_ontrac {
+    type: number
+    sql: ${TABLE}."total_orders_ontrac" ;;
+  }
+
+  dimension: total_orders_uds {
+    type: number
+    sql: ${TABLE}."total_orders_uds" ;;
+  }
+
     measure: total_orders_measure{
       type:  sum_distinct
       sql: ${total_orders_dimension};;
@@ -56,6 +86,36 @@ view: orders_derived {
   measure: total_orders_fdm_measure{
     type:  sum_distinct
     sql: ${total_orders_fdm} ;;
+  }
+
+  measure: total_orders_fedex_air_measure {
+    type: sum_distinct
+    sql: ${total_orders_fedex_air} ;;
+  }
+
+  measure: total_orders_fedex_ground_measure {
+    type: sum_distinct
+    sql: ${total_orders_fedex_ground} ;;
+  }
+
+  measure: total_orders_fedex_ground_sunday_measure {
+    type: sum_distinct
+    sql: ${total_orders_fedex_ground_sunday} ;;
+  }
+
+  measure: total_orders_lasership_measure {
+    type: sum_distinct
+    sql: ${total_orders_lasership} ;;
+  }
+
+  measure: total_orders_ontrac_measure {
+    type: sum_distinct
+    sql: ${total_orders_ontrac} ;;
+  }
+
+   measure: total_orders_uds_measure {
+    type: sum_distinct
+    sql: ${total_orders_uds} ;;
   }
 
   }
