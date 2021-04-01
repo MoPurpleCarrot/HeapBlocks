@@ -1070,13 +1070,13 @@ explore: users_data{
 
   }
   join: refunds {
-    relationship: one_to_many
+    relationship: one_to_one
     sql_on: ${refunds.id} = ${customer_issues.refund_id};;
   }
 
   join: refunds_march21_only {
-    relationship: one_to_one
-    sql_on:${refunds_march21_only.refundable_id}=${orders_data.id} ;;
+    relationship: one_to_many
+    sql_on:${orders_data.id}=${refunds_march21_only.refundable_id} ;;
   }
 
 }
