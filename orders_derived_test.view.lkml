@@ -50,6 +50,6 @@ view: orders_derived_test {
   }
 
   set: detail {
-    fields: [menus_id, total_orders, ship_template_fulfillment_center, plan, ship_template_shipping_provider]
+    fields: [menus_id, total_orders, ship_template_fulfillment_center, plan, ship_template_shipping_provider,total_orders_measure]
   }
 }
