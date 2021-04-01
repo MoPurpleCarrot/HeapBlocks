@@ -42,22 +42,26 @@ view: subscriptions {
   dimension: billed_or_bill_error_orders_count {
     type: number
     sql: ${TABLE}.billed_or_bill_error_orders_count ;;
+    hidden: yes
   }
 
   dimension: coupon_id {
     type: number
     sql: ${TABLE}.coupon_id ;;
+    hidden: yes
   }
 
   dimension_group: created {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_at ;;
+    hidden: yes
   }
 
   dimension: plan {
     type: number
     sql: ${TABLE}.plan ;;
+    hidden: yes
   }
 
   dimension: plan_name {
@@ -88,12 +92,13 @@ view: subscriptions {
   dimension: status_code {
     type: number
     sql: ${TABLE}.status ;;
+    hidden: yes
   }
 
   dimension: preselected_meal_portfolio_plan_2018 {
     type: string
-    hidden:  yes
     sql: ${TABLE}.preselected_new_plan ;;
+    hidden: yes
   }
 
   dimension: status {
@@ -123,12 +128,13 @@ view: subscriptions {
           ELSE NULL
           END
           ;;
+    hidden: yes
   }
 
   dimension: account_designation {
     type: number
-    hidden:  yes
     sql: ${TABLE}.account_designation ;;
+    hidden:  yes
   }
 
   dimension: account_designation_bucket {
@@ -140,58 +146,68 @@ view: subscriptions {
           ELSE 'Standard'
           END
           ;;
+    hidden: yes
   }
 
   dimension: cc_exp_month {
     group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_cc_exp_month ;;
+    hidden:  yes
   }
 
   dimension: cc_exp_year {
     group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_cc_exp_year ;;
+    hidden:  yes
   }
 
   dimension: cc_last_four {
     group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_cc_last_four ;;
+    hidden:  yes
   }
 
   dimension: cc_type {
     group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_cc_type ;;
+    hidden:  yes
   }
 
   dimension: stripe_customer_id {
     group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_customer_id ;;
+    hidden:  yes
   }
 
   dimension: stripe_token {
     group_label: "Stripe Info"
     type: string
     sql: ${TABLE}.stripe_token ;;
+    hidden:  yes
   }
 
   dimension_group: updated {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.updated_at ;;
+    hidden:  yes
   }
 
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
+    hidden:  yes
   }
 
   dimension: legacy_sixserving_customer {
     type: string
     sql: ${TABLE}.legacy_6servin_customer ;;
+    hidden:  yes
   }
 
 
@@ -220,14 +236,14 @@ view: subscriptions {
 
   dimension_group: winback_plus4 {
     type: time
-    hidden:  yes
     sql: dateadd('day','4', ${winback_date}) ;;
+    hidden:  yes
   }
 
   dimension_group: registered_plus4 {
     type: time
-    hidden:  yes
     sql: dateadd('day','4', ${registered_at_date}) ;;
+    hidden:  yes
   }
 
   dimension: winback_coupon {
@@ -238,6 +254,7 @@ view: subscriptions {
   dimension: winback_type {
     type: string
     sql: ${TABLE}.winback_type ;;
+    hidden:  yes
   }
 
   dimension: winback_utm_source {
@@ -268,6 +285,7 @@ view: subscriptions {
   dimension: legacy_tb12_plan {
     type: number
     sql: ${TABLE}.legacy_tb12_plan ;;
+    hidden:  yes
   }
 
   measure: count {
@@ -275,69 +293,78 @@ view: subscriptions {
     drill_fields: [detail*]
   }
 
-  dimension: clean_winback_utm_source{
-    case: {
-
-      when: {
-        sql:  ${TABLE}.winback_coupon = 'pcsum18'OR ${TABLE}.winback_coupon = 'pcfall18' ;;
-        label: "direct mail"
-      }
-      when: {
-        sql: ${TABLE}.winback_utm_source = 'Organic' OR ${TABLE}.winback_utm_source = 'organic'  ;;
-        label: "organic"
-      }
-      when: {
-        sql: ${TABLE}.winback_utm_source = 'adwordsb' OR ${TABLE}.winback_utm_source = 'adwordsb_w' OR ${TABLE}.winback_utm_source = 'adwordsb_i' ;;
-        label: "adwords branded"
-      }
-      when: {
-        sql: ${TABLE}.winback_utm_source = 'adwordstb';;
-        label: "adwordstb12"
-      }
-      when: {
-        sql: ${TABLE}.winback_utm_source = 'adwordsg_w' ;;
-        label: "adwords gmail"
-      }
-      when: {
-        sql: ${TABLE}.winback_utm_source = 'adwordsnb' ;;
-        label: "adwords non-branded"
-      }
-
-      when: {
-        sql: ${TABLE}.winback_utm_source = 'Facebook'OR ${TABLE}.winback_utm_source = 'facebook';;
-        label: "facebook"
-      }
-      when: {
-        sql: ${TABLE}.winback_utm_source = 'bingb' ;;
-        label: "bing branded"
-      }
+  dimension: winback_utm_source_groups {
+    type: string
+    sql: case when ${coupons.code} = 'pcjan21' then 'Direct Mail'
+        when ${coupons.code} = 'letsdothispc21' then 'Direct Mail'
+        when lower(${winback_utm_source}) like '%facebook%' then 'Facebook'
+        when ${winback_utm_source} like '%FB%' then 'Facebook'
+        when ${winback_utm_source} like '%winback_utm_source%' then 'Facebook'
+        when ${winback_utm_source} = 'affiliate' then 'Affiliate'
+        when ${winback_utm_source} = 'sfm' then 'SAB'
+        when ${winback_utm_source} like '%pin%' then 'Pinterest'
+        when ${winback_utm_source} like '%bing%' then 'Bing B'
+        when ${winback_utm_source} like '%adwordsdis%' then 'Google Discovery'
+        when ${winback_utm_source} like '%adwordsb%' then 'Adwords B'
+        when lower(${winback_utm_source}) like '%adwords%' then 'Adwords NB'
+        when ${winback_utm_source} like '%veganbox%' then 'Adwords NB'
+        when ${winback_utm_source} = 'gift' then 'Gift'
+        when lower(${winback_utm_source}) = 'organic' then 'Organic'
+        when ${winback_utm_source} = 'none' then 'Organic'
+        when ${winback_utm_source} is null then 'Organic'
+        Else 'Organic'
+        End
+    ;;
     }
+
+    dimension: winback_utm_source_groups_no_dm {
+      type: string
+      sql: case
+        when lower(${winback_utm_source}) like '%facebook%' then 'Facebook'
+        when ${winback_utm_source} like '%FB%' then 'Facebook'
+        when ${winback_utm_source} like '%winback_utm_source%' then 'Facebook'
+        when ${winback_utm_source} = 'affiliate' then 'Affiliate'
+        when ${winback_utm_source} = 'sfm' then 'SAB'
+        when ${winback_utm_source} like '%pin%' then 'Pinterest'
+        when ${winback_utm_source} like '%bing%' then 'Bing B'
+        when ${winback_utm_source} like '%adwordsdis%' then 'Google Discovery'
+        when ${winback_utm_source} like '%adwordsb%' then 'Adwords B'
+        when lower(${winback_utm_source}) like '%adwords%' then 'Adwords NB'
+        when ${winback_utm_source} like '%veganbox%' then 'Adwords NB'
+        when ${winback_utm_source} = 'gift' then 'Gift'
+        when lower(${winback_utm_source}) = 'organic' then 'Organic'
+        when ${winback_utm_source} = 'none' then 'Organic'
+        when ${winback_utm_source} is null then 'Organic'
+        Else 'Organic'
+        End
+    ;;
   }
 
 
   dimension_group: returning_status_start_at {
     type: time
-    hidden: yes
     timeframes: [time, date, week, month]
     sql: ${TABLE}.returning_status_start_at ;;
+    hidden: yes
   }
 
   dimension_group: returning_reactivation_on {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.returning_reactivation_on ;;
+    hidden: yes
   }
 
   dimension: returning_days{
     type: number
-    hidden:  yes
     sql: diffdays(${returning_status_start_at_week}, ${returning_reactivation_on_week}) ;;
+    hidden:  yes
   }
 
   dimension: Returning_weeks{
     type: number
-    hidden:  yes
     sql: datediff('week',${returning_status_start_at_week}, ${returning_reactivation_on_week}) ;;
+    hidden:  yes
   }
 
 

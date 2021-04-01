@@ -5,6 +5,7 @@ view: menus {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    hidden:  yes
   }
 
   dimension_group: sdc_batched {
@@ -51,23 +52,27 @@ view: menus {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_at ;;
+    hidden:  yes
   }
 
   dimension_group: end {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.end_at ;;
+    hidden:  yes
   }
 
   dimension_group: order_cancellation_cutoff {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.order_cancellation_cutoff_at ;;
+    hidden:  yes
   }
 
   dimension: is_published {
     type: yesno
     sql: ${TABLE}.published ;;
+    hidden:  yes
   }
 
   dimension_group: shipping {
@@ -76,7 +81,7 @@ view: menus {
     sql: ${TABLE}.shipping_on ;;
   }
 
-  dimension_group: ship_sun_start{
+  dimension_group: ship_week_sun_start{
     type: time
     timeframes: [date, day_of_week]
     convert_tz: no
@@ -97,16 +102,19 @@ view: menus {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.start_at ;;
+    hidden:  yes
   }
 
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+    hidden:  yes
   }
 
   dimension: status_message {
     type: string
     sql: ${TABLE}.status_message ;;
+    hidden:  yes
   }
 
   dimension_group: updated {

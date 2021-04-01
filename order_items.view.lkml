@@ -6,6 +6,7 @@ view: order_items {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    hidden:  yes
   }
 
   dimension_group: _sdc_batched {
@@ -20,6 +21,7 @@ view: order_items {
       year
     ]
     sql: ${TABLE}._sdc_batched_at ;;
+    hidden:  yes
   }
 
   dimension_group: _sdc_received {
@@ -34,16 +36,19 @@ view: order_items {
       year
     ]
     sql: ${TABLE}._sdc_received_at ;;
+    hidden:  yes
   }
 
   dimension: _sdc_sequence {
     type: number
     sql: ${TABLE}._sdc_sequence ;;
+    hidden:  yes
   }
 
   dimension: _sdc_table_version {
     type: number
     sql: ${TABLE}._sdc_table_version ;;
+    hidden:  yes
   }
 
   dimension_group: created {
@@ -58,6 +63,7 @@ view: order_items {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    hidden:  yes
   }
 
   dimension_group: deleted {
@@ -92,6 +98,7 @@ view: order_items {
   dimension: order_id {
     type: number
     sql: ${TABLE}.order_id ;;
+    hidden:  yes
   }
 
   dimension: price_cents {
@@ -152,6 +159,7 @@ view: order_items {
   dimension: sku_id {
     type: string
     sql: ${TABLE}.sku_id ;;
+    hidden:  yes
   }
 
   dimension: item_type {
@@ -332,6 +340,7 @@ view: order_items {
       year
     ]
     sql: ${TABLE}.updated_at ;;
+    hidden:  yes
   }
 
   measure: count {

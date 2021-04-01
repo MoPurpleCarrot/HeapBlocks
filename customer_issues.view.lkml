@@ -6,6 +6,7 @@ view: customer_issues {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    hidden:  yes
   }
 
   dimension_group: _sdc_batched {
@@ -20,6 +21,7 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}._sdc_batched_at ;;
+    hidden:  yes
   }
 
   dimension_group: _sdc_extracted {
@@ -34,6 +36,7 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}._sdc_extracted_at ;;
+    hidden:  yes
   }
 
   dimension_group: _sdc_received {
@@ -48,36 +51,43 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}._sdc_received_at ;;
+    hidden:  yes
   }
 
   dimension: _sdc_sequence {
     type: number
     sql: ${TABLE}._sdc_sequence ;;
+    hidden:  yes
   }
 
   dimension: _sdc_table_version {
     type: number
     sql: ${TABLE}._sdc_table_version ;;
+    hidden:  yes
   }
 
   dimension: action {
     type: number
     sql: ${TABLE}.action ;;
+    hidden:  yes
   }
 
   dimension: admin_id {
     type: number
     sql: ${TABLE}.admin_id ;;
+    hidden:  yes
   }
 
   dimension: amount {
     type: number
     sql: ${TABLE}.amount ;;
+    hidden:  yes
   }
 
   dimension: box_type {
     type: string
     sql: ${TABLE}.box_type ;;
+    hidden:  yes
   }
 
   dimension_group: created {
@@ -92,21 +102,25 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    hidden:  yes
   }
 
   dimension: delivery_tnt {
     type: string
     sql: ${TABLE}.delivery_tnt ;;
+    hidden:  yes
   }
 
   dimension: fulfillment_center {
     type: string
     sql: ${TABLE}.fulfillment_center ;;
+    hidden:  yes
   }
 
   dimension: ingredient_id {
     type: number
     sql: ${TABLE}.ingredient_id ;;
+    hidden:  yes
   }
 
   dimension: meal_combo {
@@ -134,6 +148,7 @@ view: customer_issues {
   dimension: order_id {
     type: number
     sql: ${TABLE}.order_id ;;
+    hidden:  yes
   }
 
   dimension: passed_five_days_freshness {
@@ -144,6 +159,7 @@ view: customer_issues {
   dimension: plan {
     type: string
     sql: ${TABLE}.plan ;;
+    hidden:  yes
   }
 
   dimension: meal_letter {
@@ -154,6 +170,7 @@ view: customer_issues {
   dimension: product_type {
     type: string
     sql: ${TABLE}.product_type ;;
+    hidden:  yes
   }
 
   dimension: reason {
@@ -164,11 +181,13 @@ view: customer_issues {
   dimension: refund_id {
     type: number
     sql: ${TABLE}.refund_id ;;
+    hidden:  yes
   }
 
   dimension: shipping_carrier {
     type: string
     sql: ${TABLE}.shipping_carrier ;;
+    hidden:  yes
   }
 
   dimension_group: shipping {
@@ -183,11 +202,13 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}.shipping_on ;;
+    hidden:  yes
   }
 
   dimension: sku_id {
     type: number
     sql: ${TABLE}.sku_id ;;
+    hidden:  yes
   }
 
   dimension_group: updated {
@@ -202,16 +223,19 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}.updated_at ;;
+    hidden:  yes
   }
 
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
+    hidden:  yes
   }
 
   dimension: zendesk_ticket_id {
     type: number
     sql: ${TABLE}.zendesk_ticket_id ;;
+    hidden:  yes
   }
 
   dimension: category {
@@ -290,6 +314,38 @@ view: customer_issues {
 
   measure: count {
     type: count
+  }
+
+  measure: count_ops_errors {
+    type: count_distinct
+    sql:CASE WHEN ${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient'
+       THEN ${id}
+       ELSE NULL
+       END ;;
+  }
+
+  measure: count_ing_errors {
+    type: count_distinct
+    sql:CASE WHEN ${category} = 'Ingredient'
+       THEN ${id}
+       ELSE NULL
+       END ;;
+  }
+
+  measure: count_ful_errors {
+    type: count_distinct
+    sql:CASE WHEN ${category} = 'Fulfillment'
+       THEN ${id}
+       ELSE NULL
+       END ;;
+  }
+
+  measure: count_ship_errors {
+    type: count_distinct
+    sql:CASE WHEN ${category} = 'Shipping'
+       THEN ${id}
+       ELSE NULL
+       END ;;
   }
 
   set: issues_drilldown{

@@ -1,5 +1,5 @@
 view: order_items_data {
-  # this is specifically for the ops report explore - it's a duplicate of the orders table wihtout some specific fields
+  # this is specifically for the ops report explore - it's a duplicate of the orders table without some specific fields
     sql_table_name: heroku_postgres.order_items ;;
     drill_fields: [id]
 
@@ -7,6 +7,7 @@ view: order_items_data {
       primary_key: yes
       type: number
       sql: ${TABLE}.id ;;
+      hidden:  yes
     }
 
     dimension_group: _sdc_batched {
@@ -21,6 +22,7 @@ view: order_items_data {
         year
       ]
       sql: ${TABLE}._sdc_batched_at ;;
+      hidden:  yes
     }
 
     dimension_group: _sdc_received {
@@ -35,16 +37,19 @@ view: order_items_data {
         year
       ]
       sql: ${TABLE}._sdc_received_at ;;
+      hidden:  yes
     }
 
     dimension: _sdc_sequence {
       type: number
       sql: ${TABLE}._sdc_sequence ;;
+      hidden:  yes
     }
 
     dimension: _sdc_table_version {
       type: number
       sql: ${TABLE}._sdc_table_version ;;
+      hidden:  yes
     }
 
     dimension_group: created {
@@ -59,6 +64,7 @@ view: order_items_data {
         year
       ]
       sql: ${TABLE}.created_at ;;
+      hidden:  yes
     }
 
     dimension_group: deleted {
@@ -78,81 +84,97 @@ view: order_items_data {
     dimension:  deleted_yn {
       type: yesno
       sql:  ${deleted_date} > 2015-01-01;;
+      hidden:  yes
     }
 
     dimension: discount_cents {
       type: number
       sql: ${TABLE}.discount_cents ;;
+      hidden: yes
     }
 
     dimension: discount_currency {
       type: string
       sql: ${TABLE}.discount_currency ;;
+      hidden: yes
     }
 
     dimension: order_id {
       type: number
       sql: ${TABLE}.order_id ;;
+      hidden:  yes
     }
 
     dimension: price_cents {
       type: number
       sql: ${TABLE}.price_cents ;;
+      hidden: yes
     }
 
     dimension: price_currency {
       type: string
       sql: ${TABLE}.price_currency ;;
+      hidden: yes
     }
 
     dimension: quantity {
       type: number
       sql: ${TABLE}.quantity ;;
+      hidden: yes
     }
 
     dimension: recipe_id {
       type: number
       sql: ${TABLE}.recipe_id ;;
+      hidden:  yes
     }
 
     dimension: tax_amount_cents {
       type: number
       sql: ${TABLE}.tax_amount_cents ;;
+      hidden: yes
     }
 
     dimension: tax_amount_currency {
       type: string
       sql: ${TABLE}.tax_amount_currency ;;
+      hidden: yes
     }
 
     dimension: tax_code {
       type: string
       sql: ${TABLE}.tax_code ;;
+      hidden: yes
     }
 
     dimension: recipe_or_sku {
       type: string
       sql: ${TABLE}.type ;;
+      hidden: yes
     }
 
     dimension: recipe_meal_type {
       type: string
       sql: ${products.recipe_meal_type};;
+      hidden: yes
     }
 
     dimension: order_plan_code {
       type: number
       sql: ${orders_data.plan} ;;
+      hidden: yes
     }
 
     dimension: order_plan_name {
       type: string
       sql: ${orders_data.plan_name} ;;
+      hidden: yes
     }
 
     dimension: sku_id {
       type: string
       sql: ${TABLE}.sku_id ;;
+      hidden:  yes
     }
 
     dimension: item_type {
@@ -165,6 +187,7 @@ view: order_items_data {
           WHEN ${recipe_meal_type} = 0 THEN 'Dinner - MK'
           END
           ;;
+      hidden: yes
     }
 
 
@@ -174,6 +197,7 @@ view: order_items_data {
           Else 0
           END
           ;;
+      hidden: yes
     }
 
     dimension: lunch_binary {
@@ -182,6 +206,7 @@ view: order_items_data {
           Else 0
           END
           ;;
+      hidden: yes
     }
 
     dimension: dinner_binary {
@@ -190,6 +215,7 @@ view: order_items_data {
           Else 0
           END
           ;;
+      hidden: yes
     }
 
     dimension: dinner_kit_count {
@@ -200,6 +226,7 @@ view: order_items_data {
           Else 0
           END
           ;;
+      hidden: yes
     }
 
     dimension: extension_binary {
@@ -210,31 +237,37 @@ view: order_items_data {
           Else 1*${quantity}
           END
           ;;
+      hidden: yes
     }
 
     measure: count_breakfast_binary {
       type: sum
       sql: ${breakfast_binary} ;;
+      hidden: yes
     }
 
     measure: count_lunch_binary {
       type: sum
       sql: ${lunch_binary} ;;
+      hidden: yes
     }
 
     measure: count_dinner_binary {
       type: sum
       sql: ${dinner_binary} ;;
+      hidden: yes
     }
 
     measure: count_dinner_kit {
       type: sum
       sql: ${dinner_kit_count} ;;
+      hidden: yes
     }
 
     measure: count_extension_binary {
       type: sum
       sql: ${extension_binary} ;;
+      hidden: yes
     }
 
     dimension: item_quantity {
@@ -257,6 +290,7 @@ view: order_items_data {
             Else 0
             END
             ;;
+      hidden: yes
     }
 
     dimension: lunch_revenue {
@@ -265,6 +299,7 @@ view: order_items_data {
           Else 0
           END
           ;;
+      hidden: yes
     }
 
     dimension: dinner_revenue {
@@ -273,6 +308,7 @@ view: order_items_data {
           Else 0
           END
           ;;
+      hidden: yes
     }
 
     dimension: extension_revenue {
@@ -281,26 +317,31 @@ view: order_items_data {
           Else 0
           END
           ;;
+      hidden: yes
     }
 
     measure: sum_breakfast_rev {
       type: sum
       sql: ${breakfast_revenue} ;;
+      hidden: yes
     }
 
     measure: sum_lunch_rev {
       type: sum
       sql: ${lunch_revenue} ;;
+      hidden: yes
     }
 
     measure: sum_dinner_rev {
       type: sum
       sql: ${dinner_revenue} ;;
+      hidden: yes
     }
 
     measure: sum_extension_rev {
       type: sum
       sql: ${extension_revenue} ;;
+      hidden: yes
     }
 
     dimension_group: updated {
@@ -315,6 +356,7 @@ view: order_items_data {
         year
       ]
       sql: ${TABLE}.updated_at ;;
+      hidden:  yes
     }
 
     measure: count {
@@ -326,5 +368,6 @@ view: order_items_data {
       type: sum
       sql: ${price_cents} ;;
       value_format_name: usd
+      hidden: yes
     }
   }
