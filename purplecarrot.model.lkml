@@ -732,11 +732,6 @@ explore: recipe_feedback_surveys {
     sql_on: ${products.id}=${skus.product_id};;
   }
 
-  join: segment_recipe {
-    relationship: one_to_many
-    sql_on: ${users.id}=${segment_recipe.user_id};;
-  }
-
 
 }
 

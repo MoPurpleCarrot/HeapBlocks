@@ -1,19 +1,19 @@
-view: segment_recipe {
+view: segment_recipe_derived {
   derived_table: {
     sql: select distinct u.id user_id, segment_membership, primary_reason, eating_habits,question_1_answer overall_rating, question_2_answer flavor_rating
-,p.title recipe, i."name" ingredient, m.shipping_on shipweek
-from heroku_postgres.users u
-left join heroku_postgres.welcome_surveys ws on ws.user_id=u.id
-left join heroku_postgres.recipe_feedback_surveys rfs on rfs.user_id=u.id
-left join heroku_postgres.recipe_feedbacks rf on rf.recipe_feedback_survey_id=rfs.id
-left join heroku_postgres.skus s on s.id=rf.sku_id
-left join heroku_postgres.products p on p.id=s.product_id
-left join heroku_postgres.ingredients i on i.sku_id=s.id
-left join heroku_postgres.orders o on o.id=rfs.order_id
-left join heroku_postgres.menus m on m.id=o.menu_id
-where rfs.completed_at >= '2020-12-01'
-and o.fulfillment_status = 1
-       ;;
+      ,p.title recipe, i."name" ingredient, m.shipping_on shipweek
+      from heroku_postgres.users u
+      left join heroku_postgres.welcome_surveys ws on ws.user_id=u.id
+      left join heroku_postgres.recipe_feedback_surveys rfs on rfs.user_id=u.id
+      left join heroku_postgres.recipe_feedbacks rf on rf.recipe_feedback_survey_id=rfs.id
+      left join heroku_postgres.skus s on s.id=rf.sku_id
+      left join heroku_postgres.products p on p.id=s.product_id
+      left join heroku_postgres.ingredients i on i.sku_id=s.id
+      left join heroku_postgres.orders o on o.id=rfs.order_id
+      left join heroku_postgres.menus m on m.id=o.menu_id
+      where rfs.completed_at >= '2020-12-01'
+      and o.fulfillment_status = 1
+             ;;
   }
 
 
