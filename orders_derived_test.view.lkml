@@ -42,7 +42,7 @@ view: orders_derived_test {
   }
 
   measure: total_orders_measure {
-    type:  sum_distinct
+    type: sum_distinct
     sql: ${total_orders} ;;
   }
 
