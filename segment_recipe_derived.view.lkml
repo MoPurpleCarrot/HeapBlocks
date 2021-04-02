@@ -13,8 +13,6 @@ left join heroku_postgres.orders o on o.id=rfs.order_id
 left join heroku_postgres.menus m on m.id=o.menu_id
 where rfs.completed_at >= '2020-12-01'
 and o.fulfillment_status = 1
-group by segment_membership, primary_reason, eating_habits,question_1_answer, question_2_answer
-,p.title, i."name", m.shipping_on
        ;;
   }
 
