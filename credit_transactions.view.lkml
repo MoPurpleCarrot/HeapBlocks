@@ -409,41 +409,5 @@ view: credit_transactions {
       value_format_name: usd
     }
 
-    measure: sum_ops_errors {
-      type: sum_distinct
-      sql:CASE WHEN (${customer_issues.category} = 'Shipping' OR ${customer_issues.category} = 'Fulfillment' OR ${customer_issues.category} = 'Ingredient') and ${action}=3
-               THEN ${amount}
-               ELSE NULL
-               END ;;
-      value_format_name: usd
-    }
-
-    measure: sum_ing_errors {
-      type: sum
-      sql:CASE WHEN ${customer_issues.category} = 'Ingredient'
-               THEN ${amount}
-               ELSE NULL
-               END ;;
-      value_format_name: usd
-    }
-
-    measure: sum_ful_errors {
-      type: sum
-      sql:CASE WHEN ${customer_issues.category} = 'Fulfillment'
-               THEN ${amount}
-               ELSE NULL
-               END ;;
-      value_format_name: usd
-    }
-
-    measure: sum_ship_errors {
-      type: sum
-      sql:CASE WHEN ${customer_issues.category} = 'Shipping'
-               THEN ${amount}
-               ELSE NULL
-               END ;;
-      value_format_name: usd
-    }
-
 
 }
