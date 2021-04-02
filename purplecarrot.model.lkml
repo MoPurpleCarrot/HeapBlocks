@@ -1016,14 +1016,8 @@ explore: users_data{
   }
 
   join: customer_issues {
-    relationship: many_to_one
-    sql_on: ${customer_issues.order_id} = ${orders_data.id};;
-  }
-
-
-  join: credit_transactions {
-    relationship: one_to_one
-    sql_on: ${credit_transactions.customer_issue_id} = ${customer_issues.id} ;;
+    relationship: one_to_many
+    sql_on: ${orders_data.id}=${customer_issues.order_id};;
   }
 
   join: menus {
@@ -1067,12 +1061,8 @@ explore: users_data{
     relationship: many_to_one
     sql_on: ${orders_data.coupon_id} = ${coupons.id} ;;
     fields: []
+  }
 
-  }
-  join: refunds {
-    relationship: one_to_one
-    sql_on: ${refunds.id} = ${customer_issues.refund_id};;
-  }
 
   join: refunds_march21_only {
     relationship: one_to_many

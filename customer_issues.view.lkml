@@ -6,7 +6,6 @@ view: customer_issues {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-    hidden:  yes
   }
 
   dimension_group: _sdc_batched {
@@ -69,7 +68,6 @@ view: customer_issues {
   dimension: action {
     type: number
     sql: ${TABLE}.action ;;
-    hidden:  yes
   }
 
   dimension: admin_id {
@@ -81,7 +79,6 @@ view: customer_issues {
   dimension: amount {
     type: number
     sql: ${TABLE}.amount ;;
-    hidden:  yes
   }
 
   dimension: box_type {
@@ -292,11 +289,11 @@ view: customer_issues {
     type: count
     link: {
       label: "Issues Drilldown"
-      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[customer_issues.fulfillment_center]={{ customer_issues.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[ship_template.fulfillment_center]={{ ship_template.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
     }
     link: {
       label: "Orders Drilldown"
-      url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[customer_issues.fulfillment_center]={{ customer_issues.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[ship_template.fulfillment_center]={{ ship_template.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
     }
     }
 
@@ -316,37 +313,121 @@ view: customer_issues {
     type: count
   }
 
-  measure: count_ops_errors {
+  measure: ing_count_errors {
     type: count_distinct
-    sql:CASE WHEN ${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient'
+    sql:CASE WHEN ${action} != '1' and ${category} = 'Ingredient'
        THEN ${id}
        ELSE NULL
        END ;;
   }
 
-  measure: count_ing_errors {
+  measure: ing_count_refunds{
     type: count_distinct
-    sql:CASE WHEN ${category} = 'Ingredient'
-       THEN ${id}
-       ELSE NULL
-       END ;;
+    sql: case when ${action}= 2 and ${category} = 'Ingredient'
+      then ${id} else null end ;;
   }
 
-  measure: count_ful_errors {
-    type: count_distinct
-    sql:CASE WHEN ${category} = 'Fulfillment'
-       THEN ${id}
-       ELSE NULL
-       END ;;
+  measure: ing_sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0 and ${category} = 'Ingredient'
+      then ${amount} else null end ;;
+    value_format_name: usd
   }
 
-  measure: count_ship_errors {
+  measure: ing_sum_refunds{
+    type: sum
+    sql: case when ${action}= 2 and ${category} = 'Ingredient'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+
+  measure: ful_count_errors {
     type: count_distinct
-    sql:CASE WHEN ${category} = 'Shipping'
+    sql:CASE WHEN ${action} != '1' and ${category} = 'Fulfillment'
        THEN ${id}
        ELSE NULL
        END ;;
   }
+  measure: ful_count_refunds{
+    type: count_distinct
+    sql: case when ${action}= 2 and ${category} = 'Fulfillment'
+      then ${id} else null end ;;
+  }
+
+  measure: ful_sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0 and ${category} = 'Fulfillment'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ful_sum_refunds{
+    type: sum
+    sql: case when ${action}= 2 and ${category} = 'Fulfillment'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ship_count_errors {
+    type: count_distinct
+    sql:CASE WHEN ${action} != '1' and ${category} = 'Shipping'
+       THEN ${id}
+       ELSE NULL
+       END ;;
+  }
+  measure: ship_count_refunds{
+    type: count_distinct
+    sql: case when ${action}= 2 and ${category} = 'Shipping'
+      then ${id} else null end ;;
+  }
+
+  measure: ship_sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0 and ${category} = 'Shipping'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ship_sum_refunds{
+    type: sum
+    sql: case when ${action}= 2 and ${category} = 'Shipping'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ops_count_errors {
+    type: count_distinct
+    sql:CASE WHEN ${action} != '1' and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+       THEN ${id} ELSE NULL END ;;
+  }
+
+  measure: ops_count_credits{
+    type: count_distinct
+    sql: case when ${action}= 0 and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+      then ${id} else null end ;;
+  }
+
+  measure: ops_count_refunds{
+    type: count_distinct
+    sql: case when ${action}= 2 and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+      then ${id} else null end ;;
+  }
+
+  measure: ops_sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0 and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+    then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ops_sum_refunds{
+    type: sum
+    sql: case when ${action}= 2 and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
 
   set: issues_drilldown{
     fields: [

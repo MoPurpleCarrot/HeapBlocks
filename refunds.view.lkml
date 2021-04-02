@@ -4,9 +4,7 @@ view: refunds {
   dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.id ;;
-    hidden: yes
-  }
+    sql: ${TABLE}.id ;;  }
 
   dimension_group: _sdc_batched {
     type: time

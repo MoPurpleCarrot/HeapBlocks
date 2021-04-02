@@ -410,8 +410,8 @@ view: credit_transactions {
     }
 
     measure: sum_ops_errors {
-      type: sum
-      sql:CASE WHEN ${customer_issues.category} = 'Shipping' OR ${customer_issues.category} = 'Fulfillment' OR ${customer_issues.category} = 'Ingredient'
+      type: sum_distinct
+      sql:CASE WHEN (${customer_issues.category} = 'Shipping' OR ${customer_issues.category} = 'Fulfillment' OR ${customer_issues.category} = 'Ingredient') and ${action}=3
                THEN ${amount}
                ELSE NULL
                END ;;
