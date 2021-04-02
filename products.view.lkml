@@ -6,6 +6,7 @@ view: products {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    hidden: yes
   }
 
   dimension_group: _sdc_batched {
@@ -20,6 +21,7 @@ view: products {
       year
     ]
     sql: ${TABLE}._sdc_batched_at ;;
+    hidden: yes
   }
 
   dimension_group: _sdc_extracted {
@@ -34,6 +36,7 @@ view: products {
       year
     ]
     sql: ${TABLE}._sdc_extracted_at ;;
+    hidden: yes
   }
 
   dimension_group: _sdc_received {
@@ -48,16 +51,19 @@ view: products {
       year
     ]
     sql: ${TABLE}._sdc_received_at ;;
+    hidden: yes
   }
 
   dimension: _sdc_sequence {
     type: number
     sql: ${TABLE}._sdc_sequence ;;
+    hidden: yes
   }
 
   dimension: _sdc_table_version {
     type: number
     sql: ${TABLE}._sdc_table_version ;;
+    hidden: yes
   }
 
   dimension_group: admin_updated {
@@ -72,6 +78,7 @@ view: products {
       year
     ]
     sql: ${TABLE}.admin_updated_at ;;
+    hidden: yes
   }
 
   dimension: brand {
@@ -91,24 +98,28 @@ view: products {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    hidden: yes
   }
 
   dimension: image_alt {
     type: string
     sql: ${TABLE}.image_alt ;;
+    hidden: yes
   }
 
   dimension: product_type {
     type: number
     sql: ${TABLE}.product_type ;;
+    hidden: yes
   }
 
   dimension: recipe_meal_type {
     type: number
     sql: ${TABLE}.recipe_meal_type ;;
+    hidden: yes
   }
 
-  dimension: recipe_meal_type_name {
+  dimension: meal_type {
     type: string
     sql:  CASE WHEN ${recipe_meal_type} = 0 THEN 'Dinner'
           WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
@@ -122,26 +133,31 @@ view: products {
   dimension: rectangle_image {
     type: string
     sql: ${TABLE}.rectangle_image ;;
+    hidden: yes
   }
 
   dimension: search_keywords {
     type: string
     sql: ${TABLE}.search_keywords ;;
+    hidden: yes
   }
 
   dimension: seo_description {
     type: string
     sql: ${TABLE}.seo_description ;;
+    hidden: yes
   }
 
   dimension: seo_title {
     type: string
     sql: ${TABLE}.seo_title ;;
+    hidden: yes
   }
 
   dimension: show_in_products_catalog {
     type: yesno
     sql: ${TABLE}.show_in_products_catalog ;;
+    hidden: yes
   }
 
   dimension: slug {
@@ -152,6 +168,7 @@ view: products {
   dimension: square_image {
     type: string
     sql: ${TABLE}.square_image ;;
+    hidden: yes
   }
 
   dimension: subtitle {
@@ -162,6 +179,7 @@ view: products {
   dimension: tax_code {
     type: string
     sql: ${TABLE}.tax_code ;;
+    hidden: yes
   }
 
   dimension: meal_name {
@@ -182,6 +200,7 @@ view: products {
       year
     ]
     sql: ${TABLE}.updated_at ;;
+    hidden: yes
   }
 
   measure: count {

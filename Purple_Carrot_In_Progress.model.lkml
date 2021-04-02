@@ -124,6 +124,11 @@ explore: users {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+  join: customer_issues {
+    relationship: one_to_many
+    sql_on: ${orders.id}=${customer_issues.order_id} ;;
+  }
+
   join: order_items {
     relationship: one_to_many
     sql_on: ${orders.id} = ${order_items.order_id} ;;

@@ -38,6 +38,7 @@ view: users {
     type: number
     value_format_name: id
     sql: ${TABLE}.account_number ;;
+    hidden: yes
   }
 
   dimension_group: cancelled {
@@ -143,7 +144,7 @@ view: users {
     sql: ${credit} ;;
     }
 
-  measure: total_purple_carrot_credit {
+  measure: total_employee_credit {
     type: sum
     value_format_name: usd
     sql: ${credit} ;;
@@ -157,18 +158,21 @@ view: users {
   dimension: credit_before_migration {
     type: number
     sql: ${TABLE}.credit_before_migration ;;
+    hidden: yes
   }
 
   dimension_group: current_sign_in {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.current_sign_in_at ;;
+    hidden: yes
   }
 
   dimension: current_sign_in_ip {
     type: string
     group_label: "Location"
     sql: ${TABLE}.current_sign_in_ip ;;
+    hidden: yes
   }
 
   dimension: email {
@@ -184,44 +188,50 @@ view: users {
   dimension: is_purple_carrot_employee {
     type: yesno
     sql: ${email} LIKE '%purplecarrot%' ;;
+    hidden: yes
   }
 
   dimension: encrypted_password {
     type: string
     sql: ${TABLE}.encrypted_password ;;
+    hidden: yes
   }
 
   dimension: generated_password {
     type: yesno
-    hidden: yes
     sql: ${TABLE}.generated_password ;;
+    hidden: yes
   }
 
   dimension: giveaway_points {
     type: number
     sql: ${TABLE}.giveaway_points ;;
+    hidden: yes
   }
 
   dimension: giveaway_redemption_token {
     type: string
-    hidden: yes
     sql: ${TABLE}.giveaway_redemption_token ;;
+    hidden: yes
   }
 
   dimension: is_blocked_from_ordering {
     type: yesno
     sql: ${TABLE}.is_blocked_from_ordering ;;
+    hidden: yes
   }
 
   dimension: is_residential {
     type: yesno
     sql: ${TABLE}.is_residential ;;
+    hidden: yes
   }
 
   dimension_group: last_mailchimp_update {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_mailchimp_update_at ;;
+    hidden: yes
   }
 
   dimension_group: last_sign_in {
@@ -235,102 +245,116 @@ view: users {
       day_of_week
     ]
     sql: ${TABLE}.last_sign_in_at ;;
+    hidden: yes
   }
 
   dimension: last_sign_in_ip {
     type: string
     sql: ${TABLE}.last_sign_in_ip ;;
+    hidden: yes
   }
 
   dimension: partner_token {
     type: string
-    hidden: yes
     sql: ${TABLE}.partner_token ;;
+    hidden: yes
   }
 
   dimension_group: paused {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.paused_at ;;
+    hidden: yes
   }
 
   dimension_group: suspended {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.suspended_at ;;
+    hidden: yes
   }
 
   dimension: provider {
     type: string
     sql: ${TABLE}.provider ;;
+    hidden: yes
   }
 
   dimension_group: reactivated {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.reactivation_on ;;
+    hidden: yes
   }
 
   dimension: is_referrer_converted {
     type: yesno
     sql: ${TABLE}.referrer_converted ;;
+    hidden: yes
   }
 
   dimension: referrer_source {
     type: string
     sql: ${TABLE}.referrer_source ;;
+    hidden: yes
   }
 
   dimension: referrer_token {
     type: string
-    hidden: yes
     sql: ${TABLE}.referrer_token ;;
+    hidden: yes
   }
 
   dimension: region {
     type: string
     group_label: "Location"
     sql: ${TABLE}.region ;;
+    hidden: yes
   }
 
   dimension_group: remember_created {
     type: time
-    hidden: yes
     timeframes: [time, date, week, month]
     sql: ${TABLE}.remember_created_at ;;
+    hidden: yes
   }
 
   dimension_group: reset_password_sent {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.reset_password_sent_at ;;
+    hidden: yes
   }
 
   dimension: reset_password_token {
     type: string
-    hidden: yes
     sql: ${TABLE}.reset_password_token ;;
+    hidden: yes
   }
 
   dimension: role {
     type: string
     sql: ${TABLE}.role ;;
+    hidden: yes
   }
 
   dimension: feature_flags {
     type: string
     sql: ${TABLE}.feature_flags ;;
+    hidden: yes
   }
 
   dimension: sign_in_count {
     type: number
     sql: ${TABLE}.sign_in_count ;;
+    hidden: yes
   }
 
   dimension_group: skipped {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.skipped_at ;;
+    hidden: yes
   }
 
   dimension: state {
@@ -338,6 +362,7 @@ view: users {
     group_label: "Location"
     map_layer_name: us_states
     sql: CASE WHEN ${TABLE}.state = ' ' THEN NULL ELSE ${TABLE}.state END ;;
+    hidden: yes
   }
 
   #   - dimension: stripe_cc_exp_month
@@ -372,28 +397,32 @@ view: users {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.subscribed_at ;;
+    hidden: yes
   }
 
   dimension: is_subscribed_to_mailchimp {
     type: yesno
     sql: ${TABLE}.subscribed_to_mailchimp ;;
+    hidden: yes
   }
 
   dimension: subscription_status {
     type: number
     sql: ${TABLE}.subscription_status ;;
+    hidden: yes
   }
 
   dimension: tnt {
     type: number
-    hidden: yes
     sql: ${TABLE}.tnt ;;
+    hidden: yes
   }
 
   dimension: uid {
     type: string
     label: "UID"
     sql: ${TABLE}.uid ;;
+    hidden: yes
   }
 
   dimension_group: updated {
@@ -404,15 +433,11 @@ view: users {
   }
 
   dimension: utm_campaign {
-    label: "UTM Campaign"
-    group_label: "Marketing"
     type: string
     sql: ${TABLE}.utm_campaign ;;
   }
 
   dimension: utm_source {
-    label: "UTM Source"
-    group_label: "Marketing"
     type: string
     sql: ${TABLE}.utm_source ;;
   }
@@ -469,6 +494,7 @@ view: users {
   dimension: origin {
     type: string
     sql: ${TABLE}.customer_origin ;;
+    hidden: yes
   }
 
   dimension: origin_name{
@@ -483,7 +509,7 @@ view: users {
     sql: ${TABLE}.do_not_sell ;;
   }
 
-  dimension: Segment{
+  dimension: segment{
     type: string
     sql: ${TABLE}.segment_membership ;;
   }
@@ -491,6 +517,7 @@ view: users {
   dimension: sign_up_method{
     type: string
     sql: ${TABLE}.sign_up_method ;;
+    hidden: yes
   }
 
   dimension: admin_email{

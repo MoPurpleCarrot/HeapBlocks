@@ -4,8 +4,7 @@ view: refunds {
   dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.id ;;
-  }
+    sql: ${TABLE}.id ;;  }
 
   dimension_group: _sdc_batched {
     type: time
@@ -19,6 +18,7 @@ view: refunds {
       year
     ]
     sql: ${TABLE}._sdc_batched_at ;;
+    hidden: yes
   }
 
   dimension_group: _sdc_received {
@@ -33,26 +33,31 @@ view: refunds {
       year
     ]
     sql: ${TABLE}._sdc_received_at ;;
+    hidden: yes
   }
 
   dimension: _sdc_sequence {
     type: number
     sql: ${TABLE}._sdc_sequence ;;
+    hidden: yes
   }
 
   dimension: _sdc_table_version {
     type: number
     sql: ${TABLE}._sdc_table_version ;;
+    hidden: yes
   }
 
   dimension: admin_id {
     type: number
     sql: ${TABLE}.admin_id ;;
+    hidden: yes
   }
 
   dimension: admin_reason {
     type: string
     sql: ${TABLE}.admin_reason ;;
+    hidden: yes
   }
 
   dimension: cx_reason {
@@ -104,6 +109,7 @@ view: refunds {
       }
       else: "Other"
     }
+    hidden: yes
   }
 
 
@@ -142,7 +148,9 @@ view: refunds {
         label: "Gift"
       }
       else: "Other"
-    }}
+    }
+    hidden: yes
+    }
 
 
   dimension: amount {
@@ -170,9 +178,10 @@ view: refunds {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    hidden: yes
   }
 
-    dimension: created_sun_start{
+    dimension: created_week_sun_start{
       type: date
       convert_tz: no
       sql: case
@@ -192,26 +201,31 @@ view: refunds {
   dimension: description {
     type: string
     sql: ${TABLE}.description ;;
+    hidden: yes
   }
 
   dimension: order_id {
     type: number
     sql: ${TABLE}.order_id ;;
+    hidden: yes
   }
 
   dimension: refundable_id {
     type: number
     sql: ${TABLE}.refundable_id ;;
+    hidden: yes
   }
 
   dimension: refundable_type {
     type: string
     sql: ${TABLE}.refundable_type ;;
+    hidden: yes
   }
 
   dimension: stripe_reason {
     type: string
     sql: ${TABLE}.stripe_reason ;;
+    hidden: yes
   }
 
   dimension_group: updated {
@@ -226,7 +240,55 @@ view: refunds {
       year
     ]
     sql: ${TABLE}.updated_at ;;
+    hidden: yes
   }
+
+    dimension: category {
+      type: string
+      sql: case
+          when ${TABLE}."cx_reason" = 'Arrived After Dinner' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Arrived Late 1+ Days' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Arrived Warm' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Damaged Box' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Delivery Instructions Not Followed' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Didn''t Arrive' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Tape Lifted/Open Box' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Tracking Number Issue' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Container Broken' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Broken Gel Pack' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Didn''t arrive' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Arrived Late 1' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Arrived Late 2+' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Broken or Leaked Packaging' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Damaged (exterior)' then 'Shipping'
+          when ${TABLE}."cx_reason" = 'Damaged (interior - liner/gel packs)' then 'Shipping'
+
+          when ${TABLE}."cx_reason" = 'Damaged' then 'Ingredient'
+          when ${TABLE}."cx_reason" = 'Food Poisoning' then 'Ingredient'
+          when ${TABLE}."cx_reason" = 'Spoiled' then 'Ingredient'
+          when ${TABLE}."cx_reason" = 'Overripe' then 'Ingredient'
+          when ${TABLE}."cx_reason" = 'Underripe' then 'Ingredient'
+          when ${TABLE}."cx_reason" = 'Damaged Garlic' then 'Ingredient'
+          when ${TABLE}."cx_reason" = 'Damaged non-produce Ingredient' then 'Ingredient'
+          when ${TABLE}."cx_reason" = 'Damaged Produce' then 'Ingredient'
+
+          when ${TABLE}."cx_reason" = 'Arrived Passed Expiration Date' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Incorrect Measurement' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Missing Ingredient' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Missing Meal' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Missing Snack' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Missing Booklet' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Missing Garlic' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Foreign Object' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Missing Ingredient - 1' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Missing Ingredient - 2' then 'Fulfillment'
+          when ${TABLE}."cx_reason" = 'Missing Ingredient - 3' then 'Fulfillment'
+
+          when ${TABLE}."cx_reason" is null then null
+
+          else 'Other'
+          end;;
+    }
 
   measure: count {
     type: count
@@ -340,6 +402,7 @@ view: refunds {
         }
 
       }
+      hidden: yes
     }
 
     measure: sum_cx_refunds {

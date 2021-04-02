@@ -20,6 +20,7 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}._sdc_batched_at ;;
+    hidden:  yes
   }
 
   dimension_group: _sdc_extracted {
@@ -34,6 +35,7 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}._sdc_extracted_at ;;
+    hidden:  yes
   }
 
   dimension_group: _sdc_received {
@@ -48,16 +50,19 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}._sdc_received_at ;;
+    hidden:  yes
   }
 
   dimension: _sdc_sequence {
     type: number
     sql: ${TABLE}._sdc_sequence ;;
+    hidden:  yes
   }
 
   dimension: _sdc_table_version {
     type: number
     sql: ${TABLE}._sdc_table_version ;;
+    hidden:  yes
   }
 
   dimension: action {
@@ -68,6 +73,7 @@ view: customer_issues {
   dimension: admin_id {
     type: number
     sql: ${TABLE}.admin_id ;;
+    hidden:  yes
   }
 
   dimension: amount {
@@ -78,6 +84,7 @@ view: customer_issues {
   dimension: box_type {
     type: string
     sql: ${TABLE}.box_type ;;
+    hidden:  yes
   }
 
   dimension_group: created {
@@ -92,21 +99,25 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    hidden:  yes
   }
 
   dimension: delivery_tnt {
     type: string
     sql: ${TABLE}.delivery_tnt ;;
+    hidden:  yes
   }
 
   dimension: fulfillment_center {
     type: string
     sql: ${TABLE}.fulfillment_center ;;
+    hidden:  yes
   }
 
   dimension: ingredient_id {
     type: number
     sql: ${TABLE}.ingredient_id ;;
+    hidden:  yes
   }
 
   dimension: meal_combo {
@@ -134,6 +145,7 @@ view: customer_issues {
   dimension: order_id {
     type: number
     sql: ${TABLE}.order_id ;;
+    hidden:  yes
   }
 
   dimension: passed_five_days_freshness {
@@ -144,6 +156,7 @@ view: customer_issues {
   dimension: plan {
     type: string
     sql: ${TABLE}.plan ;;
+    hidden:  yes
   }
 
   dimension: meal_letter {
@@ -154,6 +167,7 @@ view: customer_issues {
   dimension: product_type {
     type: string
     sql: ${TABLE}.product_type ;;
+    hidden:  yes
   }
 
   dimension: reason {
@@ -164,11 +178,13 @@ view: customer_issues {
   dimension: refund_id {
     type: number
     sql: ${TABLE}.refund_id ;;
+    hidden:  yes
   }
 
   dimension: shipping_carrier {
     type: string
     sql: ${TABLE}.shipping_carrier ;;
+    hidden:  yes
   }
 
   dimension_group: shipping {
@@ -183,11 +199,13 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}.shipping_on ;;
+    hidden:  yes
   }
 
   dimension: sku_id {
     type: number
     sql: ${TABLE}.sku_id ;;
+    hidden:  yes
   }
 
   dimension_group: updated {
@@ -202,16 +220,19 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}.updated_at ;;
+    hidden:  yes
   }
 
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
+    hidden:  yes
   }
 
   dimension: zendesk_ticket_id {
     type: number
     sql: ${TABLE}.zendesk_ticket_id ;;
+    hidden:  yes
   }
 
   dimension: category {
@@ -265,19 +286,21 @@ view: customer_issues {
 
 
   measure: count_fulfillment_drills {
-    type: count
+    type: count_distinct
+    sql: case when (${action}= 0 or ${action} = 2) then ${id} else null end;;
     link: {
       label: "Issues Drilldown"
-      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[customer_issues.fulfillment_center]={{ customer_issues.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[ship_template.fulfillment_center]={{ ship_template.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
     }
     link: {
       label: "Orders Drilldown"
-      url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[customer_issues.fulfillment_center]={{ customer_issues.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[ship_template.fulfillment_center]={{ ship_template.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
     }
     }
 
     measure: count_no_fulfillment_drills {
-      type: count
+      type: count_distinct
+      sql: case when (${action}= 0 or ${action} = 2) then ${id} else null end;;
       link: {
         label: "Issues Drilldown"
         url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
@@ -291,6 +314,122 @@ view: customer_issues {
   measure: count {
     type: count
   }
+
+  measure: ing_count_errors {
+    type: count_distinct
+    sql:CASE WHEN ${action} != '1' and ${category} = 'Ingredient'
+       THEN ${id}
+       ELSE NULL
+       END ;;
+  }
+
+  measure: ing_count_refunds{
+    type: count_distinct
+    sql: case when ${action}= 2 and ${category} = 'Ingredient'
+      then ${id} else null end ;;
+  }
+
+  measure: ing_sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0 and ${category} = 'Ingredient'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ing_sum_refunds{
+    type: sum
+    sql: case when ${action}= 2 and ${category} = 'Ingredient'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+
+  measure: ful_count_errors {
+    type: count_distinct
+    sql:CASE WHEN ${action} != '1' and ${category} = 'Fulfillment'
+       THEN ${id}
+       ELSE NULL
+       END ;;
+  }
+  measure: ful_count_refunds{
+    type: count_distinct
+    sql: case when ${action}= 2 and ${category} = 'Fulfillment'
+      then ${id} else null end ;;
+  }
+
+  measure: ful_sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0 and ${category} = 'Fulfillment'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ful_sum_refunds{
+    type: sum
+    sql: case when ${action}= 2 and ${category} = 'Fulfillment'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ship_count_errors {
+    type: count_distinct
+    sql:CASE WHEN ${action} != '1' and ${category} = 'Shipping'
+       THEN ${id}
+       ELSE NULL
+       END ;;
+  }
+  measure: ship_count_refunds{
+    type: count_distinct
+    sql: case when ${action}= 2 and ${category} = 'Shipping'
+      then ${id} else null end ;;
+  }
+
+  measure: ship_sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0 and ${category} = 'Shipping'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ship_sum_refunds{
+    type: sum
+    sql: case when ${action}= 2 and ${category} = 'Shipping'
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ops_count_errors {
+    type: count_distinct
+    sql:CASE WHEN ${action} != '1' and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+       THEN ${id} ELSE NULL END ;;
+  }
+
+  measure: ops_count_credits{
+    type: count_distinct
+    sql: case when ${action}= 0 and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+      then ${id} else null end ;;
+  }
+
+  measure: ops_count_refunds{
+    type: count_distinct
+    sql: case when ${action}= 2 and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+      then ${id} else null end ;;
+  }
+
+  measure: ops_sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0 and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+    then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: ops_sum_refunds{
+    type: sum
+    sql: case when ${action}= 2 and (${category} = 'Shipping' OR ${category} = 'Fulfillment' OR ${category} = 'Ingredient')
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
 
   set: issues_drilldown{
     fields: [

@@ -37,55 +37,64 @@ view: orders_data {
     dimension: admin_id {
       type: number
       sql: ${TABLE}.admin_id ;;
+      hidden: yes
     }
 
     dimension: amount_charged {
       type: number
       value_format_name: usd
       sql: ${TABLE}.amount_charged ;;
+      hidden: yes
     }
 
     dimension: cancelled_reason {
       type: string
-      hidden:  yes
       sql: ${TABLE}.cancelled_reason ;;
+      hidden:  yes
     }
 
     dimension: coupon_code {
       type: string
       sql: ${TABLE}.coupon_code ;;
+      hidden:  yes
     }
 
     dimension: coupon_id {
       type: number
       sql: ${TABLE}.coupon_id ;;
+      hidden:  yes
     }
 
     dimension_group: created {
       type: time
       timeframes: [time, date, week, month, quarter, raw]
       sql: ${TABLE}.created_at ;;
+      hidden:  yes
     }
 
     dimension: customer_id {
       type: number
       sql: ${TABLE}.customer_id ;;
+      hidden:  yes
     }
 
 
     dimension: weeks_after_registered {
       type: number
       sql: DATEDIFF('week', ${subscriptions.registered_plus4_date}, ${delivery_date}) ;;
+      hidden: yes
     }
 
     dimension: months_after_registered {
       type: number
       sql: DATEDIFF('month', ${subscriptions.registered_plus4_date}, ${delivery_date}) ;;
+      hidden: yes
     }
 
     dimension: winback_week_num {
       type: number
       sql: DATEDIFF('week', ${subscriptions.winback_plus4_date}, ${delivery_date}) ;;
+      hidden: yes
     }
 
 
@@ -93,6 +102,7 @@ view: orders_data {
       type: number
       value_format_name: usd
       sql: ${TABLE}.credit_applied ;;
+      hidden:  yes
     }
 
     dimension_group: delivery {
@@ -104,82 +114,95 @@ view: orders_data {
     dimension: is_donated {
       type: yesno
       sql: ${TABLE}.donated ;;
+      hidden:  yes
     }
 
     dimension: default_meals_were_overridden{
       type: yesno
       sql: ${TABLE}.overridden_recipes ;;
+      hidden:  yes
     }
 
     dimension: menu_id {
       type: number
       sql: ${TABLE}.menu_id ;;
+      hidden:  yes
     }
 
     dimension: order_number {
       type: number
       sql: ${TABLE}.order_number ;;
+      hidden:  yes
     }
 
     dimension: partner_label {
       type: string
-      hidden:  yes
       sql: ${TABLE}.partner_label ;;
+      hidden:  yes
     }
 
     dimension: plan {
       type: number
       sql: ${TABLE}.plan ;;
+      hidden:  yes
     }
 
     dimension: price {
       type: number
       value_format_name: usd
       sql: ${TABLE}.price ;;
+      hidden: yes
     }
 
     dimension: plan_price {
       type: number
       value_format_name: usd
       sql: ${TABLE}.plan_price ;;
+      hidden: yes
     }
 
     dimension: extras_price {
       type: number
       value_format_name: usd
       sql: ${TABLE}.extras_price ;;
+      hidden: yes
     }
 
     dimension: price_less_extras {
       type: number
       value_format_name: usd
       sql: ${price}-${extras_price} ;;
+      hidden:  yes
     }
 
     dimension: shipping_carrier {
       type: string
       sql: ${TABLE}.shipping_carrier ;;
+      hidden:  yes
     }
 
     dimension: shipping_label {
       type: string
       sql: ${TABLE}.shipping_label ;;
+      hidden:  yes
     }
 
     dimension: shippingaddress_forPIPull_ONLY {
       type: string
       sql: ${TABLE}.shipping_address ;;
+      hidden: yes
     }
 
     dimension: status {
       type: number
       sql: ${TABLE}.status ;;
+      hidden:  yes
     }
 
     dimension: billing_status_code {
       type: number
-      hidden:  yes
       sql: ${TABLE}.billing_status ;;
+      hidden:  yes
     }
 
 
@@ -199,8 +222,8 @@ view: orders_data {
 
     dimension: fulfillment_status_code {
       type: number
-      hidden:  yes
       sql: ${TABLE}.fulfillment_status ;;
+      hidden:  yes
     }
 
     dimension: fulfillment_status {
@@ -231,12 +254,14 @@ view: orders_data {
           ELSE NULL
           END
           ;;
+      hidden: yes
     }
 
 
     dimension: status_old {
       type: string
       sql: ${TABLE}.status_old ;;
+      hidden:  yes
     }
 
     dimension: ship_template_shipping_provider {
@@ -252,6 +277,7 @@ view: orders_data {
     dimension: ship_template_shipping_cost {
       type: number
       sql: ${TABLE}.ship_template_shipping_cost ;;
+      hidden:  yes
     }
 
     dimension: ship_template_TNT {
@@ -262,63 +288,74 @@ view: orders_data {
     dimension: ship_template_ship {
       type: date
       sql: ${TABLE}.ship_template_ship_date ;;
+      hidden:  yes
     }
 
     dimension: ship_template_delivery {
       type: date
       sql: ${TABLE}.ship_template_ship_date ;;
+      hidden:  yes
     }
 
     dimension: projected_delivery{
       type: date
       sql: ${TABLE}.projected_delivery_on ;;
+      hidden:  yes
     }
 
     dimension: stripe_charge_id {
       type: string
       sql: ${TABLE}.stripe_charge_id ;;
+      hidden:  yes
     }
 
     dimension: subscription_id {
       type: number
       sql: ${TABLE}.subscription_id ;;
+      hidden:  yes
     }
 
     dimension: is_through_partner {
       type: yesno
-      hidden:  yes
       sql: ${TABLE}.through_partner ;;
+      hidden:  yes
     }
 
     dimension: test_account {
       type: yesno
       sql: ${TABLE}.test_account ;;
+      hidden:  yes
     }
 
     dimension: tracking_number {
       type: string
       sql: ${TABLE}.tracking_number ;;
+      hidden:  yes
     }
 
     dimension_group: updated {
       type: time
       timeframes: [time, date, week, month]
       sql: ${TABLE}.updated_at ;;
+      hidden:  yes
     }
 
     dimension: days_to_process {
       type: number
       sql: DATEDIFF('day',${created_raw},${delivery_raw}) ;;
+      hidden:  yes
     }
 
     dimension: user_id {
       type: number
       sql: ${TABLE}.user_id ;;
+      hidden:  yes
     }
 
     dimension: account_number {
       type: number
       sql: ${TABLE}.account_number ;;
+      hidden:  yes
     }
 
     dimension: sales_tax {
@@ -334,13 +371,7 @@ view: orders_data {
     measure: count_distinct_plan {
       type: count_distinct
       sql: ${plan} ;;
-    }
-
-    measure: net_revenue_without_refunds {
-      type: sum
-      value_format_name: usd
-      drill_fields: [detail*]
-      sql: ${amount_charged} ;;
+      hidden: yes
     }
 
     measure: total_revenue {
@@ -348,6 +379,7 @@ view: orders_data {
       value_format_name: usd
       drill_fields: [detail*]
       sql: ${price} ;;
+      hidden: yes
     }
 
     measure: billed_net_revenue {
@@ -355,6 +387,7 @@ view: orders_data {
       value_format_name: usd
       drill_fields: [detail*]
       sql: ${price} ;;
+      hidden: yes
     }
 
     measure: total_plan_gross_revenue {
@@ -369,6 +402,7 @@ view: orders_data {
       value_format_name: usd
       drill_fields: [detail*]
       sql: ${price_less_extras} ;;
+      hidden:  yes
     }
 
     measure: total_extra_gross_revenue {
@@ -398,6 +432,7 @@ view: orders_data {
         value: "3"
       }
       sql: ${price} ;;
+      hidden: yes
     }
 
     measure: total_billed_count {
@@ -407,6 +442,7 @@ view: orders_data {
         field: status
         value: "3"
       }
+      hidden: yes
     }
 
     measure: total_active_status_count {
@@ -416,6 +452,7 @@ view: orders_data {
         field: active_fulfillment_status
         value: "Active"
       }
+      hidden: yes
     }
 
     measure: TB12_billed_count {
@@ -428,6 +465,7 @@ view: orders_data {
         field: status
         value: "3"
       }
+      hidden:  yes
     }
 
     measure: CC_billed_count {
@@ -440,6 +478,7 @@ view: orders_data {
         field: status
         value: "3"
       }
+      hidden:  yes
     }
 
     measure: QE_billed_count {
@@ -452,6 +491,7 @@ view: orders_data {
         field: status
         value: "3"
       }
+      hidden:  yes
     }
 
     measure: HP_billed_count {
@@ -464,6 +504,7 @@ view: orders_data {
         field: status
         value: "3"
       }
+      hidden:  yes
     }
 
     measure: admin_cancel_count {
@@ -473,7 +514,9 @@ view: orders_data {
         field: status
         value: "6"
       }
+      hidden:  yes
     }
+
     measure: PC_2_billed_count {
       type: count
       drill_fields: [detail*]
@@ -484,6 +527,7 @@ view: orders_data {
         field: status
         value: "3"
       }
+      hidden:  yes
     }
 
     measure: PC_4_billed_count {
@@ -496,6 +540,7 @@ view: orders_data {
         field: status
         value: "3"
       }
+      hidden:  yes
     }
 
 
@@ -532,11 +577,13 @@ view: orders_data {
           else 3
           end
     ;;
+      hidden:  yes
     }
 
     measure: total_default_plan_meal {
       type: sum
       sql:  ${default_plan_meal_num} ;;
+      hidden: yes
     }
 
     measure: total_sales_tax {
@@ -563,11 +610,13 @@ view: orders_data {
     dimension: Orderdate_minus_winbackdate{
       type: number
       sql: datediff( 'day', ${subscriptions.winback_date}, ${created_date}) ;;
+      hidden:  yes
     }
 
     dimension: orderdate_after_winback{
       type: yesno
       sql: ${Orderdate_minus_winbackdate} >= 0 ;;
+      hidden:  yes
     }
 
     measure: count_total_billed_post_winback {
@@ -581,18 +630,20 @@ view: orders_data {
         field:  orderdate_after_winback
         value: "yes"
       }
+      hidden:  yes
     }
 
     dimension: user_with_winback {
       type: yesno
-      hidden: yes
       sql: ${subscriptions.winback_date} IS NOT NULL ;;
+      hidden: yes
     }
 
     dimension_group: deleted_at {
       type: time
       timeframes: [time, date, week, month]
       sql: ${TABLE}.deleted_at ;;
+      hidden: yes
     }
 
 

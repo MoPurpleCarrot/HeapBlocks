@@ -298,6 +298,11 @@ explore: users {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+  join: customer_issues {
+    relationship: one_to_many
+    sql_on: ${orders.id}=${customer_issues.order_id} ;;
+  }
+
   join: customization_events_derived {
     relationship: many_to_one
     sql_on: ${customization_events_derived.order_id} = ${orders.id} ;;
@@ -1011,14 +1016,8 @@ explore: users_data{
   }
 
   join: customer_issues {
-    relationship: many_to_one
-    sql_on: ${customer_issues.order_id} = ${orders_data.id};;
-  }
-
-
-  join: credit_transactions {
-    relationship: one_to_one
-    sql_on: ${credit_transactions.customer_issue_id} = ${customer_issues.id} ;;
+    relationship: one_to_many
+    sql_on: ${orders_data.id}=${customer_issues.order_id};;
   }
 
   join: menus {
@@ -1029,6 +1028,7 @@ explore: users_data{
   join: order_items_data {
     relationship: one_to_many
     sql_on: ${orders_data.id} = ${order_items_data.order_id}  ;;
+    fields: []
   }
 
   join: skus {
@@ -1060,11 +1060,13 @@ explore: users_data{
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders_data.coupon_id} = ${coupons.id} ;;
-
+    fields: []
   }
-  join: refunds {
+
+
+  join: refunds_march21_only {
     relationship: one_to_many
-    sql_on: ${refunds.id} = ${customer_issues.refund_id} ;;
+    sql_on:${orders_data.id}=${refunds_march21_only.refundable_id} ;;
   }
 
 }
