@@ -232,7 +232,6 @@ view: customer_issues {
   dimension: zendesk_ticket_id {
     type: number
     sql: ${TABLE}.zendesk_ticket_id ;;
-    hidden:  yes
   }
 
   dimension: category {
@@ -312,7 +311,11 @@ view: customer_issues {
      }
 
   measure: count {
-    type: count
+    type: count_distinct
+    sql:CASE WHEN ${action} != '1'
+    THEN ${id}
+    ELSE NULL
+    END;;
   }
 
   measure: ing_count_errors {
