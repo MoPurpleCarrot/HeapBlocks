@@ -289,11 +289,11 @@ view: customer_issues {
     sql: case when (${action}= 0 or ${action} = 2) then ${id} else null end;;
     link: {
       label: "Issues Drilldown"
-      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[ship_template.fulfillment_center]={{ ship_template.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.issues_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[orders_data.ship_template_fulfillment_center]={{ orders_data.ship_template_fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
     }
     link: {
       label: "Orders Drilldown"
-      url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[ship_template.fulfillment_center]={{ ship_template.fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
+      url: "/explore/purplecarrot/users_data?fields=customer_issues.orders_drilldown*&f[customer_issues.category]={{ _filters['customer_issues.category'] | url_encode }}&f[orders_data.ship_template_fulfillment_center]={{ orders_data.ship_template_fulfillment_center._value | url_encode }}&f[menus.shipping_date]={{ menus.shipping_date._value | url_encode }}&f[customer_issues.reason]={{ customer_issues.reason._value | url_encode }}"
     }
     }
 
