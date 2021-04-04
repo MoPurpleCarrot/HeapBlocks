@@ -444,8 +444,8 @@ view: customer_issues {
       customer_issues.meal_quantity,
       customer_issues.ingredient_quantity,
       ingredients.ingredient_name,
-      credit_transactions.sum_cx_credits,
-      refunds.sum_cx_refunds
+      customer_issues.ops_sum_credits,
+      customer_issues.ops_sum_refunds
     ]
   }
 
@@ -455,8 +455,8 @@ view: customer_issues {
         orders_data.id,
         customer_issues.category,
         customer_issues.reason,
-        credit_transactions.sum_cx_credits,
-        refunds.sum_cx_refunds
+        customer_issues.ops_sum_credits,
+        customer_issues.ops_sum_refunds
     ]
   }
 
