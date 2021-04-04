@@ -460,6 +460,4 @@ view: customer_issues {
     ]
   }
 
-
-
 }

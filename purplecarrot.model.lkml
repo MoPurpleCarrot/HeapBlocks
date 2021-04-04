@@ -1073,4 +1073,16 @@ explore: users_data{
     sql_on:${orders_data.id}=${refunds_march21_only.refundable_id} ;;
   }
 
+  join: order_totals{
+    view_label: "Order Totals (Filters MUST MATCH 'Orders Data' Filters)"
+    from: orders_data
+    relationship: one_to_many
+    sql_on: ${menus.id}=${order_totals.menu_id} ;;
+  }
+
+  join: shipping_addresses {
+    relationship: one_to_many
+    sql_on: ${subscriptions.id} = ${shipping_addresses.subscription_id} ;;
+  }
+
 }
