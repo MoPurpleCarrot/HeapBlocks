@@ -650,6 +650,11 @@ explore: gift_purchases {
 
   }
 
+  join: welcome_surveys {
+    relationship: one_to_one
+    sql_on: ${welcome_surveys.user_id} = ${users.id} ;;
+  }
+
 }
 
 explore: ingredients {
