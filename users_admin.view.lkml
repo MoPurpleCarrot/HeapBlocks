@@ -54,8 +54,13 @@ view: users {
 
     dimension:prepared_new_customers{
     type: string
-    sql:  CASE WHEN ${vwo_signup_ab_test_variants} LIKE '%"208":"2"%' THEN 'Prepared and Meal Kit'
-    WHEN ${vwo_signup_ab_test_variants} LIKE '%"208":"1"%' THEN 'Meal Kit Only'
+    sql:  CASE
+        WHEN ${vwo_signup_ab_test_variants} LIKE '%"208":"2"%' THEN 'Prepared and Meal Kit'
+        WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"2"%' THEN 'Prepared and Meal Kit'
+        WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"3"%' THEN 'Prepared and Meal Kit'
+        WHEN (${vwo_signup_ab_test_variants} LIKE '%"248"%' and ${vwo_signup_ab_test_variants} NOT LIKE'%0%') THEN 'Prepared and Meal Kit'
+        WHEN ${vwo_signup_ab_test_variants} LIKE '%"208":"1"%' THEN 'Meal Kit Only'
+        WHEN ${vwo_signup_ab_test_variants} LIKE '%"244":"1"%' THEN 'Meal Kit Only'
 
     ELSE NULL
     END;;
@@ -466,7 +471,7 @@ view: users {
     ;;
 
   }
-  dimension: utm_source_groups_no_dm {
+  dimension: utm_source_groups_no_dm_w_other {
     type: string
     sql: case
         when lower(${utm_source}) like '%facebook%' then 'Facebook'
@@ -481,10 +486,11 @@ view: users {
         when lower(${utm_source}) like '%adwords%' then 'Adwords NB'
         when ${utm_source} like '%veganbox%' then 'Adwords NB'
         when ${utm_source} = 'gift' then 'Gift'
-        when lower(${utm_source}) = 'organic' then 'Organic'
-        when ${utm_source} = 'none' then 'Organic'
-        when ${utm_source} is null then 'Organic'
-        Else 'Organic'
+        when ${utm_campaign} = '-' then 'Organic'
+        when ${utm_campaign} = 'organic' then 'Organic'
+        when ${utm_campaign} = 'Organic' then 'Organic'
+        when ${utm_campaign} = 'none' then 'Organic'
+        Else 'Other'
         End
     ;;
 
