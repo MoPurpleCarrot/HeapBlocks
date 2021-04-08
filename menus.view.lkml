@@ -92,7 +92,7 @@ view: menus {
             when ${shipping_day_of_week} = 'Thursday' THEN dateadd(d, -3, ${shipping_date})
             when ${shipping_day_of_week} = 'Friday' THEN dateadd(d, -4, ${shipping_date})
             when ${shipping_day_of_week} = 'Saturday' THEN dateadd(d, -5, ${shipping_date})
-            when ${shipping_day_of_week} = 'Sunday' then dateadd(d, -6, ${shipping_date})
+            when ${shipping_day_of_week} = 'Sunday' then  dateadd(d, 1, ${shipping_date})
             END;;
 
     }
