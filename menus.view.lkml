@@ -77,7 +77,7 @@ view: menus {
 
   dimension_group: shipping {
     type: time
-    timeframes: [time, date, day_of_week, week, quarter, month]
+    timeframes: [time, date, day_of_week, week, quarter, month, month_num, year]
     sql: ${TABLE}.shipping_on ;;
   }
 
