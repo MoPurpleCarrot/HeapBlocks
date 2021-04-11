@@ -1075,7 +1075,8 @@ explore: users_data{
     view_label: "Order Totals (Filters MUST MATCH 'Orders Data' Filters)"
     from: orders_data
     relationship: many_to_one
-    sql_on: ${order_totals.menu_id}=${menus.id} where ${order_totals.fulfillment_status}= 1 ;;
+    sql_on: ${order_totals.menu_id}=${menus.id} ;;
+    sql_where: ${order_totals.fulfillment_status}= 'Confirmed' ;;
   }
 
   join: shipping_addresses {
