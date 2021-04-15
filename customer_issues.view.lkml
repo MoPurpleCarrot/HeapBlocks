@@ -84,7 +84,7 @@ view: customer_issues {
   dimension: box_type {
     type: string
     sql: ${TABLE}.box_type ;;
-    hidden:  yes
+    hidden: yes
   }
 
   dimension_group: created {
@@ -105,7 +105,7 @@ view: customer_issues {
   dimension: delivery_tnt {
     type: string
     sql: ${TABLE}.delivery_tnt ;;
-    hidden:  yes
+    hidden: yes
   }
 
   dimension: fulfillment_center {

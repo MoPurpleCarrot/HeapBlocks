@@ -652,6 +652,10 @@ view: orders_data {
       sql: json_extract_path_text(${TABLE}.shipping_address, 'state') ;;
     }
 
+  dimension: box_size {
+    type: string
+    sql: ${TABLE}.box_size ;;
+  }
 
 
   }
