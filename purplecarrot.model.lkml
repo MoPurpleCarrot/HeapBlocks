@@ -1084,4 +1084,12 @@ explore: users_data{
     sql_on: ${shipping_addresses.subscription_id}=${subscriptions.id} ;;
   }
 
+  join: cx_rep_user {
+    from: users
+    relationship: many_to_one
+    sql_on: ${customer_issues.admin_id}=${cx_rep_user.id};;
+
+  }
+
+
 }

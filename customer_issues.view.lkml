@@ -73,7 +73,7 @@ view: customer_issues {
   dimension: admin_id {
     type: number
     sql: ${TABLE}.admin_id ;;
-    hidden:  yes
+
   }
 
   dimension: amount {
