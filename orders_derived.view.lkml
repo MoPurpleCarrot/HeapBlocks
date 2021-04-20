@@ -1,9 +1,9 @@
 view: orders_derived {
     derived_table: {
       sql:SELECT
-          menus.id  AS "menus_id",
-          COUNT(CASE WHEN (orders.fulfillment_status  = 1) THEN 1 ELSE NULL END) AS "total_orders",
-          COUNT(CASE WHEN (orders.fulfillment_status  = 1 and orders.ship_template_fulfillment_center = 'ShipOnce_Parsippany') THEN 1 ELSE NULL END) AS "total_orders_so"
+          menus.id  AS "menus_id"
+          ,COUNT(CASE WHEN (orders.fulfillment_status  = 1) THEN 1 ELSE NULL END) AS "total_orders"
+          ,COUNT(CASE WHEN (orders.fulfillment_status  = 1 AND orders.ship_template_fulfillment_center = 'ShipOnce_Parsippany') THEN 1 ELSE NULL END) AS "total_orders_so"
         FROM heroku_postgres.menus
         join heroku_postgres.orders on orders.menu_id = menus.id
         group by 1
@@ -11,8 +11,8 @@ view: orders_derived {
         }
 
     dimension: menus_id {
-      primary_key: yes
       type: number
+      primary_key: yes
       sql: ${TABLE}."menus_id" ;;
     }
 

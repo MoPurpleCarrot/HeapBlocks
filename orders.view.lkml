@@ -431,9 +431,15 @@ view: orders {
     type: count
     drill_fields: [detail*]
     filters: {
-      field: status
-      value: "3"
+      field: fulfillment_status
+      value: "Confirmed"
     }
+  }
+
+  measure: total_skipped_count {
+    type: count_distinct
+    drill_fields: [detail*]
+    sql: case when ${fulfillment_status}= 'Skipped' or ${fulfillment_status}= 'Returning' then ${id} else null end  ;;
   }
 
   measure: total_active_status_count {

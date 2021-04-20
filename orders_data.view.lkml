@@ -267,6 +267,7 @@ view: orders_data {
     dimension: ship_template_shipping_provider {
       type: string
       sql: ${TABLE}.ship_template_shipping_provider ;;
+      case_sensitive: no
     }
 
     dimension: ship_template_fulfillment_center {
@@ -646,6 +647,15 @@ view: orders_data {
       hidden: yes
     }
 
+    dimension: state{
+      map_layer_name: us_states
+      sql: json_extract_path_text(${TABLE}.shipping_address, 'state') ;;
+    }
+
+  dimension: box_size {
+    type: string
+    sql: ${TABLE}.box_size ;;
+  }
 
 
   }

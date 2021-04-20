@@ -650,6 +650,11 @@ explore: gift_purchases {
 
   }
 
+  join: welcome_surveys {
+    relationship: one_to_one
+    sql_on: ${welcome_surveys.user_id} = ${users.id} ;;
+  }
+
 }
 
 explore: ingredients {
@@ -1015,39 +1020,39 @@ explore: users_data{
   }
 
   join: orders_data {
-    relationship: one_to_many
-    sql_on: ${orders_data.subscription_id} = ${subscriptions.id} ;;
+    relationship: many_to_one
+    sql_on: ${subscriptions.id}=${orders_data.subscription_id} ;;
   }
 
   join: customer_issues {
-    relationship: one_to_many
-    sql_on: ${orders_data.id}=${customer_issues.order_id};;
+    relationship: many_to_one
+    sql_on: ${customer_issues.order_id}=${orders_data.id};;
   }
 
   join: menus {
-    relationship: one_to_many
-    sql_on: ${menus.id} = ${orders_data.menu_id} ;;
+    relationship: many_to_one
+    sql_on: ${orders_data.menu_id}=${menus.id} ;;
   }
 
   join: order_items_data {
-    relationship: one_to_many
-    sql_on: ${orders_data.id} = ${order_items_data.order_id}  ;;
+    relationship: many_to_one
+    sql_on: ${order_items_data.order_id}=${orders_data.id}  ;;
     fields: []
   }
 
   join: skus {
-    relationship: one_to_many
-    sql_on: ${skus.id} = ${customer_issues.sku_id}  ;;
+    relationship: many_to_one
+    sql_on:  ${customer_issues.sku_id}=${skus.id}  ;;
   }
 
   join: ingredients {
-    relationship: one_to_many
-    sql_on: ${ingredients.id} = ${customer_issues.ingredient_id}  ;;
+    relationship: many_to_one
+    sql_on: ${customer_issues.ingredient_id}=${ingredients.id}  ;;
   }
 
   join: products {
-    relationship: one_to_many
-    sql_on: ${products.id} = ${skus.product_id}  ;;
+    relationship: many_to_one
+    sql_on: ${skus.product_id}=${products.id}  ;;
   }
 
   join: orders_derived {
@@ -1055,22 +1060,36 @@ explore: users_data{
     sql_on: ${orders_derived.menus_id} = ${menus.id}  ;;
   }
 
-  join: orders_derived_test {
-    relationship: one_to_many
-    sql_on: ${orders_derived_test.menus_id} = ${menus.id}  ;;
-  }
-
-
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders_data.coupon_id} = ${coupons.id} ;;
     fields: []
   }
 
-
   join: refunds_march21_only {
-    relationship: one_to_many
-    sql_on:${orders_data.id}=${refunds_march21_only.refundable_id} ;;
+    relationship: many_to_one
+    sql_on:${refunds_march21_only.refundable_id}=${orders_data.id} ;;
   }
+
+  join: order_totals{
+    view_label: "Order Totals (Filters MUST MATCH 'Orders Data' Filters)"
+    from: orders_data
+    relationship: many_to_one
+    sql_on: ${order_totals.menu_id}=${menus.id} ;;
+    sql_where: ${order_totals.fulfillment_status}= 'Confirmed' ;;
+  }
+
+  join: shipping_addresses {
+    relationship: many_to_one
+    sql_on: ${shipping_addresses.subscription_id}=${subscriptions.id} ;;
+  }
+
+  join: cx_rep_user {
+    from: users
+    relationship: many_to_one
+    sql_on: ${customer_issues.admin_id}=${cx_rep_user.id};;
+
+  }
+
 
 }

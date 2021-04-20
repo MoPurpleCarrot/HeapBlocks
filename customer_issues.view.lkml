@@ -73,7 +73,7 @@ view: customer_issues {
   dimension: admin_id {
     type: number
     sql: ${TABLE}.admin_id ;;
-    hidden:  yes
+
   }
 
   dimension: amount {
@@ -84,7 +84,7 @@ view: customer_issues {
   dimension: box_type {
     type: string
     sql: ${TABLE}.box_type ;;
-    hidden:  yes
+    hidden: yes
   }
 
   dimension_group: created {
@@ -105,7 +105,7 @@ view: customer_issues {
   dimension: delivery_tnt {
     type: string
     sql: ${TABLE}.delivery_tnt ;;
-    hidden:  yes
+    hidden: yes
   }
 
   dimension: fulfillment_center {
@@ -444,8 +444,8 @@ view: customer_issues {
       customer_issues.meal_quantity,
       customer_issues.ingredient_quantity,
       ingredients.ingredient_name,
-      credit_transactions.sum_cx_credits,
-      refunds.sum_cx_refunds
+      customer_issues.ops_sum_credits,
+      customer_issues.ops_sum_refunds
     ]
   }
 
@@ -455,11 +455,9 @@ view: customer_issues {
         orders_data.id,
         customer_issues.category,
         customer_issues.reason,
-        credit_transactions.sum_cx_credits,
-        refunds.sum_cx_refunds
+        customer_issues.ops_sum_credits,
+        customer_issues.ops_sum_refunds
     ]
   }
-
-
 
 }
