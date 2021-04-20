@@ -1,9 +1,6 @@
-view: facebook_ads_ads_insight {
-  derived_table: {
-    sql: select *
-      from facebook_ads.ads_insights
-       ;;
-  }
+view: facebook_ads_insights {
+  sql_table_name: facebook_ads.ads_insights ;;
+
 
   measure: count {
     type: count
