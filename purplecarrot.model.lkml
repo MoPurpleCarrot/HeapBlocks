@@ -1093,3 +1093,8 @@ explore: users_data{
 
 
 }
+
+explore: facebook_ads_insights{
+  label: "Facebook Ads"
+
+  }
