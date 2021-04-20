@@ -1094,7 +1094,29 @@ explore: users_data{
 
 }
 
-explore: facebook_ads_insights{
+explore: facebook_ads{
   label: "Facebook Ads"
+
+  join: facebook_ads_campaigns {
+    relationship: one_to_many
+    sql_on: ${facebook_ads_campaigns.id} = ${facebook_ads.campaign_id};;
+  }
+
+  join: facebook_ads_adsets {
+    relationship: one_to_many
+    sql_on: ${facebook_ads_adsets.id} = ${facebook_ads.adset_id};;
+  }
+
+  join: facebook_ads_adcreative {
+    relationship: one_to_many
+    sql_on: ${facebook_ads_adcreative.id} = ${facebook_ads.creative__id};;
+  }
+
+  join: facebook_ads_insights {
+    relationship: many_to_many
+    sql_on: ${facebook_ads_insights.ad_id} = ${facebook_ads.id}
+    and ${facebook_ads_insights.adset_id} = ${facebook_ads_adsets.id}
+    and ${facebook_ads_insights.campaign_id} = ${facebook_ads_campaigns.id} ;;
+  }
 
   }
