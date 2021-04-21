@@ -1093,3 +1093,57 @@ explore: users_data{
 
 
 }
+
+explore: facebook_ads{
+  label: "Facebook Ads"
+
+  join: facebook_ads_campaigns {
+    relationship: many_to_one
+    sql_on: ${facebook_ads.campaign_id} = ${facebook_ads_campaigns.id} ;;
+  }
+
+  join: facebook_ads_adsets {
+    relationship: many_to_one
+    sql_on: ${facebook_ads.adset_id} = ${facebook_ads_adsets.id} ;;
+  }
+
+  join: facebook_ads_adcreative {
+    relationship: many_to_one
+    sql_on: ${facebook_ads.creative__id} = ${facebook_ads_adcreative.id} ;;
+  }
+
+}
+
+explore: facebook_ads_insights {
+  label: "Facebook Ads Insights"
+
+  join: facebook_ads {
+    relationship: many_to_one
+    sql_on: ${facebook_ads_insights.ad_id} = ${facebook_ads.id} ;;
+  }
+  join: facebook_ads_adsets {
+    relationship: many_to_one
+    sql_on: ${facebook_ads_insights.adset_id} = ${facebook_ads_adsets.id} ;;
+  }
+
+  join: facebook_ads_campaigns {
+    relationship: many_to_one
+    sql_on: ${facebook_ads_insights.ad_id} = ${facebook_ads_campaigns.id} ;;
+    }
+
+
+}
+
+explore: google_ads_campaign_performance {
+  label: "Google Ads Campaign Performance"
+
+  join: google_ads_campaigns {
+    relationship: many_to_one
+    sql_on: ${google_ads_campaign_performance.campaignid}=${google_ads_campaigns.id}  ;;
+  }
+
+  join: google_ads_adgroups {
+    relationship: many_to_one
+    sql_on: ${google_ads_adgroups.id}=${google_ads_campaigns.id}  ;;
+  }
+}
