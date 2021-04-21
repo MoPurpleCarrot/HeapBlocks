@@ -316,6 +316,7 @@ view: customer_issues {
     THEN ${id}
     ELSE NULL
     END;;
+
   }
 
   measure: ing_count_errors {
