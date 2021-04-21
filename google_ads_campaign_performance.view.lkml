@@ -2,10 +2,9 @@ view: google_ads_campaign_performance {
   sql_table_name:google_ads.campaign_performance_report
       ;;
 
-
   measure: count {
     type: count
-    drill_fields: [detail*]
+    drill_fields: [__sdc_primary_key, campaignid, campaign]
   }
 
   dimension: __sdc_primary_key {
@@ -14,40 +13,6 @@ view: google_ads_campaign_performance {
     sql: ${TABLE}.__sdc_primary_key ;;
   }
 
-  dimension_group: _sdc_batched_at {
-    type: time
-    sql: ${TABLE}._sdc_batched_at ;;
-  }
-
-  dimension: _sdc_customer_id {
-    type: string
-    sql: ${TABLE}._sdc_customer_id ;;
-  }
-
-  dimension_group: _sdc_extracted_at {
-    type: time
-    sql: ${TABLE}._sdc_extracted_at ;;
-  }
-
-  dimension_group: _sdc_received_at {
-    type: time
-    sql: ${TABLE}._sdc_received_at ;;
-  }
-
-  dimension_group: _sdc_report_datetime {
-    type: time
-    sql: ${TABLE}._sdc_report_datetime ;;
-  }
-
-  dimension: _sdc_sequence {
-    type: number
-    sql: ${TABLE}._sdc_sequence ;;
-  }
-
-  dimension: _sdc_table_version {
-    type: number
-    sql: ${TABLE}._sdc_table_version ;;
-  }
 
   dimension: advertisingchannel {
     type: string
@@ -56,7 +21,9 @@ view: google_ads_campaign_performance {
 
   dimension: avgcost {
     type: number
-    sql: ${TABLE}.avgcost ;;
+    description: "The average amount you pay per interaction."
+    sql: ${TABLE}.avgcost/1000000 ;;
+    value_format_name: usd
   }
 
   dimension: avgcpc {
@@ -89,9 +56,10 @@ view: google_ads_campaign_performance {
     sql: ${TABLE}.bouncerate ;;
   }
 
-  dimension: budget {
+  dimension: daily_budget {
     type: number
-    sql: ${TABLE}.budget ;;
+    description: "The daily budget."
+    sql: ${TABLE}.budget/1000000 ;;
   }
 
   dimension: campaign {
@@ -126,6 +94,7 @@ view: google_ads_campaign_performance {
 
   dimension: conversions {
     type: number
+    description: "The number of conversions for all conversion actions that you have opted into optimization."
     sql: ${TABLE}.conversions ;;
   }
 
@@ -136,11 +105,13 @@ view: google_ads_campaign_performance {
 
   dimension: cost {
     type: number
-    sql: ${TABLE}.cost ;;
+    sql: ${TABLE}.cost/1000000 ;;
+    value_format_name: usd
   }
 
   dimension: costconv {
     type: number
+    description: "The Cost attributable to conversion-tracked clicks divided by the number of conversions."
     sql: ${TABLE}.costconv ;;
   }
 
@@ -189,68 +160,100 @@ view: google_ads_campaign_performance {
     sql: ${TABLE}.interactiontypes ;;
   }
 
-  dimension: newsessions {
+  dimension: PercentNewVisitors {
     type: number
+    description: "Percentage of first-time sessions (from people who had never visited your site before)."
     sql: ${TABLE}.newsessions ;;
   }
 
-  dimension: pagessession {
+  dimension: AveragePageviews {
     type: number
+    description: "Average number of pages viewed per session."
     sql: ${TABLE}.pagessession ;;
   }
 
-  dimension_group: startdate {
+  dimension_group: start {
     type: time
-    sql: ${TABLE}.startdate ;;
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.startDate ;;
   }
 
   dimension: totalconvvalue {
     type: number
+    description: "The sum of conversion values for all conversions. "
     sql: ${TABLE}.totalconvvalue ;;
   }
 
-  set: detail {
-    fields: [
-      __sdc_primary_key,
-      _sdc_batched_at_time,
-      _sdc_customer_id,
-      _sdc_extracted_at_time,
-      _sdc_received_at_time,
-      _sdc_report_datetime_time,
-      _sdc_sequence,
-      _sdc_table_version,
-      advertisingchannel,
-      avgcost,
-      avgcpc,
-      avgcpe,
-      avgcpm,
-      avgcpv,
-      bidstrategytype,
-      bouncerate,
-      budget,
-      campaign,
-      campaigngroupid,
-      campaignid,
-      campaignservingstatus,
-      campaignstate,
-      clicks,
-      conversions,
-      convrate,
-      cost,
-      costconv,
-      ctr,
-      customerid,
-      day_time,
-      engagementrate,
-      engagements,
-      impressions,
-      interactionrate,
-      interactions,
-      interactiontypes,
-      newsessions,
-      pagessession,
-      startdate_time,
-      totalconvvalue
-    ]
+## Aggregated Measures
+
+
+  measure: average_daily_bounce_rate {
+    type: average
+    value_format_name: percent_2
+    description: "Percentage of clicks where the user only visited a single page on your site."
+    sql: ${bouncerate} ;;
   }
+
+  measure: total_clicks {
+    type: sum
+    sql: ${clicks} ;;
+    description: "The number of clicks."
+    drill_fields: [start_date, total_impressions,total_clicks,total_conversions, total_cost]
+  }
+
+  measure: total_conversions {
+    type: sum
+    description: "The number of conversions for all conversion actions that you have opted into optimization."
+    sql: ${conversions} ;;
+    drill_fields: [start_date, total_conversions, total_cost]
+  }
+
+  measure: total_cost {
+    type: sum
+    description: "The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period."
+    sql: ${cost} ;;
+    value_format_name: usd
+    drill_fields: [start_date, campaigns.name, total_cost]
+  }
+
+  measure: total_engagements {
+    type: sum
+    description: "The number of engagements."
+    sql: ${engagements} ;;
+  }
+
+  measure: total_interactions {
+    type: sum
+    sql: ${interactions} ;;
+    description: "The number of interactions. An interaction is the main user action associated with an ad format—clicks for text and shopping ads, views for video ads, and so on."
+  }
+
+  measure: total_impressions {
+    type: sum
+    description: "Count of how often your ad has appeared on a search results page or website on the Google Network."
+    sql: ${impressions} ;;
+    drill_fields: [start_date, total_impressions, total_clicks,total_conversions, total_cost]
+  }
+
+  measure: avg_interaction_rate {
+    type: average
+    sql: ${interactionrate} ;;
+
+  }
+
+  measure: average_daily_cost {
+    description: "The average amount you pay per interaction. This amount is the total cost of your ads divided by the total number of interactions."
+    type: average
+    value_format_name: usd
+    sql: ${avgcost} ;;
+  }
+
 }
