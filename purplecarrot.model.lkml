@@ -1147,3 +1147,20 @@ explore: google_ads_campaign_performance {
     sql_on: ${google_ads_adgroups.id}=${google_ads_campaigns.id}  ;;
   }
 }
+
+explore: google_ads_ad_performance {
+  label: "Google Ads Ad Performance"
+
+  join: google_ads_adgroups {
+    relationship: many_to_one
+    sql_on: ${google_ads_ad_performance.adgroupid} = ${google_ads_adgroups.id} ;;
+  }
+  join: google_ads {
+    relationship: one_to_many
+    sql_on: ${google_ads_adgroups.id} = ${google_ads.adgroupid} ;;
+  }
+  join: google_ads_campaigns {
+    relationship: many_to_one
+    sql_on: ${google_ads_adgroups.campaignid} = ${google_ads_campaigns.id} ;;
+  }
+}
