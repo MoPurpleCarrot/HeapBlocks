@@ -280,6 +280,12 @@ view: skus {
     sql: ${TABLE}.title ;;
   }
 
+  dimension: ingredient_id {
+    type: string
+    sql: ${TABLE}.ingredient_id ;;
+    hidden: yes
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [

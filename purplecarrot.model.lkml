@@ -1079,6 +1079,35 @@ explore: users_data{
     sql_where: ${order_totals.fulfillment_status}= 'Confirmed' ;;
   }
 
+
+  join: order_items_total{
+    from: order_items_data
+    relationship: many_to_one
+    sql_on: ${order_items_total.order_id}=${order_totals.id}  ;;
+    fields: []
+  }
+
+  join: skus_total {
+    from: skus
+    relationship: many_to_one
+    sql_on:  ${order_items_total.sku_id}=${skus_total.id}  ;;
+    fields: []
+  }
+
+  join: ingredients_total {
+    from: ingredients
+    relationship: many_to_one
+    sql_on: ${skus_total.ingredient_id}=${ingredients_total.id}  ;;
+    fields: []
+  }
+
+  join: products_total {
+    from: products
+    relationship: many_to_one
+    sql_on: ${skus_total.product_id}=${products_total.id}  ;;
+    fields: [id]
+  }
+
   join: shipping_addresses {
     relationship: many_to_one
     sql_on: ${shipping_addresses.subscription_id}=${subscriptions.id} ;;
