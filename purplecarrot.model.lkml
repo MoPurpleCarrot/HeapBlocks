@@ -1131,6 +1131,11 @@ explore: facebook_ads_insights {
     sql_on: ${facebook_ads_insights.ad_id} = ${facebook_ads_campaigns.id} ;;
     }
 
+  join: facebook_ads_adcreative{
+    relationship: many_to_one
+    sql_on: ${facebook_ads.creative__id} = ${facebook_ads_adcreative.id} ;;
+  }
+
 
 }
 
