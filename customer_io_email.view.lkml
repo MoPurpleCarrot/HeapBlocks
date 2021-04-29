@@ -13,7 +13,9 @@ view: customer_io_email {
       year
     ]
     sql: ${TABLE}._sdc_batched_at ;;
+    hidden: yes
   }
+
 
   dimension_group: _sdc_received {
     type: time
@@ -27,16 +29,19 @@ view: customer_io_email {
       year
     ]
     sql: ${TABLE}._sdc_received_at ;;
+    hidden: yes
   }
 
   dimension: _sdc_sequence {
     type: number
     sql: ${TABLE}._sdc_sequence ;;
+    hidden: yes
   }
 
   dimension: _sdc_table_version {
     type: number
     sql: ${TABLE}._sdc_table_version ;;
+    hidden: yes
   }
 
   dimension: message_id {
@@ -55,12 +60,14 @@ view: customer_io_email {
   dimension: user_id {
     type: string
     sql: ${TABLE}.data__customer_id ;;
+    hidden: yes
   }
 
 
   dimension: user_email {
     type: string
     sql: ${TABLE}.data__recipient ;;
+    hidden: yes
   }
 
   dimension: subject {
@@ -113,11 +120,33 @@ view: customer_io_email {
           ELSE NULL
           END
           ;;
+    hidden: yes
+  }
+
+  dimension: loyalty_test {
+    type: string
+    sql:  CASE WHEN ${campaign_id} = 1000397 or ${campaign_id} = 1000399 or ${campaign_id} = 1000398 THEN 'Receiving Loyalty Emails'
+          ELSE 'Not Receiving Loyalty Emails'
+          END
+          ;;
   }
 
   measure: count {
     type: count
     drill_fields: []
+  }
+
+  measure: count_users_loyalty {
+    type: count_distinct
+    sql: CASE WHEN (${campaign_id} = 1000397 or ${campaign_id} = 1000399 or ${campaign_id} = 1000398) AND ${action} = 'sent' THEN ${user_id}
+    ELSE NULL
+    END;;
+    hidden: yes
+  }
+
+  measure: count_per_user{
+    type: number
+    sql: ${count}/${count_users_loyalty} ;;
   }
 
 }
