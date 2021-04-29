@@ -279,16 +279,6 @@ explore: users {
     sql_on: ${nps_surveys.user_id} = ${users.id} ;;
   }
 
-  join: recipe_feedback_surveys {
-    relationship: many_to_one
-    sql_on: ${recipe_feedback_surveys.user_id} = ${users.id} ;;
-  }
-
-  join: recipe_feedbacks {
-    relationship: many_to_one
-    sql_on: ${recipe_feedbacks.recipe_feedback_survey_id} = ${recipe_feedback_surveys.id} ;;
-  }
-
   join: shipping_addresses {
     relationship: one_to_many
     sql_on: ${users.id} = ${shipping_addresses.user_id} ;;
