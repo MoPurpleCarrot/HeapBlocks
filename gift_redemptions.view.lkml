@@ -21,6 +21,7 @@ view: gift_redemptions {
     sql: ${TABLE}.created_at ;;
   }
 
+
   dimension: gift_purchase_id {
     type: number
     # hidden: yes

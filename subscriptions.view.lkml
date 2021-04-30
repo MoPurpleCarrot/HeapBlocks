@@ -367,5 +367,10 @@ view: subscriptions {
     hidden:  yes
   }
 
+  dimension: giveaway_id{
+    type: number
+    sql: ${TABLE}.giveaway_id ;;
+  }
+
 
 }

@@ -1188,3 +1188,7 @@ explore: google_ads_ad_performance {
     sql_on: ${google_ads_adgroups.campaignid} = ${google_ads_campaigns.id} ;;
   }
 }
+
+explore: SAB {
+  from: giveaways
+}
