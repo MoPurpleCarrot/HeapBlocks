@@ -1095,7 +1095,7 @@ explore: users_data{
     from: products
     relationship: many_to_one
     sql_on: ${skus_total.product_id}=${products_total.id}  ;;
-    fields: [id]
+    fields: [id, meal_type]
   }
 
   join: shipping_addresses {
