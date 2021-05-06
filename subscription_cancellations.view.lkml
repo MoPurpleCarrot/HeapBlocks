@@ -51,6 +51,7 @@ view: subscription_cancellations {
       raw,
       time,
       date,
+      day_of_week,
       week,
       month,
       quarter,
