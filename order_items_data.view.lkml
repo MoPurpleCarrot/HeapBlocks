@@ -313,7 +313,7 @@ view: order_items_data {
 
     dimension: extension_revenue {
       type: number
-      sql: case when ${extension_binary} > 0 Then ${price_cents}*${quantity}
+      sql: case when ${extension_binary} > 0 Then ${price_cents}
           Else 0
           END
           ;;
