@@ -645,6 +645,11 @@ explore: gift_purchases {
     sql_on: ${welcome_surveys.user_id} = ${users.id} ;;
   }
 
+  join: subscription_cancellations {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
+  }
+
 }
 
 explore: ingredients {
