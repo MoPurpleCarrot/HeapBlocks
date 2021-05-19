@@ -529,7 +529,8 @@ view: users {
   dimension: admin_email{
     type: string
     sql: case
-    when ${is_purple_carrot_employee} = 'yes' then SPLIT_PART(${email}, '@', 1)
+    when (${is_purple_carrot_employee} = 'yes') then SPLIT_PART(${email}, '@', 1)
+    when (${email} like '%listentrust%') then CONCAT ( 'LT-',SPLIT_PART(${email}, '@', 1))
     else null
     end
     ;;

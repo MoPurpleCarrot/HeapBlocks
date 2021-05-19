@@ -279,16 +279,6 @@ explore: users {
     sql_on: ${nps_surveys.user_id} = ${users.id} ;;
   }
 
-  join: recipe_feedback_surveys {
-    relationship: many_to_one
-    sql_on: ${recipe_feedback_surveys.user_id} = ${users.id} ;;
-  }
-
-  join: recipe_feedbacks {
-    relationship: many_to_one
-    sql_on: ${recipe_feedbacks.recipe_feedback_survey_id} = ${recipe_feedback_surveys.id} ;;
-  }
-
   join: shipping_addresses {
     relationship: one_to_many
     sql_on: ${users.id} = ${shipping_addresses.user_id} ;;
@@ -653,6 +643,11 @@ explore: gift_purchases {
   join: welcome_surveys {
     relationship: one_to_one
     sql_on: ${welcome_surveys.user_id} = ${users.id} ;;
+  }
+
+  join: subscription_cancellations {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
   }
 
 }
@@ -1079,6 +1074,35 @@ explore: users_data{
     sql_where: ${order_totals.fulfillment_status}= 'Confirmed' ;;
   }
 
+
+  join: order_items_total{
+    from: order_items_data
+    relationship: many_to_one
+    sql_on: ${order_items_total.order_id}=${order_totals.id}  ;;
+    fields: []
+  }
+
+  join: skus_total {
+    from: skus
+    relationship: many_to_one
+    sql_on:  ${order_items_total.sku_id}=${skus_total.id}  ;;
+    fields: []
+  }
+
+  join: ingredients_total {
+    from: ingredients
+    relationship: many_to_one
+    sql_on: ${skus_total.ingredient_id}=${ingredients_total.id}  ;;
+    fields: []
+  }
+
+  join: products_total {
+    from: products
+    relationship: many_to_one
+    sql_on: ${skus_total.product_id}=${products_total.id}  ;;
+    fields: [id, meal_type]
+  }
+
   join: shipping_addresses {
     relationship: many_to_one
     sql_on: ${shipping_addresses.subscription_id}=${subscriptions.id} ;;
@@ -1168,4 +1192,8 @@ explore: google_ads_ad_performance {
     relationship: many_to_one
     sql_on: ${google_ads_adgroups.campaignid} = ${google_ads_campaigns.id} ;;
   }
+}
+
+explore: SAB {
+  from: giveaways
 }

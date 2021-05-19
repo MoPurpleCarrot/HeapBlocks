@@ -6,7 +6,6 @@ view: products {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-    hidden: yes
   }
 
   dimension_group: _sdc_batched {

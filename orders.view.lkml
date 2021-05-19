@@ -724,5 +724,9 @@ view: orders {
     sql: ${count_total_billed_post_winback}/NULLIF(${user_with_winback},0) ;;
   }
 
+  dimension: giveaway_id{
+    type: number
+    sql: ${TABLE}.giveaway_id ;;
+  }
 
 }
