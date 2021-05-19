@@ -20,6 +20,11 @@ view: facebook_ads_insights {
     sql: ${TABLE}.campaign_id ;;
   }
 
+  dimension: campaign_name {
+    type: string
+    sql: ${TABLE}.campaign_name ;;
+  }
+
   dimension: actions {
     type: number
     sql: ${TABLE}.actions ;;
@@ -197,6 +202,7 @@ view: facebook_ads_insights {
   measure: avg_CPC {
     type: average
     sql: ${CPC} ;;
+    value_format_name: usd
     drill_fields: [detail*]
   }
 
