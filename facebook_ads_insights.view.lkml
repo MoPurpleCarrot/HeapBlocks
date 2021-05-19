@@ -196,7 +196,7 @@ view: facebook_ads_insights {
   measure: avg_CTR {
     type: average
     sql: ${CTR} ;;
-    value_format: "#.00%"
+    value_format: "0.00"
     drill_fields: [detail*]
   }
 
