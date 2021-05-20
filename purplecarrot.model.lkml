@@ -550,6 +550,11 @@ explore: customer_io_email{
 
   }
 
+  join: subscription_cancellations {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
+  }
+
   }
 
 
