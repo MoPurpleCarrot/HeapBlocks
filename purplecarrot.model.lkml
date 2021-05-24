@@ -452,11 +452,6 @@ explore: users {
 
   }
 
-  join: current_date {
-    relationship: one_to_one
-    sql_on: 1=1 ;;
-    type: cross
-  }
 
 }
 
