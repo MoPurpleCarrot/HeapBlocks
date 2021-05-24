@@ -550,6 +550,11 @@ explore: customer_io_email{
 
   }
 
+  join: subscription_cancellations {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
+  }
+
   }
 
 
@@ -648,6 +653,23 @@ explore: gift_purchases {
   join: subscription_cancellations {
     relationship: one_to_many
     sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
+  }
+
+
+  join: first_order {
+    from: orders
+    relationship: many_to_one
+    sql_on: ${first_order.id} = ${user_facts.first_order_id} ;;
+  }
+
+  join: menus {
+    relationship: many_to_one
+    sql_on: ${orders.menu_id} = ${menus.id} ;;
+  }
+
+  join: subscription_order_num_derrived {
+    relationship: one_to_one
+    sql_on: ${subscription_order_num_derrived.subscriptions_id} = ${subscriptions.id} ;;
   }
 
 }
