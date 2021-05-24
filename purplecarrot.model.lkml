@@ -453,8 +453,6 @@ explore: users {
   }
 
   join: current_date {
-    relationship: one_to_one
-    sql: ;;
 
   }
 
