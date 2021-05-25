@@ -101,6 +101,11 @@ view: facebook_ads_insights {
     sql: ${TABLE}.impressions ;;
   }
 
+  dimension: inline_link_clicks {
+    type: number
+    sql: ${TABLE}.inline_link_clicks ;;
+  }
+
   dimension: reach {
     type: number
     sql: ${TABLE}.reach ;;
@@ -155,6 +160,7 @@ view: facebook_ads_insights {
     sql: ${clicks} ;;
     drill_fields: [detail*]
   }
+
 
   measure: total_unique_clicks {
     type: sum
@@ -217,6 +223,11 @@ view: facebook_ads_insights {
   measure: avg_unique_clicks {
     type: number
     sql: ${TABLE}.unique_clicks ;;
+  }
+
+  measure: total_inline_link_clicks {
+    type: sum
+    sql: ${TABLE}.inline_link_clicks ;;
   }
 
   measure: total_unique_inline_link_clicks {
