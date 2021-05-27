@@ -67,6 +67,14 @@ view: google_ads_campaign_performance {
     sql: ${TABLE}.campaign ;;
   }
 
+  dimension: campaigntype {
+    type: string
+    sql: case when ${TABLE}.campaign like '%Discovery%' then 'Discovery'
+              when ${TABLE}.campaign like '%Branded%' then 'Branded'
+              else 'Non-Branded'
+              end ;;
+  }
+
   dimension: campaigngroupid {
     type: number
     sql: ${TABLE}.campaigngroupid ;;
