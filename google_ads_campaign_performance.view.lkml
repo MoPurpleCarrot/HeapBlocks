@@ -229,7 +229,6 @@ view: google_ads_campaign_performance {
     description: "The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period."
     sql: ${cost} ;;
     value_format_name: usd
-    drill_fields: [start_date, campaigns.name, total_cost]
   }
 
   measure: total_engagements {
