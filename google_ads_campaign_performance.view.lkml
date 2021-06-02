@@ -214,14 +214,12 @@ view: google_ads_campaign_performance {
     type: sum
     sql: ${clicks} ;;
     description: "The number of clicks."
-    drill_fields: [start_date, total_impressions,total_clicks,total_conversions, total_cost]
   }
 
   measure: total_conversions {
     type: sum
     description: "The number of conversions for all conversion actions that you have opted into optimization."
     sql: ${conversions} ;;
-    drill_fields: [start_date, total_conversions, total_cost]
   }
 
   measure: total_cost {
@@ -247,7 +245,6 @@ view: google_ads_campaign_performance {
     type: sum
     description: "Count of how often your ad has appeared on a search results page or website on the Google Network."
     sql: ${impressions} ;;
-    drill_fields: [start_date, total_impressions, total_clicks,total_conversions, total_cost]
   }
 
   measure: avg_interaction_rate {
