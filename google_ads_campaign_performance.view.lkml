@@ -78,9 +78,9 @@ view: google_ads_campaign_performance {
 
   dimension: campaigntype {
     type: string
-    sql: case when ${TABLE}.campaign like '%Discovery%' then 'Discovery'
-              when ${TABLE}.campaign like '%Branded%' then 'Branded'
-              else 'Non-Branded'
+    sql: case when ${TABLE}.campaign like '%Discovery%' then 'Google Discovery'
+              when ${TABLE}.campaign like '%Branded%' then 'Adwords B'
+              else 'Adwords NB'
               end ;;
   }
 
