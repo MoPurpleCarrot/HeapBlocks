@@ -35,7 +35,7 @@ view: subscriptions {
 
   dimension_group: registered_at {
     type: time
-    timeframes: [raw, time, date, day_of_week, week, month, quarter, year]
+    timeframes: [raw, time, date, day_of_week, week, month, quarter, year, month_num]
     sql: ${TABLE}.registered_at ;;
   }
 
