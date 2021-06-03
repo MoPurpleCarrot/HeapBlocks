@@ -1,7 +1,16 @@
 view: google_ads_campaign_performance {
-  sql_table_name:google_ads.campaign_performance_report
+  derived_table: {
+    sql:          SELECT *
+                  FROM (
+                            SELECT *,
+                            RANK() OVER (PARTITION BY day, _sdc_customer_id
+                                         ORDER BY _sdc_report_datetime DESC)
+                            FROM google_ads.campaign_performance_report
+                            ORDER BY day ASC
+                           ) AS latest
+                     WHERE latest.rank = 1
       ;;
-
+  }
   measure: count {
     type: count
     drill_fields: [__sdc_primary_key, campaignid, campaign]
