@@ -3,7 +3,7 @@ view: bing_ads_ad_performance_report {
     sql: SELECT *
   FROM (
         SELECT *,
-        RANK() OVER (PARTITION BY TimePeriod,
+        RANK() OVER (PARTITION BY TimePeriod
                      ORDER BY _sdc_report_datetime DESC)
         FROM bing_ads.ad_performance_report
         ORDER BY TimePeriod ASC
