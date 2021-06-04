@@ -1217,6 +1217,12 @@ explore: google_ads_ad_performance {
   }
 }
 
+explore: bing_ads_ad_performance_report {
+  label: "Bing Ads Ad Performance Report"
+
+
+}
+
 explore: SAB {
   from: giveaways
 }
