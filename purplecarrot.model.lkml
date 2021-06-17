@@ -450,8 +450,47 @@ explore: users {
     relationship: one_to_one
     sql_on: ${meal_combo_derived.order_id}=${orders.id} ;;
 
+### add carts data
+  }
+  join: post_cart_carts {
+    from: carts
+    relationship: one_to_many
+    sql_on: ${users.id} = ${post_cart_carts.user_id} ;;
   }
 
+  join: post_cart_menus {
+    from: menus
+    relationship: one_to_many
+    sql_on: ${post_cart_menus.id}=${post_cart_carts.menu_id} ;;
+  }
+
+  join: post_cart_cart_items {
+    from: cart_items
+    relationship: one_to_many
+    sql_on: ${post_cart_carts.id} = ${post_cart_cart_items.cart_id} ;;
+  }
+  join: post_cart_orders {
+    from: orders
+    relationship: one_to_one
+    sql_on: ${post_cart_carts.order_id} = ${post_cart_orders.id} ;;
+  }
+  join: post_cart_order_items {
+    from: order_items
+    relationship: one_to_many
+    sql_on: ${post_cart_orders.id} = ${post_cart_order_items.order_id} ;;
+  }
+
+  join: post_cart_skus {
+    from: skus
+    relationship: one_to_many
+    sql_on: ${post_cart_skus.id} = ${post_cart_order_items.sku_id};;
+  }
+
+  join: post_cart_products {
+    from: products
+    relationship: one_to_many
+    sql_on: ${post_cart_products.id}=${post_cart_skus.product_id};;
+  }
 
 }
 

@@ -75,6 +75,7 @@ view: users {
 
           ELSE NULL
           END;;
+    hidden: yes
   }
 
   dimension:prepared_new_customers_menu_test_breakout{
@@ -86,6 +87,7 @@ view: users {
 
           ELSE NULL
           END;;
+    hidden: yes
   }
 
 
