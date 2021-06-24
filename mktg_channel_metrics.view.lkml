@@ -26,10 +26,6 @@ select distinct (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shi
 from "heroku_postgres"."menus" menus
 join google_ads_campaign_performance google on (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM google.day )::integer - 3 + 7, 7)), google.day  )), 'YYYY-MM-DD')) = (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD'))
 group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD'))
-,case when google.campaign like '%Discovery%' then 'Google Discovery'
-              when google.campaign like '%Branded%' then 'Adwords B'
-              else 'Adwords NB'
-              end
 union all
 select distinct (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD')) ship_week
 ,COALESCE(SUM(bing.clicks ), 0)  clicks
