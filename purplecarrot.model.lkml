@@ -354,6 +354,10 @@ explore: users {
     sql_on: ${menu_items_new.sku_id}= ${skus.id} and ${menu_items_new.menu_id}=${menus.id} ;;
   }
 
+  join: mktg_channel_metrics {
+    relationship: many_to_one
+    sql_on: ${menus.shipping_week} = ${mktg_channel_metrics.ship_week} ;;
+  }
   join: user_facts {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts.id} ;;
