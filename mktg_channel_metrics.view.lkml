@@ -20,6 +20,7 @@ bing_ads_ad_performance_report AS (SELECT *
        ) AS latest
  WHERE latest.rank = 1
       )
+,total as (
 select distinct (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD')) ship_week
 ,COALESCE(SUM(google.clicks ), 0) clicks
 ,COALESCE(SUM(( google.cost/1000000  ) ), 0) spend
@@ -39,7 +40,10 @@ select distinct (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shi
 ,COALESCE(SUM("spend"), 0) spend
 from "heroku_postgres"."menus" menus
 join "facebook_ads"."ads_insights" facebook on (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "facebook"."date_start")::integer - 3 + 7, 7)), "facebook"."date_start" )), 'YYYY-MM-DD')) = (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD'))
-group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD'))
+group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD')))
+select ship_week, sum(clicks) clicks, sum(spend) spend
+from total
+group by ship_week
  ;;
   }
 
@@ -51,25 +55,15 @@ group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_o
   }
 
 
-  dimension: clicks {
+  measure: clicks {
     type: number
     sql: ${TABLE}.clicks ;;
   }
 
-  dimension: spend {
+  measure: spend {
     type: number
     sql: ${TABLE}.spend ;;
   }
 
-  measure: total_clicks {
-    type: sum
-    sql: ${clicks} ;;
-    }
-
-  measure: total_spend {
-    type: sum
-    value_format_name: usd
-    sql: ${spend} ;;
-  }
 
 }
