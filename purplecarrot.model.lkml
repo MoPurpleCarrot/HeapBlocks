@@ -355,7 +355,7 @@ explore: users {
   }
 
   join: mktg_channel_metrics {
-    relationship: many_to_one
+    relationship: one_to_many
     sql_on: ${menus.shipping_week} = ${mktg_channel_metrics.ship_week} ;;
   }
   join: user_facts {
