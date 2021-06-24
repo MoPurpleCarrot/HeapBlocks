@@ -21,10 +21,6 @@ bing_ads_ad_performance_report AS (SELECT *
  WHERE latest.rank = 1
       )
 select distinct (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD')) ship_week
-,case when google.campaign like '%Discovery%' then 'Google Discovery'
-              when google.campaign like '%Branded%' then 'Adwords B'
-              else 'Adwords NB'
-              end  channel
 ,COALESCE(SUM(google.clicks ), 0) clicks
 ,COALESCE(SUM(( google.cost/1000000  ) ), 0) spend
 from "heroku_postgres"."menus" menus
@@ -36,7 +32,6 @@ group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_o
               end
 union all
 select distinct (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD')) ship_week
-,'Bing' channel
 ,COALESCE(SUM(bing.clicks ), 0)  clicks
 ,COALESCE(SUM(bing.spend ), 0) spend
 from "heroku_postgres"."menus" menus
@@ -44,7 +39,6 @@ join bing_ads_ad_performance_report bing on  (TO_CHAR(DATE(DATEADD(day,(0 - MOD(
 group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD'))
 union all
 select distinct (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_on")::integer - 3 + 7, 7)), "menus"."shipping_on" )), 'YYYY-MM-DD')) ship_week
-,'Facebook' channel
 ,COALESCE(SUM(facebook.inline_link_clicks ), 0) clicks
 ,COALESCE(SUM("spend"), 0) spend
 from "heroku_postgres"."menus" menus
