@@ -50,10 +50,6 @@ group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_o
     primary_key: yes
   }
 
-  dimension: channel {
-    type: string
-    sql: ${TABLE}.channel ;;
-  }
 
   dimension: clicks {
     type: number
@@ -76,7 +72,4 @@ group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_o
     sql: ${spend} ;;
   }
 
-  set: detail {
-    fields: [ship_week, channel, clicks, spend]
-  }
 }
