@@ -55,14 +55,15 @@ group by ship_week
   }
 
 
-  measure: clicks {
+  dimension: clicks {
     type: number
     sql: ${TABLE}.clicks ;;
   }
 
-  measure: spend {
+  dimension: spend {
     type: number
     sql: ${TABLE}.spend ;;
+    value_format_name: usd
   }
 
 
