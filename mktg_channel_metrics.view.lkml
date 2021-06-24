@@ -49,7 +49,7 @@ group by (TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM "menus"."shipping_o
 
 
   dimension: ship_week {
-    type: string
+    type: date
     sql: ${TABLE}.ship_week ;;
     primary_key: yes
   }
