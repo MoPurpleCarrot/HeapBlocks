@@ -13,6 +13,7 @@ view: customer_io_opens_derived {
   dimension: campaign_id {
     type: number
     sql: ${TABLE}.data__campaign_id ;;
+    primary_key: yes
   }
 
   measure: total_opens {
