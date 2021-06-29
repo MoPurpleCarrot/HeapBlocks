@@ -126,7 +126,7 @@ view: customer_io_opens_derived {
   }
 
   measure: total_opens {
-    type: sum
+    type: count_distinct
     sql: ${event_id} ;;
 
   }
