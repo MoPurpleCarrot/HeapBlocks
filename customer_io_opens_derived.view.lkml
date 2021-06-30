@@ -1,13 +1,10 @@
 view: customer_io_opens_derived {
   derived_table: {
-    sql: select timestamp, data__campaign_id, count(distinct event_id) total_opens
+    sql: select "timestamp", data__campaign_id, count(distinct event_id) total_opens
            from customerio_email.data
            where metric = 'opened'
-           group by timestamp, data__campaign_id
+           group by "timestamp", data__campaign_id
                ;;
-    persist_for: "24 hours"
-    indexes: ["data__campaign_id"]
-    distribution_style:  all
   }
 
   dimension_group: timestamp {
