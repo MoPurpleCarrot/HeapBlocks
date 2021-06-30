@@ -38,6 +38,7 @@ view: customer_io_opens_derived {
   dimension: campaign_id {
     type: number
     sql: ${TABLE}.data__campaign_id ;;
+    primary_key: yes
   }
 
   dimension: user_id {
@@ -127,6 +128,11 @@ view: customer_io_opens_derived {
     type: string
     sql: ${TABLE}.data__identifiers__id ;;
     hidden: yes
+  }
+
+  measure: total_opens {
+    type: count_distinct
+    sql: ${event_id} ;;
   }
 
 }
