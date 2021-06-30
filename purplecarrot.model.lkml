@@ -590,19 +590,19 @@ explore: customer_io_email{
 
   join: customer_io_opens_derived {
     relationship: one_to_many
-    sql_on: ${customer_io_opens_derived.campaign_id} = ${customer_io_email.campaign_id} ;;
+    sql_on: ${customer_io_opens_derived.message_id} = ${customer_io_email.message_id} ;;
 
   }
 
   join: customer_io_clicks_derived {
     relationship: one_to_many
-    sql_on: ${customer_io_clicks_derived.campaign_id} = ${customer_io_email.campaign_id} ;;
+    sql_on: ${customer_io_clicks_derived.message_id} = ${customer_io_email.message_id} ;;
 
   }
 
   join: customer_io_conversions_derived {
     relationship: one_to_many
-    sql_on: ${customer_io_conversions_derived.campaign_id} = ${customer_io_email.campaign_id} ;;
+    sql_on: ${customer_io_conversions_derived.message_id} = ${customer_io_email.message_id} ;;
 
   }
 

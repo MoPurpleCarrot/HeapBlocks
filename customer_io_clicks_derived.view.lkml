@@ -33,12 +33,12 @@ view: customer_io_clicks_derived {
     dimension: message_id {
       type: number
       sql: ${TABLE}.data__action_id ;;
+      primary_key: yes
     }
 
     dimension: campaign_id {
       type: number
       sql: ${TABLE}.data__campaign_id ;;
-      primary_key: yes
     }
 
     dimension: user_id {
