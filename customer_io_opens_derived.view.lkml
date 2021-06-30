@@ -49,11 +49,13 @@ view: customer_io_opens_derived {
   dimension: data__delivery_id {
     type: string
     sql: ${TABLE}.data__delivery_id ;;
+    hidden:  yes
   }
 
   dimension: data__journey_id {
     type: string
     sql: ${TABLE}.data__journey_id ;;
+    hidden:  yes
   }
 
   dimension: user_email {
@@ -86,6 +88,7 @@ view: customer_io_opens_derived {
   dimension: data__content_id {
     type: number
     sql: ${TABLE}.data__content_id ;;
+    hidden:  yes
   }
 
   dimension: broadcast_api_id {
@@ -123,6 +126,7 @@ view: customer_io_opens_derived {
   dimension: data__identifiers__id {
     type: string
     sql: ${TABLE}.data__identifiers__id ;;
+    hidden:  yes
   }
 
   measure: total_opens {
