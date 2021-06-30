@@ -1,8 +1,13 @@
 view: customer_io_conversions_derived {
     derived_table: {
-      sql: select * from customerio_email.data
-              where metric = 'converted'
+      sql: select timestamp, data__campaign_id, count(distinct event_id) total_conversions
+           from customerio_email.data
+           where metric = 'converted'
+           group by timestamp, data__campaign_id
                ;;
+      persist_for: "24 hours"
+      indexes: ["data__campaign_id"]
+      distribution_style:  all
     }
 
 
