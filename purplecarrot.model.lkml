@@ -588,23 +588,6 @@ explore: customer_io_email{
 
   }
 
-  join: customer_io_opens_derived {
-    relationship: many_to_many
-    sql_on: ${customer_io_opens_derived.campaign_id} = ${customer_io_email.campaign_id} ;;
-
-  }
-
-  join: customer_io_clicks_derived {
-    relationship: many_to_many
-    sql_on: ${customer_io_clicks_derived.campaign_id} = ${customer_io_email.campaign_id} ;;
-
-  }
-
-  join: customer_io_conversions_derived {
-    relationship: many_to_many
-    sql_on: ${customer_io_conversions_derived.campaign_id} = ${customer_io_email.campaign_id} ;;
-
-  }
 
   join: subscription_cancellations {
     relationship: one_to_many
