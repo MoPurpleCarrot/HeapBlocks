@@ -91,6 +91,12 @@ view: customer_io_email {
     sql: ${TABLE}.metric ;;
   }
 
+  dimension: data__delivery_id {
+    type: number
+    sql: ${TABLE}.data__delivery_id ;;
+  }
+
+
   dimension: message_type {
     type: string
     sql: ${TABLE}.object_type ;;
