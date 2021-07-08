@@ -553,30 +553,30 @@ explore: zd_tickets{
 
 explore: customer_io_email{
   label: "Customer.io Email"
-  join: users {
-    relationship: one_to_many
-    sql_on: ${users.id} = ${customer_io_email.user_id};;
   }
 
+explore: users_for_email{
+  from:  users
+  label: "Customer.io Email With User Data"
+  join: customer_io_email {
+    relationship: one_to_many
+    sql_on: ${users_for_email.id} = ${customer_io_email.user_id};;
+  }
   join: subscriptions {
     relationship: one_to_one
-    type: left_outer
-    sql_on: ${users.id}=${subscriptions.user_id};;
+    sql_on: ${users_for_email.id}=${subscriptions.user_id};;
   }
-
-  join: orders {
+  join: orders_data {
     relationship: one_to_many
-    sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
+    sql_on: ${subscriptions.id} = ${orders_data.subscription_id} ;;
   }
-
   join: user_facts {
     relationship: one_to_one
-    sql_on: ${users.id} = ${user_facts.id} ;;
+    sql_on: ${users_for_email.id} = ${user_facts.id} ;;
   }
-
   join: menus {
     relationship: many_to_one
-    sql_on: ${orders.menu_id} = ${menus.id} ;;
+    sql_on: ${orders_data.menu_id} = ${menus.id} ;;
   }
   join: subscription_order_num_derrived {
     relationship: one_to_one
@@ -584,17 +584,17 @@ explore: customer_io_email{
   }
   join: coupons {
     relationship: many_to_one
-    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
-
+    sql_on: ${orders_data.coupon_id} = ${coupons.id} ;;
   }
-
-
   join: subscription_cancellations {
     relationship: one_to_many
-    sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
+    sql_on: ${users_for_email.id} = ${subscription_cancellations.user_id} ;;
   }
-
+  join: loyalty_email_test_derived {
+    relationship: one_to_one
+    sql_on: ${users_for_email.id} = ${loyalty_email_test_derived.users_id} ;;
   }
+}
 
 
 explore: gift_purchases {

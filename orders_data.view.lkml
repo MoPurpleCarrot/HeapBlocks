@@ -1,5 +1,5 @@
 view: orders_data {
-  # this is specifically for the ops report explore - it's a duplicate of the orders table wihtout some specific fields
+  # this is specifically for the ops report explore - it's a duplicate of the orders table wihtout some specific fields (primarily ones that reference the users table)
     sql_table_name: heroku_postgres.orders ;;
 
     dimension: id {
