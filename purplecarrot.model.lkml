@@ -1184,6 +1184,11 @@ explore: users_data{
     sql_on: ${customer_issues.admin_id}=${cx_rep_user.id};;
 
   }
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users_data.id} = ${user_facts.id}    ;;
+    fields: []
+  }
 
 
 }

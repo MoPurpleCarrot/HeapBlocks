@@ -657,5 +657,9 @@ view: orders_data {
     sql: ${TABLE}.box_size ;;
   }
 
+  dimension: week_num {
+    type: number
+    sql: DATEDIFF('week', ${user_facts.first_order_date}, ${delivery_date}) ;;
+  }
 
   }
