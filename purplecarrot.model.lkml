@@ -815,6 +815,11 @@ explore: recipe_feedback_surveys {
     sql_on: ${users.id}=${segment_recipe_derived.user_id};;
   }
 
+  join: customer_issues {
+    relationship: many_to_one
+    sql_on: ${customer_issues.order_id}=${orders.id} and ${customer_issues.sku_id}=${skus.id};;
+  }
+
 }
 
 
