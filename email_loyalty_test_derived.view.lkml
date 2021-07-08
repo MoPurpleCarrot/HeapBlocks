@@ -20,6 +20,7 @@ view: email_loyalty_test_derived {
       primary_key: yes
       type: number
       sql: ${TABLE}."users.id" ;;
+      hidden: yes
     }
 
     dimension: count_loyalty_emails{
