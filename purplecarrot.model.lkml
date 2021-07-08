@@ -590,9 +590,13 @@ explore: users_for_email{
     relationship: one_to_many
     sql_on: ${users_for_email.id} = ${subscription_cancellations.user_id} ;;
   }
-  join: loyalty_email_test_derived {
+  join: email_loyalty_test_derived {
     relationship: one_to_one
-    sql_on: ${users_for_email.id} = ${loyalty_email_test_derived.users_id} ;;
+    sql_on: ${users_for_email.id} = ${email_loyalty_test_derived.users_id} ;;
+  }
+  join: email_failed_derived {
+    relationship: one_to_one
+    sql_on: ${users_for_email.id} = ${email_failed_derived.users_id} ;;
   }
 }
 

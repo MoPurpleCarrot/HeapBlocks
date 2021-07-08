@@ -129,12 +129,10 @@ view: customer_io_email {
     hidden: yes
   }
 
-  dimension: loyalty_test {
+  dimension: message_failed {
     type: string
-    sql:  CASE WHEN ${campaign_id} = 1000397 or ${campaign_id} = 1000399 or ${campaign_id} = 1000398 THEN 'Receiving Loyalty Emails'
-          ELSE 'Not Receiving Loyalty Emails'
-          END
-          ;;
+    sql:  ${TABLE}.data__failure_message;;
+    hidden: yes
   }
 
   measure: count {
@@ -142,17 +140,5 @@ view: customer_io_email {
     drill_fields: []
   }
 
-  measure: count_users_loyalty {
-    type: count_distinct
-    sql: CASE WHEN (${campaign_id} = 1000397 or ${campaign_id} = 1000399 or ${campaign_id} = 1000398) AND ${action} = 'sent' THEN ${user_id}
-    ELSE NULL
-    END;;
-    hidden: yes
-  }
-
-  measure: count_per_user{
-    type: number
-    sql: ${count}/${count_users_loyalty} ;;
-  }
 
 }
