@@ -487,13 +487,19 @@ explore: users {
   join: post_cart_skus {
     from: skus
     relationship: one_to_many
-    sql_on: ${post_cart_skus.id} = ${post_cart_order_items.sku_id};;
+    sql_on: ${post_cart_skus.id} = ${post_cart_cart_items.sku_id};;
   }
 
   join: post_cart_products {
     from: products
     relationship: one_to_many
     sql_on: ${post_cart_products.id}=${post_cart_skus.product_id};;
+  }
+
+  join: post_cart_menu_items {
+    from: menu_items_new
+    relationship: many_to_one
+    sql_on: ${post_cart_menu_items.sku_id}= ${post_cart_skus.id} and ${post_cart_menu_items.menu_id}=${post_cart_menus.id} ;;
   }
 
 }

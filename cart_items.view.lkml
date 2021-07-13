@@ -114,6 +114,20 @@ view: cart_items {
     sql: ${TABLE}.updated_at ;;
   }
 
+  dimension: item_quantity {
+    type: number
+    sql:  CASE WHEN ${post_cart_products.recipe_meal_type} = 3 THEN ${TABLE}.quantity
+        WHEN ${post_cart_carts.plan_name} = 'Prepared' THEN ${TABLE}.quantity
+        Else 1
+        END
+        ;;
+  }
+
+  measure: total_items {
+    type: sum
+    sql: ${item_quantity} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, carts.id]

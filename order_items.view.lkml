@@ -149,11 +149,13 @@ view: order_items {
   dimension: order_plan_code {
     type: number
     sql: ${orders.plan} ;;
+    hidden: yes
   }
 
   dimension: order_plan_name {
     type: string
     sql: ${orders.plan_name} ;;
+    hidden: yes
   }
 
   dimension: sku_id {
