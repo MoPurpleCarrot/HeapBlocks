@@ -348,7 +348,7 @@ view: users {
   dimension: feature_flags {
     type: string
     sql: ${TABLE}.feature_flags ;;
-    hidden: yes
+
   }
 
   dimension: sign_in_count {

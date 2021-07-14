@@ -273,9 +273,24 @@ view: order_items {
   ;;
 }
 
+  dimension: item_quantity_post_carts {
+    type: number
+    sql:  CASE WHEN ${recipe_meal_type} = 3 THEN ${TABLE}.quantity
+        WHEN ${order_plan_name} = 'Prepared' THEN ${TABLE}.quantity
+        WHEN ${order_plan_name} = 'Four Serving' THEN 2
+        Else 1
+        END
+        ;;
+  }
+
   measure: total_items {
     type: sum
     sql: ${item_quantity} ;;
+  }
+
+  measure: total_items_post_carts {
+    type: sum
+    sql: ${item_quantity_post_carts} ;;
   }
 
   dimension: breakfast_revenue {
