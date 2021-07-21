@@ -768,6 +768,11 @@ explore: recipe_feedback_surveys {
     sql_on: ${recipe_feedback_surveys.order_id}=${orders.id} ;;
   }
 
+  join: menus {
+    relationship: many_to_one
+    sql_on: ${orders.menu_id} = ${menus.id} ;;
+  }
+
   join: order_items {
     relationship: one_to_many
     sql_on:${order_items.order_id}=${orders.id};;
