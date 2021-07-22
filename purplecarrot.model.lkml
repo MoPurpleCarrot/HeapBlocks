@@ -504,6 +504,24 @@ explore: users {
 
 }
 
+explore: carts {
+  label: "Skip Surveys - TEMP"
+  fields: [ALL_FIELDS*, -users.utm_source_groups]
+  join: users {
+    relationship: one_to_many
+    sql_on: ${users.id}=${carts.user_id} ;;
+
+  }
+  join: menus {
+    relationship: one_to_many
+    sql_on: ${menus.id}=${carts.menu_id} ;;
+  }
+  join: skip_surveys {
+    relationship: many_to_one
+    sql_on: ${skip_surveys.menu_id} = ${menus.id} AND ${skip_surveys.user_id} = ${users.id} ;;
+  }
+}
+
 explore: zd_tickets{
   join: zd_users {
     relationship: many_to_one
