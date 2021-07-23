@@ -122,8 +122,12 @@ view: events {
     type: string
     sql: ${TABLE}.data;;
 }
-  measure: count {
+  measure: count_followed_up_events{
     type: count
     drill_fields: [followed_up_event_id, name]
+  }
+  measure: count_events {
+    type: count_distinct
+    sql: ${id} ;;
   }
 }
