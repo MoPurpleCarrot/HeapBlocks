@@ -139,5 +139,37 @@ view: recipe_feedbacks {
     type: number
     sql: ${TABLE}.question_5_answer ;;
   }
+  measure: P_Overall_Reaction_Avg{
+    type: average
+    value_format: "0.0"
+    sql: ${P_Overall_Reaction}*1.00 ;;
+  }
+
+  measure: P_Flavor_Avg {
+    type: average
+    value_format: "0.0"
+    sql: ${P_Flavor}*1.00 ;;
+  }
+  measure: P_Serving_Size_Avg {
+    type: average
+    value_format: "0.0"
+    sql: ${P_Serving_Size}*1.00;;
+  }
+  measure: P_Visual_Expectations_Avg {
+    type: average
+    value_format: "0.0"
+    sql: ${P_Visual_Expectations}*1.00;;
+  }
+  measure: P_Eat_Again_Avg {
+    type: average
+    value_format: "0.0"
+    sql: ${P_Eat_Again}*1.00;;
+  }
+  measure: P_Ingredient_Quality_Avg {
+    type: average
+    value_format: "0.0"
+    sql: ${P_Ingredient_Quality}*1.00;;
+  }
+
 
 }
