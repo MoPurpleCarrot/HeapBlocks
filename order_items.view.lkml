@@ -276,8 +276,8 @@ view: order_items {
   dimension: item_quantity_post_carts {
     type: number
     sql:  CASE WHEN ${recipe_meal_type} = 3 THEN ${TABLE}.quantity
-        WHEN ${order_plan_name} = 'Prepared' THEN ${TABLE}.quantity
-        WHEN ${order_plan_name} = 'Four Serving' THEN 2
+        WHEN (${order_plan_name} = 'Prepared' and ${recipe_meal_type} = 0) THEN ${TABLE}.quantity
+        WHEN (${order_plan_name} = 'Four Serving' and ${recipe_meal_type} = 0) THEN 2
         Else 1
         END
         ;;
