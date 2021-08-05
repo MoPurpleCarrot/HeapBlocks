@@ -114,6 +114,15 @@ view: cart_items {
     sql: ${TABLE}.updated_at ;;
   }
 
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      date
+    ]
+    sql: ${TABLE}.deleted_at ;;
+  }
+
+
   dimension: item_quantity {
     type: number
     sql:  CASE WHEN ${post_cart_products.recipe_meal_type} = 3 THEN ${TABLE}.quantity
