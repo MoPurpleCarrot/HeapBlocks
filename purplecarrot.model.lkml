@@ -501,6 +501,10 @@ explore: users {
     relationship: many_to_one
     sql_on: ${post_cart_menu_items.sku_id}= ${post_cart_skus.id} and ${post_cart_menu_items.menu_id}=${post_cart_menus.id} ;;
   }
+  join: post_cart_customization_events_derived {
+    relationship: many_to_one
+    sql_on: ${post_cart_customization_events_derived.cart_id} = ${post_cart_carts.id} ;;
+  }
 
 }
 
