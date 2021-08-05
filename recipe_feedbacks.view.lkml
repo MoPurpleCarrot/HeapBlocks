@@ -136,7 +136,7 @@ view: recipe_feedbacks {
     sql: ${TABLE}.question_6_answer ;;
   }
   dimension: P_Comments {
-    type: number
+    type: string
     sql: ${TABLE}.question_5_answer ;;
   }
   measure: P_Overall_Reaction_Avg{
