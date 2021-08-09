@@ -40,7 +40,6 @@
     type: field_filter
     explore: sessions
     field: users.identity
-    default_value: -NULL
 
   elements:
 
@@ -321,14 +320,14 @@
     dimensions: [user_facts.first_session_month, sessions.session_month]
     pivots: [user_facts.first_session_month]
     measures: [sessions.count_users]
-    listen:
-      device_type: sessions.device_type
-      referrer_domain: sessions.referrer_domain_mapped
-      users_identity: users.identity
     filters:
       sessions.session_month: 8 months ago for 8 months
       user_facts.first_session_month: 8 months ago for 8 months
-      #users.identity: -NULL
+      users.identity: -NULL
+    listen:
+      device_type: sessions.device_type
+      referrer_domain: sessions.referrer_domain_mapped
+      #users_identity: users.identity
     sorts: [sessions.session_month, user_facts.first_session_month]
     limit: 500
     column_limit: 50
@@ -362,14 +361,15 @@
       label: Percent Returned
       expression: 100*(${sessions.count_users}/max(${sessions.count_users}))
       value_format: 0.00\%
-    listen:
-        device_type: sessions.device_type
-        referrer_domain: sessions.referrer_domain_mapped
-        #users_identity: users.identity
     filters:
       sessions.session_month: 8 months ago for 8 months
       user_facts.first_session_month: 8 months ago for 8 months
       users.identity: -NULL
+    listen:
+      device_type: sessions.device_type
+      referrer_domain: sessions.referrer_domain_mapped
+      #users_identity: users.identity
+
     sorts: [sessions.session_month, user_facts.first_session_month]
     limit: 500
     column_limit: 50
