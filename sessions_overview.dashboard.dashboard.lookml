@@ -40,6 +40,7 @@
     type: field_filter
     explore: sessions
     field: users.identity
+    default_value: -NULL
 
   elements:
 
