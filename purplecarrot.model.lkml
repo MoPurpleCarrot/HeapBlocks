@@ -1214,11 +1214,6 @@ explore: users_data{
     fields: [id, meal_type]
   }
 
-  join: shipping_addresses {
-    relationship: many_to_one
-    sql_on: ${shipping_addresses.subscription_id}=${subscriptions.id} ;;
-  }
-
   join: cx_rep_user {
     from: users
     relationship: many_to_one

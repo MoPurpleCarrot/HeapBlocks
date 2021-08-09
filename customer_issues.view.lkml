@@ -99,7 +99,6 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}.created_at ;;
-    hidden:  yes
   }
 
   dimension: delivery_tnt {
