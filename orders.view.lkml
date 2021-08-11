@@ -106,7 +106,7 @@ view: orders {
     type: number
     value_format_name: usd
     sql: ${TABLE}.credit_applied ;;
-    hidden:  yes
+
   }
 
   dimension_group: delivery {
@@ -600,6 +600,7 @@ view: orders {
 
   measure: total_sales_tax {
     type: sum
+    value_format_name: usd
     sql:  ${sales_tax} ;;
   }
 
@@ -735,6 +736,12 @@ view: orders {
   dimension: giveaway_id{
     type: number
     sql: ${TABLE}.giveaway_id ;;
+  }
+
+  measure: total_credit {
+    type: sum
+    value_format_name: usd
+    sql: ${credit_applied} ;;
   }
 
 }
