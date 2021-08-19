@@ -505,6 +505,12 @@ explore: users {
     relationship: many_to_one
     sql_on: ${post_cart_customization_events_derived.cart_id} = ${post_cart_carts.id} ;;
   }
+  ##test
+  join: test_cart {
+    from: carts
+    relationship: one_to_one
+    sql_on: ${test_cart.order_id}=${orders.id} ;;
+  }
 
 }
 
