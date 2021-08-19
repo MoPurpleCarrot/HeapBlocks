@@ -86,7 +86,7 @@ explore: heap_users{
 explore: users {
   persist_for: "1 hour"
   label: "Customer Service Portal"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomolies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
 
 
   join: subscription_cancellations {
