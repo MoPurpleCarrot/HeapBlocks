@@ -4,6 +4,7 @@ view: sab_avail {
     ,count(*) available_sab
       from heroku_postgres.giveaways
       where status = 0
+      group by user_id
        ;;
   }
 

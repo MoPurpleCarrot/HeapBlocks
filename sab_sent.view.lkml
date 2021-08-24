@@ -4,6 +4,7 @@ view: sab_sent {
     ,count(*) sent_sab
       from heroku_postgres.giveaways
       where status = 1
+      group by user_id
        ;;
   }
 
