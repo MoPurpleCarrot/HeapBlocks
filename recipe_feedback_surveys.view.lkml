@@ -87,6 +87,7 @@ view: recipe_feedback_surveys {
   dimension: comments {
     type: string
     sql: ${TABLE}.question_comment_answer ;;
+    hidden: yes
   }
 
   dimension: order_id {

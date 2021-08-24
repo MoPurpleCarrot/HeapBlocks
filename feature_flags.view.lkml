@@ -1,5 +1,5 @@
-view: cart_items {
-  sql_table_name: heroku_postgres.cart_items ;;
+view: feature_flags {
+  sql_table_name: heroku_postgres.feature_flags ;;
   drill_fields: [id]
 
   dimension: id {
@@ -60,12 +60,6 @@ view: cart_items {
     sql: ${TABLE}._sdc_table_version ;;
   }
 
-  dimension: cart_id {
-    type: number
-    # hidden: yes
-    sql: ${TABLE}.cart_id ;;
-  }
-
   dimension_group: created {
     type: time
     timeframes: [
@@ -80,24 +74,33 @@ view: cart_items {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: quantity {
-    type: number
-    sql: ${TABLE}.quantity ;;
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.deleted_at ;;
   }
 
-  dimension: sku_amount {
-    type: number
-    sql: ${TABLE}.sku_amount ;;
+  dimension: description {
+    type: string
+    sql: ${TABLE}.description ;;
   }
 
-  dimension: sku_id {
-    type: number
-    sql: ${TABLE}.sku_id ;;
+  dimension: enabled {
+    type: yesno
+    sql: ${TABLE}.enabled ;;
   }
 
-  dimension: sku_point_value {
-    type: number
-    sql: ${TABLE}.sku_point_value ;;
+  dimension: name {
+    type: string
+    sql: ${TABLE}.name ;;
   }
 
   dimension_group: updated {
@@ -114,31 +117,8 @@ view: cart_items {
     sql: ${TABLE}.updated_at ;;
   }
 
-  dimension_group: deleted {
-    type: time
-    timeframes: [
-      date
-    ]
-    sql: ${TABLE}.deleted_at ;;
-  }
-
-
-  dimension: item_quantity {
-    type: number
-    sql:  CASE WHEN ${post_cart_products.recipe_meal_type} = 3 THEN ${TABLE}.quantity
-        WHEN ${post_cart_carts.plan_name} = 'Prepared' THEN ${TABLE}.quantity
-        Else 1
-        END
-        ;;
-  }
-
-  measure: total_items {
-    type: sum
-    sql: ${item_quantity} ;;
-  }
-
   measure: count {
     type: count
-    drill_fields: [id, carts.id]
+    drill_fields: [id, name]
   }
 }

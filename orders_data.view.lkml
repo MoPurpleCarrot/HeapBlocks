@@ -1,5 +1,5 @@
 view: orders_data {
-  # this is specifically for the ops report explore - it's a duplicate of the orders table wihtout some specific fields
+  # this is specifically for the ops report explore - it's a duplicate of the orders table wihtout some specific fields (primarily ones that reference the users table)
     sql_table_name: heroku_postgres.orders ;;
 
     dimension: id {
@@ -187,11 +187,43 @@ view: orders_data {
       hidden:  yes
     }
 
-    dimension: shippingaddress_forPIPull_ONLY {
+    dimension: shipping_address_full {
       type: string
       sql: ${TABLE}.shipping_address ;;
-      hidden: yes
     }
+
+  dimension: shipping_zip {
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'zip') ;;
+  }
+  dimension: shipping_city {
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'city') ;;
+  }
+  dimension: shipping_state {
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'state') ;;
+  }
+  dimension: shipping_address{
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'address') ;;
+  }
+  dimension: shipping_address2{
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'address2') ;;
+  }
+  dimension: shipping_first_name{
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'first_name') ;;
+  }
+  dimension: shipping_last_name{
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'last_name') ;;
+  }
+  dimension: shipping_delivery_instructions{
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'delivery_instructions') ;;
+  }
 
     dimension: status {
       type: number
@@ -289,13 +321,11 @@ view: orders_data {
     dimension: ship_template_ship {
       type: date
       sql: ${TABLE}.ship_template_ship_date ;;
-      hidden:  yes
     }
 
     dimension: ship_template_delivery {
       type: date
       sql: ${TABLE}.ship_template_ship_date ;;
-      hidden:  yes
     }
 
     dimension: projected_delivery{
@@ -331,7 +361,6 @@ view: orders_data {
     dimension: tracking_number {
       type: string
       sql: ${TABLE}.tracking_number ;;
-      hidden:  yes
     }
 
     dimension_group: updated {
@@ -657,5 +686,9 @@ view: orders_data {
     sql: ${TABLE}.box_size ;;
   }
 
+  dimension: week_num {
+    type: number
+    sql: DATEDIFF('week', ${user_facts.first_order_date}, ${delivery_date}) ;;
+  }
 
   }

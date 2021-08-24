@@ -213,6 +213,7 @@ explore: subscriptions {
 explore: users {
   persist_for: "1 hour"
   label: "Customer Service Portal"
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
 
   join: tickets {
     relationship: one_to_many
@@ -487,7 +488,7 @@ explore: users {
   join: post_cart_skus {
     from: skus
     relationship: one_to_many
-    sql_on: ${post_cart_skus.id} = ${post_cart_order_items.sku_id};;
+    sql_on: ${post_cart_skus.id} = ${post_cart_cart_items.sku_id};;
   }
 
   join: post_cart_products {
@@ -496,6 +497,48 @@ explore: users {
     sql_on: ${post_cart_products.id}=${post_cart_skus.product_id};;
   }
 
+  join: post_cart_menu_items {
+    from: menu_items_new
+    relationship: many_to_one
+    sql_on: ${post_cart_menu_items.sku_id}= ${post_cart_skus.id} and ${post_cart_menu_items.menu_id}=${post_cart_menus.id} ;;
+  }
+  join: post_cart_customization_events_derived {
+    relationship: many_to_one
+    sql_on: ${post_cart_customization_events_derived.cart_id} = ${post_cart_carts.id} ;;
+  }
+  ##test
+  join: test_cart {
+    from: carts
+    relationship: one_to_one
+    sql_on: ${test_cart.order_id}=${orders.id} ;;
+  }
+
+}
+
+explore: carts {
+  label: "Skip Surveys - TEMP"
+  fields: [ALL_FIELDS*, -users.utm_source_groups, -subscriptions.winback_utm_source_groups]
+  join: users {
+    relationship: one_to_many
+    sql_on: ${users.id}=${carts.user_id} ;;
+
+  }
+  join: menus {
+    relationship: one_to_many
+    sql_on: ${menus.id}=${carts.menu_id} ;;
+  }
+  join: skip_surveys {
+    relationship: many_to_one
+    sql_on: ${skip_surveys.menu_id} = ${menus.id} AND ${skip_surveys.user_id} = ${users.id} ;;
+  }
+  join: subscriptions {
+    relationship: one_to_one
+    sql_on: ${subscriptions.user_id} = ${users.id} ;;
+  }
+  join: subscription_order_num_derrived {
+    relationship: one_to_one
+    sql_on: ${subscription_order_num_derrived.subscriptions_id} = ${subscriptions.id} ;;
+  }
 }
 
 explore: zd_tickets{
@@ -553,30 +596,30 @@ explore: zd_tickets{
 
 explore: customer_io_email{
   label: "Customer.io Email"
-  join: users {
-    relationship: one_to_many
-    sql_on: ${users.id} = ${customer_io_email.user_id};;
   }
 
+explore: users_for_email{
+  from:  users
+  label: "Customer.io Email With User Data"
+  join: customer_io_email {
+    relationship: one_to_many
+    sql_on: ${users_for_email.id} = ${customer_io_email.user_id};;
+  }
   join: subscriptions {
     relationship: one_to_one
-    type: left_outer
-    sql_on: ${users.id}=${subscriptions.user_id};;
+    sql_on: ${users_for_email.id}=${subscriptions.user_id};;
   }
-
-  join: orders {
+  join: orders_data {
     relationship: one_to_many
-    sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
+    sql_on: ${subscriptions.id} = ${orders_data.subscription_id} ;;
   }
-
   join: user_facts {
     relationship: one_to_one
-    sql_on: ${users.id} = ${user_facts.id} ;;
+    sql_on: ${users_for_email.id} = ${user_facts.id} ;;
   }
-
   join: menus {
     relationship: many_to_one
-    sql_on: ${orders.menu_id} = ${menus.id} ;;
+    sql_on: ${orders_data.menu_id} = ${menus.id} ;;
   }
   join: subscription_order_num_derrived {
     relationship: one_to_one
@@ -584,17 +627,21 @@ explore: customer_io_email{
   }
   join: coupons {
     relationship: many_to_one
-    sql_on: ${orders.coupon_id} = ${coupons.id} ;;
-
+    sql_on: ${orders_data.coupon_id} = ${coupons.id} ;;
   }
-
-
   join: subscription_cancellations {
     relationship: one_to_many
-    sql_on: ${users.id} = ${subscription_cancellations.user_id} ;;
+    sql_on: ${users_for_email.id} = ${subscription_cancellations.user_id} ;;
   }
-
+  join: email_loyalty_test_derived {
+    relationship: one_to_one
+    sql_on: ${users_for_email.id} = ${email_loyalty_test_derived.users_id} ;;
   }
+  join: email_failed_derived {
+    relationship: one_to_one
+    sql_on: ${users_for_email.id} = ${email_failed_derived.users_id} ;;
+  }
+}
 
 
 explore: gift_purchases {
@@ -747,6 +794,7 @@ explore: recipes {}
 
 explore: recipe_feedback_surveys {
   label: "Recipe Feedback Surveys"
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
 
   join: recipe_feedbacks {
     relationship: one_to_many
@@ -756,6 +804,11 @@ explore: recipe_feedback_surveys {
   join: orders {
     relationship: one_to_one
     sql_on: ${recipe_feedback_surveys.order_id}=${orders.id} ;;
+  }
+
+  join: menus {
+    relationship: many_to_one
+    sql_on: ${orders.menu_id} = ${menus.id} ;;
   }
 
   join: order_items {
@@ -798,6 +851,11 @@ explore: recipe_feedback_surveys {
     sql_on: ${users.id}=${segment_recipe_derived.user_id};;
   }
 
+  join: customer_issues {
+    relationship: many_to_one
+    sql_on: ${customer_issues.order_id}=${orders.id} and ${customer_issues.sku_id}=${skus.id};;
+  }
+
 }
 
 
@@ -806,6 +864,7 @@ explore: heap_sessions {}
 
 explore: credit_transactions{
   label: "Order Credits"
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
 
   join: credit_transaction_groups {
     relationship: many_to_one
@@ -869,6 +928,7 @@ explore: credit_transactions{
 
 explore: refunds {
   label: "Order Refunds"
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
 
   join: cx_rep_user {
       from: users
@@ -1164,16 +1224,16 @@ explore: users_data{
     fields: [id, meal_type]
   }
 
-  join: shipping_addresses {
-    relationship: many_to_one
-    sql_on: ${shipping_addresses.subscription_id}=${subscriptions.id} ;;
-  }
-
   join: cx_rep_user {
     from: users
     relationship: many_to_one
     sql_on: ${customer_issues.admin_id}=${cx_rep_user.id};;
 
+  }
+  join: user_facts {
+    relationship: one_to_one
+    sql_on: ${users_data.id} = ${user_facts.id}    ;;
+    fields: []
   }
 
 

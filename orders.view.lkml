@@ -106,7 +106,7 @@ view: orders {
     type: number
     value_format_name: usd
     sql: ${TABLE}.credit_applied ;;
-    hidden:  yes
+
   }
 
   dimension_group: delivery {
@@ -600,6 +600,7 @@ view: orders {
 
   measure: total_sales_tax {
     type: sum
+    value_format_name: usd
     sql:  ${sales_tax} ;;
   }
 
@@ -612,18 +613,21 @@ view: orders {
       field: is_30day_since_created
       value: "Yes"
     }
+    hidden: yes
   }
 
   measure: average_revenue_30day {
     type: number
     value_format_name: usd
     sql: ${total_revenue_30day}/NULLIF(${users.count},0);;
+    hidden: yes
   }
 
   # 60 day
   dimension: is_60day_since_created {
     type: yesno
     sql: ${days_since_created} <= 60 ;;
+    hidden: yes
   }
 
   measure: total_revenue_60day {
@@ -634,18 +638,21 @@ view: orders {
       field: is_60day_since_created
       value: "Yes"
     }
+    hidden: yes
   }
 
   measure: average_revenue_60day {
     type: number
     value_format_name: usd
     sql: ${total_revenue_60day}/NULLIF(${users.count},0);;
+    hidden: yes
   }
 
 
   dimension: is_90day_since_created {
     type: yesno
     sql: ${days_since_created} <= 90 ;;
+    hidden: yes
   }
 
   measure: total_revenue_90day {
@@ -656,12 +663,14 @@ view: orders {
       field: is_90day_since_created
       value: "Yes"
     }
+    hidden: yes
   }
 
   measure: average_revenue_90day {
     type: number
     value_format_name: usd
     sql: ${total_revenue_90day}/NULLIF(${users.count},0);;
+    hidden: yes
   }
 
 
@@ -727,6 +736,12 @@ view: orders {
   dimension: giveaway_id{
     type: number
     sql: ${TABLE}.giveaway_id ;;
+  }
+
+  measure: total_credit {
+    type: sum
+    value_format_name: usd
+    sql: ${credit_applied} ;;
   }
 
 }

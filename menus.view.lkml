@@ -94,6 +94,7 @@ view: menus {
             when ${shipping_day_of_week} = 'Saturday' THEN dateadd(d, -5, ${shipping_date})
             when ${shipping_day_of_week} = 'Sunday' then  dateadd(d, +1, ${shipping_date})
             END;;
+    allow_fill: no
 
     }
 

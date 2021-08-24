@@ -199,6 +199,15 @@ view: carts {
     sql: ${TABLE}.updated_at ;;
   }
 
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      date
+    ]
+    sql: ${TABLE}.deleted_at ;;
+  }
+
+
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;

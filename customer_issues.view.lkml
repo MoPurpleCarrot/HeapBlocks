@@ -99,7 +99,6 @@ view: customer_issues {
       year
     ]
     sql: ${TABLE}.created_at ;;
-    hidden:  yes
   }
 
   dimension: delivery_tnt {
@@ -433,6 +432,14 @@ view: customer_issues {
       then ${amount} else null end ;;
     value_format_name: usd
   }
+
+  dimension: ab_anomalies {
+    type: yesno
+    sql: (${reason}='Missing Booklet' and ${menus.ship_week_mon_start_date}='2021/08/09' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan sour cream' and ${menus.ship_week_mon_start_date}='2021/07/26' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago')   ;;
+  }
+
+  ## anomalies check https://purplecarrot.looker.com/explore/purplecarrot/users_data?qid=QetXklePMVtB8yAQpPXnkb&origin_space=86&toggle=fil
+
 
 
   set: issues_drilldown{
