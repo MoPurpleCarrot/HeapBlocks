@@ -1,4 +1,4 @@
-view: sab_sent {
+view: sab_avail {
   derived_table: {
     sql: select distinct user_id, order_of_invite,
       case when order_of_invite = 1 then '1'
@@ -8,16 +8,16 @@ view: sab_sent {
       when order_of_invite = 5 then '5'
       when order_of_invite > 5 then '6+'
       else 'None Available'
-      end "Sent SAB Group"
+      end "Avail SAB Group"
       from heroku_postgres.giveaways
-      where status = 1
+      where status = 0
        ;;
   }
 
   measure: count {
     type: count_distinct
     sql: ${user_id} ;;
-      }
+  }
 
   dimension: user_id {
     type: number
@@ -29,10 +29,10 @@ view: sab_sent {
     sql: ${TABLE}.order_of_invite ;;
   }
 
-  dimension: sent_sab_group {
+  dimension: avail_sab_group {
     type: string
-    label: "sent sab group"
-    sql: ${TABLE}."sent sab group" ;;
+    label: "avail sab group"
+    sql: ${TABLE}."avail sab group" ;;
   }
 
 }
