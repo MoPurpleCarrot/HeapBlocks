@@ -165,6 +165,37 @@ view: giveaways {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: sent_group{
+    type: string
+    case:{
+      when:{
+        sql:${status} = 0  ;;
+        label: "No"
+      }
+      else: "Yes"
+    }}
+
+  dimension: sent_1_week{
+    type: string
+    case:{
+      when:{
+        sql:datediff(day,${created_date},${sent_date})<8  ;;
+        label: "Yes"
+      }
+      else: "No"
+    }}
+
+  dimension: sent_2_weeks{
+    type: string
+    case:{
+      when:{
+        sql:datediff(day,${created_date},${sent_date})<15  ;;
+        label: "Yes"
+      }
+      else: "No"
+    }}
+
+
   measure: count {
     type: count
     drill_fields: [id, recipient_name]
