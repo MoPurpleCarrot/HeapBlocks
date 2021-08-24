@@ -1,14 +1,7 @@
 view: sab_avail {
   derived_table: {
-    sql: select distinct user_id, order_of_invite,
-      case when order_of_invite = 1 then '1'
-      when order_of_invite = 2 then '2'
-      when order_of_invite = 3 then '3'
-      when order_of_invite = 4 then '4'
-      when order_of_invite = 5 then '5'
-      when order_of_invite > 5 then '6+'
-      else 'None Available'
-      end "Avail SAB Group"
+    sql: select user_id
+    ,count(*) available_sab
       from heroku_postgres.giveaways
       where status = 0
        ;;
@@ -25,15 +18,23 @@ view: sab_avail {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension: order_of_invite {
+  dimension: available_sab {
     type: number
-    sql: ${TABLE}.order_of_invite ;;
+    sql: ${TABLE}.available_sab ;;
   }
 
   dimension: avail_sab_group {
     type: string
     label: "Avail SAB Group"
-    sql: ${TABLE}."avail sab group" ;;
+    sql: CASE WHEN ${available_sab} = 0 THEN '0'
+          WHEN ${available_sab} = 1 THEN '1'
+          WHEN ${available_sab} = 2 THEN '2'
+          WHEN ${available_sab} = 3 THEN '3'
+          WHEN ${available_sab} = 4 THEN '4'
+          WHEN ${available_sab} = 5 THEN '5'
+          WHEN ${available_sab} > 5 THEN '6+'
+          ELSE 'None Available'
+          END ;;
   }
 
 }
