@@ -1333,4 +1333,29 @@ explore: SAB {
     relationship:  one_to_one
     sql_on: ${SAB.user_id}= ${sab_avail.user_id} ;;
   }
+
+  join: subscriptions {
+    relationship:  one_to_one
+    sql_on: ${SAB.user_id}= ${subscriptions.user_id} ;;
+  }
+
+  join: users {
+    relationship:  one_to_one
+    sql_on: ${SAB.user_id}= ${users.id} ;;
+  }
+
+  join: user_facts {
+    relationship:  one_to_one
+    sql_on: ${users.id}= ${user_facts.id} ;;
+  }
+
+  join: orders {
+    relationship:  one_to_many
+    sql_on: ${subscriptions.id}= ${orders.subscription_id} ;;
+  }
+
+  join: coupons {
+    relationship:  many_to_one
+    sql_on: ${orders.coupon_id}= ${coupons.id} ;;
+  }
 }
