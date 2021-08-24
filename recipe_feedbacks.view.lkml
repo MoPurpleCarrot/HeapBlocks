@@ -170,6 +170,9 @@ view: recipe_feedbacks {
     value_format: "0.0"
     sql: ${P_Ingredient_Quality}*1.00;;
   }
-
+  dimension: did_not_prepare {
+    type: string
+    sql: ${TABLE}.not_applicable;;
+  }
 
 }
