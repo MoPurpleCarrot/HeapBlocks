@@ -32,7 +32,7 @@ view: sab_avail {
 
   dimension: avail_sab_group {
     type: string
-    label: "avail sab group"
+    label: "Avail SAB Group"
     sql: ${TABLE}."avail sab group" ;;
   }
 

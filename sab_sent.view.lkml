@@ -32,7 +32,7 @@ view: sab_sent {
 
   dimension: sent_sab_group {
     type: string
-    label: "sent sab group"
+    label: "Sent SAB Group"
     sql: ${TABLE}."sent sab group" ;;
   }
 
