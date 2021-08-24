@@ -1323,4 +1323,14 @@ explore: bing_ads_ad_performance_report {
 
 explore: SAB {
   from: giveaways
+
+  join: sab_sent {
+    relationship:  one_to_one
+    sql_on: ${SAB.user_id}= ${sab_sent.user_id} ;;
+  }
+
+  join: sab_avail {
+    relationship:  one_to_one
+    sql_on: ${SAB.user_id}= ${sab_avail.user_id} ;;
+  }
 }

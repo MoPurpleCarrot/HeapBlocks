@@ -21,6 +21,7 @@ view: sab_avail {
 
   dimension: user_id {
     type: number
+    primary_key:  yes
     sql: ${TABLE}.user_id ;;
   }
 
