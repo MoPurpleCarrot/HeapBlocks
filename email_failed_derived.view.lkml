@@ -5,7 +5,7 @@ view: email_failed_derived {
         COUNT(*) AS "users.failed_email_count"
       FROM heroku_postgres.users  AS users
       LEFT JOIN customerio_email.data  AS customer_io_email ON users.id = customer_io_email.data__customer_id
-      where (customer_io_email.metric = 'Attempted' or customer_io_email.metric = 'Deferred' or customer_io_email.metric = 'Unsubscribed' or customer_io_email.metric = 'Bounced' or customer_io_email.metric = 'Dropped' or customer_io_email.metric = 'Spammed' or customer_io_email.metric = 'Failed' or customer_io_email.metric = 'Undeliverable')
+      where (customer_io_email.metric = 'attempted' or customer_io_email.metric = 'deferred' or customer_io_email.metric = 'unsubscribed' or customer_io_email.metric = 'bounced' or customer_io_email.metric = 'dropped' or customer_io_email.metric = 'spammed' or customer_io_email.metric = 'failed' or customer_io_email.metric = 'undeliverable')
 
       GROUP BY 1
       ORDER BY 2 DESC
