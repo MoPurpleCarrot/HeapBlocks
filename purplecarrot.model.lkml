@@ -456,6 +456,12 @@ explore: users {
     sql_on: ${meal_combo_derived.order_id}=${orders.id} ;;
   }
 
+  join: giveaways {
+    view_label: "SAB"
+    relationship: many_to_one
+    sql_on: ${giveaways.user_id} = ${users.id} ;;
+  }
+
     join: sab_sent {
       relationship: one_to_one
       sql_on: ${users.id} = ${sab_sent.user_id} ;;
