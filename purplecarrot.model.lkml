@@ -454,6 +454,18 @@ explore: users {
   join: meal_combo_derived {
     relationship: one_to_one
     sql_on: ${meal_combo_derived.order_id}=${orders.id} ;;
+  }
+
+    join: sab_sent {
+      relationship: one_to_one
+      sql_on: ${users.id} = ${sab_sent.user_id} ;;
+
+    }
+
+    join: sab_avail {
+      relationship: one_to_one
+      sql_on: ${users.id} = ${sab_avail.user_id} ;;
+
 
 ### add carts data
   }
