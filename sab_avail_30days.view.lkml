@@ -4,7 +4,7 @@ view: sab_avail_30days {
           ,count(*) available_sab
             from heroku_postgres.giveaways
             where status = 0
-            where created_at >= current_date-30
+            and created_at >= current_date-30
             group by user_id
              ;;
   }
