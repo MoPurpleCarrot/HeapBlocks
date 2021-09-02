@@ -471,7 +471,17 @@ explore: users {
     join: sab_avail {
       relationship: one_to_one
       sql_on: ${users.id} = ${sab_avail.user_id} ;;
+    }
 
+    join: sab_avail_30days {
+      relationship: one_to_one
+      sql_on: ${users.id} = ${sab_avail_30days.user_id} ;;
+
+    }
+
+    join: sab_sent_30days {
+      relationship: one_to_one
+      sql_on: ${users.id} = ${sab_sent_30days.user_id} ;;
 
 ### add carts data
   }

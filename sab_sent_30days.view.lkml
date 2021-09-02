@@ -1,17 +1,18 @@
-view: sab_sent {
+view: sab_sent_30days {
   derived_table: {
     sql: select user_id
-    ,count(*) sent_sab
-      from heroku_postgres.giveaways
-      where status = 1
-      group by user_id
-       ;;
+          ,count(*) sent_sab
+            from heroku_postgres.giveaways
+            where status = 1
+            and sent_at >= current_date-30
+            group by user_id
+             ;;
   }
 
   measure: count {
     type: count_distinct
     sql: ${user_id} ;;
-      }
+  }
 
   dimension: user_id {
     type: number
