@@ -511,6 +511,7 @@ explore: users {
     from: order_items
     relationship: one_to_many
     sql_on: ${post_cart_orders.id} = ${post_cart_order_items.order_id} ;;
+    fields: []
   }
 
   join: post_cart_skus {
@@ -533,12 +534,6 @@ explore: users {
   join: post_cart_customization_events_derived {
     relationship: many_to_one
     sql_on: ${post_cart_customization_events_derived.cart_id} = ${post_cart_carts.id} ;;
-  }
-  ##test
-  join: test_cart {
-    from: carts
-    relationship: one_to_one
-    sql_on: ${test_cart.order_id}=${orders.id} ;;
   }
 
 }
