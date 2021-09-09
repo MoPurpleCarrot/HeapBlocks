@@ -132,6 +132,25 @@ view: cart_items {
         ;;
   }
 
+
+  dimension: recipe_meal_type_2 {
+    type: string
+    sql: ${post_cart_products.recipe_meal_type};;
+    hidden: yes
+  }
+
+  dimension: item_type {
+    type: string
+    sql:  CASE
+          WHEN ${recipe_meal_type_2} = 2 THEN 'Lunch'
+          WHEN ${recipe_meal_type_2} = 1 THEN 'Breakfast'
+          WHEN ${recipe_meal_type_2} = 3 THEN 'Extension'
+          WHEN ${recipe_meal_type_2} = 0 AND ${post_cart_carts.plan_name} = 'Prepared' THEN 'Dinner - Prep'
+          WHEN ${recipe_meal_type_2} = 0 THEN 'Dinner - MK'
+          END;;
+  }
+
+
   measure: total_items {
     type: sum
     sql: ${item_quantity} ;;
