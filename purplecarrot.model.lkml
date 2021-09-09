@@ -879,6 +879,11 @@ explore: recipe_feedback_surveys {
     sql_on: ${customer_issues.order_id}=${orders.id} and ${customer_issues.sku_id}=${skus.id};;
   }
 
+  join: max_week_recipe_feedback {
+    relationship: one_to_many
+    sql_on: ${max_week_recipe_feedback.products_sku_id}=${recipe_feedbacks.sku_id} and ${max_week_recipe_feedback.products_sku_id}=${order_items.sku_id} ;;
+  }
+
 }
 
 
