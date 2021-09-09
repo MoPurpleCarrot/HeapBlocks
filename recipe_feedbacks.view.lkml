@@ -175,6 +175,7 @@ view: recipe_feedbacks {
     sql: ${TABLE}.not_applicable;;
   }
   measure: latest_created_week {
+    type: date
     sql: MAX(${created_week});;
   }
 }
