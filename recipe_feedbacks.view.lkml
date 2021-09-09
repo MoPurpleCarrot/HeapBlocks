@@ -174,8 +174,5 @@ view: recipe_feedbacks {
     type: string
     sql: ${TABLE}.not_applicable;;
   }
-  measure: max_created_week {
-    sql: MAX(${created_week});;
-  }
 
 }
