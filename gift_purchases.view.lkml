@@ -329,4 +329,9 @@ view: gift_purchases {
     }
     drill_fields: [id, purchaser_name, purchaser_email, recipient_name, recipient_email]
   }
+
+   dimension: test_account {
+   type: string
+   sql: ${TABLE}.test_account ;;
+              }
 }
