@@ -73,14 +73,14 @@ LIMIT 500
     drill_fields: [detail*]
   }
 
-  dimension: meal_name {
+  dimension: kit_title {
     type: string
-    sql: ${TABLE}.meal_name ;;
+    sql: ${TABLE}."recipe_titles_derived.kit_title" ;;
   }
 
-  dimension: subtitle {
+  dimension: recipe_title {
     type: string
-    sql: ${TABLE}.subtitle ;;
+    sql: ${TABLE}."recipe_titles_derived.recipe_title" ;;
   }
 
   dimension: products_id {
@@ -95,6 +95,6 @@ LIMIT 500
   }
 
   set: detail {
-    fields: [meal_name, subtitle, products_id, recipe_feedbacks_max_created_week]
+    fields: [kit_title, recipe_title, products_id, recipe_feedbacks_max_created_week]
   }
 }
