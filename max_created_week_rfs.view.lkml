@@ -86,7 +86,7 @@ LIMIT 500
   dimension: products_id {
     type: number
     primary_key: yes
-    sql: ${TABLE}."products.id" ;;
+    sql: ${TABLE}."recipe_titles_derived.product_id" ;;
   }
 
   dimension: recipe_feedbacks_max_created_week {
