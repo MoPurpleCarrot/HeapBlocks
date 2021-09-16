@@ -883,6 +883,12 @@ explore: recipe_feedback_surveys {
     relationship: one_to_one
     sql_on: ${max_created_week_rfs.products_id}=${skus.product_id};;
   }
+
+  join: recipe_titles_derived {
+    relationship: one_to_many
+    sql_on: ${recipe_titles_derived.recipe_feedbacks_sku_id}=${recipe_feedbacks.sku_id};;
+  }
+
 }
 
 
