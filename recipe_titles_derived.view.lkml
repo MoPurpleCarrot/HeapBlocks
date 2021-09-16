@@ -7,7 +7,7 @@ view: recipe_titles_derived {
           "products"."title"||' '||"products"."subtitle" Recipe_Title,
           "products"."id" AS product_id,
           "recipe_feedbacks"."sku_id" AS "recipe_feedbacks.sku_id",
-           replace(replace(replace(recipe_title, 'and', ''), '&',''), ' ', '') trimmed_recipe,
+           trim(replace(replace(replace(recipe_title, 'and', ''), '&',''), ' ', '')) trimmed_recipe,
            "skus".created_at
       FROM
           "heroku_postgres"."recipe_feedback_surveys" AS "recipe_feedback_surveys"
@@ -29,7 +29,7 @@ view: recipe_titles_derived {
       ,latest_recipe_title as (
       SELECT distinct
           "products"."title"||' '||"products"."subtitle" Recipe_Title,
-           replace(replace(replace(recipe_title, 'and', ''), '&',''), ' ', '') trimmed_recipe,
+           trim(replace(replace(replace(recipe_title, 'and', ''), '&',''), ' ', '')) trimmed_recipe,
            show_in_products_catalog
       FROM
           "heroku_postgres"."recipe_feedback_surveys" AS "recipe_feedback_surveys"
