@@ -82,7 +82,7 @@ ORDER BY
   }
 
   dimension: recipe_feedbacks_max_created_week {
-    type: string
+    type: date
     sql: ${TABLE}."recipe_feedbacks.max_created_week" ;;
   }
 
