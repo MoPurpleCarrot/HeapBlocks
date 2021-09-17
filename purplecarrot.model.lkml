@@ -879,16 +879,15 @@ explore: recipe_feedback_surveys {
     sql_on: ${customer_issues.order_id}=${orders.id} and ${customer_issues.sku_id}=${skus.id};;
   }
 
-  join: max_created_week_rfs {
-    relationship: one_to_one
-    sql_on: ${max_created_week_rfs.products_id}=${skus.product_id};;
-  }
-
   join: recipe_titles_derived {
     relationship: one_to_many
     sql_on: ${recipe_titles_derived.recipe_feedbacks_sku_id}=${recipe_feedbacks.sku_id};;
   }
 
+  join: max_created_week_rfs {
+    relationship: one_to_one
+    sql_on: ${max_created_week_rfs.recipe_title}=${recipe_titles_derived.recipe_title};;
+  }
 }
 
 

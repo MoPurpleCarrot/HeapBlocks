@@ -53,19 +53,16 @@ view: max_created_week_rfs {
 SELECT
     recipe_titles_derived.kit_title  AS "recipe_titles_derived.kit_title",
     recipe_titles_derived.recipe_title  AS "recipe_titles_derived.recipe_title",
-    recipe_titles_derived.product_id  AS "recipe_titles_derived.product_id",
     MAX(TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM recipe_feedbacks.created_at )::integer - 3 + 7, 7)), recipe_feedbacks.created_at  )), 'YYYY-MM-DD')) AS "recipe_feedbacks.max_created_week"
 FROM heroku_postgres.recipe_feedback_surveys  AS recipe_feedback_surveys
 LEFT JOIN heroku_postgres.recipe_feedbacks  AS recipe_feedbacks ON recipe_feedback_surveys.id = recipe_feedbacks.recipe_feedback_survey_id
 LEFT JOIN recipe_titles_derived ON (recipe_titles_derived."recipe_feedbacks.sku_id")=recipe_feedbacks.sku_id
 GROUP BY
     1,
-    2,
-    3
+    2
 ORDER BY
     1
-LIMIT 500
-       ;;
+ ;;
   }
 
   measure: count {
@@ -80,21 +77,16 @@ LIMIT 500
 
   dimension: recipe_title {
     type: string
+    primary_key: yes
     sql: ${TABLE}."recipe_titles_derived.recipe_title" ;;
   }
 
-  dimension: products_id {
-    type: number
-    primary_key: yes
-    sql: ${TABLE}."recipe_titles_derived.product_id" ;;
-  }
-
   dimension: recipe_feedbacks_max_created_week {
-    type: date
+    type: string
     sql: ${TABLE}."recipe_feedbacks.max_created_week" ;;
   }
 
   set: detail {
-    fields: [kit_title, recipe_title, products_id, recipe_feedbacks_max_created_week]
+    fields: [kit_title, recipe_title, recipe_feedbacks_max_created_week]
   }
 }
