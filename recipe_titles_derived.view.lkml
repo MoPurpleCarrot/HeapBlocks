@@ -1,6 +1,6 @@
-view: max_created_week_rfs {
+view: recipe_titles_derived {
   derived_table: {
-    sql: WITH recipe_titles_derived AS (with all_recipes as(
+    sql: with all_recipes as(
       SELECT distinct
           "products"."title" AS Kit_Title,
           "products"."subtitle" AS "products.subtitle",
@@ -49,20 +49,7 @@ view: max_created_week_rfs {
       select distinct a.Kit_Title, b.recipe_title, product_id, "recipe_feedbacks.sku_id"
       from all_recipes a
       join latest_recipe_title b on b.trimmed_recipe=a.trimmed_recipe
-       )
-SELECT
-    recipe_titles_derived.kit_title  AS "recipe_titles_derived.kit_title",
-    recipe_titles_derived.recipe_title  AS "recipe_titles_derived.recipe_title",
-    MAX(TO_CHAR(DATE(DATEADD(day,(0 - MOD(EXTRACT(DOW FROM recipe_feedbacks.created_at )::integer - 3 + 7, 7)), recipe_feedbacks.created_at  )), 'YYYY-MM-DD')) AS "recipe_feedbacks.max_created_week"
-FROM heroku_postgres.recipe_feedback_surveys  AS recipe_feedback_surveys
-LEFT JOIN heroku_postgres.recipe_feedbacks  AS recipe_feedbacks ON recipe_feedback_surveys.id = recipe_feedbacks.recipe_feedback_survey_id
-LEFT JOIN recipe_titles_derived ON (recipe_titles_derived."recipe_feedbacks.sku_id")=recipe_feedbacks.sku_id
-GROUP BY
-    1,
-    2
-ORDER BY
-    1
- ;;
+       ;;
   }
 
   measure: count {
@@ -72,21 +59,26 @@ ORDER BY
 
   dimension: kit_title {
     type: string
-    sql: ${TABLE}."recipe_titles_derived.kit_title" ;;
+    sql: ${TABLE}.kit_title ;;
   }
 
   dimension: recipe_title {
     type: string
-    primary_key: yes
-    sql: ${TABLE}."recipe_titles_derived.recipe_title" ;;
+    sql: ${TABLE}.recipe_title ;;
   }
 
-  dimension: recipe_feedbacks_max_created_week {
-    type: date
-    sql: ${TABLE}."recipe_feedbacks.max_created_week" ;;
+  dimension: product_id {
+    type: number
+    sql: ${TABLE}.product_id ;;
+  }
+
+  dimension: recipe_feedbacks_sku_id {
+    type: number
+    primary_key: yes
+    sql: ${TABLE}."recipe_feedbacks.sku_id" ;;
   }
 
   set: detail {
-    fields: [kit_title, recipe_title, recipe_feedbacks_max_created_week]
+    fields: [kit_title, recipe_title, product_id, recipe_feedbacks_sku_id]
   }
 }
