@@ -118,9 +118,10 @@ view: coupons {
     sql: ${TABLE}.friend_referral ;;
   }
 
-  dimension: new_member_only {
+  dimension: deprecated_new_member_only {
     type: yesno
     sql: ${TABLE}.new_member_only ;;
+    hidden: yes
   }
 
   dimension: orders_count {

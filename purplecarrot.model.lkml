@@ -337,7 +337,11 @@ explore: users {
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+  }
 
+  join: coupons__allowed_orders_counts {
+    relationship: many_to_one
+    sql_on: ${coupons__allowed_orders_counts._sdc_source_key_id} = ${coupons.id} ;;
   }
 
   join: gift_purchases {
