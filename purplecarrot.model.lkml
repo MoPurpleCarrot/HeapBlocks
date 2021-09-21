@@ -785,6 +785,12 @@ explore: gift_purchases {
     sql_on: ${subscription_order_num_derrived.subscriptions_id} = ${subscriptions.id} ;;
   }
 
+  join: subscriptions_referrer {
+    from: subscriptions
+    relationship: one_to_one
+    sql_on: ${subscriptions_referrer.user_id} = ${users_referrer.id} ;;
+  }
+
 }
 
 explore: ingredients {
@@ -1393,5 +1399,10 @@ explore: SAB {
   join: coupons {
     relationship:  many_to_one
     sql_on: ${orders.coupon_id}= ${coupons.id} ;;
+  }
+  join: redeeming_subscriptions {
+    from: subscriptions
+    relationship:  one_to_one
+    sql_on: ${SAB.id}= ${redeeming_subscriptions.giveaway_id} ;;
   }
 }
