@@ -791,6 +791,11 @@ explore: gift_purchases {
     sql_on: ${subscriptions_referrer.user_id} = ${users_referrer.id} ;;
   }
 
+  join: events {
+    relationship: many_to_one
+    sql_on: ${events.subscription_id} = ${subscriptions.id} ;;
+  }
+
 }
 
 explore: ingredients {
