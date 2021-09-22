@@ -178,7 +178,7 @@ view: refunds {
       year
     ]
     sql: ${TABLE}.created_at ;;
-    hidden: yes
+
   }
 
     dimension: created_week_sun_start{
