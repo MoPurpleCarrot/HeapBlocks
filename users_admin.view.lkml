@@ -452,8 +452,7 @@ view: users {
   dimension: utm_source_groups {
     type: string
     sql: case when ${utm_source} = 'gift' then 'Gift'
-        when ${coupons.code} = 'Purplefall21' then 'Direct Mail'
-        when ${coupons.code} = 'letsdothispc21' then 'Direct Mail'
+        when lower(${coupons.code}) = 'purplefall21' then 'Direct Mail'
         when lower(${utm_source}) like '%facebook%' then 'Facebook'
         when ${utm_source} like '%FB%' then 'Facebook'
         when ${utm_source} like '%utm_source%' then 'Facebook'
