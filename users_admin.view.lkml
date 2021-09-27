@@ -348,6 +348,11 @@ view: users {
   dimension: feature_flags {
     type: string
     sql: ${TABLE}.feature_flags ;;
+  }
+
+  dimension: signup_flow {
+    type: string
+    sql: ${TABLE}.signup_flow ;;
 
   }
 
@@ -451,7 +456,7 @@ view: users {
 
   dimension: utm_source_groups {
     type: string
-    sql: case when ${utm_source} = 'gift' then 'Gift'
+    sql: case when ${utm_campaign} = 'gift' or ${signup_flow} = 1 then 'Gift'
         when lower(${coupons.code}) = 'purplefall21' then 'Direct Mail'
         when lower(${utm_source}) like '%facebook%' then 'Facebook'
         when ${utm_source} like '%FB%' then 'Facebook'
