@@ -20,7 +20,11 @@ view: user_facts_extra_breakfast {
       left join heroku_postgres.products as products
       on skus.product_id = products.id
 
-      WHERE orders.status = 3 AND orders.extras_price > 0 AND products.recipe_meal_type = 1 and order_items.deleted_at is null
+      WHERE orders.status = 3 AND
+      orders.extras_price > 0 AND
+      products.recipe_meal_type = 1 and
+      order_items.deleted_at is null AND
+      orders.deleted_at is null
       GROUP BY 1
        ;;
 # AND order_items.deleted_at = NULL
