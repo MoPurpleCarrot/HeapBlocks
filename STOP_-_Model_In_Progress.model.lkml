@@ -12,7 +12,7 @@ datagroup: hourly_sync  {
 explore: users {
   persist_for: "1 hour"
   label: "Users Base"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies]
 
 
   join: subscription_cancellations {

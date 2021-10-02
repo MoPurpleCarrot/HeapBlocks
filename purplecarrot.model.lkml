@@ -213,7 +213,7 @@ explore: subscriptions {
 explore: users {
   persist_for: "1 hour"
   label: "Customer Service Portal"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies]
 
   join: tickets {
     relationship: one_to_many
@@ -832,7 +832,7 @@ explore: recipes {}
 
 explore: recipe_feedback_surveys {
   label: "Recipe Feedback Surveys"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies]
 
   join: recipe_feedbacks {
     relationship: one_to_many
@@ -911,7 +911,7 @@ explore: heap_sessions {}
 
 explore: credit_transactions{
   label: "Order Credits"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies]
 
   join: credit_transaction_groups {
     relationship: many_to_one
@@ -975,7 +975,7 @@ explore: credit_transactions{
 
 explore: refunds {
   label: "Order Refunds"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies]
 
   join: cx_rep_user {
       from: users
