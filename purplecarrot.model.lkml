@@ -871,7 +871,6 @@ explore: recipe_feedback_surveys {
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
-
   }
 
   join: skus {
