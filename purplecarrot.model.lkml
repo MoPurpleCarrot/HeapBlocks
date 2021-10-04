@@ -874,6 +874,7 @@ explore: recipe_feedback_surveys {
   }
 
   join: skus {
+    type: inner
     relationship: one_to_many
     sql_on: ${skus.id}=${recipe_feedbacks.sku_id} and ${skus.id}=${order_items.sku_id} ;;
   }
