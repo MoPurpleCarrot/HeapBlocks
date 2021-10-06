@@ -83,6 +83,7 @@ view: order_items {
   dimension:  deleted_yn {
     type: yesno
     sql:  ${deleted_date} > 2015-01-01;;
+    hidden: yes
   }
 
   dimension: discount_cents {
@@ -134,16 +135,19 @@ view: order_items {
   dimension: tax_code {
     type: string
     sql: ${TABLE}.tax_code ;;
+    hidden: yes
   }
 
   dimension: recipe_or_sku {
     type: string
     sql: ${TABLE}.type ;;
+    hidden: yes
   }
 
   dimension: recipe_meal_type {
     type: string
     sql: ${products.recipe_meal_type};;
+    hidden: yes
   }
 
   dimension: order_plan_code {
@@ -170,8 +174,9 @@ view: order_items {
           WHEN ${recipe_meal_type} = 2 THEN 'Lunch'
           WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
           WHEN ${recipe_meal_type} = 3 THEN 'Extension'
-          WHEN ${recipe_meal_type} = 0 AND ${order_plan_name} = 'Prepared' THEN 'Dinner - Prep'
-          WHEN ${recipe_meal_type} = 0 THEN 'Dinner - MK'
+          WHEN ${recipe_meal_type} = 0 AND ${skus.plan_group} = 'prepared_one_serving' THEN 'Dinner - Prep'
+          WHEN ${recipe_meal_type} = 0 AND ${skus.plan_group} = 'four_servings' THEN 'Dinner - MK - 4'
+          WHEN ${recipe_meal_type} = 0 THEN 'Dinner - MK - 2'
           END
           ;;
   }
@@ -212,8 +217,8 @@ view: order_items {
 
   dimension: dinner_kit_count {
     type: number
-    sql: case when ${recipe_meal_type} = 0 and ${skus.servings} = 4 Then 2
-          When ${recipe_meal_type} = 0 and ${order_plan_code} = 6 Then 1
+    sql: case when ${recipe_meal_type} = 0 and ${skus.plan_group} = 'four_servings' Then 2
+          When ${recipe_meal_type} = 0 and ${skus.plan_group} = 'six_servings' Then 1
           When ${recipe_meal_type} = 0 Then 1
           Else 0
           END
@@ -267,7 +272,7 @@ view: order_items {
  dimension: item_quantity {
     type: number
     sql:  CASE WHEN ${recipe_meal_type} = 3 THEN ${TABLE}.quantity
-  WHEN ${order_plan_name} = 'Prepared' THEN ${TABLE}.quantity
+  WHEN ${skus.plan_group} = 'prepared_one_serving' THEN ${TABLE}.quantity
   Else 1
   END
   ;;
@@ -276,8 +281,8 @@ view: order_items {
   dimension: item_quantity_post_carts {
     type: number
     sql:  CASE WHEN ${recipe_meal_type} = 3 THEN ${TABLE}.quantity
-        WHEN (${order_plan_name} = 'Prepared' and ${recipe_meal_type} = 0) THEN ${TABLE}.quantity
-        WHEN (${order_plan_name} = 'Four Serving' and ${recipe_meal_type} = 0) THEN 2
+        WHEN (${skus.plan_group} = 'prepared_one_serving' and ${recipe_meal_type} = 0) THEN ${TABLE}.quantity
+        WHEN (${skus.plan_group} = 'four_servings' and ${recipe_meal_type} = 0) THEN 2
         Else 1
         END
         ;;
