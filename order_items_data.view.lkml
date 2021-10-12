@@ -183,11 +183,10 @@ view: order_items_data {
           WHEN ${recipe_meal_type} = 2 THEN 'Lunch'
           WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
           WHEN ${recipe_meal_type} = 3 THEN 'Extension'
-          WHEN ${recipe_meal_type} = 0 AND ${order_plan_name} = 'Prepared' THEN 'Dinner - Prep'
-          WHEN ${recipe_meal_type} = 0 THEN 'Dinner - MK'
+          WHEN ${recipe_meal_type} = 0 AND ${skus.plan_group} = 'prepared_one_serving' THEN 'Dinner - Prep'
+          WHEN ${recipe_meal_type} = 0 AND ${skus.plan_group} = 'four_servings' THEN 'Dinner - MK - 4'          WHEN ${recipe_meal_type} = 0 THEN 'Dinner - MK'
           END
           ;;
-      hidden: yes
     }
 
 
@@ -218,16 +217,16 @@ view: order_items_data {
       hidden: yes
     }
 
-    dimension: dinner_kit_count {
-      type: number
-      sql: case when ${recipe_meal_type} = 0 and ${skus.servings} = 4 Then 2
-          When ${recipe_meal_type} = 0 and ${order_plan_code} = 6 Then 1
+  dimension: dinner_kit_count {
+    type: number
+    sql: case when ${recipe_meal_type} = 0 and ${skus.plan_group} = 'four_servings' Then 2
+          When ${recipe_meal_type} = 0 and ${skus.plan_group} = 'six_servings' Then 1
           When ${recipe_meal_type} = 0 Then 1
           Else 0
           END
           ;;
-      hidden: yes
-    }
+    hidden: yes
+  }
 
     dimension: extension_binary {
       type: number
@@ -270,19 +269,34 @@ view: order_items_data {
       hidden: yes
     }
 
-    dimension: item_quantity {
-      type: number
-      sql:  CASE WHEN ${recipe_meal_type} = 3 THEN ${TABLE}.quantity
-          WHEN ${order_plan_name} = 'Prepared' THEN ${TABLE}.quantity
-          Else 1
-          END
-          ;;
-    }
+  dimension: item_quantity {
+    type: number
+    sql:  CASE WHEN ${recipe_meal_type} = 3 THEN ${TABLE}.quantity
+        WHEN ${skus.plan_group} = 'prepared_one_serving' THEN ${TABLE}.quantity
+        Else 1
+        END
+        ;;
+  }
+
+  dimension: item_quantity_post_carts {
+    type: number
+    sql:  CASE WHEN ${recipe_meal_type} = 3 THEN ${TABLE}.quantity
+        WHEN (${skus.plan_group} = 'prepared_one_serving' and ${recipe_meal_type} = 0) THEN ${TABLE}.quantity
+        WHEN (${skus.plan_group} = 'four_servings' and ${recipe_meal_type} = 0) THEN 2
+        Else 1
+        END
+        ;;
+  }
 
     measure: total_items {
       type: sum
       sql: ${item_quantity} ;;
     }
+
+  measure: total_items_post_carts {
+    type: sum
+    sql: ${item_quantity_post_carts} ;;
+  }
 
     dimension: breakfast_revenue {
       type: number

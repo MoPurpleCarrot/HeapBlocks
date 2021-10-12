@@ -74,6 +74,7 @@ view: skus {
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
+    hidden: yes
   }
 
   dimension: calories {
@@ -138,6 +139,8 @@ view: skus {
   dimension: ingredients {
     type: string
     sql: ${TABLE}.ingredients ;;
+    hidden: yes
+
   }
 
   dimension: min_quantity__bigint {
@@ -155,6 +158,7 @@ view: skus {
   dimension: nutrition_label {
     type: string
     sql: ${TABLE}.nutrition_label ;;
+    hidden: yes
   }
 
   dimension: plan_group {
@@ -268,16 +272,19 @@ view: skus {
   dimension: subtitle {
     type: string
     sql: ${TABLE}.subtitle ;;
+    hidden: yes
   }
 
   dimension: tax_code {
     type: string
     sql: ${TABLE}.tax_code ;;
+    hidden: yes
   }
 
   dimension: title {
     type: string
     sql: ${TABLE}.title ;;
+    hidden: yes
   }
 
   dimension: ingredient_id {

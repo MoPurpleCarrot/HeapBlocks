@@ -235,7 +235,16 @@ view: customer_issues {
 
   dimension: category {
     type: string
-    sql: case
+    sql:
+     case
+          when (${product_type}='Prepared' and ${TABLE}."reason" = 'Container Broken') then 'Fulfillment'
+          when (${product_type}='Prepared'and ${TABLE}."reason" = 'Overripe') then 'Bad Entry'
+          when (${product_type}='Prepared'and ${TABLE}."reason" = 'Underripe') then 'Bad Entry'
+          when (${product_type}='Prepared'and ${TABLE}."reason" = 'Damaged Garlic') then 'Bad Entry'
+          when (${product_type}='Prepared'and ${TABLE}."reason" = 'Missing Booklet') then 'Bad Entry'
+          when (${product_type}='Prepared'and ${TABLE}."reason" = 'Missing Garlic') then 'Bad Entry'
+          when (${product_type}='Prepared'and ${TABLE}."reason" = 'Missing Ingredient') then 'Bad Entry'
+
           when ${TABLE}."reason" = 'Arrived After Dinner' then 'Shipping'
           when ${TABLE}."reason" = 'Arrived Late 1+ Days' then 'Shipping'
           when ${TABLE}."reason" = 'Arrived Warm' then 'Shipping'
@@ -435,7 +444,15 @@ view: customer_issues {
 
   dimension: ab_anomalies {
     type: yesno
-    sql: (${reason}='Missing Booklet' and ${menus.ship_week_mon_start_date}='2021/08/09' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan sour cream' and ${menus.ship_week_mon_start_date}='2021/07/26' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago')   ;;
+    sql: (${reason}='Missing Booklet' and ${menus.ship_week_mon_start_date}='2021/08/09' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan sour cream' and ${menus.ship_week_mon_start_date}='2021/07/26' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Ingredient Substitution' and ${ingredients.ingredient_name}='almond milk' and ${menus.ship_week_mon_start_date}='2021/09/13' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan cabbage kimchi' and ${menus.ship_week_mon_start_date}='2021/09/06' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='peanut butter' and ${menus.ship_week_mon_start_date}='2021/08/23' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name} like 'Treeline%' and ${ingredients.ingredient_name} not like '%French-Style%' and ${menus.ship_week_mon_start_date}='2021/08/16' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago')  ;;
+  }
+  dimension: so_anomalies {
+    type: yesno
+    sql: (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan cabbage kimchi' and ${menus.ship_week_mon_start_date}='2021/09/06' and ${orders_data.ship_template_fulfillment_center}='ShipOnce_Parsippany')   ;;
+  }
+  dimension: gf_anomalies {
+    type: yesno
+    sql: (${reason}='Ingredient Substitution' and ${ingredients.ingredient_name}='almond milk' and ${menus.ship_week_mon_start_date}='2021/09/13' and ${orders_data.ship_template_fulfillment_center}='Get_Fresh_Las_Vegas')   ;;
   }
 
   ## anomalies check https://purplecarrot.looker.com/explore/purplecarrot/users_data?qid=QetXklePMVtB8yAQpPXnkb&origin_space=86&toggle=fil

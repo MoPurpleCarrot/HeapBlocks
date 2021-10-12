@@ -29,6 +29,7 @@ view: recipe_feedbacks {
   dimension: recipe_id {
     type: number
     sql: ${TABLE}.recipe_id ;;
+    hidden: yes
   }
 
   dimension: sku_id {

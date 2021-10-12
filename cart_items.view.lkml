@@ -20,6 +20,7 @@ view: cart_items {
       year
     ]
     sql: ${TABLE}._sdc_batched_at ;;
+    hidden: yes
   }
 
   dimension_group: _sdc_extracted {
@@ -34,6 +35,7 @@ view: cart_items {
       year
     ]
     sql: ${TABLE}._sdc_extracted_at ;;
+    hidden: yes
   }
 
   dimension_group: _sdc_received {
@@ -48,16 +50,19 @@ view: cart_items {
       year
     ]
     sql: ${TABLE}._sdc_received_at ;;
+    hidden: yes
   }
 
   dimension: _sdc_sequence {
     type: number
     sql: ${TABLE}._sdc_sequence ;;
+    hidden: yes
   }
 
   dimension: _sdc_table_version {
     type: number
     sql: ${TABLE}._sdc_table_version ;;
+    hidden: yes
   }
 
   dimension: cart_id {
@@ -93,6 +98,7 @@ view: cart_items {
   dimension: sku_id {
     type: number
     sql: ${TABLE}.sku_id ;;
+    hidden: yes
   }
 
   dimension: sku_point_value {
@@ -112,6 +118,7 @@ view: cart_items {
       year
     ]
     sql: ${TABLE}.updated_at ;;
+    hidden: yes
   }
 
   dimension_group: deleted {
@@ -126,7 +133,7 @@ view: cart_items {
   dimension: item_quantity {
     type: number
     sql:  CASE WHEN ${post_cart_products.recipe_meal_type} = 3 THEN ${TABLE}.quantity
-        WHEN ${post_cart_carts.plan_name} = 'Prepared' THEN ${TABLE}.quantity
+        WHEN ${post_cart_skus.plan_group} = 'prepared_one_serving' THEN ${TABLE}.quantity
         Else 1
         END
         ;;
@@ -145,8 +152,9 @@ view: cart_items {
           WHEN ${recipe_meal_type_2} = 2 THEN 'Lunch'
           WHEN ${recipe_meal_type_2} = 1 THEN 'Breakfast'
           WHEN ${recipe_meal_type_2} = 3 THEN 'Extension'
-          WHEN ${recipe_meal_type_2} = 0 AND ${post_cart_carts.plan_name} = 'Prepared' THEN 'Dinner - Prep'
-          WHEN ${recipe_meal_type_2} = 0 THEN 'Dinner - MK'
+          WHEN ${recipe_meal_type_2} = 0 AND ${post_cart_skus.plan_group} = 'prepared_one_serving' THEN 'Dinner - Prep'
+          WHEN ${recipe_meal_type_2} = 0 AND ${post_cart_skus.plan_group} = 'four_servings' THEN 'Dinner - MK - 4'
+          WHEN ${recipe_meal_type_2} = 0 THEN 'Dinner - MK - 2'
           END;;
   }
 
