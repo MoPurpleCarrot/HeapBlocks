@@ -31,17 +31,25 @@ view: post_cart_customization_events_derived {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: delivery2 {
+    type: date
+    hidden:  yes
+    sql: case when ${TABLE}.delivery_date = '' THEN NULL
+          ELSE  ${TABLE}.delivery_date
+          END;;
+  }
+
   dimension_group: delivery {
     type: time
-    timeframes: [time, date, week, month, day_of_week]
     hidden:  yes
-    sql: ${TABLE}.delivery_date ;;
+    timeframes: [time, date, week, month, day_of_week]
+    sql: ${delivery2} ;;
   }
 
   dimension: delivery_date_mon_start{
     type: date
     convert_tz: no
-    hidden:  yes
+    hidden: yes
     sql: case
     when ${delivery_day_of_week} = 'Sunday' THEN dateadd(d, 1, ${delivery_date})
     when ${delivery_day_of_week} = 'Monday' THEN ${delivery_date}
@@ -68,9 +76,18 @@ view: post_cart_customization_events_derived {
     sql: ${TABLE}.cart_id ;;
   }
 
+
+  dimension: ship_week2 {
+    type: date
+    hidden: yes
+    sql: CASE WHEN ${TABLE}.ship_week = '' then NULL
+          ELSE  ${TABLE}.ship_week
+          end ;;
+  }
+
   dimension: ship_week {
     type: date
-    sql: coalesce(${TABLE}.ship_week, delivery_date_mon_start) ;;
+    sql: coalesce(${ship_week2}, ${delivery_date_mon_start}) ;;
   }
 
   dimension: cart_rank {
@@ -78,6 +95,6 @@ view: post_cart_customization_events_derived {
     sql: ${TABLE}.cart_rank ;;
   }
   set: detail {
-    fields: [created_at_time,delivery_date,delivery_date_mon_start, name, user_id, cart_id, ship_week, cart_rank]
+    fields: [created_at_time, delivery_date, delivery_date_mon_start, name, user_id, cart_id, ship_week2, cart_rank]
   }
 }
