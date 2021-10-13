@@ -56,7 +56,13 @@ explore: heap_users{
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+  }
 
+  join: new_sub_coupon_tracking {
+    from: coupons
+    relationship: many_to_one
+    sql_on: ${first_order.coupon_id} = ${new_sub_coupon_tracking.id} ;;
+    fields: [new_sub_coupon_tracking.code]
   }
 
   join: user_facts {
@@ -133,7 +139,7 @@ explore: heap_users{
 
 explore: subscriptions {
   label: "Users, Orders & Recipes"
-  fields: [ALL_FIELDS*, -orders.days_since_created, -orders.month_num, -orders.week_num]
+  fields: [ALL_FIELDS*, -orders.days_since_created, -orders.month_num, -orders.week_num, -users.utm_source_groups]
 
   join: orders {
     relationship: many_to_one
@@ -199,7 +205,6 @@ explore: subscriptions {
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
-
   }
 
 
@@ -337,6 +342,13 @@ explore: users {
   join: coupons {
     relationship: many_to_one
     sql_on: ${orders.coupon_id} = ${coupons.id} ;;
+  }
+
+  join: new_sub_coupon_tracking {
+    from: coupons
+    relationship: many_to_one
+    sql_on: ${first_order.coupon_id} = ${new_sub_coupon_tracking.id} ;;
+    fields: [new_sub_coupon_tracking.code]
   }
 
   join: coupons__allowed_orders_counts {
@@ -569,6 +581,8 @@ explore: carts {
 }
 
 explore: zd_tickets{
+  fields: [ALL_FIELDS*, -users.utm_source_groups]
+
   join: zd_users {
     relationship: many_to_one
     sql_on: ${zd_tickets.submitter_id} = ${zd_users.zd_id};;
@@ -626,6 +640,8 @@ explore: customer_io_email{
   }
 
 explore: users_for_email{
+  fields: [ALL_FIELDS*, -users_for_email.utm_source_groups]
+
   from:  users
   label: "Customer.io Email With User Data"
   join: customer_io_email {
@@ -796,6 +812,13 @@ explore: gift_purchases {
     sql_on: ${events.subscription_id} = ${subscriptions.id} ;;
   }
 
+  join: new_sub_coupon_tracking {
+    from: coupons
+    relationship: many_to_one
+    sql_on: ${first_order.coupon_id} = ${new_sub_coupon_tracking.id} ;;
+    fields: [new_sub_coupon_tracking.code]
+  }
+
 }
 
 explore: ingredients {
@@ -832,7 +855,7 @@ explore: recipes {}
 
 explore: recipe_feedback_surveys {
   label: "Recipe Feedback Surveys"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies, -users.utm_source_groups]
 
   join: recipe_feedbacks {
     relationship: one_to_many
@@ -911,7 +934,7 @@ explore: heap_sessions {}
 
 explore: credit_transactions{
   label: "Order Credits"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies, -cx_rep_user.utm_source_groups, -users.utm_source_groups]
 
   join: credit_transaction_groups {
     relationship: many_to_one
@@ -975,7 +998,7 @@ explore: credit_transactions{
 
 explore: refunds {
   label: "Order Refunds"
-  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies]
+  fields: [ALL_FIELDS*, -customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies, -cx_rep_user.utm_source_groups, -users.utm_source_groups]
 
   join: cx_rep_user {
       from: users
@@ -1061,6 +1084,8 @@ explore: prep_needs {
 }
 
 explore: seasonal_order {
+  fields: [ALL_FIELDS*, -users.utm_source_groups]
+
   join: users {
     relationship:many_to_one
     sql_on: ${seasonal_order.customer_id}=${users.id} ;;
@@ -1090,6 +1115,7 @@ explore: coupons {}
 #Intercom joining
 
 explore: Intercom_conversations {
+  fields: [ALL_FIELDS*, -users.utm_source_groups]
 
   join: Intercom_users {
     relationship:  one_to_many
@@ -1174,6 +1200,7 @@ join: intercom_derived_firstmessage {
 }
 
 explore: users_data{
+  fields: [ALL_FIELDS*, -users_data.utm_source_groups, -cx_rep_user.utm_source_groups]
   from: users
   label: "Ops Report"
 
@@ -1369,6 +1396,8 @@ explore: bing_ads_ad_performance_report {
 }
 
 explore: SAB {
+  fields: [ALL_FIELDS*, -users.utm_source_groups]
+
   from: giveaways
 
   join: sab_sent {
@@ -1410,4 +1439,6 @@ explore: SAB {
     relationship:  one_to_one
     sql_on: ${SAB.id}= ${redeeming_subscriptions.giveaway_id} ;;
   }
+
+
 }
