@@ -132,11 +132,12 @@ view: cart_items {
 
   dimension: item_quantity {
     type: number
-    sql:  CASE WHEN ${post_cart_products.recipe_meal_type} = 3 THEN ${TABLE}.quantity
-        WHEN ${post_cart_skus.plan_group} = 'prepared_one_serving' THEN ${TABLE}.quantity
-        Else 1
-        END
-        ;;
+    sql:  CASE WHEN ${recipe_meal_type_2} = 3 THEN ${TABLE}.quantity
+    WHEN (${post_cart_skus.plan_group} = 'prepared_one_serving' and ${recipe_meal_type_2} = 0) THEN ${TABLE}.quantity
+    WHEN (${post_cart_skus.plan_group} = 'four_servings' and ${recipe_meal_type_2} = 0) THEN 2
+    Else 1
+    END
+    ;;
   }
 
 
