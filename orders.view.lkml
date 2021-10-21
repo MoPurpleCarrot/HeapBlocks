@@ -359,6 +359,11 @@ view: orders {
     sql: ${TABLE}.tax_amount ;;
   }
 
+  dimension: box_defintion {
+    type: number
+    sql: ${TABLE}.box_definition ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
