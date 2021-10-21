@@ -498,9 +498,15 @@ explore: users {
     join: sab_sent_30days {
       relationship: one_to_one
       sql_on: ${users.id} = ${sab_sent_30days.user_id} ;;
+      }
+
+    join: shipments {
+        relationship: many_to_one
+        sql_on: ${shipments.order_id} = ${orders.id} ;;
+      }
+
 
 ### add carts data
-  }
   join: post_cart_carts {
     from: carts
     relationship: one_to_many
