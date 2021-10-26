@@ -178,7 +178,6 @@ view: products {
   dimension: tax_code {
     type: string
     sql: ${TABLE}.tax_code ;;
-    hidden: yes
   }
 
   dimension: meal_name {
