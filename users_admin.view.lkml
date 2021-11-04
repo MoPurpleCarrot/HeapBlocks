@@ -529,7 +529,8 @@ view: users {
     type: string
     sql: case when ${TABLE}.segment_membership in ('Null', 'No Segment')
     then 'Rest of Market'
-    else ${TABLE}.segment_membership;;
+    else ${TABLE}.segment_membership
+    end;;
   }
 
   dimension: sign_up_method{
