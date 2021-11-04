@@ -456,8 +456,11 @@ view: users {
 
   dimension: utm_source_groups {
     type: string
-    sql: case when ${utm_campaign} = 'gift' or ${signup_flow} = 1 then 'Gift'
-        when lower(${coupons.code}) = 'purplefall21'or lower(${coupons.code}) = 'fallback2pc' then 'Direct Mail'
+    sql: case
+        when lower(${new_sub_coupon_tracking.code}) = 'purplefall21' then 'Direct Mail'
+        when lower(${new_sub_coupon_tracking.code}) = 'fallback2pc' then 'Direct Mail'
+        when lower(${new_sub_coupon_tracking.code}) = 'pcspotify' then 'Audio'
+        when (${utm_campaign} = 'gift' or ${signup_flow} = 1) then 'Gift'
         when lower(${utm_source}) like '%facebook%' then 'Facebook'
         when ${utm_source} like '%FB%' then 'Facebook'
         when ${utm_source} like '%utm_source%' then 'Facebook'
@@ -471,7 +474,6 @@ view: users {
         when ${utm_source} like '%veganbox%' then 'Adwords NB'
         when lower(${utm_source}) = 'organic' then 'Organic'
         when lower(${utm_source}) = 'audio' then 'Audio'
-        when lower(${coupons.code}) = 'pcspotify' then 'Audio'
         when ${utm_source} = 'none' then 'Organic'
         when ${utm_source} is null then 'Organic'
         Else 'Organic'

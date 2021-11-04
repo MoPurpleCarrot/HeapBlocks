@@ -1,11 +1,12 @@
-view: products {
-  sql_table_name: heroku_postgres.products ;;
+view: shipments {
+  sql_table_name: heroku_postgres.shipments ;;
   drill_fields: [id]
 
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    hidden: yes
   }
 
   dimension_group: _sdc_batched {
@@ -21,6 +22,7 @@ view: products {
     ]
     sql: ${TABLE}._sdc_batched_at ;;
     hidden: yes
+
   }
 
   dimension_group: _sdc_extracted {
@@ -36,6 +38,7 @@ view: products {
     ]
     sql: ${TABLE}._sdc_extracted_at ;;
     hidden: yes
+
   }
 
   dimension_group: _sdc_received {
@@ -51,38 +54,28 @@ view: products {
     ]
     sql: ${TABLE}._sdc_received_at ;;
     hidden: yes
+
   }
 
   dimension: _sdc_sequence {
     type: number
     sql: ${TABLE}._sdc_sequence ;;
     hidden: yes
+
   }
 
   dimension: _sdc_table_version {
     type: number
     sql: ${TABLE}._sdc_table_version ;;
     hidden: yes
+
   }
 
-  dimension_group: admin_updated {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.admin_updated_at ;;
-    hidden: yes
-  }
-
-  dimension: brand {
+  dimension: box_size {
     type: string
-    sql: ${TABLE}.brand ;;
+    sql: ${TABLE}.box_size ;;
+    hidden: yes
+
   }
 
   dimension_group: created {
@@ -98,92 +91,125 @@ view: products {
     ]
     sql: ${TABLE}.created_at ;;
     hidden: yes
+
   }
 
-  dimension: image_alt {
-    type: string
-    sql: ${TABLE}.image_alt ;;
+  dimension_group: delivery {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.delivery_on ;;
     hidden: yes
+
   }
 
-  dimension: product_type {
+  dimension: order_id {
     type: number
-    sql: ${TABLE}.product_type ;;
+    sql: ${TABLE}.order_id ;;
     hidden: yes
+
   }
 
-  dimension: recipe_meal_type {
+  dimension: point_value {
     type: number
-    sql: ${TABLE}.recipe_meal_type ;;
+    sql: ${TABLE}.point_value ;;
     hidden: yes
+
   }
 
-  dimension: meal_type {
-    type: string
-    sql:  CASE WHEN ${recipe_meal_type} = 0 THEN 'Dinner'
-          WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
-          WHEN ${recipe_meal_type} = 2 THEN 'Lunch'
-          When ${recipe_meal_type} = 3 THEN 'Extension'
-          ELSE NULL
-          END
-          ;;
-  }
-
-  dimension: rectangle_image {
-    type: string
-    sql: ${TABLE}.rectangle_image ;;
+  dimension_group: ship_template_delivery {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.ship_template_delivery_date ;;
     hidden: yes
+
   }
 
-  dimension: search_keywords {
+  dimension: ship_template_fulfillment_center {
     type: string
-    sql: ${TABLE}.search_keywords ;;
+    sql: ${TABLE}.ship_template_fulfillment_center ;;
     hidden: yes
+
   }
 
-  dimension: seo_description {
-    type: string
-    sql: ${TABLE}.seo_description ;;
+  dimension_group: ship_template_ship {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.ship_template_ship_date ;;
     hidden: yes
+
   }
 
-  dimension: seo_title {
-    type: string
-    sql: ${TABLE}.seo_title ;;
+  dimension: ship_template_shipping_cost {
+    type: number
+    sql: ${TABLE}.ship_template_shipping_cost ;;
     hidden: yes
+
   }
 
-  dimension: show_in_products_catalog {
-    type: yesno
-    sql: ${TABLE}.show_in_products_catalog ;;
+  dimension: ship_template_shipping_provider {
+    type: string
+    sql: ${TABLE}.ship_template_shipping_provider ;;
     hidden: yes
+
   }
 
-  dimension: slug {
-    type: string
-    sql: ${TABLE}.slug ;;
-  }
-
-  dimension: square_image {
-    type: string
-    sql: ${TABLE}.square_image ;;
+  dimension: ship_template_tnt {
+    type: number
+    sql: ${TABLE}.ship_template_tnt ;;
     hidden: yes
+
   }
 
-  dimension: subtitle {
+  dimension: shipment_identifier {
     type: string
-    sql: ${TABLE}.subtitle ;;
+    sql: ${TABLE}.shipment_identifier ;;
+    hidden: yes
+
   }
 
-  dimension: tax_code {
-    type: string
-    sql: ${TABLE}.tax_code ;;
+  dimension: shipment_status {
+    type: number
+    sql: ${TABLE}.shipment_status ;;
+    hidden: yes
+
   }
 
-  dimension: meal_name {
+  dimension: shipping_carrier {
     type: string
-    case_sensitive: no
-    sql: ${TABLE}.title ;;
+    sql: ${TABLE}.shipping_carrier ;;
+    hidden: yes
+
+  }
+
+  dimension: tracking_number {
+    type: string
+    sql: ${TABLE}.tracking_number ;;
+    hidden: yes
+
   }
 
   dimension_group: updated {
@@ -199,10 +225,13 @@ view: products {
     ]
     sql: ${TABLE}.updated_at ;;
     hidden: yes
+
   }
 
   measure: count {
     type: count
-    drill_fields: [id, product_tags_products.count]
+    drill_fields: [id, shipment_items.count]
+    hidden: yes
+
   }
 }

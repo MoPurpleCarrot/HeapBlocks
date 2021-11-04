@@ -272,6 +272,14 @@ view: orders {
     sql: ${TABLE}.ship_template_fulfillment_center ;;
   }
 
+  dimension: prepared_st_fulfillment_center {
+    type: string
+    sql: case when (${plan_name}='Prepared' and (${ship_template_fulfillment_center}='Primo_Pennsylvania' or ${TABLE}.ship_template_fulfillment_center='ShipOnce_Parsippany')) then 'Primo'
+          when (${plan_name}='Prepared' and ${ship_template_fulfillment_center}='Get_Fresh_Las_Vegas') then 'Get Fresh'
+          else null
+          end;;
+  }
+
   dimension: ship_template_shipping_cost {
     type: number
     sql: ${TABLE}.ship_template_shipping_cost ;;
@@ -357,6 +365,11 @@ view: orders {
   dimension: sales_tax {
     type: number
     sql: ${TABLE}.tax_amount ;;
+  }
+
+  dimension: box_defintion {
+    type: number
+    sql: ${TABLE}.box_definition ;;
   }
 
   measure: count {
