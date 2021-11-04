@@ -525,7 +525,9 @@ view: users {
 
   dimension: segment{
     type: string
-    sql: ${TABLE}.segment_membership ;;
+    sql: case when ${TABLE}.segment_membership in ('Null', 'No Segment')
+    then 'Rest of Market'
+    else ${TABLE}.segment_membership;;
   }
 
   dimension: sign_up_method{
