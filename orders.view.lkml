@@ -372,9 +372,19 @@ view: orders {
     sql: ${TABLE}.box_definition ;;
   }
 
+  dimension: shipping_zip {
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'zip') ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
+  }
+
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${id} ;;
   }
 
   measure: count_distinct_plan {

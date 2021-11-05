@@ -6,7 +6,7 @@ view: shipments {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-    hidden: yes
+
   }
 
   dimension_group: _sdc_batched {
@@ -74,7 +74,6 @@ view: shipments {
   dimension: box_size {
     type: string
     sql: ${TABLE}.box_size ;;
-    hidden: yes
 
   }
 
@@ -143,7 +142,6 @@ view: shipments {
   dimension: ship_template_fulfillment_center {
     type: string
     sql: ${TABLE}.ship_template_fulfillment_center ;;
-    hidden: yes
 
   }
 
@@ -173,21 +171,21 @@ view: shipments {
   dimension: ship_template_shipping_provider {
     type: string
     sql: ${TABLE}.ship_template_shipping_provider ;;
-    hidden: yes
+
 
   }
 
   dimension: ship_template_tnt {
     type: number
     sql: ${TABLE}.ship_template_tnt ;;
-    hidden: yes
+
 
   }
 
   dimension: shipment_identifier {
     type: string
     sql: ${TABLE}.shipment_identifier ;;
-    hidden: yes
+
 
   }
 
@@ -208,7 +206,6 @@ view: shipments {
   dimension: tracking_number {
     type: string
     sql: ${TABLE}.tracking_number ;;
-    hidden: yes
 
   }
 
@@ -230,8 +227,7 @@ view: shipments {
 
   measure: count {
     type: count
-    drill_fields: [id, shipment_items.count]
-    hidden: yes
+    drill_fields: [id]
 
   }
 }

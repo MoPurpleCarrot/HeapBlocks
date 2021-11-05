@@ -477,6 +477,11 @@ explore: users {
     sql_on: ${shipments.order_id} = ${orders.id} ;;
   }
 
+  join: shipment_items {
+    relationship: many_to_one
+    sql_on: ${shipment_items.sku_id}=${skus.id} and ${shipment_items.shipment_id}=${shipments.id} ;;
+  }
+
   join: giveaways {
     view_label: "SAB"
     relationship: many_to_one
