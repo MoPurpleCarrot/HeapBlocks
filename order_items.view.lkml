@@ -389,11 +389,12 @@ view: order_items {
     sql:${sku_id} ;;
     }
 
-  measure: flex_flag {
-    type:  number
-      sql: case when ${mk_count} >0 and ${prep_count}>0
-      then 1
-      else 0
+  measure: flex_contract_box_type {
+    type:  string
+      sql: case when ${mk_count}>0 and ${prep_count}>0 then 'Flex'
+      when  ${mk_count}>0 and ${prep_count}=0 then 'Meal Kit'
+      when ${mk_count}=0 and  ${prep_count}>0 then 'Prepared'
+      else null
       end;;
 
   }
