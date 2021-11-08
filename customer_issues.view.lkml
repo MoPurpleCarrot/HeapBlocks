@@ -455,8 +455,12 @@ view: customer_issues {
     sql: (${reason}='Ingredient Substitution' and ${ingredients.ingredient_name}='almond milk' and ${menus.ship_week_mon_start_date}='2021/09/13' and ${orders_data.ship_template_fulfillment_center}='Get_Fresh_Las_Vegas')   ;;
   }
 
-  ## anomalies check https://purplecarrot.looker.com/explore/purplecarrot/users_data?qid=QetXklePMVtB8yAQpPXnkb&origin_space=86&toggle=fil
+  dimension: primo_anomalies {
+    type: yesno
+    sql: (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='tomato powder' and ${menus.ship_week_mon_start_date}='2021/10/25' and ${orders_data.ship_template_fulfillment_center}='Primo_Pennsylvania')   ;;
+  }
 
+  ## anomalies check   https://purplecarrot.looker.com/dashboards-next/130
 
 
   set: issues_drilldown{
