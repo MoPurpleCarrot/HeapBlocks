@@ -122,6 +122,7 @@ view: order_items {
     sql: ${TABLE}.recipe_id ;;
   }
 
+
   dimension: tax_amount_cents {
     type: number
     sql: ${TABLE}.tax_amount_cents ;;
@@ -374,5 +375,27 @@ view: order_items {
     type: sum
     sql: ${price_cents} ;;
     value_format_name: usd
+  }
+
+  measure: mk_count {
+    type:  count_distinct
+    filters: [item_type: "Breakfast,Lunch,Dinner - MK - 2,Dinner - MK - 4"]
+    sql:${sku_id} ;;
+    }
+
+  measure: prep_count {
+    type:  count_distinct
+    filters: [item_type: "Dinner - Prep"]
+    sql:${sku_id} ;;
+    }
+
+  measure: flex_contract_box_type {
+    type:  string
+      sql: case when ${mk_count}>0 and ${prep_count}>0 then 'Flex'
+      when  ${mk_count}>0 and ${prep_count}=0 then 'Meal Kit'
+      when ${mk_count}=0 and  ${prep_count}>0 then 'Prepared'
+      else null
+      end;;
+
   }
 }

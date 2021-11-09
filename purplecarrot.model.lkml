@@ -288,11 +288,14 @@ explore: users {
   join: shipping_addresses {
     relationship: one_to_many
     sql_on: ${users.id} = ${shipping_addresses.user_id} ;;
-  }
-
-  join: orders {
+  } join: orders {
     relationship: one_to_many
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
+  }
+
+ join: flex_contract {
+    relationship: one_to_one
+    sql_on: ${flex_contract.order_id} = ${orders.id} ;;
   }
 
   join: customer_issues {
