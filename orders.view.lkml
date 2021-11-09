@@ -368,7 +368,7 @@ view: orders {
   }
 
   dimension: box_defintion {
-    type: number
+    type: string
     sql: ${TABLE}.box_definition ;;
   }
 

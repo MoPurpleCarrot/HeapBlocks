@@ -225,6 +225,20 @@ view: shipments {
 
   }
 
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.deleted_at ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
