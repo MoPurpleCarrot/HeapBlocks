@@ -295,6 +295,11 @@ explore: users {
     sql_on: ${subscriptions.id} = ${orders.subscription_id} ;;
   }
 
+  join: flex_contract {
+    relationship: one_to_one
+    sql_on: ${flex_contract.order_id} = ${orders.id} ;;
+  }
+
   join: customer_issues {
     relationship: one_to_many
     sql_on: ${orders.id}=${customer_issues.order_id} ;;

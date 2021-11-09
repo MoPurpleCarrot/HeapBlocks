@@ -9,11 +9,11 @@ view: flex_contract {
       }
     }
   }
-  dimension: id {
+  dimension: order_id {
     primary_key: yes
     type: number
   }
   dimension: box_type {
-    type: number
+    type: string
   }
 }
