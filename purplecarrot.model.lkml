@@ -295,7 +295,7 @@ explore: users {
 
  join: flex_contract {
     relationship: one_to_one
-    sql_on: ${flex_contract.order_id}.id} = ${orders.id} ;;
+    sql_on: ${flex_contract.order_id} = ${orders.id} ;;
   }
 
   join: customer_issues {
