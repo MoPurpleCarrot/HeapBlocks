@@ -372,6 +372,12 @@ view: orders {
     sql: ${TABLE}.box_definition ;;
   }
 
+  dimension: box_size {
+    type: string
+    sql: ${TABLE}.box_size ;;
+    hidden: yes
+  }
+
   dimension: shipping_zip {
     type: string
     sql: json_extract_path_text(${TABLE}.shipping_address, 'zip') ;;
