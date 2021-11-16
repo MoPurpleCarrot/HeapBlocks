@@ -290,6 +290,11 @@ view: customer_issues {
     ;;
     }
 
+    dimension: known_issue{
+      type: string
+      sql: ${TABLE}.include_in_reporting ;;
+    }
+
 
 
   measure: count_fulfillment_drills {
@@ -442,9 +447,23 @@ view: customer_issues {
     value_format_name: usd
   }
 
+  measure: sum_credits{
+    type: sum_distinct
+    sql: case when ${action}= 0
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
+  measure: sum_refunds{
+    type: sum
+    sql: case when ${action}= 2
+      then ${amount} else null end ;;
+    value_format_name: usd
+  }
+
   dimension: ab_anomalies {
     type: yesno
-    sql: (${reason}='Missing Booklet' and ${menus.ship_week_mon_start_date}='2021/08/09' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan sour cream' and ${menus.ship_week_mon_start_date}='2021/07/26' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Ingredient Substitution' and ${ingredients.ingredient_name}='almond milk' and ${menus.ship_week_mon_start_date}='2021/09/13' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan cabbage kimchi' and ${menus.ship_week_mon_start_date}='2021/09/06' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='peanut butter' and ${menus.ship_week_mon_start_date}='2021/08/23' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name} like 'Treeline%' and ${ingredients.ingredient_name} not like '%French-Style%' and ${menus.ship_week_mon_start_date}='2021/08/16' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='nutritional yeast' and ${menus.ship_week_mon_start_date}='2021/10/18' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Ingredient Substitution'and ${ingredients.ingredient_name}='nutritional yeast' and ${menus.ship_week_mon_start_date}='2021/10/18' and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='potato buns'and ${menus.ship_week_mon_start_date}='2021/10/25'and ${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago')  ;;
+    sql:${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago' and ((${reason}='Missing Booklet' and ${menus.ship_week_mon_start_date}='2021/08/09') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan sour cream' and ${menus.ship_week_mon_start_date}='2021/07/26') or (${reason}='Ingredient Substitution' and ${ingredients.ingredient_name}='almond milk' and ${menus.ship_week_mon_start_date}='2021/09/13') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='vegan cabbage kimchi' and ${menus.ship_week_mon_start_date}='2021/09/06') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='peanut butter' and ${menus.ship_week_mon_start_date}='2021/08/23') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name} like 'Treeline%' and ${ingredients.ingredient_name} not like '%French-Style%' and ${menus.ship_week_mon_start_date}='2021/08/16') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='nutritional yeast' and ${menus.ship_week_mon_start_date}='2021/10/18') or (${reason}='Ingredient Substitution'and ${ingredients.ingredient_name}='nutritional yeast' and ${menus.ship_week_mon_start_date}='2021/10/18') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='potato buns'and ${menus.ship_week_mon_start_date}='2021/10/25') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='lime'and ${menus.ship_week_mon_start_date}='2021/10/25') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='tomato powder'and ${menus.ship_week_mon_start_date}='2021/10/25'));;
   }
   dimension: so_anomalies {
     type: yesno
@@ -452,12 +471,12 @@ view: customer_issues {
   }
   dimension: gf_anomalies {
     type: yesno
-    sql: (${reason}='Ingredient Substitution' and ${ingredients.ingredient_name}='almond milk' and ${menus.ship_week_mon_start_date}='2021/09/13' and ${orders_data.ship_template_fulfillment_center}='Get_Fresh_Las_Vegas')   ;;
+    sql: ${orders_data.ship_template_fulfillment_center}='Get_Fresh_Las_Vegas' and ((${reason}='Ingredient Substitution' and ${ingredients.ingredient_name}='almond milk' and ${menus.ship_week_mon_start_date}='2021/09/13') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='lime'and ${menus.ship_week_mon_start_date}='2021/10/25') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='tomato powder'and ${menus.ship_week_mon_start_date}='2021/10/25') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name} = ' raisins ' and ${menus.ship_week_mon_start_date}='2021/11/08')) ;;
   }
 
   dimension: primo_anomalies {
     type: yesno
-    sql: (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='tomato powder' and ${menus.ship_week_mon_start_date}='2021/10/25' and ${orders_data.ship_template_fulfillment_center}='Primo_Pennsylvania')   ;;
+    sql: ${orders_data.ship_template_fulfillment_center}='Primo_Pennsylvania' and ((${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='tomato powder' and ${menus.ship_week_mon_start_date}='2021/10/25') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='lime'and ${menus.ship_week_mon_start_date}='2021/10/25') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='togarashi'and ${menus.ship_week_mon_start_date}='2021/11/01'))  ;;
   }
 
   ## anomalies check   https://purplecarrot.looker.com/dashboards-next/130
@@ -474,7 +493,7 @@ view: customer_issues {
       customer_issues.ingredient_quantity,
       ingredients.ingredient_name,
       customer_issues.ops_sum_credits,
-      customer_issues.ops_sum_refunds
+      customer_issues.ops_sum_refund
     ]
   }
 
