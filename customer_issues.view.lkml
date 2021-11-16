@@ -290,7 +290,7 @@ view: customer_issues {
     ;;
     }
 
-    dimension: known_issue{
+    dimension: include_in_reporting{
       type: string
       sql: ${TABLE}.include_in_reporting ;;
     }
