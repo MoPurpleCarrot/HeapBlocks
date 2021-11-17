@@ -137,6 +137,19 @@ view: shipment_items {
         ;;
   }
 
+  dimension: item_type {
+    type: string
+    sql:  CASE
+          WHEN ${recipe_meal_type} = 2 THEN 'Lunch'
+          WHEN ${recipe_meal_type} = 1 THEN 'Breakfast'
+          WHEN ${recipe_meal_type} = 3 THEN 'Extension'
+          WHEN ${recipe_meal_type} = 0 AND ${skus.plan_group} = 'prepared_one_serving' THEN 'Dinner - Prep'
+          WHEN ${recipe_meal_type} = 0 AND ${skus.plan_group} = 'four_servings' THEN 'Dinner - MK - 4'
+          WHEN ${recipe_meal_type} = 0 THEN 'Dinner - MK - 2'
+          END
+          ;;
+  }
+
   dimension_group: deleted {
     type: time
     timeframes: [
