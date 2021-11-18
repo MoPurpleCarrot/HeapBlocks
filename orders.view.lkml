@@ -375,7 +375,6 @@ view: orders {
   dimension: box_size {
     type: string
     sql: ${TABLE}.box_size ;;
-    hidden: yes
   }
 
   dimension: shipping_zip {
