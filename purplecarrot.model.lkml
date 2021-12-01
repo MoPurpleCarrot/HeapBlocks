@@ -513,6 +513,11 @@ explore: users {
       sql_on: ${users.id} = ${sab_sent_30days.user_id} ;;
       }
 
+  join: hgdata {
+    relationship: one_to_one
+    sql_on: ${products.id}=${hgdata.products_id} ;;
+  }
+
 
 ### add carts data
   join: post_cart_carts {

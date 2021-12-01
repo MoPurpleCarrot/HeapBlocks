@@ -65,6 +65,11 @@ view: carts {
     sql: ${TABLE}.box_size ;;
   }
 
+  dimension: box_definition {
+    type: string
+    sql: ${TABLE}.box_definition ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
