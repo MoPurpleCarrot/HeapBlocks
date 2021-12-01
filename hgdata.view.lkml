@@ -88,6 +88,7 @@ view: hgdata {
   dimension: products_id {
     type: number
     sql: ${TABLE}."products id" ;;
+    primary_key: yes
   }
 
   dimension: water_saved_default {
