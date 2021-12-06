@@ -115,11 +115,13 @@ view: hgdata {
   measure: sum_carbon {
     type: sum
     sql: ${carbon_saved} ;;
+    value_format: "0.00"
   }
 
   measure: sum_water {
     type: sum
     sql: ${water_saved} ;;
+    value_format: "0.00"
   }
 
 }
