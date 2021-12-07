@@ -222,4 +222,17 @@ view: carts {
     type: count
     drill_fields: [id, cart_items.count]
   }
+
+  measure: total_planned_count {
+    type: count
+    filters: {
+      field: fulfillment_status
+      value: "Planned"
+    }
+    }
+
+    measure: total_skipped_count {
+      type: count_distinct
+      sql: case when ${fulfillment_status}= 'Skipped' or ${fulfillment_status}= 'Returning' then ${id} else null end ;;
+}
 }
