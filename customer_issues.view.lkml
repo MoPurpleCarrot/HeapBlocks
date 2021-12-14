@@ -468,7 +468,7 @@ view: customer_issues {
 
   dimension: ab_one_time_exclusion {
     type: yesno
-    sql:${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago' and  (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='cremini mushrooms' and ${menus.ship_week_mon_start_date}='2021/11/29'));;
+    sql:${orders_data.ship_template_fulfillment_center}='AtomBanana_Chicago' and (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='cremini mushrooms' and ${menus.ship_week_mon_start_date}='2021/11/29');;
   }
 
   dimension: so_anomalies {
