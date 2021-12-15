@@ -134,8 +134,8 @@ view: cart_items {
     type: number
     sql:  CASE WHEN ${recipe_meal_type_2} = 3 THEN ${TABLE}.quantity
     WHEN (${post_cart_skus.plan_group} = 'prepared_one_serving' and ${recipe_meal_type_2} = 0) THEN ${TABLE}.quantity
-    WHEN (${post_cart_skus.plan_group} = 'four_servings' and ${recipe_meal_type_2} = 0) THEN 2
-    Else 1
+    WHEN (${post_cart_skus.plan_group} = 'four_servings' and ${recipe_meal_type_2} = 0) THEN (2*${TABLE}.quantity)
+    Else (1*${TABLE}.quantity)
     END
     ;;
   }
