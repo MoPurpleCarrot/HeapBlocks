@@ -1461,16 +1461,3 @@ explore: SAB {
 
 
 }
-
-explore: payments {
-fields: [ALL_FIELDS*, -orders.month_num, -orders.week_num,-orders.weeks_after_registered,-orders.months_after_registered,-orders.winback_week_num,-orders.average_revenue, -orders.average_num_orders,-orders.user_with_winback,-orders.Orderdate_minus_winbackdate,-orders.average_revenue_90day,-orders.average_revenue_60day,-orders.average_revenue_30day,-orders.days_since_created]
-
-  join: orders {
-    relationship: one_to_many
-    sql_on: ${orders.id}=${payments.payable_id};;
-  }
-  join: events {
-    relationship: one_to_many
-    sql_on: ${events.id}=${events.order_id} ;;
-  }
-  }
