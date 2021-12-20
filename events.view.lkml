@@ -99,6 +99,11 @@ view: events {
     sql: ${TABLE}.subscription_id ;;
   }
 
+  dimension: order_id{
+    type: string
+    sql: json_extract_path_text(${TABLE}.data, 'order_id') ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
