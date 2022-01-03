@@ -137,6 +137,16 @@ view: gift_purchases {
         label: "Partially Refunded"
       }
 
+      when:{
+        sql: ${status} = 0 ;;
+        label: "Pending Charge"
+      }
+
+      when:{
+        sql: ${status} = 8 ;;
+        label: "Expired"
+      }
+
       else: "Other"
   }}
 
