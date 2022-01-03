@@ -1458,6 +1458,11 @@ explore: SAB {
     relationship:  one_to_one
     sql_on: ${SAB.id}= ${redeeming_subscriptions.giveaway_id} ;;
   }
+  join: redeeming_subscription_order_num_derrived {
+    from: subscription_order_num_derrived
+    relationship: one_to_one
+    sql_on: ${redeeming_subscription_order_num_derrived.subscriptions_id} = ${redeeming_subscriptions.id} ;;
+  }
 
 
 }
