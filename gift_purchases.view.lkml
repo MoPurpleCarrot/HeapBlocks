@@ -359,4 +359,21 @@ view: gift_purchases {
    type: string
    sql: ${TABLE}.test_account ;;
               }
+
+measure: value_sum{
+  type: sum_distinct
+  sql: ${value} ;;
+  value_format_name: usd
+}
+ measure: applied_sum{
+  type: sum_distinct
+  sql: ${value_applied} ;;
+  value_format_name: usd
+}
+measure: refunded_sum{
+  type: sum_distinct
+  sql: ${value_refunded} ;;
+  value_format_name: usd
+}
+
 }
