@@ -296,6 +296,7 @@ view: subscriptions {
   dimension: winback_utm_source_groups {
     type: string
     sql: case
+        when lower(${coupons.code}) = 'january22' then 'Direct Mail'
         when lower(${coupons.code}) = 'fallback2pc' then 'Direct Mail'
         when lower(${winback_utm_source}) like '%facebook%' then 'Facebook'
         when ${winback_utm_source} like '%FB%' then 'Facebook'
