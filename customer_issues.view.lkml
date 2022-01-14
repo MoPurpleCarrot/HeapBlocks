@@ -485,6 +485,11 @@ view: customer_issues {
     sql: ${orders_data.ship_template_fulfillment_center}='Primo_Pennsylvania' and ((${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='tomato powder' and ${menus.ship_week_mon_start_date}='2021/10/25') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='lime'and ${menus.ship_week_mon_start_date}='2021/10/25') or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='togarashi'and ${menus.ship_week_mon_start_date}='2021/11/01')or(${reason}='Missing Meal' and ${amount} = '153862' and ${user_id}=1618184) or (${reason}='Missing Ingredient' and ${ingredients.ingredient_name}='cremini mushrooms'and ${menus.ship_week_mon_start_date}='2021/11/29'))  ;;
   }
 
+  dimension: all_anomalies {
+    type: yesno
+    sql: ${primo_anomalies}='yes' or ${gf_anomalies}='yes' or ${ab_anomalies}='yes';;
+    }
+
   ## anomalies check   https://purplecarrot.looker.com/dashboards-next/130
 
 
