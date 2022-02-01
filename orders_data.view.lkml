@@ -298,7 +298,7 @@ view: orders_data {
 
     dimension: ship_template_shipping_provider {
       type: string
-      sql: ${TABLE}.ship_template_shipping_provider ;;
+      sql: lower(${TABLE}.ship_template_shipping_provider) ;;
       case_sensitive: no
     }
 
