@@ -264,7 +264,7 @@ view: orders {
 
   dimension: ship_template_shipping_provider {
     type: string
-    sql: ${TABLE}.ship_template_shipping_provider ;;
+    sql: lower(${TABLE}.ship_template_shipping_provider) ;;
   }
 
   dimension: ship_template_fulfillment_center {
