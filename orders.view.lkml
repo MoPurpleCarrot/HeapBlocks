@@ -377,9 +377,19 @@ view: orders {
     sql: ${TABLE}.box_size ;;
   }
 
+  dimension: shipping_price {
+    type: number
+    sql: ${TABLE}.shipping_price;;
+  }
+
   dimension: shipping_zip {
     type: string
     sql: json_extract_path_text(${TABLE}.shipping_address, 'zip') ;;
+  }
+
+  dimension: shipping_state {
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'state') ;;
   }
 
   measure: count {
@@ -770,6 +780,12 @@ view: orders {
     type: sum
     value_format_name: usd
     sql: ${credit_applied} ;;
+  }
+
+  measure:total_shipping_price {
+    type: sum
+    value_format_name: usd
+    sql: ${shipping_price} ;;
   }
 
 }
