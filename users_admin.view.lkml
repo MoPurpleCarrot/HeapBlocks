@@ -537,7 +537,6 @@ view: users {
   dimension: sign_up_method{
     type: string
     sql: ${TABLE}.sign_up_method ;;
-    hidden: yes
   }
 
   dimension: admin_email{

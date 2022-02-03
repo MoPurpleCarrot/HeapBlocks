@@ -68,7 +68,7 @@ view: ingredients {
   dimension: ingredient_name {
     type: string
     case_sensitive: no
-    sql: ${TABLE}.name ;;
+    sql: split_part(${TABLE}.name, ',',1) ;;
   }
 
   dimension: quantity {
