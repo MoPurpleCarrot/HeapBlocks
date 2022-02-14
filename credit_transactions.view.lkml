@@ -52,7 +52,6 @@ view: credit_transactions {
   dimension: action {
     type: number
     sql: ${TABLE}.action ;;
-    hidden:  yes
   }
 
   dimension: admin_id {
@@ -251,13 +250,11 @@ view: credit_transactions {
   dimension: source_id {
     type: number
     sql: ${TABLE}.source_id ;;
-    hidden:  yes
   }
 
   dimension: source_type {
     type: string
     sql: ${TABLE}.source_type ;;
-    hidden:  yes
   }
 
   dimension_group: updated {

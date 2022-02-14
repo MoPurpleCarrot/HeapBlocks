@@ -980,7 +980,7 @@ explore: credit_transactions{
   join: cx_rep_shipping_addresses {
     from: shipping_addresses
     relationship: one_to_one
-    sql_on: ${cx_rep_subscription.id}=${cx_rep_shipping_addresses.subscription_id} ;;
+    sql_on: ${cx_rep_user.id}=${cx_rep_shipping_addresses.user_id} ;;
   }
 
   join: subscriptions {
@@ -1034,7 +1034,7 @@ explore: refunds {
   join: cx_rep_shipping_addresses {
     from: shipping_addresses
     relationship: one_to_one
-    sql_on: ${cx_rep_subscription.id}=${cx_rep_shipping_addresses.subscription_id} ;;
+    sql_on: ${cx_rep_user.id}=${cx_rep_shipping_addresses.user_id} ;;
   }
 
   join: orders {
