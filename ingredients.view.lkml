@@ -68,7 +68,12 @@ view: ingredients {
   dimension: ingredient_name {
     type: string
     case_sensitive: no
-    sql: split_part(${TABLE}.name, ',',1) ;;
+    sql: case
+        when ${TABLE}.name like '%,%' then split_part(${TABLE}.name, ',',1)
+        when ${TABLE}.name like '%(%' then split_part(${TABLE}.name, '(',1)
+         else
+         ${TABLE}.name
+         end;;
   }
 
   dimension: quantity {
