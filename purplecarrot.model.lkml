@@ -446,6 +446,13 @@ explore: users {
     sql_on: ${payment_methods.user_id} = ${users.id} ;;
   }
 
+  join: first_payment {
+    from: payments
+    relationship: one_to_one
+    sql_on: ${first_payment.payable_id} = ${first_order.id} ;;
+    sql_where: ${first_payment.payable_type}='Order' ;;
+  }
+
   join: sab_avail_derived {
     relationship: one_to_one
     sql_on: ${users.id} = ${sab_avail_derived.sab_purchaser_id} ;;
