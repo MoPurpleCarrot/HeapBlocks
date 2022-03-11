@@ -11,7 +11,7 @@ view: ontrac_shipping_invoices {
   }
 
   dimension: reference {
-    type: string
+    type: number
     primary_key: yes
     sql: ${TABLE}.reference ;;
   }
