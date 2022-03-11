@@ -5,11 +5,6 @@ view: ontrac_shipping_invoices {
        ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
-
   dimension: shipper {
     type: string
     sql: ${TABLE}.shipper ;;
@@ -86,10 +81,21 @@ view: ontrac_shipping_invoices {
     sql: ${TABLE}."add'l charge 3" ;;
   }
 
+  measure: total_orders {
+    type: count_distinct
+    sql: ${TABLE}.reference;;
+  }
+
   measure: sum_cost {
     type: sum
     sql: ${TABLE}."total cost" ;;
   }
+
+  measure: avg_cost {
+    type: average
+    sql: ${total_cost};;
+  }
+
 
   set: detail {
     fields: [
