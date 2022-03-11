@@ -111,7 +111,7 @@ view: orders {
 
   dimension_group: delivery {
     type: time
-    timeframes: [time, date, week, month, quarter, raw, day_of_week]
+    timeframes: [time, date, week, month, quarter, raw, day_of_week,year]
     sql: ${TABLE}.delivery_on ;;
   }
 
@@ -264,7 +264,7 @@ view: orders {
 
   dimension: ship_template_shipping_provider {
     type: string
-    sql: ${TABLE}.ship_template_shipping_provider ;;
+    sql: lower(${TABLE}.ship_template_shipping_provider) ;;
   }
 
   dimension: ship_template_fulfillment_center {
@@ -377,9 +377,19 @@ view: orders {
     sql: ${TABLE}.box_size ;;
   }
 
+  dimension: shipping_price {
+    type: number
+    sql: ${TABLE}.shipping_price;;
+  }
+
   dimension: shipping_zip {
     type: string
     sql: json_extract_path_text(${TABLE}.shipping_address, 'zip') ;;
+  }
+
+  dimension: shipping_state {
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'state') ;;
   }
 
   measure: count {
@@ -770,6 +780,12 @@ view: orders {
     type: sum
     value_format_name: usd
     sql: ${credit_applied} ;;
+  }
+
+  measure:total_shipping_price {
+    type: sum
+    value_format_name: usd
+    sql: ${shipping_price} ;;
   }
 
 }

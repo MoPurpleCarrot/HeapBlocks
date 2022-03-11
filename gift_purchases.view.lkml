@@ -137,6 +137,16 @@ view: gift_purchases {
         label: "Partially Refunded"
       }
 
+      when:{
+        sql: ${status} = 0 ;;
+        label: "Pending Charge"
+      }
+
+      when:{
+        sql: ${status} = 8 ;;
+        label: "Expired"
+      }
+
       else: "Other"
   }}
 
@@ -196,11 +206,12 @@ view: gift_purchases {
 
     dimension: value_bucket {
       type: string
-      sql: case when ${TABLE}.value <= 50 then '$50'
-                when ${TABLE}.value between 51 and 100 then '$51-$100'
-                when ${TABLE}.value between 101 and 150 then '$101-$150'
-                when ${TABLE}.value between 151 and 200 then '$151-$200'
-                when ${TABLE}.value between 201 and 250 then '$201-$250'
+      sql: case when ${TABLE}.value <= 50.99 then '$50'
+                when ${TABLE}.value between 51 and 75.99 then '$51-$75'
+                when ${TABLE}.value between 76 and 100.99 then '$76-$100'
+                when ${TABLE}.value between 101 and 150.99 then '$101-$150'
+                when ${TABLE}.value between 151 and 200.99 then '$151-$200'
+                when ${TABLE}.value between 201 and 250.99 then '$201-$250'
                 when ${TABLE}.value between 251 and 300 then '$251-$300'
                 when ${TABLE}.value > 300 then '$300+'
                 end
@@ -348,4 +359,21 @@ view: gift_purchases {
    type: string
    sql: ${TABLE}.test_account ;;
               }
+
+measure: value_sum{
+  type: sum_distinct
+  sql: ${value} ;;
+  value_format_name: usd
+}
+ measure: applied_sum{
+  type: sum_distinct
+  sql: ${value_applied} ;;
+  value_format_name: usd
+}
+measure: refunded_sum{
+  type: sum_distinct
+  sql: ${value_refunded} ;;
+  value_format_name: usd
+}
+
 }

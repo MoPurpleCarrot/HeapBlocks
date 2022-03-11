@@ -457,6 +457,7 @@ view: users {
   dimension: utm_source_groups {
     type: string
     sql: case
+        when lower(${new_sub_coupon_tracking.code}) = 'pcjan22' then 'Direct Mail'
         when lower(${new_sub_coupon_tracking.code}) = 'purplefall21' then 'Direct Mail'
         when lower(${new_sub_coupon_tracking.code}) = 'fallback2pc' then 'Direct Mail'
         when lower(${new_sub_coupon_tracking.code}) = 'pcspotify' then 'Audio'
@@ -536,7 +537,6 @@ view: users {
   dimension: sign_up_method{
     type: string
     sql: ${TABLE}.sign_up_method ;;
-    hidden: yes
   }
 
   dimension: admin_email{

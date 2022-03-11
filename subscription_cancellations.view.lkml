@@ -80,72 +80,46 @@ view: subscription_cancellations {
   }
 
   dimension: reason_text {
-    case:{
-      when:{
-        sql: ${reason} = 0 ;;
-        label: "Dietary Preference"
-      }
-      when:{
-        sql: ${reason} = 1 ;;
-        label: "Meal Choice"
-      }
-      when:{
-        sql: ${reason} = 2 ;;
-        label: "Didn't Like Recipe"
-      }
-      when: {
-        sql: ${reason} = 3 ;;
-        label: "Ingredient Quality"
-      }
-      when: {
-        sql: ${reason} = 4 ;;
-        label: "Fewer Meals"
-      }
-      when: {
-        sql: ${reason} = 5 ;;
-        label: "More Meals"
-      }
-      when: {
-        sql: ${reason} = 6 ;;
-        label: "Too Expensive"
-      }
-      when: {
-        sql: ${reason} = 7 ;;
-        label: "Too Long"
-      }
-      when: {
-        sql: ${reason} = 8 ;;
-        label: "Packaging"
-      }
-      when: {
-        sql: ${reason} = 9 ;;
-        label: "Delivery Issues"
-      }
-      when: {
-        sql: ${reason} = 10 ;;
-        label: "Used Gift Credit"
-      }
-      when: {
-        sql: ${reason} = 11 ;;
-        label: "Cooking Independently"
-      }
-      when: {
-        sql: ${reason} = 12 ;;
-        label: "Not Kid-Friendly"
-      }
-      when: {
-        sql: ${reason} = 13 ;;
-        label: "Prefer Meal Kit"
-      }
-      when: {
-        sql: ${reason} = 14 ;;
-        label: "Want to Grocery Shop & Prepare"
-      }
-      when: {
-        sql: ${reason} = 15 ;;
-        label: "Want More Variety"
-      }
-      }}
+    type: string
+    sql:
+    case when (${reason} = 0 and ${created_date}<'2021-11-17') then 'Dietary Preference'
+    when (${reason} = 0 and ${created_date}>'2021-11-16') then 'Nutrition Goals'
+    when (${reason} = 1 and ${created_date}<'2021-11-17') then 'Meal Choice'
+    when (${reason} = 19 and ${created_date}>'2021-11-16') then 'Flavor/Taste'
+    when (${reason} = 2 and ${created_date}<'2021-11-17') then 'Didn''t Like Recipe'
+    when (${reason} = 2 and ${created_date}>'2021-11-16') then 'Didn''t Like Meal/Recipe Choices'
+    when (${reason} = 3 and ${created_date}<'2021-11-17') then 'Ingredient Quality'
+    when (${reason} = 3 and ${created_date}>'2021-11-16') then 'Ingredient Quality'
+    when (${reason} = 4 and ${created_date}<'2021-11-17') then 'Fewer Meals'
+    when (${reason} = 4 and ${created_date}>'2021-11-16') then 'Thrill is Gone'
+    when (${reason} = 5 and ${created_date}<'2021-11-17') then 'More Meals'
+    when (${reason} = 16 and ${created_date}>'2021-11-16') then 'More Variety'
+    when (${reason} = 6 and ${created_date}<'2021-11-17') then 'Too Expensive'
+    when (${reason} = 6 and ${created_date}>'2021-11-16') then 'No Longer Afford'
+    when (${reason} = 7 and ${created_date}<'2021-11-17') then 'Too Long'
+    when (${reason} = 7 and ${created_date}>'2021-11-16') then 'Too Long'
+    when (${reason} = 8 and ${created_date}<'2021-11-17') then 'Packaging'
+    when (${reason} = 8 and ${created_date}>'2021-11-16') then 'Packaging - Environment'
+    when (${reason} = 9 and ${created_date}<'2021-11-17') then 'Delivery Issues'
+    when (${reason} = 9 and ${created_date}>'2021-11-16') then 'Packaging - Quality'
+    when (${reason} = 10 and ${created_date}<'2021-11-17') then 'Used Gift Credit'
+    when (${reason} = 10 and ${created_date}>'2021-11-16') then 'Delivery Issues'
+    when (${reason} = 11 and ${created_date}<'2021-11-17') then 'Cooking Independently'
+    when (${reason} = 11 and ${created_date}>'2021-11-16') then 'Used Gift Credit'
+    when (${reason} = 12 and ${created_date}<'2021-11-17') then 'Not Kid-Friendly'
+    when (${reason} = 12 and ${created_date}>'2021-11-16') then 'Prefer to Shop, Prep, Cook Myself'
+    when (${reason} = 13 and ${created_date}<'2021-11-17') then 'Prefer Meal Kit'
+    when (${reason} = 13 and ${created_date}>'2021-11-16') then 'Not Kid-Friendly'
+    when (${reason} = 14 and ${created_date}<'2021-11-17') then 'Want to Grocery Shop & Prepare'
+    when (${reason} = 14 and ${created_date}>'2021-11-16') then 'Prefer Meal Kit'
+    when (${reason} = 15 and ${created_date}<'2021-11-17') then 'Want More Variety'
+    when (${reason} = 15 and ${created_date}>'2021-11-16') then 'Want to Grocery Shop & Prepare'
+    when (${reason} = 17 and ${created_date}>'2021-11-16') then 'Portions Too Small'
+    when (${reason} = 18 and ${created_date}>'2021-11-16') then 'Other'
+    else null
+    end;;
+    }
+
 
   dimension: reason_details {
     type: string

@@ -446,6 +446,13 @@ explore: users {
     sql_on: ${payment_methods.user_id} = ${users.id} ;;
   }
 
+  join: first_payment {
+    from: payments
+    relationship: one_to_one
+    sql_on: ${first_payment.payable_id} = ${first_order.id} ;;
+    sql_where: ${first_payment.payable_type}='Order' ;;
+  }
+
   join: sab_avail_derived {
     relationship: one_to_one
     sql_on: ${users.id} = ${sab_avail_derived.sab_purchaser_id} ;;
@@ -985,7 +992,7 @@ explore: credit_transactions{
   join: cx_rep_shipping_addresses {
     from: shipping_addresses
     relationship: one_to_one
-    sql_on: ${cx_rep_subscription.id}=${cx_rep_shipping_addresses.subscription_id} ;;
+    sql_on: ${cx_rep_user.id}=${cx_rep_shipping_addresses.user_id} ;;
   }
 
   join: subscriptions {
@@ -1039,7 +1046,7 @@ explore: refunds {
   join: cx_rep_shipping_addresses {
     from: shipping_addresses
     relationship: one_to_one
-    sql_on: ${cx_rep_subscription.id}=${cx_rep_shipping_addresses.subscription_id} ;;
+    sql_on: ${cx_rep_user.id}=${cx_rep_shipping_addresses.user_id} ;;
   }
 
   join: orders {
@@ -1419,49 +1426,69 @@ explore: bing_ads_ad_performance_report {
 
 }
 
-explore: SAB {
-  fields: [ALL_FIELDS*, -users.utm_source_groups]
+explore: referring_users {
+  fields: [ALL_FIELDS*, -referring_users.utm_source_groups, -referring_subscriptions.winback_utm_source_groups, -referring_orders.month_num, -referring_orders.week_num, -referring_orders.weeks_after_registered, -referring_orders.months_after_registered, -referring_orders.months_after_registered, -referring_orders.winback_week_num,-referring_orders.average_revenue, -referring_orders.average_num_orders, -referring_orders.days_since_created, -referring_orders.average_revenue_30day, -referring_orders.average_revenue_60day, -referring_orders.average_revenue_90day, -referring_orders.Orderdate_minus_winbackdate, -referring_orders.user_with_winback, -redeeming_subscriptions.winback_utm_source_groups]
+  label: "SAB"
 
-  from: giveaways
+  from: users
 
-  join: sab_sent {
-    relationship:  one_to_one
-    sql_on: ${SAB.user_id}= ${sab_sent.user_id} ;;
-  }
-
-  join: sab_avail {
-    relationship:  one_to_one
-    sql_on: ${SAB.user_id}= ${sab_avail.user_id} ;;
-  }
-
-  join: subscriptions {
-    relationship:  one_to_one
-    sql_on: ${SAB.user_id}= ${subscriptions.user_id} ;;
-  }
-
-  join: users {
-    relationship:  one_to_one
-    sql_on: ${SAB.user_id}= ${users.id} ;;
-  }
-
-  join: user_facts {
-    relationship:  one_to_one
-    sql_on: ${users.id}= ${user_facts.id} ;;
-  }
-
-  join: orders {
+  join: SAB {
+    from: giveaways
     relationship:  one_to_many
-    sql_on: ${subscriptions.id}= ${orders.subscription_id} ;;
+    sql_on: ${referring_users.id} = ${SAB.user_id} ;;
   }
 
-  join: coupons {
-    relationship:  many_to_one
-    sql_on: ${orders.coupon_id}= ${coupons.id} ;;
+  join: referring_sab_sent {
+    from: sab_sent
+    relationship:  one_to_one
+    sql_on: ${referring_users.id}= ${referring_sab_sent.user_id} ;;
   }
+
+  join: referring_sab_avail {
+    from: sab_avail
+    relationship:  one_to_one
+    sql_on: ${referring_users.id}= ${referring_sab_avail.user_id} ;;
+  }
+
+  join: referring_subscriptions {
+    from: subscriptions
+    relationship:  one_to_one
+    sql_on: ${referring_users.id}= ${referring_subscriptions.user_id} ;;
+  }
+
+  join: referring_user_facts {
+    from:  user_facts
+    relationship:  one_to_one
+    sql_on: ${referring_users.id}= ${referring_user_facts.id} ;;
+  }
+
+  join: referring_orders {
+    from: orders
+    relationship:  one_to_many
+    sql_on: ${referring_subscriptions.id}= ${referring_orders.subscription_id} ;;
+  }
+
+  join: referring_coupons {
+    from: coupons
+    relationship:  many_to_one
+    sql_on: ${referring_orders.coupon_id}= ${referring_coupons.id} ;;
+  }
+
+  join: referring_subscription_order_num_derrived {
+    from: subscription_order_num_derrived
+    relationship: one_to_one
+    sql_on: ${referring_subscription_order_num_derrived.subscriptions_id} = ${referring_subscriptions.id} ;;
+  }
+
   join: redeeming_subscriptions {
     from: subscriptions
     relationship:  one_to_one
     sql_on: ${SAB.id}= ${redeeming_subscriptions.giveaway_id} ;;
+  }
+  join: redeeming_subscription_order_num_derrived {
+    from: subscription_order_num_derrived
+    relationship: one_to_one
+    sql_on: ${redeeming_subscription_order_num_derrived.subscriptions_id} = ${redeeming_subscriptions.id} ;;
   }
 
 
