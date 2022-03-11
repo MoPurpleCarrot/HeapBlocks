@@ -86,6 +86,11 @@ view: ontrac_shipping_invoices {
     sql: ${TABLE}."add'l charge 3" ;;
   }
 
+  measure: sum_cost {
+    type: sum
+    sql: ${TABLE}."total cost" ;;
+  }
+
   set: detail {
     fields: [
       shipper,
