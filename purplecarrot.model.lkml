@@ -485,6 +485,11 @@ explore: users {
     sql_on: ${shipment_items.sku_id}=${skus.id} and ${shipment_items.shipment_id}=${shipments.id} ;;
   }
 
+  join: ontrac_shipping_invoices {
+    relationship: one_to_one
+    sql_on: ${ontrac_shipping_invoices.reference}=${orders.id};;
+  }
+
   join: giveaways {
     view_label: "SAB"
     relationship: many_to_one
