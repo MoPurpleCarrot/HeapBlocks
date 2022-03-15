@@ -497,6 +497,16 @@ explore: users {
     sql_on: ${ontrac_shipping_invoices.reference}=${orders.id};;
   }
 
+  join: uds_shipping_invoices {
+    relationship: one_to_one
+    sql_on: ${uds_shipping_invoices.order_id}=${orders.id};;
+  }
+
+  join: lasership_shipping_invoices {
+    relationship: one_to_one
+    sql_on: ${lasership_shipping_invoices.order_id}=${orders.id};;
+  }
+
   join: giveaways {
     view_label: "SAB"
     relationship: many_to_one

@@ -30,90 +30,105 @@ view: lasership_shipping_invoices {
 
   dimension: service_amount {
     type: number
+    value_format: "$0.00"
     label: "service amount"
     sql: ${TABLE}."service amount" ;;
   }
 
   dimension: extra_1_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 1 amount"
     sql: ${TABLE}."extra 1 amount" ;;
   }
 
   dimension: extra_2_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 2 amount"
     sql: ${TABLE}."extra 2 amount" ;;
   }
 
   dimension: extra_3_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 3 amount"
     sql: ${TABLE}."extra 3 amount" ;;
   }
 
   dimension: extra_4_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 4 amount"
     sql: ${TABLE}."extra 4 amount" ;;
   }
 
   dimension: extra_5_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 5 amount"
     sql: ${TABLE}."extra 5 amount" ;;
   }
 
   dimension: extra_6_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 6 amount"
     sql: ${TABLE}."extra 6 amount" ;;
   }
 
   dimension: extra_7_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 7 amount"
     sql: ${TABLE}."extra 7 amount" ;;
   }
 
   dimension: extra_8_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 8 amount"
     sql: ${TABLE}."extra 8 amount" ;;
   }
 
   dimension: extra_9_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 9 amount"
     sql: ${TABLE}."extra 9 amount" ;;
   }
 
   dimension: extra_10_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 10 amount"
     sql: ${TABLE}."extra 10 amount" ;;
   }
 
   dimension: extra_11_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 11 amount"
     sql: ${TABLE}."extra 11 amount" ;;
   }
 
   dimension: extra_12_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 12 amount"
     sql: ${TABLE}."extra 12 amount" ;;
   }
 
   dimension: extra_13_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 13 amount"
     sql: ${TABLE}."extra 13 amount" ;;
   }
 
   dimension: extra_14_amount {
     type: number
+    value_format: "$0.00"
     label: "extra 14 amount"
     sql: ${TABLE}."extra 14 amount" ;;
   }
@@ -125,6 +140,7 @@ view: lasership_shipping_invoices {
 
   dimension: total {
     type: number
+    value_format: "$0.00"
     sql: ${TABLE}.total ;;
   }
 
@@ -147,11 +163,13 @@ view: lasership_shipping_invoices {
 
   measure: sum_cost {
     type: sum
+    value_format: "$0.00"
     sql: ${TABLE}.total ;;
   }
 
   measure: avg_cost {
     type: average
+    value_format: "$0.00"
     sql: ${TABLE}.total;;
   }
 

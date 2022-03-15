@@ -42,18 +42,21 @@ view: uds_shipping_invoices {
 
   dimension: total_rate {
     type: number
+    value_format: "$0.00"
     label: "total rate"
     sql: ${TABLE}."total rate" ;;
   }
 
   dimension: base_rate {
     type: number
+    value_format: "$0.00"
     label: "base rate"
     sql: ${TABLE}."base rate" ;;
   }
 
   dimension: fuel_surcharge {
     type: number
+    value_format: "$0.00"
     label: "fuel surcharge"
     sql: ${TABLE}."fuel surcharge" ;;
   }
@@ -65,11 +68,13 @@ view: uds_shipping_invoices {
 
   measure: sum_cost {
     type: sum
+    value_format: "$0.00"
     sql: ${TABLE}."total rate" ;;
   }
 
   measure: avg_cost {
     type: average
+    value_format: "$0.00"
     sql: ${TABLE}."total rate";;
   }
 
