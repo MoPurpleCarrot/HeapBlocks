@@ -65,12 +65,12 @@ view: uds_shipping_invoices {
 
   measure: sum_cost {
     type: sum
-    sql: ${TABLE}."total cost" ;;
+    sql: ${TABLE}."total rate" ;;
   }
 
   measure: avg_cost {
     type: average
-    sql: ${TABLE}."total cost";;
+    sql: ${TABLE}."total rate";;
   }
 
   set: detail {
