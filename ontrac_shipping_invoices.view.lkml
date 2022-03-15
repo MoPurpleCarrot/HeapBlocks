@@ -1,7 +1,7 @@
 view: ontrac_shipping_invoices {
   derived_table: {
     sql: select distinct 'Ontrac' shipper, reference, "ship date", tracking, "total cost", "service charge", "cod charge", "declared value charge", "add'l charge 1", "add'l charge 2", "saturday charge", "fuel surcharge", "add'l charge 3"
-      from temptablesmo.shippingdatatest3922
+      from temptablesmo.ontracinvoices
        ;;
   }
 
