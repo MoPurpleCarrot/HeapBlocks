@@ -298,6 +298,11 @@ explore: users {
     sql_on: ${flex_contract.order_id} = ${orders.id} ;;
   }
 
+  join: flex_contract_shipments {
+    relationship: one_to_one
+    sql_on: ${flex_contract_shipments.shipment_id} = ${shipments.id} ;;
+  }
+
   join: customer_issues {
     relationship: one_to_many
     sql_on: ${orders.id}=${customer_issues.order_id} ;;
