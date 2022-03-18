@@ -597,6 +597,10 @@ explore: users {
     relationship: many_to_one
     sql_on: ${post_cart_customization_events_derived.cart_id} = ${post_cart_carts.id} ;;
   }
+  join: flex_contract_carts {
+    relationship: one_to_one
+    sql_on: ${flex_contract_carts.cart_id} = ${post_cart_carts.id} ;;
+  }
 
 }
 
