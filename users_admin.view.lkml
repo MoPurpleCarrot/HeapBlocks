@@ -549,6 +549,19 @@ view: users {
     ;;
   }
 
+  dimension: flex_pilot_variant {
+    type: number
+    sql: case
+        when (json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_1') = 'true') then 1
+        when (json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_2') = 'true') then 2
+        when (json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_3') = 'true') then 3
+        when (json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_4') = 'true') then 4
+        Else null
+        End
+    ;;
+
+    }
+
   measure: count {
     type: count
   }
