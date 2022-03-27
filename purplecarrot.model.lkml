@@ -606,7 +606,7 @@ explore: users {
 
 explore: carts {
   label: "Skip Surveys - TEMP"
-  fields: [ALL_FIELDS*, -users.utm_source_groups, -subscriptions.winback_utm_source_groups]
+  fields: [ALL_FIELDS*, -users.utm_source_groups, -subscriptions.winback_utm_source_groups, -users.flex_variant_ab]
   join: users {
     relationship: one_to_many
     sql_on: ${users.id}=${carts.user_id} ;;
@@ -631,7 +631,7 @@ explore: carts {
 }
 
 explore: zd_tickets{
-  fields: [ALL_FIELDS*, -users.utm_source_groups]
+  fields: [ALL_FIELDS*, -users.utm_source_groups, -users.flex_variant_ab]
 
   join: zd_users {
     relationship: many_to_one
@@ -690,7 +690,7 @@ explore: customer_io_email{
   }
 
 explore: users_for_email{
-  fields: [ALL_FIELDS*, -users_for_email.utm_source_groups]
+  fields: [ALL_FIELDS*, -users_for_email.utm_source_groups, -users_for_email.flex_variant_ab]
 
   from:  users
   label: "Customer.io Email With User Data"
@@ -905,7 +905,7 @@ explore: recipes {}
 
 explore: recipe_feedback_surveys {
   label: "Recipe Feedback Surveys"
-  fields: [ALL_FIELDS*,-customer_issues.ab_one_time_exclusion, -customer_issues.primo_anomalies,-customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies, -users.utm_source_groups]
+  fields: [ALL_FIELDS*,-customer_issues.ab_one_time_exclusion, -customer_issues.primo_anomalies,-customer_issues.ab_anomalies,-customer_issues.gf_anomalies,-customer_issues.so_anomalies, -users.utm_source_groups, -users.flex_variant_ab]
 
   join: recipe_feedbacks {
     relationship: one_to_many
@@ -1134,7 +1134,7 @@ explore: prep_needs {
 }
 
 explore: seasonal_order {
-  fields: [ALL_FIELDS*, -users.utm_source_groups]
+  fields: [ALL_FIELDS*, -users.utm_source_groups, -users.flex_variant_ab]
 
   join: users {
     relationship:many_to_one
@@ -1165,7 +1165,7 @@ explore: coupons {}
 #Intercom joining
 
 explore: Intercom_conversations {
-  fields: [ALL_FIELDS*, -users.utm_source_groups]
+  fields: [ALL_FIELDS*, -users.utm_source_groups, -users.flex_variant_ab]
 
   join: Intercom_users {
     relationship:  one_to_many
@@ -1250,7 +1250,7 @@ join: intercom_derived_firstmessage {
 }
 
 explore: users_data{
-  fields: [ALL_FIELDS*, -users_data.utm_source_groups, -cx_rep_user.utm_source_groups]
+  fields: [ALL_FIELDS*, -users_data.utm_source_groups, -cx_rep_user.utm_source_groups, -cx_rep_user.flex_variant_ab, -users_data.flex_variant_ab]
   from: users
   label: "Ops Report"
 
@@ -1446,7 +1446,7 @@ explore: bing_ads_ad_performance_report {
 }
 
 explore: referring_users {
-  fields: [ALL_FIELDS*, -referring_users.utm_source_groups, -referring_subscriptions.winback_utm_source_groups, -referring_orders.month_num, -referring_orders.week_num, -referring_orders.weeks_after_registered, -referring_orders.months_after_registered, -referring_orders.months_after_registered, -referring_orders.winback_week_num,-referring_orders.average_revenue, -referring_orders.average_num_orders, -referring_orders.days_since_created, -referring_orders.average_revenue_30day, -referring_orders.average_revenue_60day, -referring_orders.average_revenue_90day, -referring_orders.Orderdate_minus_winbackdate, -referring_orders.user_with_winback, -redeeming_subscriptions.winback_utm_source_groups]
+  fields: [ALL_FIELDS*, -referring_users.utm_source_groups, -referring_subscriptions.winback_utm_source_groups, -referring_orders.month_num, -referring_orders.week_num, -referring_orders.weeks_after_registered, -referring_orders.months_after_registered, -referring_orders.months_after_registered, -referring_orders.winback_week_num,-referring_orders.average_revenue, -referring_orders.average_num_orders, -referring_orders.days_since_created, -referring_orders.average_revenue_30day, -referring_orders.average_revenue_60day, -referring_orders.average_revenue_90day, -referring_orders.Orderdate_minus_winbackdate, -referring_orders.user_with_winback, -redeeming_subscriptions.winback_utm_source_groups, -referring_users.flex_variant_ab]
   label: "SAB"
 
   from: users
