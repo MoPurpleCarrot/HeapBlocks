@@ -16,6 +16,11 @@ view: users {
     sql: ${TABLE}."identity" ;;
   }
 
+  dimension: vwo_265 {
+    type: string
+    sql: ${TABLE}.VWO_Test_ID_265;;
+  }
+
 ### add additional user properties here based on their column name to drill down on additional user properties
   dimension_group: joindate {
     type: time
