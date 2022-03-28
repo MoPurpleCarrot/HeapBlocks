@@ -235,4 +235,8 @@ view: carts {
       type: count_distinct
       sql: case when ${fulfillment_status}= 'Skipped' or ${fulfillment_status}= 'Returning' then ${id} else null end ;;
 }
+  measure: total_flex_count {
+    type: count_distinct
+    sql: case when ${box_definition}='flex' then ${id} else null end ;;
+  }
 }

@@ -480,6 +480,11 @@ view: orders {
     sql: case when ${fulfillment_status}= 'Skipped' or ${fulfillment_status}= 'Returning' then ${id} else null end  ;;
   }
 
+  measure: total_flex_count {
+    type: count_distinct
+    sql: case when ${box_defintion}= 'flex' then ${id} else null end  ;;
+  }
+
   measure: total_active_status_count {
     type: count
     drill_fields: [detail*]
