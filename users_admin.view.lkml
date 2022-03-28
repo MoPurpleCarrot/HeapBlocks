@@ -563,12 +563,12 @@ view: users {
       }
 
   dimension: flex_variant_ab {
-    type: number
+    type: string
     sql: case
-        when (${shipping_addresses.region_name} = 'atombanana_chicago' and ${shipping_addresses.primary} = true and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'false' and (${ab_test_flex} = 1 or ${vwo_test_flex} =1)) then 1
-        when (${shipping_addresses.region_name} = 'atombanana_chicago' and ${shipping_addresses.primary} = true and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_2') = 'true') then 2
-        when (${shipping_addresses.region_name} = 'atombanana_chicago' and ${shipping_addresses.primary} = true and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_3') = 'true') then 3
-        when (${shipping_addresses.region_name} = 'atombanana_chicago' and ${shipping_addresses.primary} = true and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_4') = 'true') then 4
+        when (${shipping_addresses.region_name} = 'atombanana_chicago' and ${shipping_addresses.primary} = true and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'false' and (${ab_test_flex} = 1 or ${vwo_test_flex} =1)) then '1 - Control'
+        when (${shipping_addresses.region_name} = 'atombanana_chicago' and ${shipping_addresses.primary} = true and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_2') = 'true') then '2 - $45 Min, No Ship'
+        when (${shipping_addresses.region_name} = 'atombanana_chicago' and ${shipping_addresses.primary} = true and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_3') = 'true') then '3 - $45 Min, $8 Ship'
+        when (${shipping_addresses.region_name} = 'atombanana_chicago' and ${shipping_addresses.primary} = true and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot') = 'true' and json_extract_path_text(${TABLE}.feature_flags, 'flex_pilot_variant_4') = 'true') then '4 - $70 Min'
         Else null
         End
     ;;
