@@ -1,0 +1,796 @@
+view: orders {
+  sql_table_name: heroku_postgres.orders ;;
+
+  dimension: id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
+  dimension_group: sdc_batched {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}._sdc_batched_at ;;
+    hidden: yes
+  }
+
+  dimension_group: sdc_received {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}._sdc_received_at ;;
+    hidden: yes
+  }
+
+  dimension: sdc_sequence {
+    type: number
+    sql: ${TABLE}._sdc_sequence ;;
+    hidden: yes
+  }
+
+  dimension: sdc_table_version {
+    type: number
+    sql: ${TABLE}._sdc_table_version ;;
+    hidden: yes
+  }
+
+  dimension: admin_id {
+    type: number
+    sql: ${TABLE}.admin_id ;;
+    hidden:  yes
+  }
+
+  dimension: amount_charged {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.amount_charged ;;
+  }
+
+  dimension: cancelled_reason {
+    type: string
+    sql: ${TABLE}.cancelled_reason ;;
+    hidden:  yes
+  }
+
+  dimension: coupon_code {
+    type: string
+    sql: ${TABLE}.coupon_code ;;
+    hidden:  yes
+  }
+
+  dimension: coupon_id {
+    type: number
+    sql: ${TABLE}.coupon_id ;;
+    hidden:  yes
+  }
+
+  dimension_group: created {
+    type: time
+    timeframes: [time, date, week, month, quarter, raw]
+    sql: ${TABLE}.created_at ;;
+    hidden:  yes
+  }
+
+  dimension: customer_id {
+    type: number
+    sql: ${TABLE}.customer_id ;;
+    hidden:  yes
+  }
+
+  dimension: month_num {
+    type: number
+    sql: DATEDIFF('month', ${user_facts.first_order_date}, ${delivery_date}) ;;
+  }
+
+  dimension: week_num {
+    type: number
+    sql: DATEDIFF('week', ${user_facts.first_order_date}, ${delivery_date}) ;;
+  }
+
+  dimension: weeks_after_registered {
+    type: number
+    sql: DATEDIFF('week', ${subscriptions.registered_plus4_date}, ${delivery_date}) ;;
+  }
+
+  dimension: months_after_registered {
+    type: number
+    sql: DATEDIFF('month', ${subscriptions.registered_plus4_date}, ${delivery_date}) ;;
+  }
+
+  dimension: winback_week_num {
+    type: number
+    sql: DATEDIFF('week', ${subscriptions.winback_plus4_date}, ${delivery_date}) ;;
+  }
+
+
+  dimension: credit_applied {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.credit_applied ;;
+
+  }
+
+  dimension_group: delivery {
+    type: time
+    timeframes: [time, date, week, month, quarter, raw, day_of_week,year]
+    sql: ${TABLE}.delivery_on ;;
+  }
+
+  dimension: is_donated {
+    type: yesno
+    sql: ${TABLE}.donated ;;
+    hidden:  yes
+  }
+
+  dimension: default_meals_were_overridden{
+    type: yesno
+    sql: ${TABLE}.overridden_recipes ;;
+    hidden:  yes
+  }
+
+  dimension: menu_id {
+    type: number
+    sql: ${TABLE}.menu_id ;;
+    hidden:  yes
+  }
+
+  dimension: order_number {
+    type: number
+    sql: ${TABLE}.order_number ;;
+    hidden:  yes
+  }
+
+  dimension: partner_label {
+    type: string
+    sql: ${TABLE}.partner_label ;;
+    hidden:  yes
+  }
+
+  dimension: plan {
+    type: number
+    sql: ${TABLE}.plan ;;
+  }
+
+  dimension: price {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.price ;;
+  }
+
+  dimension: plan_price {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.plan_price ;;
+  }
+
+  dimension: extras_price {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.extras_price ;;
+  }
+
+  dimension: price_less_extras {
+    type: number
+    value_format_name: usd
+    sql: ${price}-${extras_price} ;;
+    hidden:  yes
+  }
+
+  dimension: shipping_carrier {
+    type: string
+    sql: ${TABLE}.shipping_carrier ;;
+    hidden:  yes
+  }
+
+  dimension: shipping_label {
+    type: string
+    sql: ${TABLE}.shipping_label ;;
+    hidden:  yes
+  }
+
+  dimension: shippingaddress_forPIPull_ONLY {
+    type: string
+    sql: ${TABLE}.shipping_address ;;
+  }
+
+  dimension: status {
+    type: number
+    sql: ${TABLE}.status ;;
+    hidden:  yes
+  }
+
+  dimension: billing_status_code {
+    type: number
+    sql: ${TABLE}.billing_status ;;
+    hidden:  yes
+  }
+
+
+  dimension: billing_status {
+    type: string
+    sql:  CASE WHEN ${billing_status_code} = 0 THEN 'No Billing'
+          WHEN ${billing_status_code} = 1 THEN 'Authorized'
+          WHEN ${billing_status_code} = 2 THEN 'Auth Error'
+          WHEN ${billing_status_code} = 3 THEN 'No Charge'
+          WHEN ${billing_status_code} = 4 THEN 'Billed'
+          WHEN ${billing_status_code} = 5 THEN 'Bill Error'
+          WHEN ${billing_status_code} = 6 THEN 'Refunded'
+          ELSE NULL
+          END
+          ;;
+  }
+
+  dimension: fulfillment_status_code {
+    type: number
+    sql: ${TABLE}.fulfillment_status ;;
+    hidden:  yes
+  }
+
+  dimension: fulfillment_status {
+    type: string
+    sql:  CASE WHEN ${fulfillment_status_code} = 0 THEN 'Planned'
+          WHEN ${fulfillment_status_code} = 1 THEN 'Confirmed'
+          WHEN ${fulfillment_status_code} = 2 THEN 'Delayed Start'
+          WHEN ${fulfillment_status_code} = 3 THEN 'Skipped'
+          WHEN ${fulfillment_status_code} = 4 THEN 'Cancelled'
+          WHEN ${fulfillment_status_code} = 5 THEN 'Suspended'
+          WHEN ${fulfillment_status_code} = 6 THEN 'Admin Cancelled'
+          WHEN ${fulfillment_status_code} = 7 THEN 'Returning'
+          ELSE NULL
+          END
+          ;;
+  }
+
+  dimension: active_fulfillment_status {
+    type: string
+    sql:  CASE WHEN ${fulfillment_status_code} = 0 THEN 'Active'
+          WHEN ${fulfillment_status_code} = 1 THEN 'Active'
+          WHEN ${fulfillment_status_code} = 2 THEN 'Active'
+          WHEN ${fulfillment_status_code} = 3 THEN 'Active'
+          WHEN ${fulfillment_status_code} = 4 THEN 'Cancelled'
+          WHEN ${fulfillment_status_code} = 5 THEN 'Cancelled'
+          WHEN ${fulfillment_status_code} = 6 THEN 'Cancelled'
+          WHEN ${fulfillment_status_code} = 7 THEN 'Active'
+          ELSE NULL
+          END
+          ;;
+  }
+
+
+  dimension: status_old {
+    type: string
+    sql: ${TABLE}.status_old ;;
+    hidden:  yes
+  }
+
+  dimension: ship_template_shipping_provider {
+    type: string
+    sql: lower(${TABLE}.ship_template_shipping_provider) ;;
+  }
+
+  dimension: ship_template_fulfillment_center {
+    type: string
+    sql: ${TABLE}.ship_template_fulfillment_center ;;
+  }
+
+  dimension: prepared_st_fulfillment_center {
+    type: string
+    sql: case when (${plan_name}='Prepared' and (${ship_template_fulfillment_center}='Primo_Pennsylvania' or ${TABLE}.ship_template_fulfillment_center='ShipOnce_Parsippany')) then 'Primo'
+          when (${plan_name}='Prepared' and ${ship_template_fulfillment_center}='Get_Fresh_Las_Vegas') then 'Get Fresh'
+          else null
+          end;;
+  }
+
+  dimension: ship_template_shipping_cost {
+    type: number
+    sql: ${TABLE}.ship_template_shipping_cost ;;
+  }
+
+  dimension: ship_template_TNT {
+    type: number
+    sql: ${TABLE}.ship_template_TNT ;;
+  }
+
+  dimension: ship_template_ship {
+    type: date
+    sql: ${TABLE}.ship_template_ship_date ;;
+    hidden:  yes
+  }
+
+  dimension: ship_template_delivery {
+    type: date
+    sql: ${TABLE}.ship_template_ship_date ;;
+    hidden:  yes
+  }
+
+  dimension: projected_delivery{
+    type: date
+    sql: ${TABLE}.projected_delivery_on ;;
+    hidden:  yes
+  }
+
+  dimension: stripe_charge_id {
+    type: string
+    sql: ${TABLE}.stripe_charge_id ;;
+    hidden:  yes
+  }
+
+  dimension: subscription_id {
+    type: number
+    sql: ${TABLE}.subscription_id ;;
+    hidden:  yes
+  }
+
+  dimension: is_through_partner {
+    type: yesno
+    sql: ${TABLE}.through_partner ;;
+    hidden:  yes
+  }
+
+  dimension: test_account {
+    type: yesno
+    sql: ${TABLE}.test_account ;;
+    hidden:  yes
+  }
+
+  dimension: tracking_number {
+    type: string
+    sql: ${TABLE}.tracking_number ;;
+  }
+
+  dimension_group: updated {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.updated_at ;;
+    hidden:  yes
+  }
+
+  dimension: days_to_process {
+    type: number
+    sql: DATEDIFF('day',${created_raw},${delivery_raw}) ;;
+    hidden:  yes
+  }
+
+  dimension: user_id {
+    type: number
+    sql: ${TABLE}.user_id ;;
+    hidden:  yes
+  }
+
+  dimension: account_number {
+    type: number
+    sql: ${TABLE}.account_number ;;
+    hidden:  yes
+  }
+
+  dimension: sales_tax {
+    type: number
+    sql: ${TABLE}.tax_amount ;;
+  }
+
+  dimension: box_defintion {
+    type: string
+    sql: ${TABLE}.box_definition ;;
+  }
+
+  dimension: box_size {
+    type: string
+    sql: ${TABLE}.box_size ;;
+  }
+
+  dimension: shipping_price {
+    type: number
+    sql: ${TABLE}.shipping_price;;
+  }
+
+  dimension: shipping_zip {
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'zip') ;;
+  }
+
+  dimension: shipping_state {
+    type: string
+    sql: json_extract_path_text(${TABLE}.shipping_address, 'state') ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
+  }
+
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${id} ;;
+  }
+
+  measure: count_distinct_plan {
+    type: count_distinct
+    sql: ${plan} ;;
+  }
+
+  measure: net_revenue_without_refunds {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${amount_charged} ;;
+    hidden:  yes
+  }
+
+  measure: total_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${price} ;;
+  }
+
+  measure: total_plan_gross_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${plan_price} ;;
+  }
+
+  measure: total_net_revenue_less_extras {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${price_less_extras} ;;
+  }
+
+  measure: total_extra_gross_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    sql: ${extras_price} ;;
+  }
+
+  measure: total_amount_charged {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "3"
+    }
+    sql: ${amount_charged} ;;
+  }
+
+  measure: total_billed_net_revenue {
+    type: sum
+    value_format_name: usd
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "3"
+    }
+    sql: ${price} ;;
+  }
+
+  measure: total_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: fulfillment_status
+      value: "Confirmed"
+    }
+  }
+
+  measure: total_skipped_count {
+    type: count_distinct
+    drill_fields: [detail*]
+    sql: case when ${fulfillment_status}= 'Skipped' or ${fulfillment_status}= 'Returning' then ${id} else null end  ;;
+  }
+
+  measure: total_flex_count {
+    type: count_distinct
+    sql: case when ${box_defintion}= 'flex' then ${id} else null end  ;;
+  }
+
+  measure: total_active_status_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: active_fulfillment_status
+      value: "Active"
+    }
+  }
+
+  measure: TB12_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "2"}
+    filters: {
+      field: status
+      value: "3"
+    }
+    hidden:  yes
+  }
+
+  measure: CC_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "3"}
+    filters: {
+      field: status
+      value: "3"
+    }
+  }
+
+  measure: QE_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "4"}
+    filters: {
+      field: status
+      value: "3"
+    }
+  }
+
+  measure: HP_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "5"}
+    filters: {
+      field: status
+      value: "3"
+    }
+  }
+
+  measure: admin_cancel_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "6"
+    }
+    hidden:  yes
+  }
+  measure: PC_2_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "0"}
+    filters: {
+      field: status
+      value: "3"
+    }
+    hidden:  yes
+  }
+
+  measure: PC_4_billed_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: plan
+      value: "1"}
+    filters: {
+      field: status
+      value: "3"
+    }
+    hidden:  yes
+  }
+
+  measure: average_revenue {
+    type: number
+    value_format_name: usd
+    sql: ${total_revenue}/NULLIF(${users.count},0) ;;
+  }
+
+  measure: average_num_orders {
+    type: number
+    value_format_name: decimal_2
+    sql: 1.0 * ${count}/NULLIF(${users.count},0) ;;
+  }
+
+  dimension: days_since_created {
+    type: number
+    sql:  DATEDIFF('day',${users.created_date},${created_date})  ;;
+  }
+
+  # 30 day
+  dimension: is_30day_since_created {
+    type: yesno
+    sql: ${days_since_created} <= 30 ;;
+  }
+
+  dimension: plan_name {
+    type: string
+    sql:  CASE WHEN ${plan} = 0 THEN 'Core'
+          WHEN ${plan} = 1 THEN 'Family'
+          WHEN ${plan} = 2 THEN 'TB12'
+          WHEN ${plan} = 3 THEN 'Chefs Choice'
+          WHEN ${plan} = 4 THEN 'Quick and Easy'
+          WHEN ${plan} = 5 THEN 'High Protein'
+          WHEN ${plan} = 6 THEN 'Six Serving'
+          WHEN ${plan} = 7 THEN 'Gluten Free'
+          WHEN ${plan} = 8 THEN 'Four Serving'
+          WHEN ${plan} = 9 THEN 'Seasonal Box'
+          WHEN ${plan} = 10 THEN 'Prepared'
+          ELSE NULL
+          END
+          ;;
+  }
+  dimension: prepared_pilot_plan {
+    type: string
+    sql:  CASE WHEN ${plan} < 9 THEN 'Meal Kit'
+          WHEN ${plan} = 10 THEN 'Prepared'
+          ELSE NULL
+          END
+          ;;
+  }
+
+  dimension: default_plan_meal_num {
+    type: number
+    sql:  case when ${plan} = 8 then 4
+          when ${plan} = 6 then 2
+          else 3
+          end
+    ;;
+  }
+
+  measure: total_default_plan_meal {
+    type: sum
+    sql:  ${default_plan_meal_num} ;;
+  }
+
+  measure: total_sales_tax {
+    type: sum
+    value_format_name: usd
+    sql:  ${sales_tax} ;;
+  }
+
+
+  measure: total_revenue_30day {
+    type:  sum
+    value_format_name: usd
+    sql: ${price} ;;
+    filters: {
+      field: is_30day_since_created
+      value: "Yes"
+    }
+    hidden: yes
+  }
+
+  measure: average_revenue_30day {
+    type: number
+    value_format_name: usd
+    sql: ${total_revenue_30day}/NULLIF(${users.count},0);;
+    hidden: yes
+  }
+
+  # 60 day
+  dimension: is_60day_since_created {
+    type: yesno
+    sql: ${days_since_created} <= 60 ;;
+    hidden: yes
+  }
+
+  measure: total_revenue_60day {
+    type:  sum
+    value_format_name: usd
+    sql: ${price} ;;
+    filters: {
+      field: is_60day_since_created
+      value: "Yes"
+    }
+    hidden: yes
+  }
+
+  measure: average_revenue_60day {
+    type: number
+    value_format_name: usd
+    sql: ${total_revenue_60day}/NULLIF(${users.count},0);;
+    hidden: yes
+  }
+
+
+  dimension: is_90day_since_created {
+    type: yesno
+    sql: ${days_since_created} <= 90 ;;
+    hidden: yes
+  }
+
+  measure: total_revenue_90day {
+    type:  sum
+    value_format_name: usd
+    sql: ${price} ;;
+    filters: {
+      field: is_90day_since_created
+      value: "Yes"
+    }
+    hidden: yes
+  }
+
+  measure: average_revenue_90day {
+    type: number
+    value_format_name: usd
+    sql: ${total_revenue_90day}/NULLIF(${users.count},0);;
+    hidden: yes
+  }
+
+
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      id,
+      created_date,
+      delivery_date,
+      days_to_process,
+      tracking_number,
+      recipes.title,
+      chefs.name,
+      users.name,
+      user_with_winback
+    ]
+  }
+
+
+  dimension: Orderdate_minus_winbackdate{
+    type: number
+    sql: datediff( 'day', ${subscriptions.winback_date}, ${created_date}) ;;
+  }
+
+  dimension: orderdate_after_winback{
+    type: yesno
+    sql: ${Orderdate_minus_winbackdate} >= 0 ;;
+  }
+
+  measure: count_total_billed_post_winback {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: status
+      value: "3"
+    }
+    filters: {
+      field:  orderdate_after_winback
+      value: "yes"
+    }
+  }
+
+  dimension: user_with_winback {
+    type: yesno
+    hidden: yes
+    sql: ${subscriptions.winback_date} IS NOT NULL ;;
+  }
+
+  dimension_group: deleted_at {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.deleted_at ;;
+  }
+
+
+  measure: average_orders_post_winback {
+    type: number
+    hidden: yes
+    sql: ${count_total_billed_post_winback}/NULLIF(${user_with_winback},0) ;;
+  }
+
+  dimension: giveaway_id{
+    type: number
+    sql: ${TABLE}.giveaway_id ;;
+  }
+
+  measure: total_credit {
+    type: sum
+    value_format_name: usd
+    sql: ${credit_applied} ;;
+  }
+
+  measure:total_shipping_price {
+    type: sum
+    value_format_name: usd
+    sql: ${shipping_price} ;;
+  }
+
+}
