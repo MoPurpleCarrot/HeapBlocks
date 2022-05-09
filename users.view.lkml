@@ -28,6 +28,11 @@ view: users {
     sql: ${TABLE}.VWO_Test_ID_265 ;;
   }
 
+  dimension: order_count {
+    type: string
+    sql: ${TABLE}.orders ;;
+  }
+
   measure: count {
     hidden: yes
     type: count
