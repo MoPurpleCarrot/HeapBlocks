@@ -28,11 +28,6 @@ view: users {
     sql: ${TABLE}.joindate ;;
   }
 
-  dimension: vwo_265 {
-    type: string
-    sql: ${TABLE}.VWO_Test_ID_265 ;;
-  }
-
   dimension: order_count {
     type: string
     sql: ${TABLE}.orders ;;
