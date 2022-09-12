@@ -52,6 +52,10 @@ explore: sessions {
     sql_on: ${sessions.session_unique_id} = ${session_facts.session_unique_id} ;;
     relationship: one_to_one
   }
+  join: admin_subscriptions {
+    sql_on: ${admin_subscriptions.user_id}=${users.identity};;
+    relationship: one_to_one
+  }
 }
 
 explore: funnel_explorer {
