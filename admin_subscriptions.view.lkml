@@ -264,9 +264,25 @@ view: admin_subscriptions {
     sql: ${TABLE}.returning_status_start_at ;;
   }
 
-  dimension: status {
+  dimension: status_code {
     type: number
     sql: ${TABLE}.status ;;
+    hidden: yes
+  }
+
+  dimension: status {
+    type: string
+    sql:  CASE WHEN ${status_code} = 0 THEN 'Inactive'
+          WHEN ${status_code} = 1 THEN 'Active'
+          WHEN ${status_code} = 2 THEN 'Cancelled'
+          WHEN ${status_code} = 3 THEN 'Paused'
+          WHEN ${status_code} = 4 THEN 'Skipped'
+          WHEN ${status_code} = 5 THEN 'Suspended'
+          WHEN ${status_code} = 6 THEN 'Delayed Start'
+          WHEN ${status_code} = 7 THEN 'Returning'
+          ELSE NULL
+          END
+          ;;
   }
 
   dimension_group: updated {
