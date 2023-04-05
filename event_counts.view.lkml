@@ -1,8 +1,9 @@
+## turning off PDT
 include: "base_all_events.view.lkml"
 view: event_counts {
   derived_table: {
-    sql_trigger_value: SELECT COUNT(*) FROM main_production.all_events;;
-    distribution_style: all
+  ##  sql_trigger_value: SELECT COUNT(*) FROM main_production.all_events;;
+  ##  distribution_style: all
     sql: SELECT
           event_table_name
         , count(*)
