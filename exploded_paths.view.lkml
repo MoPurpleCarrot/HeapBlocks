@@ -1,11 +1,12 @@
+## turning off PDT
 include: "all_unique_events.view.lkml"
 include: "example_paths.view.lkml"
 
 view: exploded_paths {
   derived_table: {
-    sql_trigger_value: SELECT COUNT(*) FROM main_production.all_events;;
-    distribution: "path"
-    sortkeys: ["event_table_name"]
+  ##  sql_trigger_value: SELECT COUNT(*) FROM main_production.all_events;;
+  ##  distribution: "path"
+  ##  sortkeys: ["event_table_name"]
     sql:
         SELECT
             ep.path

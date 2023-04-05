@@ -1,9 +1,10 @@
+## turning off PDT
 include: "event_string_length.view.lkml"
 view: session_paths {
   derived_table: {
-    sql_trigger_value: SELECT COUNT(*) FROM main_production.all_events;;
-    distribution: "user_id"
-    sortkeys: ["session_id"]
+  ##  sql_trigger_value: SELECT COUNT(*) FROM main_production.all_events;;
+  ##  distribution: "user_id"
+  ##  sortkeys: ["session_id"]
     sql:
       SELECT
           aue.user_id
